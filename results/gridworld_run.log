@@ -1,0 +1,11 @@
+nohup: ignoring input
+qlearning seed=0 done
+mlp seed=0 done
+connectome seed=0 done
+qlearning seed=1 done
+mlp seed=1 done
+connectome seed=1 done
+qlearning seed=2 done
+mlp seed=2 done
+connectome seed=2 done
+Wrote /home/nnnn/fly-project/fly-brain/my_experiments/results/gridworld_results.csv
