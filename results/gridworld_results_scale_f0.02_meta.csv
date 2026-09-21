@@ -1,0 +1,7 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used,top10_share,max_pair_trains
+scale_f0.02,kc_delta,0,7.1,0.850,0.550,,True,197633,,,,
+scale_f0.02,rand_delta,0,6.2,0.850,0.600,,False,166431,,,,
+scale_f0.02,kc_delta,1,7.7,0.800,0.600,,False,208845,,,,
+scale_f0.02,rand_delta,1,6.1,0.900,0.700,554,False,159604,,,,
+scale_f0.02,kc_delta,2,7.5,0.750,0.400,,True,207896,,,,
+scale_f0.02,rand_delta,2,5.8,0.900,0.650,423,False,148266,,,,

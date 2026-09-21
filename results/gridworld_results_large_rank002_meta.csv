@@ -1,0 +1,4 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used
+large_rank002,khot_rank,0,2.4,1.000,1.000,20,False,126,5829,True
+large_rank002,khot_rank,1,2.0,1.000,1.000,20,False,92,5485,True
+large_rank002,khot_rank,2,2.7,1.000,1.000,20,False,154,5792,True

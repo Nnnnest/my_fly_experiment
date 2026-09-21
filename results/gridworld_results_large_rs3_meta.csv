@@ -1,0 +1,16 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used,top10_share,max_pair_trains
+large_rs3,qlearning,0,0.1,1.000,1.000,20,False,,,,,
+large_rs3,mlp,0,9.9,1.000,1.000,27,False,,,,,
+large_rs3,khot_rank,0,133.8,1.000,0.800,20,False,10687,9647,True,0.760,1561
+large_rs3,kc_delta,0,0.5,1.000,1.000,22,False,9519,,,,
+large_rs3,rand_delta,0,0.5,1.000,1.000,20,False,8304,,,,
+large_rs3,qlearning,1,0.1,1.000,1.000,22,False,,,,,
+large_rs3,mlp,1,10.9,1.000,1.000,34,False,,,,,
+large_rs3,khot_rank,1,53.6,1.000,0.900,22,False,4378,9615,True,0.827,2494
+large_rs3,kc_delta,1,0.5,1.000,1.000,25,False,9961,,,,
+large_rs3,rand_delta,1,0.5,1.000,1.000,22,False,8913,,,,
+large_rs3,qlearning,2,0.1,1.000,1.000,21,False,,,,,
+large_rs3,mlp,2,10.9,1.000,1.000,24,False,,,,,
+large_rs3,khot_rank,2,248.2,1.000,0.550,22,True,20942,8358,True,0.771,4627
+large_rs3,kc_delta,2,0.5,1.000,1.000,21,False,8997,,,,
+large_rs3,rand_delta,2,0.5,1.000,1.000,22,False,8658,,,,

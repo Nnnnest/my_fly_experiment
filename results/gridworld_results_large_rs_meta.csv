@@ -1,0 +1,10 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used
+large_rs,qlearning,0,0.1,1.000,1.000,20,False,,,
+large_rs,mlp,0,10.0,1.000,1.000,27,False,,,
+large_rs,khot_rank,0,128.1,1.000,0.800,20,False,10687,9647,True
+large_rs,qlearning,1,0.1,1.000,1.000,22,False,,,
+large_rs,mlp,1,11.1,1.000,1.000,34,False,,,
+large_rs,khot_rank,1,53.4,1.000,0.900,22,False,4378,9615,True
+large_rs,qlearning,2,0.1,1.000,1.000,21,False,,,
+large_rs,mlp,2,11.0,1.000,1.000,24,False,,,
+large_rs,khot_rank,2,248.5,1.000,0.550,22,True,20942,8358,True
