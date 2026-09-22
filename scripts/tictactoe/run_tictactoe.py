@@ -17,19 +17,21 @@ import csv
 import os
 import random
 import sys
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(SCRIPT_DIR, "..", "..")
 from envs.tictactoe_env import TicTacToe
 from opponents.opponents import random_opponent, heuristic_opponent
-from agents.gridworld.qlearning_tictactoe_agent import QLearningTicTacToeAgent
-from agents.gridworld.mlp_tictactoe_agent import MLPTicTacToeAgent
-from agents.gridworld.connectome_tictactoe_agent import ConnectomeTicTacToeAgent
+from agents.tictactoe.qlearning_tictactoe_agent import QLearningTicTacToeAgent
+from agents.tictactoe.mlp_tictactoe_agent import MLPTicTacToeAgent
+from agents.tictactoe.connectome_tictactoe_agent_v2 import ConnectomeTicTacToeAgentV2
+from agents.shared.symmetry_wrapper import SymmetryWrapper
 
 N_EPISODES = 2000
 EPSILON_START = 0.1
 EPSILON_END = 0.01
 EPSILON_DECAY = (EPSILON_END / EPSILON_START) ** (1 / N_EPISODES)  # multiplicative per episode, same as grid world
-RESULTS_DIR = os.path.join(ROOT, "results", "gridworld")
+RESULTS_DIR = os.path.join(ROOT, "results", "tictactoe")
 
 
 def sample_early_boards(n=300, max_depth=4):
@@ -163,16 +165,15 @@ def run_self_play(agent_cls, agent_name, calibration_boards=None, n_episodes=N_E
     print(f"wrote {path}")
     return a1, a2
 
-
 def main():
     calibration_boards = sample_early_boards(300)
 
     agents = {
-        "qlearning": QLearningTicTacToeAgent(),
-        "mlp": MLPTicTacToeAgent(),
-        "connectome": ConnectomeTicTacToeAgent(),
+        "qlearning_sym": SymmetryWrapper(QLearningTicTacToeAgent()),
+        "mlp_sym": SymmetryWrapper(MLPTicTacToeAgent()),
+        "connectome_sym_cache": SymmetryWrapper(ConnectomeTicTacToeAgentV2(gate="none")),
     }
-    agents["connectome"].calibrate_baseline(calibration_boards)
+    agents["connectome_sym_cache"].calibrate_baseline(calibration_boards)
 
     opponents = {"random": random_opponent, "heuristic": heuristic_opponent}
     for agent_name, agent in agents.items():
@@ -180,13 +181,12 @@ def main():
             run_block(agent, agent_name, opponent_fn, opponent_name)
 
     for agent_name, agent_cls in [
-        ("qlearning", QLearningTicTacToeAgent),
-        ("mlp", MLPTicTacToeAgent),
-        ("connectome", ConnectomeTicTacToeAgent),
+        ("qlearning_sym", lambda: SymmetryWrapper(QLearningTicTacToeAgent())),
+        ("mlp_sym", lambda: SymmetryWrapper(MLPTicTacToeAgent())),
+        ("connectome_sym_cache", lambda: SymmetryWrapper(ConnectomeTicTacToeAgentV2(gate="none"))),
     ]:
-        cb = calibration_boards if agent_name == "connectome" else None
+        cb = calibration_boards if agent_name == "connectome_sym_cache" else None
         run_self_play(agent_cls, agent_name, calibration_boards=cb)
-
 
 if __name__ == "__main__":
     main()

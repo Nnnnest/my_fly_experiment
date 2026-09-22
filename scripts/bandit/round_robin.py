@@ -1,10 +1,11 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 import numpy as np
 
 rng = np.random.default_rng(0)
-mb = FlyBrainAPI(mode="mb")
+mb = FlyBrainAPI(mode="mb", path=FLY_ROOT)
 probs = {"A": 0.3, "B": 0.7}
 
 for t in range(150):

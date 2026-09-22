@@ -1,6 +1,7 @@
 import sys, os, argparse
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 import numpy as np
 
 parser = argparse.ArgumentParser()
@@ -8,7 +9,7 @@ parser.add_argument("--hops", type=int, default=1)
 parser.add_argument("--mag", type=float, default=5.0)
 args = parser.parse_args()
 
-mb = FlyBrainAPI(mode="mb")
+mb = FlyBrainAPI(mode="mb", path=FLY_ROOT)
 n_target = len(mb.ALPN)
 
 def one_hot(i, n_target=n_target, mag=args.mag):

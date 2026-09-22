@@ -3,6 +3,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "shared")
 import numpy as np
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 from state_action_odor_encoder import StateActionOdorEncoder
 from sparse_encoder import SparseStateActionEncoder
 from mb_value_cache import MBValueCache, train_no_readout, calibrate_own_effect
@@ -44,7 +45,7 @@ class ConnectomeGridAgentV2:
         self.state_map = {sid: i for i, sid in enumerate(traversable_state_ids)}
         n_states = len(traversable_state_ids)
         self.n_states, self.n_actions = n_states, n_actions
-        self.brain = FlyBrainAPI(mode="mb")
+        self.brain = FlyBrainAPI(mode="mb", path=FLY_ROOT)
         if encoding == "khot":
             self.encoder = SparseStateActionEncoder(n_states, n_actions, live_indices_path,
                                                     k=k, max_overlap=max_overlap, seed=seed)

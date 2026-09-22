@@ -3,6 +3,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "shared")
 import numpy as np
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 from sparse_encoder import SparseStateActionEncoder
 from mb_value_cache import MBValueCache
 
@@ -40,7 +41,7 @@ class ConnectomeKCDeltaAgent:
         self.alpha, self.gamma = alpha, gamma
         self.rng = np.random.default_rng(seed)
 
-        brain = FlyBrainAPI(mode="mb")
+        brain = FlyBrainAPI(mode="mb", path=FLY_ROOT)
         enc = SparseStateActionEncoder(n_states, 1, live_indices_path, k=k,
                                        max_overlap=max_overlap, seed=seed)
         cache = MBValueCache(brain, enc)   # library-default 5% sparsity: verify against brain.step

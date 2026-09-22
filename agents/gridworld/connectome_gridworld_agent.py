@@ -1,6 +1,7 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 from state_action_odor_encoder import StateActionOdorEncoder
 import numpy as np
 
@@ -13,7 +14,7 @@ class ConnectomeGridAgent:
         self.state_map = {sid: i for i, sid in enumerate(traversable_state_ids)}
         n_compact_states = len(traversable_state_ids)
 
-        self.brain = FlyBrainAPI(mode="mb")
+        self.brain = FlyBrainAPI(mode="mb", path=FLY_ROOT)
         self.encoder = StateActionOdorEncoder(n_compact_states, n_actions, live_indices_path, seed=seed)
         self.n_actions = n_actions
         self.bfs_dist = bfs_dist

@@ -136,13 +136,14 @@ def train_no_readout(brain, odor, hops=1, **kw):
 
 def ensure_live_hops1(path, brain=None):
     """Load live ALPN positions from `path`; if missing, compute them analytically
-    from the circuit (MBValueCache.scan_live) and save. Needs fly_api on sys.path."""
+    from the circuit (MBValueCache.scan_live) and save."""
     import os
     if os.path.exists(path):
         return np.load(path)
     from fly_api import FlyBrainAPI
-    from sparse_encoder import SparseStateActionEncoder
-    brain = brain or FlyBrainAPI(mode="mb")
+    from agents.shared.paths import FLY_ROOT
+    from agents.shared.sparse_encoder import SparseStateActionEncoder
+    brain = brain or FlyBrainAPI(mode="mb", path=FLY_ROOT)
     dummy = SparseStateActionEncoder(2, 2, np.arange(20), k=2, max_overlap=2)
     live = MBValueCache(brain, dummy).scan_live()
     np.save(path, live)

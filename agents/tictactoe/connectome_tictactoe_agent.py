@@ -25,14 +25,14 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 
 import numpy as np
-
 from fly_api import FlyBrainAPI
-from encoders.board_odor_encoder import board_to_vector, board_baseline_features
+from agents.shared.paths import FLY_ROOT
+from encoders.tictactoe.board_odor_encoder import board_to_vector, board_baseline_features
 
 
 class ConnectomeTicTacToeAgent:
     def __init__(self, hops=1, min_pulls=5):
-        self.fly = FlyBrainAPI(mode="mb")
+        self.fly = FlyBrainAPI(mode="mb", path=FLY_ROOT)
         self.hops = hops
         self.min_pulls = min_pulls
         self.visits = {}

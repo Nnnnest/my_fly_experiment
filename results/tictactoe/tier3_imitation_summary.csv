@@ -1,0 +1,6 @@
+model,full_coverage_accuracy_pct,correct,total
+connectome_imitation,54.0,2441,4520
+connectome_imitation_shuffle,53.9,2437,4520
+connectome_imitation_sleep500,54.7,2471,4520
+connectome_imitation_symmetry,61.0,2759,4520
+connectome_imitation_shuffle_symmetry,61.6,2783,4520

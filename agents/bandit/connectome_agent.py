@@ -1,12 +1,13 @@
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 from fly_api import FlyBrainAPI
+from agents.shared.paths import FLY_ROOT
 import numpy as np
 
 class ConnectomeBanditAgent:
     def __init__(self, k, odor_labels, epsilon=0.1, min_pulls=15, seed=0):
         assert k == len(odor_labels)
-        self.brain = FlyBrainAPI(mode="mb")
+        self.brain = FlyBrainAPI(mode="mb", path=FLY_ROOT)
         self.odor_labels = odor_labels
         self.epsilon = epsilon
         self.min_pulls = min_pulls

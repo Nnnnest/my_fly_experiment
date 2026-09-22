@@ -18,9 +18,11 @@ win-rate curve AND drift-over-time side by side.
 import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(SCRIPT_DIR, "..", "..")
 
-from agents.gridworld.connectome_tictactoe_agent import ConnectomeTicTacToeAgent
+from agents.gridworld.connectome_tictactoe_agent import ConnectomeTicTacToeAgentV2
+from agents.shared.symmetry_wrapper.py import SymmetryWrapper
 from opponents.opponents import random_opponent, heuristic_opponent
 from run_tictactoe import run_block, run_self_play, sample_early_boards
 
@@ -30,14 +32,13 @@ SLEEP_EVERY = 100
 def main():
     calibration_boards = sample_early_boards(300)
 
-    agent = ConnectomeTicTacToeAgent()
+    agent = SymmetryWrapper(ConnectomeTicTacToeAgentV2(gate="none"))
     agent.calibrate_baseline(calibration_boards)
     for opponent_name, opponent_fn in [("random", random_opponent), ("heuristic", heuristic_opponent)]:
-        run_block(agent, "connectome", opponent_fn, opponent_name, sleep_every=SLEEP_EVERY)
+        run_block(agent, "connectome_sym_cache", opponent_fn, opponent_name, sleep_every=SLEEP_EVERY)
 
-    run_self_play(ConnectomeTicTacToeAgent, "connectome",
+    run_self_play(lambda: SymmetryWrapper(ConnectomeTicTacToeAgentV2(gate="none")), "connectome_sym_cache",
                    calibration_boards=calibration_boards, sleep_every=SLEEP_EVERY)
-
 
 if __name__ == "__main__":
     main()
