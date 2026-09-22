@@ -18,15 +18,15 @@ Run from the directory that contains mb_circuit.npz (same as before).
 import sys, os, csv, time, argparse
 import numpy as np
 
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.join(SCRIPT_DIR, "..", "..")
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-from envs.gridworld_env import GridWorld, ACTIONS
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))            # scripts/gridworld
+ROOT = os.path.normpath(os.path.join(SCRIPT_DIR, "..", ".."))       # my_experiments
+if ROOT not in sys.path:
+    sys.path.insert(0, ROOT)
+from envs.gridworld_env import GridWorld, ACTIONS, GRID
 from envs.maze_generator import generate_maze
 from agents.gridworld.qlearning_gridworld_agent import QLearningGridAgent
 from agents.gridworld.mlp_gridworld_agent import MLPGridAgent
 from agents.gridworld.connectome_gridworld_agent_v2 import ConnectomeGridAgentV2
-from agents.gridworld.connectome_kc_delta_agent import ConnectomeKCDeltaAgent
 from agents.shared.mb_value_cache import ensure_live_hops1
 
 GAMMA = 0.95
@@ -50,6 +50,7 @@ CONNECTOME_VARIANTS = {
     # rand_delta is the control: same size/sparsity, random codes with no connectome structure.
     "kc_delta":        dict(kind="delta", features="kc"),
     "rand_delta":      dict(kind="delta", features="random"),
+    "onehot_h1_v1equiv": dict(encoding="onehot", hops=1, gate="none"),  # verify vs v1 first, see verify_gridworld_v2_matches_v1.py
     "onehot_h2":       dict(encoding="onehot", hops=2, gate="none"),   # reproduces the old run
     "onehot_h2_decay": dict(encoding="onehot", hops=2, gate="visit"),
 }
@@ -121,6 +122,8 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     ap.add_argument("--agents", nargs="+", default=["qlearning", "mlp", "khot_rank", "khot"],
                     choices=ALL_AGENTS)
+    ap.add_argument("--maze", choices=["small_26", "medium_72", "large_113", "custom"], default="custom",
+                    help="preset maze size; 'custom' uses --maze-w/--maze-h/--max-steps")
     ap.add_argument("--maze-w", type=int, default=19)
     ap.add_argument("--maze-h", type=int, default=13)
     ap.add_argument("--max-steps", type=int, default=350)
@@ -141,7 +144,14 @@ def main():
     ap.add_argument("--tag", default="large_v2")
     args = ap.parse_args()
 
-    maze = generate_maze(args.maze_w, args.maze_h, extra_connections=0.1, seed=0)
+    if args.maze == "small_26":
+        maze, args.max_steps = GRID, 100
+    elif args.maze == "medium_72":
+        maze, args.max_steps = generate_maze(15, 11, extra_connections=0.1, seed=0), 250
+    elif args.maze == "large_113":
+        maze, args.max_steps = generate_maze(19, 13, extra_connections=0.1, seed=0), 350
+    else:
+        maze = generate_maze(args.maze_w, args.maze_h, extra_connections=0.1, seed=0)
     probe = GridWorld(grid=maze, max_steps=args.max_steps)
     n_states, n_actions = probe.n_states, 4
     n_trav = sum(1 for row in probe.grid for c in row if c != "#")

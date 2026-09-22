@@ -1,0 +1,10 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used,top10_share,max_pair_trains
+large113_opt,qlearning,0,0.1,1.000,1.000,20,False,,,,,
+large113_opt,mlp,0,200.3,1.000,1.000,30,False,,,,,
+large113_opt,khot,0,1779.6,0.800,0.000,,True,135062,0,True,0.948,79769
+large113_opt,qlearning,1,0.1,1.000,1.000,20,False,,,,,
+large113_opt,mlp,1,25.6,1.000,1.000,46,False,,,,,
+large113_opt,khot,1,1718.0,0.000,0.000,,False,140000,0,True,0.943,72702
+large113_opt,qlearning,2,0.1,1.000,1.000,20,False,,,,,
+large113_opt,mlp,2,23.4,1.000,1.000,44,False,,,,,
+large113_opt,khot,2,1601.0,0.600,0.050,,True,136600,0,True,0.949,49013

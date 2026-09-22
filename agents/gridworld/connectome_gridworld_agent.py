@@ -1,8 +1,11 @@
 import sys, os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+_THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+for _p in (os.path.join(_THIS_DIR, "..", "..", ".."), os.path.join(_THIS_DIR, "..", "..")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 from fly_api import FlyBrainAPI
 from agents.shared.paths import FLY_ROOT
-from state_action_odor_encoder import StateActionOdorEncoder
+from agents.shared.state_action_odor_encoder import StateActionOdorEncoder
 import numpy as np
 
 class ConnectomeGridAgent:

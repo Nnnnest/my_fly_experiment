@@ -1,13 +1,14 @@
 import sys, os, warnings
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "shared")
+_THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+for _p in (os.path.join(_THIS_DIR, "..", "..", ".."), os.path.join(_THIS_DIR, "..", "..")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 import numpy as np
 from fly_api import FlyBrainAPI
 from agents.shared.paths import FLY_ROOT
-from state_action_odor_encoder import StateActionOdorEncoder
-from sparse_encoder import SparseStateActionEncoder
-from mb_value_cache import MBValueCache, train_no_readout, calibrate_own_effect
-
+from agents.shared.state_action_odor_encoder import StateActionOdorEncoder
+from agents.shared.sparse_encoder import SparseStateActionEncoder
+from agents.shared.mb_value_cache import MBValueCache, train_no_readout, calibrate_own_effect
 
 class ConnectomeGridAgentV2:
     """Same task interface and shaping as ConnectomeGridAgent. Changes:

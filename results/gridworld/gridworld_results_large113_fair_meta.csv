@@ -1,0 +1,7 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used,top10_share,max_pair_trains
+large113_fair,qlearning,0,0.1,1.000,1.000,20,False,,,,,
+large113_fair,mlp,0,23.3,1.000,1.000,30,False,,,,,
+large113_fair,qlearning,1,0.1,1.000,1.000,20,False,,,,,
+large113_fair,mlp,1,32.7,1.000,1.000,46,False,,,,,
+large113_fair,qlearning,2,0.1,1.000,1.000,20,False,,,,,
+large113_fair,mlp,2,45.9,1.000,1.000,44,False,,,,,
