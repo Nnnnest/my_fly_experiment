@@ -1,0 +1,4 @@
+step,held_out_accuracy,held_out_mae,output_drift_pct
+-1,0.4,0.92,0.0
+99,0.22,1.89,38.6626
+199,0.21,1.96,50.1994

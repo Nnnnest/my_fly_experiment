@@ -1,0 +1,13 @@
+agent,min_pulls,win,draw,loss,last100_win,last100_draw
+qlearning_sym,5,0.003,0.176,0.821,0.0,0.2
+mlp_sym,5,0.007,0.156,0.837,0.01,0.14
+connectome_sym_cache,5,0.005,0.042,0.953,0.0,0.04
+qlearning_sym,10,0.006,0.141,0.853,0.0,0.16
+mlp_sym,10,0.008,0.134,0.858,0.0,0.16
+connectome_sym_cache,10,0.008,0.064,0.928,0.0,0.03
+qlearning_sym,20,0.009,0.098,0.893,0.02,0.16
+mlp_sym,20,0.006,0.105,0.889,0.0,0.18
+connectome_sym_cache,20,0.004,0.097,0.899,0.0,0.05
+qlearning_sym,40,0.005,0.076,0.919,0.0,0.03
+mlp_sym,40,0.002,0.088,0.91,0.0,0.1
+connectome_sym_cache,40,0.007,0.075,0.918,0.01,0.05
