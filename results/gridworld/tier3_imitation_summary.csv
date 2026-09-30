@@ -1,9 +1,4 @@
 maze,shuffle,seed,n_states,n_trained,n_skipped,policy_accuracy,seconds
 small_26,True,0,26,150,1,0.9600,1.9
 medium_72,True,0,72,426,1,0.7606,5.5
-small_26,True,0,26,150,1,0.9200,1.6
-medium_72,True,0,72,426,1,0.7606,4.5
 large_113,True,0,113,672,1,0.5893,7.1
-small_26,True,0,26,150,1,0.9600,1.6
-medium_72,True,0,72,426,1,0.7606,4.6
-large_113,True,0,113,672,1,0.5982,7.2

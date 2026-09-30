@@ -1,7 +1,12 @@
 import sys, os, csv, time
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(SCRIPT_DIR, "..", "..")
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+_d = SCRIPT_DIR 
+for _ in range(4):
+    if _d not in sys.path:
+        sys.path.insert(0, _d)
+    _d = os.path.dirname(_d)
+
 from envs.gridworld_env import GridWorld, GRID
 from envs.maze_generator import generate_maze
 from agents.gridworld.qlearning_gridworld_agent import QLearningGridAgent
