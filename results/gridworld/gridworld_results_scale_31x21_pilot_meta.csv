@@ -1,0 +1,5 @@
+maze,agent,seed,seconds,peak20,final20,first_ep_ge90,collapsed,n_trained,n_skipped,cache_used,top10_share,max_pair_trains
+scale_31x21_pilot,khot,1,937.9,0.250,0.000,,False,56934,0,True,0.248,2216
+scale_31x21_pilot,khot_rank,1,2484.0,0.350,0.050,,False,38403,16082,True,0.272,1666
+scale_31x21_pilot,khot,2,2449.4,0.100,0.000,,False,59422,0,True,0.253,2862
+scale_31x21_pilot,khot_rank,2,639.1,0.700,0.000,,True,35908,15602,True,0.286,1588
