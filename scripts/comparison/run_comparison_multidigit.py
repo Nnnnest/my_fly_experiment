@@ -1,16 +1,13 @@
-"""Main runner for the number-comparison ("solve the inequality")
-experiment. mode='mb', plain step()/train() -- no vision, no x_zone --
-directly reusing the bandit's validated mechanism instead of the
-full-mode regression path that failed for counting.
+"""Runner for N-digit comparison (general version of
+run_comparison_twodigit.py, via MultiDigitPairEncoder). Same pattern as
+run_comparison.py's baseline fix: logs a round=-1 pre-training baseline
+(zero train_on calls, all three agents) before the main loop, so you get
+the genuine before-any-learning number instead of only the 0-19 block
+average.
 
-Logs abs_diff = |a-b| alongside correctness, since (like the bandit's
-close-probability arms) pairs with a small gap should be intrinsically
-harder than pairs with a large one -- worth checking whether accuracy
-degrades with closeness the way you'd expect from a real graded-magnitude
-comparison, as opposed to being flat (which would suggest it's not
-really using the magnitude at all).
-
-    python scripts/comparison/run_comparison.py
+    python scripts/comparison/run_comparison_multidigit.py --n-digits 2
+    python scripts/comparison/run_comparison_multidigit.py --n-digits 3
+    python scripts/comparison/run_comparison_multidigit.py --n-digits 3 --no-train
 """
 import sys
 import os
@@ -27,21 +24,18 @@ for _ in range(6):
 
 import numpy as np
 
-from encoders.comparison.number_pair_encoder import NumberPairEncoder, sample_pair
+from encoders.comparison.multi_digit_pair_encoder import MultiDigitPairEncoder, sample_n_digit_pair
 from agents.comparison.connectome_compare_agent import ConnectomeCompareAgent
 from agents.comparison.baseline_compare_agents import LinearCompareAgent, MLPCompareAgent
 
 N_ROUNDS = 400
-N_CALIB = 40
-N_BASELINE_EVAL = 60  # pre-training eval pairs, ALL agents, zero train_on() calls
+N_CALIB = 60
+N_BASELINE_EVAL = 60
 SLEEP_EVERY = 50
 PROGRESS_EVERY = 20
 
 
 def _find_dir_containing(name):
-    """Walk up from this file to find an ancestor that has `name` as a
-    child (file or dir) -- same robustness reasoning as the sys.path fix:
-    don't hard-code an exact directory depth."""
     d = _HERE
     for _ in range(6):
         if os.path.exists(os.path.join(d, name)):
@@ -54,9 +48,6 @@ LIVE_ALPN_PATH = os.path.join(_find_dir_containing("results"), "results", "gridw
 RESULTS_DIR = os.path.join(_find_dir_containing("results"), "results", "comparison")
 
 if not os.path.exists(LIVE_ALPN_PATH):
-    # fall back to computing it fresh, same helper run_gridworld_large_v2.py
-    # uses (agents/shared/mb_value_cache.py's ensure_live_hops1) -- avoids a
-    # second hard-coded path guess if your layout differs from the above.
     from agents.shared.mb_value_cache import ensure_live_hops1
     os.makedirs(os.path.dirname(LIVE_ALPN_PATH), exist_ok=True)
     ensure_live_hops1(LIVE_ALPN_PATH)
@@ -64,25 +55,23 @@ if not os.path.exists(LIVE_ALPN_PATH):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--n-digits", type=int, default=2)
     ap.add_argument("--no-train", action="store_true",
-                    help="skip connectome train_on() entirely -- diagnostic to check "
-                         "whether the baseline-corrected sign is already near-perfect "
-                         "from the physical encoding alone, with zero learning")
-    ap.add_argument("--n-max", type=int, default=9,
-                    help="numbers sampled from [1, n_max] -- sweep this (19/49/99) to "
-                         "find where resolution starts to degrade accuracy, especially "
-                         "for close pairs where the volume-knob gap shrinks")
+                    help="skip connectome train_on() -- same diagnostic as the "
+                         "single/two-digit versions")
     args = ap.parse_args()
-    n_max = args.n_max
+    n_digits = args.n_digits
 
     os.makedirs(RESULTS_DIR, exist_ok=True)
     rng = np.random.default_rng(0)
 
-    encoder = NumberPairEncoder(LIVE_ALPN_PATH, n_max=n_max)
+    encoder = MultiDigitPairEncoder(LIVE_ALPN_PATH, n_digits=n_digits)
+    print(f"n_digits={n_digits}: {2 * n_digits} ALPN groups, "
+          f"{encoder.group_size} cells/group (of {len(np.load(LIVE_ALPN_PATH))} live total)")
     connectome = ConnectomeCompareAgent(encoder)
 
     calib_rng = np.random.default_rng(1)
-    calib_pairs = [sample_pair(calib_rng, n_max=n_max) for _ in range(N_CALIB)]
+    calib_pairs = [sample_n_digit_pair(calib_rng, n_digits) for _ in range(N_CALIB)]
     connectome.calibrate_baseline(calib_pairs)  # BEFORE any train_on call
 
     agents = {
@@ -91,21 +80,16 @@ def main():
         "mlp": MLPCompareAgent(),
     }
 
-    tag = f"_nmax{n_max}" if n_max != 9 else ""
-    fname = f"comparison_results{tag}_notrain.csv" if args.no_train else f"comparison_results{tag}.csv"
+    fname = f"comparison_results_{n_digits}digit{'_notrain' if args.no_train else ''}.csv"
     csv_path = os.path.join(RESULTS_DIR, fname)
     t0 = time.time()
     with open(csv_path, "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["round", "agent", "a", "b", "abs_diff", "predicted", "correct", "drift_pct"])
 
-        # Pre-training baseline: round=-1, every agent evaluated with ZERO
-        # train_on() calls so far -- the genuine "before any learning"
-        # number, as opposed to the 0-19 block average (which already
-        # includes 20 rounds of training). Same round=-1 convention
-        # train_imitation_counting.py uses for its untrained/pre eval.
-        baseline_rng = np.random.default_rng(2)  # distinct from calib_rng/rng
-        baseline_pairs = [sample_pair(baseline_rng, n_max=n_max) for _ in range(N_BASELINE_EVAL)]
+        # pre-training baseline, zero train_on calls, all agents
+        baseline_rng = np.random.default_rng(2)
+        baseline_pairs = [sample_n_digit_pair(baseline_rng, n_digits) for _ in range(N_BASELINE_EVAL)]
         baseline_correct = {name: 0 for name in agents}
         for a, b in baseline_pairs:
             correct_ans = "A" if a > b else "B"
@@ -118,12 +102,11 @@ def main():
                 w.writerow([-1, name, a, b, abs_diff, pred, correct, drift])
         print(f"pre-training baseline (n={N_BASELINE_EVAL} pairs, zero train_on calls):")
         for name in agents:
-            acc = baseline_correct[name] / N_BASELINE_EVAL
-            print(f"  {name}: accuracy={acc:.3f}")
+            print(f"  {name}: accuracy={baseline_correct[name] / N_BASELINE_EVAL:.3f}")
         f.flush()
 
         for rnd in range(N_ROUNDS):
-            a, b = sample_pair(rng, n_max=n_max)
+            a, b = sample_n_digit_pair(rng, n_digits)
             correct_ans = "A" if a > b else "B"
             abs_diff = abs(a - b)
 
@@ -133,7 +116,7 @@ def main():
                 drift = f"{agent.drift_pct():.4f}" if hasattr(agent, "drift_pct") else ""
                 w.writerow([rnd, name, a, b, abs_diff, pred, correct, drift])
                 if name == "connectome" and args.no_train:
-                    pass  # diagnostic mode: never train the connectome
+                    pass
                 else:
                     agent.train_on(a, b)
             f.flush()

@@ -12,18 +12,25 @@ import torch.optim as optim
 
 
 class LinearCompareAgent:
-    """Logistic regression on [a, b, a*b, 1]."""
+    """Logistic regression on [a, b, a*b, 1], scaled to O(1) so a fixed
+    learning rate converges regardless of the operand range (n_max=9 vs
+    n_max=99) -- the earlier ||x||^2-normalized step was the wrong fix:
+    it let the large a*b feature suppress the effective step size for
+    EVERY weight, including the ones on raw a/b that make this an easy
+    task in the first place."""
 
-    def __init__(self, lr=0.05, seed=0):
+    def __init__(self, lr=2.0, seed=0, scale=100.0):
         rng = np.random.default_rng(seed)
         self.w = rng.normal(0, 0.01, size=4)
         self.lr = lr
+        self.scale = scale  # brings a, b, a*b all to roughly O(1)
 
     def _feats(self, a, b):
-        return np.array([a, b, a * b, 1.0])
+        sa, sb = a / self.scale, b / self.scale
+        return np.array([sa, sb, sa * sb, 1.0])
 
     def _p(self, a, b):
-        z = float(self._feats(a, b) @ self.w)
+        z = np.clip(float(self._feats(a, b) @ self.w), -30, 30)
         return 1.0 / (1.0 + np.exp(-z))
 
     def predict(self, a, b):
@@ -32,8 +39,9 @@ class LinearCompareAgent:
 
     def train_on(self, a, b):
         y = 1.0 if a > b else 0.0
+        x = self._feats(a, b)
         p = self._p(a, b)
-        grad = (p - y) * self._feats(a, b)
+        grad = (p - y) * x
         self.w -= self.lr * grad
 
 

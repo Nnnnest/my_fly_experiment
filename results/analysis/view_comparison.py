@@ -46,7 +46,19 @@ def main():
     pd.set_option("display.float_format", lambda x: f"{x:.3f}")
 
     agents = list(df["agent"].unique())
-    print(f"=== comparison: agents={agents} rounds={df.groupby('agent').size().max()} ===\n")
+    n_rounds = int(df[df["round"] >= 0].groupby("agent").size().max())
+    print(f"=== comparison: agents={agents} rounds={n_rounds} ===\n")
+
+    baseline_df = df[df["round"] == -1]
+    if len(baseline_df):
+        print(f"=== Pre-training baseline (round=-1, n={len(baseline_df) // len(agents)} pairs, "
+              f"ZERO train_on calls -- the genuine before-any-learning number) ===")
+        print(baseline_df.groupby("agent")["correct"].mean().rename("baseline_accuracy").to_string(), "\n")
+    else:
+        print("(no round=-1 baseline rows in this file -- rerun with the updated "
+              "run_comparison.py to get one)\n")
+
+    df = df[df["round"] >= 0]  # exclude baseline rows from everything below
 
     overall = df.groupby("agent")["correct"].mean().rename("overall_accuracy")
     last = df[df["round"] >= df["round"].max() - W + 1]
