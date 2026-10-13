@@ -13,7 +13,7 @@ from agents.shared.paths import FLY_ROOT
 from encoders.tictactoe.board_odor_encoder import board_to_vector, board_baseline_features
 from agents.shared.mb_value_cache import train_no_readout
 from agents.shared.board_value_cache import build_board_cache, enumerate_afterstates
-
+from core.brain_pool import fresh_brain
 
 class ConnectomeTicTacToeAgentV2:
     """Same public interface as ConnectomeTicTacToeAgent (value/
@@ -32,10 +32,10 @@ class ConnectomeTicTacToeAgentV2:
     """
 
     def __init__(self, hops=1, min_pulls=5, use_cache=True, gate="none",
-                 margin_frac=0.05, train_power=1.0, train_floor=0.05, seed=0):
+                 margin_frac=0.05, train_power=1.0, train_floor=0.05, seed=0, slot=0):
         if gate not in ("none", "visit", "error"):
             raise ValueError("gate must be none/visit/error")
-        self.fly = FlyBrainAPI(mode="mb", path=FLY_ROOT)
+        self.fly = fresh_brain(slot)
         self.hops = hops
         self.min_pulls = min_pulls
         self.gate = gate

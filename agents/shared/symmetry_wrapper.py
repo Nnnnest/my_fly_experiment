@@ -13,7 +13,7 @@ instead of
 -- nothing else in run_tictactoe.py / play_tictactoe.py /
 tictactoe_training_curve.py needs to change.
 """
-from tictactoe_symmetry import canonicalize, action_to_canonical, action_from_canonical
+from agents.shared.tictactoe_symmetry import canonicalize, action_to_canonical, action_from_canonical
 
 
 class SymmetryWrapper:

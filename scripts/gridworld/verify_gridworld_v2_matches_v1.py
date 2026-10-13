@@ -14,7 +14,7 @@ from envs.gridworld_env import GridWorld, GRID
 from agents.gridworld.connectome_gridworld_agent import ConnectomeGridAgent
 from agents.gridworld.connectome_gridworld_agent_v2 import ConnectomeGridAgentV2
 
-LIVE_PATH = os.path.join(ROOT, "results", "gridworld", "live_alpn_indices.npy")
+LIVE_PATH = os.path.join(ROOT, "assets", "live_alpn_indices.npy")
 N_EPISODES = 30
 
 
@@ -34,13 +34,14 @@ def run(agent_cls, **kw):
             if done:
                 break
         agent.decay_epsilon()
-    return agent.brain.wM
+    return agent.brain.wM.copy()
 
 
 if __name__ == "__main__":
     w1 = run(ConnectomeGridAgent)
     w2 = run(ConnectomeGridAgentV2, encoding="onehot", gate="none")
-    diff = float(np.abs(w1 - w2).max())
-    print(f"max weight diff after {N_EPISODES} episodes: {diff}")
-    assert diff < 1e-4, "v2 (onehot, gate=none) does NOT reproduce v1 -- do not use as a Tier-1-fair stand-in"
-    print("OK: v2 (onehot, gate=none) reproduces v1 exactly")
+    w3 = run(ConnectomeGridAgentV2, encoding="onehot", gate="none")   # same process, pooled brain reset
+    d12, d23 = float(np.abs(w1 - w2).max()), float(np.abs(w2 - w3).max())
+    print(f"v1 vs v2: {d12}   v2 vs v2 (after pool reset): {d23}")
+    assert d12 < 1e-4 and d23 == 0.0
+    print("OK")

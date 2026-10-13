@@ -2,7 +2,7 @@
 import itertools
 import sys, os
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
-from tictactoe_symmetry import canonicalize, action_to_canonical, action_from_canonical, _NAMES
+from agents.shared.tictactoe_symmetry import canonicalize, action_to_canonical, action_from_canonical, _NAMES
 
 def test_roundtrip():
     """Every action, under every transform, must round-trip exactly."""
@@ -23,7 +23,7 @@ def test_full_episode_consistency():
     """For every reachable board, canonicalize + map every legal action to
     canonical space and back; the mapped-back set must equal the original
     legal set exactly (same elements, no duplicates, no drops)."""
-    from tictactoe_solver import enumerate_reachable_states
+    from agents.shared.tictactoe_solver import enumerate_reachable_states
     states = enumerate_reachable_states()
     bad = 0
     for board, mover in states:

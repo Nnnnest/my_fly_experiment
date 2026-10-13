@@ -1,29 +1,31 @@
-# scripts/tictactoe/verify_v2_matches_v1.py
+"""python -m scripts.tictactoe.verify_v2_matches_v1"""
 import random
+
 import numpy as np
-import sys
-import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+
+from core import paths
 from agents.tictactoe.connectome_tictactoe_agent import ConnectomeTicTacToeAgent
 from agents.tictactoe.connectome_tictactoe_agent_v2 import ConnectomeTicTacToeAgentV2
-from scripts.tictactoe.run_tictactoe import sample_early_boards, play_episode
+from agents.shared.tictactoe_play import play, train_policy, opp_policy
 from opponents.opponents import random_opponent
+from scripts.tictactoe.run_tictactoe import early_boards
 
-random.seed(0)
-boards = sample_early_boards(300)
 
-a1 = ConnectomeTicTacToeAgent(); a1.calibrate_baseline(boards)
-a2 = ConnectomeTicTacToeAgentV2(gate="none"); a2.calibrate_baseline(boards)
+def run(agent, boards, n=50):
+    agent.calibrate_baseline(boards)
+    for ep in range(n):
+        random.seed(1000 + ep)
+        m = 1 if ep % 2 == 0 else -1
+        after, res = play({m: train_policy(agent, 0.1), -m: opp_policy(random_opponent, -m)})
+        agent.update_episode(after[m], res[m])
+    return agent.fly.wM.copy()
 
-for ep in range(50):
-    random.seed(1000 + ep)
-    afterstates, outcome = play_episode(a1, random_opponent, ep % 2 == 0, 0.1)
-    a1.update_episode(afterstates, outcome)
-    random.seed(1000 + ep)
-    afterstates2, outcome2 = play_episode(a2, random_opponent, ep % 2 == 0, 0.1)
-    a2.update_episode(afterstates2, outcome2)
 
-diff = float(np.abs(a1.fly.wM - a2.fly.wM).max())
-print(f"max weight diff after 50 episodes: {diff}")
-assert diff < 1e-4, "v2 gate='none' does NOT reproduce v1 -- do not trust Tier 2 results until this passes"
-print("OK: v2 (gate=none) reproduces v1 exactly")
+boards = early_boards(0)
+w1 = run(ConnectomeTicTacToeAgent(), boards)
+w2 = run(ConnectomeTicTacToeAgentV2(gate="none"), boards)
+w3 = run(ConnectomeTicTacToeAgentV2(gate="none"), boards)      # same process, pool reset
+d12, d23 = float(np.abs(w1 - w2).max()), float(np.abs(w2 - w3).max())
+print(f"v1 vs v2: {d12}   v2 vs v2 after reset: {d23}")
+assert d12 < 1e-4 and d23 == 0.0
+print("OK")

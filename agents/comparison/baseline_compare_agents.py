@@ -59,22 +59,23 @@ class CompareNet(nn.Module):
 
 
 class MLPCompareAgent:
-    def __init__(self, lr=1e-3, seed=0):
+    def __init__(self, lr=1e-3, seed=0, scale=1.0):
         torch.manual_seed(seed)
         self.net = CompareNet()
         self.opt = optim.Adam(self.net.parameters(), lr=lr)
+        self.scale = float(scale)
+
+    def _x(self, a, b):
+        return torch.tensor([[a / self.scale, b / self.scale]], dtype=torch.float32)
 
     def predict(self, a, b):
-        x = torch.tensor([[float(a), float(b)]], dtype=torch.float32)
         with torch.no_grad():
-            p = torch.sigmoid(self.net(x)).item()
+            p = torch.sigmoid(self.net(self._x(a, b))).item()
         return ("A" if p >= 0.5 else "B"), p
 
     def train_on(self, a, b):
-        x = torch.tensor([[float(a), float(b)]], dtype=torch.float32)
         y = torch.tensor([1.0 if a > b else 0.0], dtype=torch.float32)
-        logit = self.net(x)
-        loss = nn.functional.binary_cross_entropy_with_logits(logit, y)
+        loss = nn.functional.binary_cross_entropy_with_logits(self.net(self._x(a, b)), y)
         self.opt.zero_grad()
         loss.backward()
         self.opt.step()

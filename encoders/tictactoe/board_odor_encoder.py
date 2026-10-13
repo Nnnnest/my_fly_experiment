@@ -19,28 +19,11 @@ import os
 import numpy as np
 import itertools
 
+from core import paths as _paths
+LIVE_ALPN = _paths.live_alpn()
+
 N_CELLS = 9
 N_ALPN_TOTAL = 685  # mb mode's ALPN count, per README/summary.txt
-
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_MY_EXPERIMENTS =  os.path.join(os.path.dirname(__file__), "..", "..", "..")         # my_experiments/
-_REPO_ROOT = os.path.dirname(_MY_EXPERIMENTS)     # one level up, in case it lives there instead
-_CANDIDATES = [
-    os.path.join(_MY_EXPERIMENTS, "results", "gridworld", "live_alpn_indices.npy"),
-    os.path.join(_REPO_ROOT, "results", "gridworld", "live_alpn_indices.npy"),
-]
-
-for _candidate in _CANDIDATES:
-    if os.path.exists(_candidate):
-        LIVE_ALPN = np.load(_candidate)
-        break
-else:
-    raise FileNotFoundError(
-        "couldn't find live_alpn_indices.npy in either of:\n  "
-        + "\n  ".join(_CANDIDATES)
-        + "\n(the same file the bandit/grid-world agents use, hops=1). "
-        "If it lives somewhere else, edit _CANDIDATES above."
-    )
 
 GROUP_SIZE = len(LIVE_ALPN) // N_CELLS
 CELL_GROUPS = [LIVE_ALPN[i * GROUP_SIZE:(i + 1) * GROUP_SIZE] for i in range(N_CELLS)]

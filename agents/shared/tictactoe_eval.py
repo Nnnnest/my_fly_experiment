@@ -12,7 +12,7 @@ to unseen states (that's what tictactoe_defense_diagnostic.py tests).
 """
 import random
 
-from tictactoe_solver import enumerate_reachable_states, minimax
+from agents.shared.tictactoe_solver import enumerate_reachable_states, minimax
 
 
 def to_perspective(raw_board, mover):

@@ -1,3 +1,5 @@
+from core import paths
+from core.brain_pool import fresh_brain
 import sys, os, warnings
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 for _p in (os.path.join(_THIS_DIR, "..", "..", ".."), os.path.join(_THIS_DIR, "..", "..")):
@@ -46,7 +48,7 @@ class ConnectomeGridAgentV2:
         self.state_map = {sid: i for i, sid in enumerate(traversable_state_ids)}
         n_states = len(traversable_state_ids)
         self.n_states, self.n_actions = n_states, n_actions
-        self.brain = FlyBrainAPI(mode="mb", path=FLY_ROOT)
+        self.brain = fresh_brain()
         if encoding == "khot":
             self.encoder = SparseStateActionEncoder(n_states, n_actions, live_indices_path,
                                                     k=k, max_overlap=max_overlap, seed=seed)

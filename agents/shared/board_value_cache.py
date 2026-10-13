@@ -28,7 +28,7 @@ def enumerate_afterstates():
     excludes but choose_action() does evaluate (a winning move must be
     visible)."""
     from envs.tictactoe_env import TicTacToe
-    from tictactoe_solver import enumerate_reachable_states
+    from agents.shared.tictactoe_solver import enumerate_reachable_states
     seen = set()
     for board, mover in enumerate_reachable_states():
         for a in range(9):
@@ -40,12 +40,12 @@ def enumerate_afterstates():
     return list(seen)
 
 
+_CODES = {}
+
+
 def build_board_cache(brain, boards, board_to_vector, kc_frac=0.05):
-    """boards: list of length-9 board tuples, already in whatever
-    orientation you'll look values up with -- if you canonicalize with
-    SymmetryWrapper, canonicalize THESE first and canonicalize every later
-    lookup the same way, or ids won't match.
-    Returns (cache, board_to_id)."""
     patterns = np.stack([board_to_vector(b) for b in boards]).astype(np.float32)
-    cache = MBValueCache(brain, _BoardEncoderAdapter(patterns), kc_frac=kc_frac)
+    key = (hash(tuple(boards)), kc_frac)
+    cache = MBValueCache(brain, _BoardEncoderAdapter(patterns), kc_frac=kc_frac, codes=_CODES.get(key))
+    _CODES[key] = cache.codes
     return cache, {b: i for i, b in enumerate(boards)}

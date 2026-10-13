@@ -1,53 +1,66 @@
-import sys, os, csv
-
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.join(SCRIPT_DIR, "..", "..")
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
+"""Bandit experiment: probs [0.3, 0.7], min_pulls sweep, 3 agents, FINAL_SEEDS (10).
+    python -m scripts.bandit.run_bandit --smoke
+    python -m scripts.bandit.run_bandit"""
+from core import paths
+from core.runner import RunSpec, common_parser, resolve_seeds, run_all
 from envs.bandit_env import BernoulliBandit
 from agents.bandit.qlearning_agent import QLearningBanditAgent
 from agents.bandit.mlp_agent import MLPBanditAgent
 from agents.bandit.connectome_agent import ConnectomeBanditAgent
 
+EXPERIMENT = "bandit"
 PROBS = [0.3, 0.7]
-OPTIMAL_REWARD = max(PROBS)
 N_TRIALS = 300
-SEEDS = [0, 1, 2]
-MIN_PULLS = 10
+MIN_PULLS_SWEEP = [2, 5, 8, 10, 15, 20, 30]     # main results = min_pulls 10
+AGENTS = ["qlearning", "mlp", "connectome"]
 
-RESULTS_DIR = os.path.join(ROOT, "results", "bandit")
-os.makedirs(RESULTS_DIR, exist_ok=True)
-CSV_PATH = os.path.join(RESULTS_DIR, "bandit_results.csv")
 
-with open(CSV_PATH, "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow([
-        "agent", "seed", "trial", "arm", "reward",
-        "cum_reward", "regret", "cum_regret"
-    ])
+def make_agent(name, min_pulls, seed):
+    k = len(PROBS)
+    if name == "qlearning":
+        return QLearningBanditAgent(k, min_pulls=min_pulls, seed=seed)
+    if name == "mlp":   # NOTE: one weight per arm trained by a delta rule (not a multilayer net)
+        return MLPBanditAgent(k, lr=0.3, min_pulls=min_pulls, seed=seed)
+    return ConnectomeBanditAgent(k, ["A", "B"], min_pulls=min_pulls, seed=seed)
 
-    for seed in SEEDS:
-        for agent_name, agent in [
-            ("qlearning", QLearningBanditAgent(len(PROBS), min_pulls=MIN_PULLS, seed=seed)),
-            ("mlp", MLPBanditAgent(len(PROBS), lr=0.3, min_pulls=MIN_PULLS, seed=seed)),
-            ("connectome", ConnectomeBanditAgent(len(PROBS), ["A", "B"], min_pulls=MIN_PULLS, seed=seed)),
-        ]:
-            env = BernoulliBandit(PROBS, seed=seed)
-            cum_reward = 0.0
-            cum_regret = 0.0
-            for t in range(N_TRIALS):
-                arm = agent.select_action()
-                reward = env.pull(arm)
-                agent.update(arm, reward)
 
-                regret = OPTIMAL_REWARD - reward
-                cum_reward += reward
-                cum_regret += regret
+def run_one(spec, log):
+    cfg = spec.config
+    probs, n = cfg["probs"], cfg["n_trials"]
+    agent = make_agent(spec.agent, cfg["min_pulls"], spec.seed)
+    env = BernoulliBandit(probs, seed=spec.seed)
+    best = max(probs)
+    tot_reward = cum_regret = cum_pseudo = 0.0
+    last_opt = []
+    for t in range(n):
+        arm = agent.select_action()
+        reward = env.pull(arm)
+        agent.update(arm, reward)
+        pseudo = best - probs[arm]
+        tot_reward += reward
+        cum_regret += best - reward
+        cum_pseudo += pseudo
+        log.log(t, "arm", arm)
+        log.log(t, "reward", reward)
+        log.log(t, "regret", best - reward)          # realized (as in v1)
+        log.log(t, "pseudo_regret", pseudo)          # expected, less noisy
+        last_opt.append(probs[arm] == best)
+    out = {"total_reward": tot_reward, "cum_regret": cum_regret, "cum_pseudo_regret": cum_pseudo,
+           "frac_optimal_last50": sum(last_opt[-50:]) / 50}
+    if hasattr(agent, "drift_pct"):
+        out["final_drift_pct"] = agent.drift_pct()
+    return out
 
-                writer.writerow([
-                    agent_name, seed, t, arm, reward,
-                    cum_reward, regret, cum_regret
-                ])
-                f.flush()
-            print(f"{agent_name} seed={seed} final cum_reward={cum_reward} final cum_regret={cum_regret}")
 
-print(f"Wrote results to {CSV_PATH}")
+def main():
+    args = common_parser(__doc__).parse_args()
+    sweep = [10] if args.smoke else MIN_PULLS_SWEEP
+    n = 50 if args.smoke else N_TRIALS
+    specs = [RunSpec(EXPERIMENT, f"mp{mp}", agent, "-", seed,
+                     {"probs": PROBS, "n_trials": n, "min_pulls": mp})
+             for mp in sweep for agent in AGENTS for seed in resolve_seeds(args)]
+    run_all(specs, run_one, args)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,153 +1,110 @@
-"""Main runner for the number-comparison ("solve the inequality")
-experiment. mode='mb', plain step()/train() -- no vision, no x_zone --
-directly reusing the bandit's validated mechanism instead of the
-full-mode regression path that failed for counting.
-
-Logs abs_diff = |a-b| alongside correctness, since (like the bandit's
-close-probability arms) pairs with a small gap should be intrinsically
-harder than pairs with a large one -- worth checking whether accuracy
-degrades with closeness the way you'd expect from a real graded-magnitude
-comparison, as opposed to being flat (which would suggest it's not
-really using the magnitude at all).
-
-    python scripts/comparison/run_comparison.py
-"""
-import sys
-import os
-import csv
-import time
-import argparse
-
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_d = _HERE
-for _ in range(6):
-    if _d not in sys.path:
-        sys.path.insert(0, _d)
-    _d = os.path.dirname(_d)
-
+"""Number comparison. Tasks: knob_n{9,19,49,99} (Method A) and digits_{2,3,4,5,9} (Method B).
+    python -m scripts.comparison.run_comparison --smoke
+    python -m scripts.comparison.run_comparison"""
 import numpy as np
 
+from core import paths
+from core.runner import RunSpec, common_parser, resolve_seeds, run_all
 from encoders.comparison.number_pair_encoder import NumberPairEncoder, sample_pair
+from encoders.comparison.multi_digit_pair_encoder import MultiDigitPairEncoder, sample_n_digit_pair
 from agents.comparison.connectome_compare_agent import ConnectomeCompareAgent
 from agents.comparison.baseline_compare_agents import LinearCompareAgent, MLPCompareAgent
 
-N_ROUNDS = 400
-N_CALIB = 40
-N_BASELINE_EVAL = 60  # pre-training eval pairs, ALL agents, zero train_on() calls
-SLEEP_EVERY = 50
-PROGRESS_EVERY = 20
+EXPERIMENT = "comparison"
+ROUNDS, N_EVAL, EVAL_EVERY, N_CALIB = 400, 200, 20, 100
+KNOB_N = [9, 19, 49, 99]
+DIGITS = [2, 3, 4, 5, 9]
+LR_LINEAR, LR_MLP = 2.0, 3e-3          
+TUNE_LINEAR = [0.1, 0.5, 2.0, 8.0]
+TUNE_MLP = [3e-4, 1e-3, 3e-3, 1e-2, 3e-2]
+# (agent, tier, trains, sleep_every, lr)
+FIXED_VARIANTS = [("connectome", "fair", True, None, None), ("connectome", "sleep50", True, 50, None),
+                  ("connectome_notrain", "control", False, None, None)]
+
+def build(cfg, seed):
+    live = paths.live_alpn()
+    if cfg["kind"] == "knob":
+        n = cfg["n_max"]
+        return NumberPairEncoder(live, n_max=n, seed=seed), (lambda r: sample_pair(r, n_max=n)), float(n)
+    d = cfg["n_digits"]
+    return MultiDigitPairEncoder(live, n_digits=d, seed=seed), (lambda r: sample_n_digit_pair(r, d)), float(10 ** d)
 
 
-def _find_dir_containing(name):
-    """Walk up from this file to find an ancestor that has `name` as a
-    child (file or dir) -- same robustness reasoning as the sys.path fix:
-    don't hard-code an exact directory depth."""
-    d = _HERE
-    for _ in range(6):
-        if os.path.exists(os.path.join(d, name)):
-            return d
-        d = os.path.dirname(d)
-    raise FileNotFoundError(f"couldn't find '{name}' by walking up from {_HERE}")
+def truth(a, b):
+    return "A" if a > b else "B"
 
 
-LIVE_ALPN_PATH = os.path.join(_find_dir_containing("results"), "results", "gridworld", "live_alpn_indices.npy")
-RESULTS_DIR = os.path.join(_find_dir_containing("results"), "results", "comparison")
+def acc(agent, pairs):
+    return float(np.mean([agent.predict(a, b)[0] == truth(a, b) for a, b in pairs]))
 
-if not os.path.exists(LIVE_ALPN_PATH):
-    # fall back to computing it fresh, same helper run_gridworld_large_v2.py
-    # uses (agents/shared/mb_value_cache.py's ensure_live_hops1) -- avoids a
-    # second hard-coded path guess if your layout differs from the above.
-    from agents.shared.mb_value_cache import ensure_live_hops1
-    os.makedirs(os.path.dirname(LIVE_ALPN_PATH), exist_ok=True)
-    ensure_live_hops1(LIVE_ALPN_PATH)
+
+def run_one(spec, log):
+    cfg, seed = spec.config, spec.seed
+    enc, sample, scale = build(cfg, seed)
+    is_conn = spec.agent.startswith("connectome")
+    if is_conn:
+        agent = ConnectomeCompareAgent(enc)
+    elif spec.agent == "linear":
+        agent = LinearCompareAgent(lr=cfg["lr"], seed=seed, scale=scale)
+    else:
+        agent = MLPCompareAgent(lr=cfg["lr"], seed=seed, scale=scale)
+
+    r_eval, r_cal, r_tr = (np.random.default_rng([seed, k]) for k in (1, 2, 3))
+    eval_pairs = [sample(r_eval) for _ in range(N_EVAL)]
+    if is_conn:
+        agent.calibrate_baseline([sample(r_cal) for _ in range(N_CALIB)])   # BEFORE any training
+
+    def evaluate(step):
+        a = acc(agent, eval_pairs)
+        log.log(step, "eval_acc", a, split="eval")
+        if is_conn:
+            log.log(step, "drift_pct", agent.drift_pct(), split="eval")
+        return a
+
+    pre = evaluate(0)
+    ev, online = {0: pre}, []
+    for t in range(cfg["rounds"]):
+        a, b = sample(r_tr)
+        ok = float(agent.predict(a, b)[0] == truth(a, b))
+        online.append(ok)
+        log.log(t, "online_correct", ok)
+        log.log(t, "abs_diff", abs(a - b))
+        if cfg["train"]:
+            agent.train_on(a, b)
+        if cfg["sleep_every"] and (t + 1) % cfg["sleep_every"] == 0:
+            agent.sleep()
+        if (t + 1) % EVAL_EVERY == 0:
+            ev[t + 1] = evaluate(t + 1)
+    first90 = next((s for s, v in sorted(ev.items()) if v >= 0.9), None)
+    out = {"eval_acc_pre": pre, "eval_acc_final": ev[cfg["rounds"]], "online_acc": float(np.mean(online)),
+           "online_acc_last40": float(np.mean(online[-40:])), "rounds_to_eval90": first90}
+    if is_conn:
+        out["final_drift_pct"] = agent.drift_pct()
+    return out
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--no-train", action="store_true",
-                    help="skip connectome train_on() entirely -- diagnostic to check "
-                         "whether the baseline-corrected sign is already near-perfect "
-                         "from the physical encoding alone, with zero learning")
-    ap.add_argument("--n-max", type=int, default=9,
-                    help="numbers sampled from [1, n_max] -- sweep this (19/49/99) to "
-                         "find where resolution starts to degrade accuracy, especially "
-                         "for close pairs where the volume-knob gap shrinks")
-    args = ap.parse_args()
-    n_max = args.n_max
-
-    os.makedirs(RESULTS_DIR, exist_ok=True)
-    rng = np.random.default_rng(0)
-
-    encoder = NumberPairEncoder(LIVE_ALPN_PATH, n_max=n_max)
-    connectome = ConnectomeCompareAgent(encoder)
-
-    calib_rng = np.random.default_rng(1)
-    calib_pairs = [sample_pair(calib_rng, n_max=n_max) for _ in range(N_CALIB)]
-    connectome.calibrate_baseline(calib_pairs)  # BEFORE any train_on call
-
-    agents = {
-        "connectome": connectome,
-        "linear": LinearCompareAgent(),
-        "mlp": MLPCompareAgent(),
-    }
-
-    tag = f"_nmax{n_max}" if n_max != 9 else ""
-    fname = f"comparison_results{tag}_notrain.csv" if args.no_train else f"comparison_results{tag}.csv"
-    csv_path = os.path.join(RESULTS_DIR, fname)
-    t0 = time.time()
-    with open(csv_path, "w", newline="") as f:
-        w = csv.writer(f)
-        w.writerow(["round", "agent", "a", "b", "abs_diff", "predicted", "correct", "drift_pct"])
-
-        # Pre-training baseline: round=-1, every agent evaluated with ZERO
-        # train_on() calls so far -- the genuine "before any learning"
-        # number, as opposed to the 0-19 block average (which already
-        # includes 20 rounds of training). Same round=-1 convention
-        # train_imitation_counting.py uses for its untrained/pre eval.
-        baseline_rng = np.random.default_rng(2)  # distinct from calib_rng/rng
-        baseline_pairs = [sample_pair(baseline_rng, n_max=n_max) for _ in range(N_BASELINE_EVAL)]
-        baseline_correct = {name: 0 for name in agents}
-        for a, b in baseline_pairs:
-            correct_ans = "A" if a > b else "B"
-            abs_diff = abs(a - b)
-            for name, agent in agents.items():
-                pred, _ = agent.predict(a, b)
-                correct = int(pred == correct_ans)
-                baseline_correct[name] += correct
-                drift = f"{agent.drift_pct():.4f}" if hasattr(agent, "drift_pct") else ""
-                w.writerow([-1, name, a, b, abs_diff, pred, correct, drift])
-        print(f"pre-training baseline (n={N_BASELINE_EVAL} pairs, zero train_on calls):")
-        for name in agents:
-            acc = baseline_correct[name] / N_BASELINE_EVAL
-            print(f"  {name}: accuracy={acc:.3f}")
-        f.flush()
-
-        for rnd in range(N_ROUNDS):
-            a, b = sample_pair(rng, n_max=n_max)
-            correct_ans = "A" if a > b else "B"
-            abs_diff = abs(a - b)
-
-            for name, agent in agents.items():
-                pred, _ = agent.predict(a, b)
-                correct = int(pred == correct_ans)
-                drift = f"{agent.drift_pct():.4f}" if hasattr(agent, "drift_pct") else ""
-                w.writerow([rnd, name, a, b, abs_diff, pred, correct, drift])
-                if name == "connectome" and args.no_train:
-                    pass  # diagnostic mode: never train the connectome
-                else:
-                    agent.train_on(a, b)
-            f.flush()
-
-            if hasattr(agents["connectome"], "sleep") and (rnd + 1) % SLEEP_EVERY == 0:
-                agents["connectome"].sleep()
-
-            if (rnd + 1) % PROGRESS_EVERY == 0 or rnd == N_ROUNDS - 1:
-                elapsed = time.time() - t0
-                eta = elapsed / (rnd + 1) * (N_ROUNDS - rnd - 1)
-                print(f"round {rnd + 1}/{N_ROUNDS} elapsed={elapsed:.0f}s eta={eta:.0f}s")
-
-    print(f"wrote {csv_path}")
-
+    args = common_parser(__doc__).parse_args()
+    if args.smoke:
+        tasks = {"knob_n9": {"kind": "knob", "n_max": 9}, "digits_2": {"kind": "digits", "n_digits": 2}}
+        rounds = 60
+    else:
+        tasks = {f"knob_n{n}": {"kind": "knob", "n_max": n} for n in KNOB_N}
+        tasks.update({f"digits_{d}": {"kind": "digits", "n_digits": d} for d in DIGITS})
+        rounds = ROUNDS
+    if args.tuning:     # baselines only: the connectome has no tunable hyperparameter here
+        variants = ([("linear", f"lr{lr}", True, None, lr) for lr in TUNE_LINEAR] +
+                    [("mlp", f"lr{lr}", True, None, lr) for lr in TUNE_MLP])
+    else:
+        variants = FIXED_VARIANTS + [("linear", "fair", True, None, LR_LINEAR), ("mlp", "fair", True, None, LR_MLP)]
+    specs = []
+    for task, tcfg in tasks.items():
+        for agent, tier, trains, sleep, lr in variants:
+            for seed in resolve_seeds(args):
+                cfg = {**tcfg, "rounds": rounds, "train": trains, "sleep_every": sleep, "lr": lr,
+                       "n_eval": N_EVAL, "eval_every": EVAL_EVERY}
+                specs.append(RunSpec(EXPERIMENT, task, agent, tier, seed, cfg))
+    run_all(specs, run_one, args)
 
 if __name__ == "__main__":
     main()

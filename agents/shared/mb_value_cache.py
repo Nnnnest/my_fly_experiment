@@ -17,7 +17,7 @@ import numpy as np
 
 
 class MBValueCache:
-    def __init__(self, brain, encoder, kc_frac=0.05):
+    def __init__(self, brain, encoder, kc_frac=0.05, codes=None):
         if brain.mode != "mb":
             raise ValueError("MBValueCache supports mode='mb' only")
         self._check_static(brain)
@@ -28,14 +28,15 @@ class MBValueCache:
         alpn, kc = np.asarray(b.ALPN), np.asarray(b.KC)
         self.n_alpn, self.n_kc = len(alpn), len(kc)
 
-        a_idx = np.full(b.N, -1, np.int64); a_idx[alpn] = np.arange(len(alpn))
-        k_idx = np.full(b.N, -1, np.int64); k_idx[kc] = np.arange(len(kc))
-        sw = (b.wM * b.sign).astype(np.float32)
-        m = (a_idx[b.pre] >= 0) & (k_idx[b.post] >= 0)
-        M = np.zeros((self.n_alpn, self.n_kc), np.float32)
-        np.add.at(M, (a_idx[b.pre[m]], k_idx[b.post[m]]), sw[m])
-        self.M = M
-        self.fan_kc = (b._fan[kc] + 1e-6).astype(np.float32)
+        if getattr(b, "_mbc_shared", None) is None:
+            a_idx = np.full(b.N, -1, np.int64); a_idx[alpn] = np.arange(len(alpn))
+            k_idx = np.full(b.N, -1, np.int64); k_idx[kc] = np.arange(len(kc))
+            sw = (b.wM * b.sign).astype(np.float32)
+            m = (a_idx[b.pre] >= 0) & (k_idx[b.post] >= 0)
+            M = np.zeros((self.n_alpn, self.n_kc), np.float32)
+            np.add.at(M, (a_idx[b.pre[m]], k_idx[b.post[m]]), sw[m])
+            b._mbc_shared = (M, (b._fan[kc] + 1e-6).astype(np.float32))
+        self.M, self.fan_kc = b._mbc_shared
 
         pos = b._mb_pos
         ai = [pos[int(a)] for a in np.sort(b.approach)]
@@ -45,7 +46,7 @@ class MBValueCache:
         np.add.at(c, vi, -1.0 / len(vi))
         self.c = c
 
-        self.codes = self._codes(encoder.patterns)
+        self.codes = codes if codes is not None else self._codes(encoder.patterns)
         self.n_actions = encoder.n_actions
         self.kc_sorted = bool(np.all(np.diff(kc) > 0))
         self.refresh()
