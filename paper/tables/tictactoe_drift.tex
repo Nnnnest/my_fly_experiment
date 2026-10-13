@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+task & connectome & connectome [gate\_error] & connectome [gate\_visit] & connectome [opt] & connectome [opt\_sleep100] & connectome [sym] & connectome [sym\_sleep500] \\
+\midrule
+imitation & 26.40 [26.39, 26.42] & - & - & - & - & 20.54 [20.52, 20.56] & 19.08 [19.06, 19.09] \\
+rl\_heuristic & 14.04 [13.82, 14.29] & 3.68 [3.28, 4.06] & 9.53 [9.37, 9.67] & 10.05 [9.92, 10.17] & 8.31 [8.26, 8.38] & - & - \\
+rl\_random & 23.79 [23.70, 23.88] & 16.34 [16.24, 16.44] & 18.56 [18.52, 18.60] & 19.16 [19.11, 19.20] & 16.48 [16.44, 16.52] & - & - \\
+rl\_selfplay & 21.08 [20.76, 21.40] & 15.46 [15.42, 15.51] & 17.78 [17.71, 17.85] & 18.36 [18.30, 18.42] & 15.50 [15.46, 15.53] & - & - \\
+\bottomrule
+\end{tabular}
+\caption{Final weight drift (\%)}
+\label{tab:tictactoe_drift}
+\end{table}

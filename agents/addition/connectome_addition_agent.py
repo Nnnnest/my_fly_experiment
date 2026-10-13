@@ -1,83 +1,58 @@
-"""Connectome binary-judgment agent for addition: 'is C == A + B?'.
-
-mode='mb', plain step()/train(reward/punish) -- NOT x_teach_output, per
-summary_addendum2.txt section 15 (reusing the mechanism validated by the
-number-comparison Method A/B experiments, not the x_zone regression
-machinery that failed for shape-identity/counting).
-
-calibrate_baseline() must be called once, on a sample of (a,b,c) triples,
-BEFORE any train() call -- same discipline as every other agent here.
-"""
-import os
-import sys
-
-_THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-for _p in (_THIS_DIR, os.path.dirname(_THIS_DIR), os.path.dirname(os.path.dirname(_THIS_DIR))):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-
 import numpy as np
-from fly_api import FlyBrainAPI
-from agents.shared.paths import FLY_ROOT
-from encoders.addition.addition_encoder import AdditionEncoder
+
+from core import paths  # noqa: F401
+from core.brain_pool import fresh_brain, value_fn
+from agents.shared.mb_value_cache import train_no_readout
 
 
 class ConnectomeAdditionAgent:
-    def __init__(self, n_max=9, hops=1, live_indices_path=None, seed=0):
-        self.fly = FlyBrainAPI(mode="mb", path=FLY_ROOT)
-        live_path = live_indices_path or os.path.join(FLY_ROOT, "my_experiments", "results", "gridworld", "live_alpn_indices.npy")
-        self.encoder = AdditionEncoder(live_path, n_max=n_max, seed=seed)
-        self.hops = hops
-        self._baseline_coef = None
+    """'is C == A + B?'  value > 0 => yes. Baseline correction uses LABEL-BLIND features only
+    (operands, candidate, pairwise products); no sum residual, no carry flag."""
 
-    def calibrate_baseline(self, sample_triples):
-        """sample_triples: list of (a, b, c). Call BEFORE any train()."""
-        X, y = [], []
-        for a, b, c in sample_triples:
-            X.append(self.encoder.features(a, b, c))
-            raw = self.fly.step(odor=self.encoder.encode(a, b, c), hops=self.hops)["MB_pref"]
-            y.append(raw)
-        X = np.array(X)
-        X_aug = np.hstack([X, np.ones((len(X), 1))])
-        coef, *_ = np.linalg.lstsq(X_aug, np.array(y), rcond=None)
-        self._baseline_coef = coef
+    def __init__(self, encoder, width):
+        self.brain = fresh_brain()
+        self.cache, self._values = value_fn()
+        self.encoder, self.width, self._coef = encoder, width, None
 
-    def _baseline(self, a, b, c):
-        if self._baseline_coef is None:
-            raise RuntimeError("call calibrate_baseline() before using this agent")
-        feats = np.append(self.encoder.features(a, b, c), 1.0)
-        return float(feats @ self._baseline_coef)
+    def _blind(self, a, b, c):
+        if self.width == "single":
+            return [a, b, c, a * b, a * c, b * c, 1.0]
+        at, au = divmod(a, 10)
+        bt, bu = divmod(b, 10)
+        ct, cu = divmod(c, 10)
+        return [at, au, bt, bu, ct, cu, at * bt, au * bu, 1.0]
+
+    def _raw_many(self, triples):
+        return self._values(np.stack([self.encoder.encode(a, b, c) for a, b, c in triples]))
+
+    def calibrate_baseline(self, triples):
+        """Fit untrained MB_pref ~ blind features. Call once, before any update()."""
+        X = np.array([self._blind(*t) for t in triples], float)
+        self._coef, *_ = np.linalg.lstsq(X, self._raw_many(triples), rcond=None)
+
+    def value_many(self, triples):
+        X = np.array([self._blind(*t) for t in triples], float)
+        return self._raw_many(triples) - X @ self._coef
 
     def value(self, a, b, c):
-        raw = self.fly.step(odor=self.encoder.encode(a, b, c), hops=self.hops)["MB_pref"]
-        return raw - self._baseline(a, b, c)
+        return float(self.value_many([(a, b, c)])[0])
+
+    def predict_many(self, triples):
+        return self.value_many(triples) > 0.0
 
     def predict(self, a, b, c):
-        """True = agent believes c == a + b."""
         return self.value(a, b, c) > 0.0
 
     def update(self, a, b, c, label):
-        """label: True if c == a + b, False otherwise."""
-        vec = self.encoder.encode(a, b, c)
-        if label:
-            self.fly.train(odor=vec, reward=1.0, hops=self.hops)
-        else:
-            self.fly.train(odor=vec, punish=1.0, hops=self.hops)
+        kw = {"reward": 1.0} if label else {"punish": 1.0}
+        train_no_readout(self.brain, self.encoder.encode(a, b, c), hops=1, **kw)
+        self.cache.refresh()
 
     def drift_pct(self):
-        num = float(np.abs(self.fly.wM - self.fly.wM0).mean())
-        den = float(np.abs(self.fly.wM0).mean()) + 1e-9
-        return 100.0 * num / den
+        num = float(np.abs(self.brain.wM - self.brain.wM0).mean())
+        return 100.0 * num / (float(np.abs(self.brain.wM0).mean()) + 1e-9)
 
-    def sleep(self, **kwargs):
-        return self.fly.sleep(**kwargs)
-
-    def save(self, path_prefix):
-        self.fly.save_weights(path_prefix + "_weights.npz")
-        if self._baseline_coef is not None:
-            np.save(path_prefix + "_baseline.npy", self._baseline_coef)
-
-    def load(self, path_prefix):
-        self.fly.load_weights(path_prefix + "_weights.npz")
-        self._baseline_coef = np.load(path_prefix + "_baseline.npy")
+    def sleep(self, **kw):
+        r = self.brain.sleep(**kw)
+        self.cache.refresh()
+        return r

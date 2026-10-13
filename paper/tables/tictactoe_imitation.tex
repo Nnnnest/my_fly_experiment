@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+label & coverage\_acc\_pre & coverage\_acc \\
+\midrule
+connectome & 0.547 [0.543, 0.552] & 0.545 [0.543, 0.547] \\
+connectome [sym] & 0.570 [0.561, 0.578] & 0.619 [0.613, 0.624] \\
+connectome [sym\_sleep500] & 0.570 [0.561, 0.578] & 0.618 [0.613, 0.623] \\
+mlp & 0.577 [0.563, 0.590] & 0.860 [0.856, 0.864] \\
+mlp [sym] & 0.575 [0.548, 0.605] & 0.928 [0.921, 0.935] \\
+qlearning & 0.587 [0.587, 0.587] & 0.917 [0.915, 0.919] \\
+qlearning [sym] & 0.587 [0.587, 0.587] & 0.973 [0.972, 0.975] \\
+\bottomrule
+\end{tabular}
+\caption{Imitation: minimax-optimal move coverage over all 4520 reachable states}
+\label{tab:tictactoe_imitation}
+\end{table}

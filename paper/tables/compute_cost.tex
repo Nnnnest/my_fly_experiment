@@ -1,0 +1,50 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrr}
+\toprule
+experiment & agent & tier & runs & total\_h & mean\_s & median\_s \\
+\midrule
+addition & connectome & fair & 40 & 0.24 & 21.76 & 20.78 \\
+addition & connectome & gate\_error & 20 & 0.08 & 14.24 & 13.92 \\
+addition & connectome\_notrain & control & 20 & 0.01 & 2.14 & 2.2 \\
+addition & linear & feat & 40 & 0.0 & 0.05 & 0.04 \\
+addition & linear & raw & 40 & 0.0 & 0.05 & 0.04 \\
+addition & mlp & feat & 40 & 0.01 & 1.12 & 0.93 \\
+addition & mlp & raw & 40 & 0.01 & 1.18 & 1.08 \\
+addition\_diag & connectome & diagnostic & 20 & 0.0 & 0.05 & 0.05 \\
+bandit & connectome & - & 70 & 0.05 & 2.37 & 2.45 \\
+bandit & mlp & - & 70 & 0.0 & 0.0 & 0.0 \\
+bandit & qlearning & - & 70 & 0.0 & 0.0 & 0.0 \\
+comparison & connectome & fair & 90 & 0.2 & 7.81 & 7.78 \\
+comparison & connectome & sleep50 & 90 & 0.2 & 7.95 & 8.01 \\
+comparison & connectome\_notrain & control & 90 & 0.02 & 0.76 & 0.71 \\
+comparison & linear & fair & 90 & 0.0 & 0.03 & 0.03 \\
+comparison & mlp & fair & 90 & 0.01 & 0.41 & 0.4 \\
+gridworld & connectome & fair & 20 & 0.83 & 148.63 & 90.44 \\
+gridworld & connectome & gate\_error & 50 & 0.34 & 24.56 & 8.52 \\
+gridworld & connectome & gate\_rank & 50 & 1.89 & 135.81 & 6.44 \\
+gridworld & connectome & gate\_visit & 50 & 1.31 & 94.37 & 70.92 \\
+gridworld & connectome & opt & 50 & 13.57 & 976.84 & 809.38 \\
+gridworld & kc\_delta & diagnostic & 50 & 0.03 & 1.88 & 0.46 \\
+gridworld & mlp & fair & 50 & 1.33 & 95.84 & 14.16 \\
+gridworld & qlearning & fair & 50 & 0.0 & 0.09 & 0.07 \\
+gridworld & rand\_delta & diagnostic & 50 & 0.02 & 1.41 & 0.44 \\
+tictactoe & connectome & fair & 40 & 3.74 & 336.38 & 233.23 \\
+tictactoe & connectome & gate\_error & 30 & 0.79 & 94.26 & 76.18 \\
+tictactoe & connectome & gate\_visit & 30 & 0.76 & 91.75 & 110.6 \\
+tictactoe & connectome & opt & 30 & 1.94 & 232.57 & 173.76 \\
+tictactoe & connectome & opt\_sleep100 & 30 & 1.98 & 237.13 & 199.41 \\
+tictactoe & connectome & sym & 10 & 2.09 & 752.8 & 790.97 \\
+tictactoe & connectome & sym\_sleep500 & 10 & 1.95 & 701.92 & 718.0 \\
+tictactoe & mlp & fair & 40 & 0.19 & 17.42 & 12.58 \\
+tictactoe & mlp & opt & 30 & 0.19 & 22.53 & 21.92 \\
+tictactoe & mlp & sym & 10 & 0.09 & 32.98 & 38.13 \\
+tictactoe & qlearning & fair & 40 & 0.0 & 0.41 & 0.4 \\
+tictactoe & qlearning & opt & 30 & 0.08 & 9.73 & 10.3 \\
+tictactoe & qlearning & sym & 10 & 0.02 & 5.59 & 5.58 \\
+\bottomrule
+\end{tabular}
+\caption{Wall-clock cost per run (several workers shared the CPU; compare within an experiment only)}
+\label{tab:compute_cost}
+\end{table}

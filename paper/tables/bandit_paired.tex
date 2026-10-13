@@ -1,0 +1,26 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+comparison & task & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome - qlearning & mp2 & 10 & 20.4 & -0.56 & 51.48 & False \\
+connectome - qlearning & mp5 & 10 & 9.84 & 0.0 & 29.52 & False \\
+connectome - qlearning & mp8 & 10 & -0.08 & -0.24 & 0.0 & False \\
+connectome - qlearning & mp10 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp15 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp30 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - mlp & mp2 & 10 & 17.2 & -5.84 & 50.2 & False \\
+connectome - mlp & mp5 & 10 & 5.12 & -6.96 & 25.92 & False \\
+connectome - mlp & mp8 & 10 & -5.56 & -8.8 & -3.08 & True \\
+connectome - mlp & mp10 & 10 & -3.36 & -5.32 & -1.64 & True \\
+connectome - mlp & mp15 & 10 & -3.4 & -7.32 & -0.88 & True \\
+connectome - mlp & mp20 & 10 & -7.08 & -12.36 & -3.24 & True \\
+connectome - mlp & mp30 & 10 & -4.24 & -6.8 & -1.96 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences in cumulative pseudo-regret (negative = connectome better)}
+\label{tab:bandit_paired}
+\end{table}

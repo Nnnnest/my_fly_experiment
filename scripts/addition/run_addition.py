@@ -1,127 +1,136 @@
-"""Addition experiment runner (spec.txt rung (b) / summary_addendum2.txt
-section 15): binary judgment 'is C == A + B?', mode='mb', plain
-step()/train(). Single-digit only (n_max=9, no carrying) for this first
-run -- widen n_max, then move to true two-digit positional operands with
-carrying, only after this baseline result comes in.
-
-Always run the --no-train control first (built into main() below, per
-section 15's explicit instruction -- this is what caught Method A's
-suspicious first result being real-but-modest bias, not perfect learning).
-
-    python run_addition.py                      # n_max=9, 400 rounds
-    python run_addition.py --n-max 19            # wider range
-    python run_addition.py --no-train-only       # just the control
-"""
-import argparse
-import csv
-import os
-import sys
-
-_THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-for _p in (_THIS_DIR, os.path.dirname(_THIS_DIR), os.path.dirname(os.path.dirname(_THIS_DIR))):
-    if _p not in sys.path:
-        sys.path.insert(0, _p)
+"""Addition ('is C == A+B?'). Tasks: {single,two}_{online,imitation}.
+    python -m scripts.addition.run_addition --smoke
+    python -m scripts.addition.run_addition --tuning --workers 4
+    python -m scripts.addition.run_addition --workers 4"""
+import random
 
 import numpy as np
 
+from core import paths
+from core.runner import RunSpec, common_parser, resolve_seeds, run_all
+from encoders.addition.addition_encoder import AdditionEncoder
+from encoders.addition.addition_encoder_2digit import TwoDigitAdditionEncoder
+from agents.shared.addition_common import sample_batch, sample_triple
 from agents.addition.connectome_addition_agent import ConnectomeAdditionAgent
+from agents.addition.addition_gate_utils import GatedAdditionAgent
 from agents.addition.baseline_addition_agents import LinearAdditionAgent, MLPAdditionAgent
 
-RESULTS_DIR = os.path.join(os.path.dirname(_THIS_DIR), "..", "results", "addition")
-N_TEST = 200
-N_ROUNDS = 400
-BLOCK = 20
-
-
-def sample_triple(rng, n_max, positive):
-    a = int(rng.integers(0, n_max + 1))
-    b = int(rng.integers(0, n_max + 1))
-    correct = a + b
-    if positive:
-        return a, b, correct, True
-    c_max = 2 * n_max
-    if rng.random() < 0.5:  # near-miss negative
-        delta = int(rng.choice([-3, -2, -1, 1, 2, 3]))
-        c = min(max(correct + delta, 0), c_max)
-        if c == correct:
-            c = correct + 1 if correct < c_max else correct - 1
-    else:  # anywhere-else negative
-        c = int(rng.integers(0, c_max + 1))
-        if c == correct:
-            c = correct + 1 if correct < c_max else correct - 1
-    return a, b, c, False
-
-
-def sample_batch(rng, n_max, n, pos_frac=0.5):
-    return [sample_triple(rng, n_max, rng.random() < pos_frac) for _ in range(n)]
+EXPERIMENT = "addition"
+ROUNDS, REPS, POOL, N_EVAL, EVAL_EVERY, N_CALIB = 800, 3, 200, 300, 40, 300
+LR_LINEAR, LR_MLP, MARGIN, LINEAR_SCALED = 0.5, 3e-3, 0.02, False
+TUNE_LR_LINEAR, TUNE_LR_MLP, TUNE_MARGIN = [0.01, 0.02, 0.05, 0.2], [3e-4, 1e-3, 3e-3, 1e-2], [0.01, 0.02, 0.05, 0.2]
 
 
 def accuracy(agent, triples):
-    hits = sum(agent.predict(a, b, c) == label for a, b, c, label in triples)
-    return hits / max(1, len(triples))
+    y = np.array([t[3] for t in triples])
+    if hasattr(agent, "predict_many"):
+        p = np.asarray(agent.predict_many([t[:3] for t in triples]))
+    else:
+        p = np.array([agent.predict(*t[:3]) for t in triples])
+    return float((p == y).mean())
 
 
-def run_no_train_control(n_max, seed=0):
-    rng = np.random.default_rng(seed)
-    calib = [(t[0], t[1], t[2]) for t in sample_batch(rng, n_max, 300)]
-    test = sample_batch(rng, n_max, N_TEST)
-    agent = ConnectomeAdditionAgent(n_max=n_max, seed=seed)
-    agent.calibrate_baseline(calib)
-    acc = accuracy(agent, test)
-    print(f"[no-train control] n_max={n_max}: connectome accuracy = {acc:.3f} (chance = 0.500)")
-    return acc
+def make_agent(spec, op_max, two, rngs):
+    cfg, seed = spec.config, spec.seed
+    if spec.agent.startswith("connectome"):
+        live = paths.live_alpn()
+        enc = TwoDigitAdditionEncoder(live, seed=seed) if two else AdditionEncoder(live, n_max=9, seed=seed)
+        agent = ConnectomeAdditionAgent(enc, "two" if two else "single")
+        agent.calibrate_baseline([t[:3] for t in sample_batch(rngs["cal"], op_max, N_CALIB, two)])  # BEFORE training
+        if cfg.get("gate"):
+            agent = GatedAdditionAgent(agent, margin_frac=cfg["margin"])
+            agent.calibrate_gate([t[:3] for t in sample_batch(rngs["probe"], op_max, 8, two)])
+        return agent
+    if spec.agent == "linear":
+        return LinearAdditionAgent("two" if two else "single", cfg["feat"], lr=cfg["lr"], seed=seed,
+                                   scaled=cfg.get("scaled", True))
+    return MLPAdditionAgent("two" if two else "single", cfg["feat"], lr=cfg["lr"], seed=seed)
 
+def run_one(spec, log):
+    cfg, seed = spec.config, spec.seed
+    two, op_max = cfg["width"] == "two", 49 if cfg["width"] == "two" else 9
+    rngs = {k: np.random.default_rng([seed, i]) for i, k in enumerate(["cal", "eval", "train", "pool", "probe"], 1)}
+    eval_set = sample_batch(rngs["eval"], op_max, cfg["n_eval"], two)
+    agent = make_agent(spec, op_max, two, rngs)
+    has_drift = hasattr(agent, "drift_pct")
+    last = {}
 
-def run_training(n_max, n_rounds, seed=0, tag="single_digit"):
-    os.makedirs(RESULTS_DIR, exist_ok=True)
-    rng = np.random.default_rng(seed)
-    calib = [(t[0], t[1], t[2]) for t in sample_batch(rng, n_max, 300)]
+    def evaluate(step):
+        last["acc"] = accuracy(agent, eval_set)
+        log.log(step, "eval_acc", last["acc"], split="eval")
+        if has_drift:
+            log.log(step, "drift_pct", agent.drift_pct(), split="eval")
+        return last["acc"]
 
-    conn = ConnectomeAdditionAgent(n_max=n_max, seed=seed)
-    conn.calibrate_baseline(calib)
-    agents = {"connectome": conn, "linear": LinearAdditionAgent(seed=seed),
-              "mlp": MLPAdditionAgent(seed=seed)}
-
-    csv_path = os.path.join(RESULTS_DIR, f"addition_results_{tag}.csv")
-    with open(csv_path, "w", newline="") as f:
-        writer = csv.writer(f)
-        writer.writerow(["round", "agent", "a", "b", "c", "label", "pred", "correct", "drift_pct"])
-        block_hits = {name: [] for name in agents}
-        for rnd in range(n_rounds):
-            a, b, c, label = sample_triple(rng, n_max, rng.random() < 0.5)
-            for name, agent in agents.items():
-                pred = agent.predict(a, b, c)
+    pre = evaluate(0)
+    step = 0
+    if cfg["mode"] == "online":
+        for rnd in range(1, cfg["rounds"] + 1):
+            a, b, c, label = sample_triple(rngs["train"], op_max, rngs["train"].random() < 0.5, two)
+            if cfg["train"]:
                 agent.update(a, b, c, label)
-                drift = conn.drift_pct() if name == "connectome" else ""
-                writer.writerow([rnd, name, a, b, c, label, pred, pred == label, drift])
-                block_hits[name].append(pred == label)
-            if (rnd + 1) % BLOCK == 0:
-                f.flush()
-                line = f"  round {rnd+1}/{n_rounds}: "
-                for name in agents:
-                    line += f"{name}={np.mean(block_hits[name][-BLOCK:]):.2f} "
-                line += f"drift={conn.drift_pct():.2f}%"
-                print(line)
+            step = rnd
+            if rnd % cfg["eval_every"] == 0:
+                evaluate(rnd)
+    else:
+        pool = sample_batch(rngs["pool"], op_max, cfg["pool"], two)
+        for rep in range(cfg["reps"]):
+            order = list(range(len(pool)))
+            random.Random(seed + rep).shuffle(order)
+            for i in order:
+                a, b, c, label = pool[i]
+                if cfg["train"]:
+                    agent.update(a, b, c, label)
+                step += 1
+                if step % cfg["eval_every"] == 0:
+                    evaluate(step)
+        log.log(step, "pool_acc", accuracy(agent, pool), split="eval")
+    out = {"eval_acc_pre": pre, "eval_acc_final": last["acc"]}
+    if cfg["mode"] == "imitation":
+        out["pool_acc"] = accuracy(agent, pool)
+    if has_drift:
+        out["final_drift_pct"] = float(agent.drift_pct())
+    if hasattr(agent, "n_trained"):
+        out["n_trained"], out["n_skipped"] = agent.n_trained, agent.n_skipped
+    return out
 
-    print(f"wrote {csv_path}")
-    for name in agents:
-        print(f"  {name}: overall={np.mean(block_hits[name]):.3f} "
-              f"last{BLOCK}={np.mean(block_hits[name][-BLOCK:]):.3f}")
+
+def variants(mode):
+    v = [("connectome", "fair", {}), 
+         ("linear", "raw", {"feat": "raw", "lr": LR_LINEAR, "scaled": LINEAR_SCALED}),
+         ("linear", "feat", {"feat": "feat", "lr": LR_LINEAR, "scaled": LINEAR_SCALED}), 
+         ("mlp", "raw", {"feat": "raw", "lr": LR_MLP}),
+         ("mlp", "feat", {"feat": "feat", "lr": LR_MLP})]
+    if mode == "online":
+        v += [("connectome", "gate_error", {"gate": True, "margin": MARGIN}),
+              ("connectome_notrain", "control", {"train": False})]
+    return v
+
+
+def tuning_variants():
+    v = []
+    for feat in ("raw", "feat"):
+        v += [("linear", f"{feat}_{'s' if sc else 'u'}_lr{lr}", {"feat": feat, "lr": lr, "scaled": sc})
+              for sc in (True, False) for lr in TUNE_LR_LINEAR]
+        v += [("mlp", f"{feat}_lr{lr}", {"feat": feat, "lr": lr}) for lr in TUNE_LR_MLP]
+    return v + [("connectome", f"gate_error_m{m}", {"gate": True, "margin": m}) for m in TUNE_MARGIN]
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--n-max", type=int, default=9)
-    ap.add_argument("--rounds", type=int, default=N_ROUNDS)
-    ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--no-train-only", action="store_true")
-    ap.add_argument("--tag", default=None)
-    args = ap.parse_args()
-
-    run_no_train_control(args.n_max, seed=args.seed)
-    if args.no_train_only:
-        return
-    run_training(args.n_max, args.rounds, seed=args.seed, tag=args.tag or f"nmax{args.n_max}")
+    args = common_parser(__doc__).parse_args()
+    small = args.smoke
+    base = {"rounds": 80 if small else ROUNDS, "reps": 1 if small else REPS, "pool": 40 if small else POOL,
+            "n_eval": 60 if small else N_EVAL, "eval_every": EVAL_EVERY, "train": True}
+    if args.tuning:
+        jobs = [(f"{w}_online", w, "online", tuning_variants()) for w in ("single", "two")]
+    elif small:
+        jobs = [("single_online", "single", "online", variants("online")),
+                ("two_imitation", "two", "imitation", variants("imitation"))]
+    else:
+        jobs = [(f"{w}_{m}", w, m, variants(m)) for w in ("single", "two") for m in ("online", "imitation")]
+    specs = [RunSpec(EXPERIMENT, task, agent, tier, seed, {**base, "width": w, "mode": m, **extra})
+             for task, w, m, vs in jobs for agent, tier, extra in vs for seed in resolve_seeds(args)]
+    run_all(specs, run_one, args, cost=lambda s: 4 if s.agent.startswith("connectome") else 1)
 
 
 if __name__ == "__main__":

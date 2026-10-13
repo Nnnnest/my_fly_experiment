@@ -18,13 +18,15 @@ def load_manifests(experiment, root=None):
             rows.append({k: m.get(k) for k in ("run_id", "task", "agent", "tier", "seed", "status", "runtime_s")})
     return pd.DataFrame(rows)
 
-
-def load_metrics(experiment, metric=None, root=None):
+def load_metrics(experiment, metric=None, root=None, task=None):
     """Metrics of all OK runs, joined with task/agent/tier/seed."""
     root = root or paths.RUNS_DIR
     man = load_manifests(experiment, root)
+    man = man[man.status == "ok"]
+    if task:
+        man = man[man.task == task]
     frames = []
-    for _, r in man[man.status == "ok"].iterrows():
+    for _, r in man.iterrows():
         df = pd.read_csv(os.path.join(root, experiment, r.run_id, "metrics.csv"))
         if metric:
             df = df[df.metric == metric]
@@ -32,6 +34,7 @@ def load_metrics(experiment, metric=None, root=None):
             df[c] = r[c]
         frames.append(df)
     return pd.concat(frames, ignore_index=True)
+
 
 def load_summaries(experiment, root=None):
     """One row per OK run: manifest columns + everything in summary.json."""
