@@ -22,7 +22,7 @@ from agents.shared.tictactoe_eval import full_coverage_accuracy, to_perspective,
 EXPERIMENT = "tictactoe"
 MIN_PULLS, EPS0, EPS1 = 5, 0.1, 0.01
 EPISODES, EVAL_EVERY, N_EVAL, DRIFT_EVERY, REPS = 2000, 250, 200, 50, 3
-ALPHA_Q, LR_MLP, MARGIN = 0.1, 3e-3, 0.02
+ALPHA_Q, LR_MLP, MARGIN = 0.1, 3e-3, 0.05
 TUNE_ALPHA_Q, TUNE_LR_MLP, TUNE_MARGIN = [0.02, 0.05, 0.1, 0.3], [3e-4, 1e-3, 3e-3, 1e-2], [0.01, 0.02, 0.05, 0.2]
 OPP = {"random": random_opponent, "heuristic": heuristic_opponent}
 
