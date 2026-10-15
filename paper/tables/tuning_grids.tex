@@ -22,11 +22,12 @@ gridworld & connectome & gate\_rank\_m0.01 & 0.8834 & 15 & overall\_success \\
 gridworld & connectome & gate\_rank\_m0.02 & 0.897 & 15 & overall\_success \\
 gridworld & connectome & gate\_rank\_m0.05 & 0.9522 & 15 & overall\_success \\
 gridworld & connectome & gate\_rank\_m0.2 & 0.9217 & 15 & overall\_success \\
-gridworld & kc\_delta & a0.1 & 0.8825 & 15 & overall\_success \\
-gridworld & kc\_delta & a0.2 & 0.9557 & 15 & overall\_success \\
-gridworld & kc\_delta & a0.5 & 0.9799 & 15 & overall\_success \\
-gridworld & kc\_delta & a1.0 & 0.9859 & 15 & overall\_success \\
-gridworld & kc\_delta & a1.5 & 0.2902 & 15 & overall\_success \\
+gridworld & kc\_delta & a0.05 & 0.6688 & 20 & overall\_success \\
+gridworld & kc\_delta & a0.1 & 0.7478 & 20 & overall\_success \\
+gridworld & kc\_delta & a0.2 & 0.8207 & 20 & overall\_success \\
+gridworld & kc\_delta & a0.5 & 0.8226 & 20 & overall\_success \\
+gridworld & kc\_delta & a1.0 & 0.7857 & 20 & overall\_success \\
+gridworld & kc\_delta & a1.5 & 0.2293 & 20 & overall\_success \\
 gridworld & mlp & lr0.003 & 0.9197 & 15 & overall\_success \\
 gridworld & mlp & lr0.01 & 0.9319 & 15 & overall\_success \\
 gridworld & mlp & lr0.03 & 0.4789 & 15 & overall\_success \\
@@ -34,11 +35,12 @@ gridworld & qlearning & a0.05 & 0.9907 & 15 & overall\_success \\
 gridworld & qlearning & a0.1 & 0.9907 & 15 & overall\_success \\
 gridworld & qlearning & a0.3 & 0.9679 & 15 & overall\_success \\
 gridworld & qlearning & a0.5 & 0.9238 & 15 & overall\_success \\
-gridworld & rand\_delta & a0.1 & 0.8929 & 15 & overall\_success \\
-gridworld & rand\_delta & a0.2 & 0.96 & 15 & overall\_success \\
-gridworld & rand\_delta & a0.5 & 0.9842 & 15 & overall\_success \\
-gridworld & rand\_delta & a1.0 & 0.9877 & 15 & overall\_success \\
-gridworld & rand\_delta & a1.5 & 0.3203 & 15 & overall\_success \\
+gridworld & rand\_delta & a0.05 & 0.7048 & 20 & overall\_success \\
+gridworld & rand\_delta & a0.1 & 0.8078 & 20 & overall\_success \\
+gridworld & rand\_delta & a0.2 & 0.9027 & 20 & overall\_success \\
+gridworld & rand\_delta & a0.5 & 0.8996 & 20 & overall\_success \\
+gridworld & rand\_delta & a1.0 & 0.8776 & 20 & overall\_success \\
+gridworld & rand\_delta & a1.5 & 0.2548 & 20 & overall\_success \\
 tictactoe & connectome & gate\_error\_m0.01 & 0.6489 & 10 & coverage\_acc \\
 tictactoe & connectome & gate\_error\_m0.02 & 0.6478 & 10 & coverage\_acc \\
 tictactoe & connectome & gate\_error\_m0.05 & 0.64 & 10 & coverage\_acc \\
@@ -79,6 +81,10 @@ addition & mlp & raw\_lr0.0003 & 0.5313 & 10 & eval\_acc\_final \\
 addition & mlp & raw\_lr0.001 & 0.5447 & 10 & eval\_acc\_final \\
 addition & mlp & raw\_lr0.003 & 0.624 & 10 & eval\_acc\_final \\
 addition & mlp & raw\_lr0.01 & 0.5143 & 10 & eval\_acc\_final \\
+bandit & mlp & lr0.03 & 14.5714 & 35 & cum\_pseudo\_regret \\
+bandit & mlp & lr0.1 & 11.5543 & 35 & cum\_pseudo\_regret \\
+bandit & mlp & lr0.3 & 14.0343 & 35 & cum\_pseudo\_regret \\
+bandit & mlp & lr1.0 & 96.4914 & 35 & cum\_pseudo\_regret \\
 \bottomrule
 \end{tabular}
 \caption{Hyperparameter search on tuning seeds (mean over tasks and seeds)}

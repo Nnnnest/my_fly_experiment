@@ -5,3 +5,6 @@ __pycache__/
 *~
 notes/
 runs/
+runs/
+runs_pre_freeze/
+runs_*/

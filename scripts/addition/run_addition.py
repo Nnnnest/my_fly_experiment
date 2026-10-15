@@ -17,7 +17,7 @@ from agents.addition.baseline_addition_agents import LinearAdditionAgent, MLPAdd
 
 EXPERIMENT = "addition"
 ROUNDS, REPS, POOL, N_EVAL, EVAL_EVERY, N_CALIB = 800, 3, 200, 300, 40, 300
-LR_LINEAR, LR_MLP, MARGIN, LINEAR_SCALED = 0.5, 3e-3, 0.02, False
+LR_LINEAR, LR_MLP, MARGIN, LINEAR_SCALED = 0.05, 3e-3, 0.02, False
 TUNE_LR_LINEAR, TUNE_LR_MLP, TUNE_MARGIN = [0.01, 0.02, 0.05, 0.2], [3e-4, 1e-3, 3e-3, 1e-2], [0.01, 0.02, 0.05, 0.2]
 
 

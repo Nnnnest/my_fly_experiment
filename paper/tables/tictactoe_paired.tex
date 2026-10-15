@@ -24,6 +24,15 @@ connectome - qlearning (sym) & imitation & 10 & -0.3546 & -0.3604 & -0.3487 & Tr
 connectome [opt] - connectome & rl\_heuristic & 10 & 0.0537 & 0.0304 & 0.0774 & True \\
 connectome [opt] - connectome & rl\_random & 10 & 0.0666 & 0.0608 & 0.0732 & True \\
 connectome [opt] - connectome & rl\_selfplay & 10 & 0.0345 & 0.0221 & 0.0472 & True \\
+connectome [gate\_error] - connectome [opt] & rl\_heuristic & 10 & -0.04 & -0.0652 & -0.0174 & True \\
+connectome [gate\_error] - connectome [opt] & rl\_random & 10 & -0.0114 & -0.0211 & -0.0019 & True \\
+connectome [gate\_error] - connectome [opt] & rl\_selfplay & 10 & 0.0034 & -0.0071 & 0.0136 & False \\
+connectome [gate\_visit] - connectome [opt] & rl\_heuristic & 10 & 0.011 & 0.0016 & 0.0204 & True \\
+connectome [gate\_visit] - connectome [opt] & rl\_random & 10 & -0.0013 & -0.0067 & 0.0046 & False \\
+connectome [gate\_visit] - connectome [opt] & rl\_selfplay & 10 & 0.0002 & -0.0029 & 0.0035 & False \\
+connectome [opt\_sleep100] - connectome [opt] & rl\_heuristic & 10 & 0.0026 & -0.0062 & 0.0118 & False \\
+connectome [opt\_sleep100] - connectome [opt] & rl\_random & 10 & -0.0029 & -0.0066 & 0.001 & False \\
+connectome [opt\_sleep100] - connectome [opt] & rl\_selfplay & 10 & -0.0044 & -0.0077 & -0.0009 & True \\
 \bottomrule
 \end{tabular}
 \caption{Paired differences in minimax coverage accuracy}

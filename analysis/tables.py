@@ -52,17 +52,24 @@ def gridworld():
     comps = [(f"{label(*o)} - qlearning", o, ref) for o in others]
     comps += [("connectome [gate_rank] - connectome [opt]", ("connectome", "gate_rank"), ("connectome", "opt")),
               ("kc_delta - rand_delta (does the wiring help?)", ("kc_delta", "diagnostic"), ("rand_delta", "diagnostic"))]
+    comps += [("connectome [gate_error] - connectome [opt]", ("connectome", "gate_error"), ("connectome", "opt")),
+              ("connectome [gate_visit] - connectome [opt]", ("connectome", "gate_visit"), ("connectome", "opt"))]
+    comps += [("kc_delta - rand_delta, alpha 0.2 (best at 316)", ("kc_delta", "diagnostic_a0.2"), ("rand_delta", "diagnostic_a0.2"))]
     save_table(paired_table(d, "final20", comps), "gridworld_paired", "Paired differences in last-20-episode success", 2)
+    d["never_f"] = (d.final20 < 0.5).astype(float)
+    f = d.groupby(["task", "label"]).agg(k=("never_f", "sum"), n=("seed", "count")).reset_index()
+    f["cell"] = f.k.astype(int).astype(str) + "/" + f.n.astype(str)
+    save_table(wide(f, "task", "cell"), "gridworld_failed_final", "Gridworld: runs ending below 0.5 success in the last 20 episodes (of 10)")
 
 
 def tictactoe():
     d = load("tictactoe")
     rl = d[d.task.str.startswith("rl_")].copy()
-    mets = ["eval_random_win", "eval_heuristic_draw", "eval_heuristic_loss", "coverage_acc", "last100_win"]
+    mets = ["eval_random_win", "eval_heuristic_draw", "eval_heuristic_loss", "coverage_acc", "last100_win", "last100_draw"]
     for task, g in rl.groupby("task"):
         c = cells(g, ["label"], mets, 3)
         save_table(c.drop(columns="n"), f"tictactoe_{task}", f"Tic-tac-toe, {task}: greedy evaluation after training, minimax coverage, last-100 training win rate")
-    r = rl.assign(cf=rl.collapsed.astype(float)).groupby(["task", "label"]).agg(k=("cf", "sum"), n=("seed", "count")).reset_index()
+    r = rl[rl.task != "rl_selfplay"].assign(cf=rl.collapsed.astype(float)).groupby(["task", "label"]).agg(k=("cf", "sum"), n=("seed", "count")).reset_index()
     r["cell"] = r.k.astype(int).astype(str) + "/" + r.n.astype(str)
     save_table(wide(r, "task", "cell"), "tictactoe_collapse", "Tic-tac-toe: collapsed training runs (of 10)")
     im = d[d.task == "imitation"]
@@ -75,6 +82,9 @@ def tictactoe():
         comps += [(f"connectome - mlp ({tier})", ("connectome", tier), ("mlp", tier)),
                   (f"connectome - qlearning ({tier})", ("connectome", tier), ("qlearning", tier))]
     comps += [("connectome [opt] - connectome", ("connectome", "opt"), ("connectome", "fair"))]
+    comps += [("connectome [gate_error] - connectome [opt]", ("connectome", "gate_error"), ("connectome", "opt")),
+              ("connectome [gate_visit] - connectome [opt]", ("connectome", "gate_visit"), ("connectome", "opt")),
+              ("connectome [opt_sleep100] - connectome [opt]", ("connectome", "opt_sleep100"), ("connectome", "opt"))]
     save_table(paired_table(d, "coverage_acc", comps), "tictactoe_paired", "Paired differences in minimax coverage accuracy", 2)
 
 
@@ -100,11 +110,12 @@ def addition():
 
 
 TUNE_METRIC = {"comparison": "eval_acc_final", "gridworld": "overall_success",
-               "tictactoe": "coverage_acc", "addition": "eval_acc_final"}
+               "tictactoe": "coverage_acc", "addition": "eval_acc_final", "bandit": "cum_pseudo_regret"}
 
 
 def tuning():
     root, rows = os.path.join(paths.RUNS_DIR, "_tuning"), []
+    bytask = []
     for exp, met in TUNE_METRIC.items():
         try:
             d = load_summaries(exp, root=root)
@@ -115,7 +126,9 @@ def tuning():
         g.insert(0, "experiment", exp)
         g["metric"] = met
         rows.append(g)
+        bytask.append(d.groupby(["agent","tier","task"])[met].mean().reset_index().assign(experiment=exp))
     save_table(pd.concat(rows), "tuning_grids", "Hyperparameter search on tuning seeds (mean over tasks and seeds)", 3)
+    save_table(pd.concat(bytask), "tuning_by_task", "Tuning results by task", 3)
 
 
 def main():

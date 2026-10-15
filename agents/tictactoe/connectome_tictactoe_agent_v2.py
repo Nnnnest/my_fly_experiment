@@ -14,6 +14,7 @@ from encoders.tictactoe.board_odor_encoder import board_to_vector, board_baselin
 from agents.shared.mb_value_cache import train_no_readout
 from agents.shared.board_value_cache import build_board_cache, enumerate_afterstates
 from core.brain_pool import fresh_brain
+from agents.shared.tie_break import argmax_random
 
 class ConnectomeTicTacToeAgentV2:
     """Same public interface as ConnectomeTicTacToeAgent (value/
@@ -115,12 +116,7 @@ class ConnectomeTicTacToeAgentV2:
             return random.choice(under_visited)
         if random.random() < epsilon:
             return random.choice(legal_actions)
-        best_a, best_v = None, float("-inf")
-        for a, s in afterstates:
-            v = self.value(s)
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+        return argmax_random([a for a, _ in afterstates], [self.value(s) for _, s in afterstates])
 
     def _train_prob(self, n):
         if n <= self.min_pulls:
@@ -157,13 +153,12 @@ class ConnectomeTicTacToeAgentV2:
                 self.fly.train(odor=vec, punish=1.0, hops=self.hops)
 
     def best_action(self, board, legal_actions):
-        best_a, best_v = None, float("-inf")
+        vals = []
         for a in legal_actions:
-            b = list(board); b[a] = 1
-            v = self.value(tuple(b))
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+            b = list(board)
+            b[a] = 1
+            vals.append(self.value(tuple(b)))
+        return argmax_random(legal_actions, vals)
 
     def save(self, path_prefix):
         self.fly.save_weights(path_prefix + "_weights.npz")

@@ -11,7 +11,7 @@ env.board_from_perspective). This lets one table serve as both players,
 same trick the env file itself calls out.
 """
 import random
-
+from agents.shared.tie_break import argmax_random
 
 class QLearningTicTacToeAgent:
     def __init__(self, alpha=0.1, min_pulls=5):
@@ -42,12 +42,7 @@ class QLearningTicTacToeAgent:
         if random.random() < epsilon:
             return random.choice(legal_actions)
 
-        best_a, best_v = None, float("-inf")
-        for a, s in afterstates:
-            v = self.value(s)
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+        return argmax_random([a for a, _ in afterstates], [self.value(s) for _, s in afterstates])
 
     def update_episode(self, afterstates, outcome):
         """afterstates: list of this agent's own afterstates from the
@@ -69,17 +64,12 @@ class QLearningTicTacToeAgent:
             self.V[s] = old + lr * (target - old)
 
     def best_action(self, board, legal_actions):
-        """Pure greedy -- no forced exploration, no epsilon. For
-        play/eval against a human or another trained agent, not training
-        (choose_action is for training)."""
-        best_a, best_v = None, float("-inf")
+        vals = []
         for a in legal_actions:
             b = list(board)
             b[a] = 1
-            v = self.value(tuple(b))
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+            vals.append(self.value(tuple(b)))
+        return argmax_random(legal_actions, vals)
 
     def save(self, path):
         import pickle

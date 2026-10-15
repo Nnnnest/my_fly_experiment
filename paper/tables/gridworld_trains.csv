@@ -1,6 +1,6 @@
-task,connectome,connectome [gate_error],connectome [gate_rank],connectome [gate_visit],connectome [opt],kc_delta [diagnostic],rand_delta [diagnostic]
-maze26_rs,1954.5,65.5,57.5,1060.0,1995.5,1997.5,1985.0
-maze72_rs,22665.0,264.0,277.5,5829.5,69404.0,8533.5,7631.5
-maze113_fs,-,191.5,138.0,8706.0,139081.5,15545.5,16003.0
-maze113_rs,-,2737.5,57287.5,10574.0,135211.5,10424.5,9728.5
-maze316_rs,-,-,-,-,-,249350.5,165507.0
+task,connectome,connectome [gate_error],connectome [gate_rank],connectome [gate_visit],connectome [opt],kc_delta [diagnostic],kc_delta [diagnostic_a0.2],rand_delta [diagnostic],rand_delta [diagnostic_a0.2]
+maze26_rs,1954.5,64.0,65.5,1060.0,1995.5,1997.5,-,1985.0,-
+maze72_rs,22665.0,247.0,212.5,5829.5,69404.0,8533.5,-,7631.5,-
+maze113_fs,-,190.5,154.0,8706.0,139081.5,15545.5,-,16003.0,-
+maze113_rs,-,1126.5,30063.0,10574.0,135211.5,10424.5,-,9728.5,-
+maze316_rs,-,232897.5,249694.5,24870.5,296327.0,249350.5,194386.0,165507.0,118821.5

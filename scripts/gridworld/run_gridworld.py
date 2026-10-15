@@ -17,11 +17,14 @@ from agents.gridworld.connectome_kc_delta_agent import ConnectomeKCDeltaAgent
 
 EXPERIMENT = "gridworld"
 GAMMA, MIN_PULLS, WINDOW, POL_EVERY = 0.95, 5, 20, 10
-# tuned on tuning seeds (see --tuning); overwrite after tuning:
-ALPHA_Q, LR_MLP, ALPHA_KC, ALPHA_RAND, MARGIN_ERROR, MARGIN_RANK = 0.1, 1e-2, 1.0, 1.0, 0.05, 0.02
+
+ALPHA_Q, LR_MLP, ALPHA_KC, ALPHA_RAND = 0.1, 1e-2, 1.0, 1.0
+MARGIN_ERROR, MARGIN_RANK = 0.02, 0.05
+ALPHA_DELTA_316 = 0.2  
+
 TUNE_ALPHA_Q = [0.05, 0.1, 0.3, 0.5]
 TUNE_LR_MLP = [3e-3, 1e-2, 3e-2]
-TUNE_ALPHA_DELTA = [0.1, 0.2, 0.5, 1.0, 1.5]
+TUNE_ALPHA_DELTA = [0.05, 0.1, 0.2, 0.5, 1.0, 1.5]
 TUNE_MARGIN = [0.01, 0.02, 0.05, 0.2]
 
 # name -> (width, height, max_steps, episodes); maze26 is the hand-made GRID
@@ -134,7 +137,7 @@ def conn(tier, **kw):
     return ("connectome", tier, {"conn": kw})
 
 
-def final_variants(pairs):
+def final_variants(pairs, maze):
     v = [("qlearning", "fair", {"lr": ALPHA_Q}), ("mlp", "fair", {"lr": LR_MLP})]
     if pairs <= len(paths.live_alpn()):
         v.append(conn("fair", encoding="onehot", gate="none"))
@@ -142,6 +145,9 @@ def final_variants(pairs):
           conn("gate_error", encoding="khot", gate="error", margin_frac=MARGIN_ERROR),
           conn("gate_rank", encoding="khot", gate="rank", margin_frac=MARGIN_RANK),
           ("kc_delta", "diagnostic", {"lr": ALPHA_KC}), ("rand_delta", "diagnostic", {"lr": ALPHA_RAND})]
+    if maze == "maze316":      # step-size sensitivity: best alpha of the 316-state sweep
+        v += [("kc_delta", "diagnostic_a0.2", {"lr": ALPHA_DELTA_316}),
+              ("rand_delta", "diagnostic_a0.2", {"lr": ALPHA_DELTA_316})]
     return v
 
 
@@ -159,7 +165,7 @@ def main():
     if args.smoke:
         tasks = [("maze26", "rs")]
     elif args.tuning:
-        tasks = [("maze26", "rs"), ("maze72", "rs"), ("maze113", "rs")]
+        tasks = [("maze26", "rs"), ("maze72", "rs"), ("maze113", "rs"), ("maze316", "rs")]
     else:
         tasks = [(m, "rs") for m in MAZES] + [("maze113", "fs")]
     specs = []
@@ -167,8 +173,12 @@ def main():
         _, _, max_steps, episodes = MAZES[maze]
         episodes = 30 if args.smoke else episodes
         pairs = 4 * count_traversable(get_maze(maze))
-        variants = tuning_variants() if args.tuning else final_variants(pairs)
+        variants = tuning_variants() if args.tuning else final_variants(pairs, maze)
+        if args.tuning and maze == "maze316":      # sensitivity check for the delta agents only
+            variants = [v for v in variants if v[0] in ("kc_delta", "rand_delta")]
         for agent, tier, extra in variants:
+            if maze == "maze316" and "conn" in extra:     # 1264 pairs do not fit with max_overlap=1
+                extra = {"conn": {**extra["conn"], "max_overlap": 2}}
             for seed in resolve_seeds(args):
                 cfg = {"maze": maze, "start": start, "max_steps": max_steps, "episodes": episodes,
                        "gamma": GAMMA, "min_pulls": MIN_PULLS, **extra}

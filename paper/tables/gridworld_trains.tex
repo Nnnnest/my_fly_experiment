@@ -1,15 +1,15 @@
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{lrrrrrrr}
+\begin{tabular}{lrrrrrrrrr}
 \toprule
-task & connectome & connectome [gate\_error] & connectome [gate\_rank] & connectome [gate\_visit] & connectome [opt] & kc\_delta [diagnostic] & rand\_delta [diagnostic] \\
+task & connectome & connectome [gate\_error] & connectome [gate\_rank] & connectome [gate\_visit] & connectome [opt] & kc\_delta [diagnostic] & kc\_delta [diagnostic\_a0.2] & rand\_delta [diagnostic] & rand\_delta [diagnostic\_a0.2] \\
 \midrule
-maze26\_rs & 1954.5 & 65.5 & 57.5 & 1060.0 & 1995.5 & 1997.5 & 1985.0 \\
-maze72\_rs & 22665.0 & 264.0 & 277.5 & 5829.5 & 69404.0 & 8533.5 & 7631.5 \\
-maze113\_fs & - & 191.5 & 138.0 & 8706.0 & 139081.5 & 15545.5 & 16003.0 \\
-maze113\_rs & - & 2737.5 & 57287.5 & 10574.0 & 135211.5 & 10424.5 & 9728.5 \\
-maze316\_rs & - & - & - & - & - & 249350.5 & 165507.0 \\
+maze26\_rs & 1954.5 & 64.0 & 65.5 & 1060.0 & 1995.5 & 1997.5 & - & 1985.0 & - \\
+maze72\_rs & 22665.0 & 247.0 & 212.5 & 5829.5 & 69404.0 & 8533.5 & - & 7631.5 & - \\
+maze113\_fs & - & 190.5 & 154.0 & 8706.0 & 139081.5 & 15545.5 & - & 16003.0 & - \\
+maze113\_rs & - & 1126.5 & 30063.0 & 10574.0 & 135211.5 & 10424.5 & - & 9728.5 & - \\
+maze316\_rs & - & 232897.5 & 249694.5 & 24870.5 & 296327.0 & 249350.5 & 194386.0 & 165507.0 & 118821.5 \\
 \bottomrule
 \end{tabular}
 \caption{Median number of train() calls / updates}

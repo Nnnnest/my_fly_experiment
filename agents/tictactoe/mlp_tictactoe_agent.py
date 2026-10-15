@@ -26,7 +26,7 @@ from collections import deque
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
+from agents.shared.tie_break import argmax_random
 
 class ValueNet(nn.Module):
     def __init__(self, in_dim=9):
@@ -75,12 +75,7 @@ class MLPTicTacToeAgent:
         if random.random() < epsilon:
             return random.choice(legal_actions)
 
-        best_a, best_v = None, float("-inf")
-        for a, s in afterstates:
-            v = self.value(s)
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+        return argmax_random([a for a, _ in afterstates], [self.value(s) for _, s in afterstates])
 
     def update_episode(self, afterstates, outcome):
         target = float(outcome)
@@ -102,16 +97,12 @@ class MLPTicTacToeAgent:
         self.opt.step()
 
     def best_action(self, board, legal_actions):
-        """Pure greedy -- no forced exploration, no epsilon. For
-        play/eval against a human or another trained agent, not training."""
-        best_a, best_v = None, float("-inf")
+        vals = []
         for a in legal_actions:
             b = list(board)
             b[a] = 1
-            v = self.value(tuple(b))
-            if v > best_v:
-                best_a, best_v = a, v
-        return best_a
+            vals.append(self.value(tuple(b)))
+        return argmax_random(legal_actions, vals)
 
     def save(self, path):
         torch.save(self.net.state_dict(), path)

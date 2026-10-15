@@ -56,6 +56,7 @@ def fig_gridworld():
     ax[0].set_xscale("log")
     ax[0].set_xticks(list(SIZES.values()))
     ax[0].set_xticklabels(list(SIZES.values()))
+    ax[0].minorticks_off()
     ax[0].set(xlabel="traversable states", ylabel="success, last 20 episodes")
     ax[0].legend(fontsize=6)
     keep = ["qlearning", "mlp", "connectome [opt]", "connectome [gate_error]", "connectome [gate_rank]", "kc_delta [diagnostic]"]
@@ -73,14 +74,12 @@ def fig_tictactoe():
     d = load("tictactoe")
     fig, ax = plt.subplots(1, 3, figsize=(13, 3.6))
     keep = ["qlearning", "mlp", "connectome", "connectome [opt]", "connectome [gate_error]"]
-    m = add_label(load_metrics("tictactoe", metric="outcome", task="rl_selfplay"))
-    m = m[m.label.isin(keep)].copy()
-    m["win"] = (m.value == 1).astype(float)
-    m = rolling(m, "win", 100)
+    m = add_label(load_metrics("tictactoe", metric="coverage_acc", task="rl_selfplay"))
+    m = m[m.label.isin(keep)]
     for lab in keep:
         if lab in set(m.label):
-            band(ax[0], m[m.label == lab], lab, ycol="roll")
-    ax[0].set(xlabel="episode", ylabel="win rate (rolling 100)", title="self-play training")
+            line_ci(ax[0], m[m.label == lab], "step", "value", lab)
+    ax[0].set(xlabel="self-play episodes", ylabel="minimax coverage", title="self-play: policy quality")
     ax[0].legend(fontsize=6)
     im = d[d.task == "imitation"]
     dots_by_label(ax[1], im, "coverage_acc", sort_labels(im.label), "minimax coverage")

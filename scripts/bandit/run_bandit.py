@@ -14,20 +14,23 @@ N_TRIALS = 300
 MIN_PULLS_SWEEP = [2, 5, 8, 10, 15, 20, 30]     # main results = min_pulls 10
 AGENTS = ["qlearning", "mlp", "connectome"]
 
+LR_MLP = 0.1 
+TUNE_LR_MLP = [0.03, 0.1, 0.3, 1.0]
 
-def make_agent(name, min_pulls, seed):
+
+def make_agent(name, min_pulls, seed, lr):
     k = len(PROBS)
     if name == "qlearning":
         return QLearningBanditAgent(k, min_pulls=min_pulls, seed=seed)
-    if name == "mlp":   # NOTE: one weight per arm trained by a delta rule (not a multilayer net)
-        return MLPBanditAgent(k, lr=0.3, min_pulls=min_pulls, seed=seed)
+    if name == "mlp":
+        return MLPBanditAgent(k, lr=lr, min_pulls=min_pulls, seed=seed)
     return ConnectomeBanditAgent(k, ["A", "B"], min_pulls=min_pulls, seed=seed)
 
 
 def run_one(spec, log):
     cfg = spec.config
     probs, n = cfg["probs"], cfg["n_trials"]
-    agent = make_agent(spec.agent, cfg["min_pulls"], spec.seed)
+    agent = make_agent(spec.agent, cfg["min_pulls"], spec.seed, cfg.get("lr"))
     env = BernoulliBandit(probs, seed=spec.seed)
     best = max(probs)
     tot_reward = cum_regret = cum_pseudo = 0.0
@@ -56,9 +59,11 @@ def main():
     args = common_parser(__doc__).parse_args()
     sweep = [10] if args.smoke else MIN_PULLS_SWEEP
     n = 50 if args.smoke else N_TRIALS
-    specs = [RunSpec(EXPERIMENT, f"mp{mp}", agent, "-", seed,
-                     {"probs": PROBS, "n_trials": n, "min_pulls": mp})
-             for mp in sweep for agent in AGENTS for seed in resolve_seeds(args)]
+    agents = ([("mlp", f"lr{lr}", lr) for lr in TUNE_LR_MLP] if args.tuning else
+              [("qlearning", "-", None), ("mlp", "-", LR_MLP), ("connectome", "-", None)])
+    specs = [RunSpec(EXPERIMENT, f"mp{mp}", agent, tier, seed,
+                     {"probs": PROBS, "n_trials": n, "min_pulls": mp, "lr": lr})
+             for mp in sweep for agent, tier, lr in agents for seed in resolve_seeds(args)]
     run_all(specs, run_one, args)
 
 
