@@ -2,20 +2,20 @@
 ===================== bandit =====================
 
 --- bandit_headline (3 rows) ---
-     label            total_reward      cum_pseudo_regret             cum_regret frac_optimal_last50
-connectome 196.30 [189.80, 202.50]     9.44 [8.72, 10.12]    13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
-       mlp  106.50 [99.00, 114.10] 100.32 [97.92, 102.92] 103.50 [95.90, 111.00]   0.16 [0.10, 0.21]
- qlearning 196.30 [189.80, 202.50]     9.44 [8.72, 10.12]    13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
+     label            total_reward  cum_pseudo_regret          cum_regret frac_optimal_last50
+connectome 196.30 [189.80, 202.50] 9.44 [8.72, 10.12] 13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
+       mlp 195.90 [189.60, 201.50] 9.44 [8.68, 10.20] 14.10 [8.50, 20.40]   0.95 [0.93, 0.96]
+ qlearning 196.30 [189.80, 202.50] 9.44 [8.72, 10.12] 13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
 
 --- bandit_sweep (7 rows) ---
-task            qlearning                    mlp           connectome
- mp2    7.84 [6.56, 9.20] 102.32 [99.88, 104.68]  28.24 [6.40, 60.40]
- mp5    8.16 [7.08, 9.40] 101.00 [98.68, 103.40]  18.00 [7.12, 38.92]
- mp8    8.76 [8.00, 9.56] 101.96 [99.60, 104.40]    8.68 [7.96, 9.40]
-mp10   9.44 [8.72, 10.12] 100.32 [97.92, 102.92]   9.44 [8.72, 10.12]
-mp15 11.24 [10.48, 11.96]  99.80 [97.36, 101.96] 11.24 [10.48, 11.96]
-mp20 13.08 [12.36, 13.76]   97.24 [95.40, 99.08] 13.08 [12.36, 13.76]
-mp30 16.60 [15.92, 17.24]   93.60 [91.52, 95.72] 16.60 [15.92, 17.24]
+task            qlearning                  mlp           connectome
+ mp2    7.84 [6.56, 9.20]   9.48 [7.20, 12.36]  28.24 [6.40, 60.40]
+ mp5    8.16 [7.08, 9.40]   8.56 [7.20, 10.24]  18.00 [7.12, 38.92]
+ mp8    8.76 [8.00, 9.56]    8.72 [7.96, 9.44]    8.68 [7.96, 9.40]
+mp10   9.44 [8.72, 10.12]   9.44 [8.68, 10.20]   9.44 [8.72, 10.12]
+mp15 11.24 [10.48, 11.96] 11.24 [10.48, 11.96] 11.24 [10.48, 11.96]
+mp20 13.08 [12.36, 13.76] 13.24 [12.44, 13.96] 13.08 [12.36, 13.76]
+mp30 16.60 [15.92, 17.24] 16.72 [15.92, 17.52] 16.60 [15.92, 17.24]
 
 --- bandit_paired (14 rows) ---
             comparison task  n  mean_diff  ci_lo  ci_hi  excludes_zero
@@ -26,13 +26,13 @@ connectome - qlearning mp10 10       0.00   0.00   0.00          False
 connectome - qlearning mp15 10       0.00   0.00   0.00          False
 connectome - qlearning mp20 10       0.00   0.00   0.00          False
 connectome - qlearning mp30 10       0.00   0.00   0.00          False
-      connectome - mlp  mp2 10     -74.08 -96.44 -42.12           True
-      connectome - mlp  mp5 10     -83.00 -95.60 -61.08           True
-      connectome - mlp  mp8 10     -93.28 -95.96 -90.72           True
-      connectome - mlp mp10 10     -90.88 -93.76 -88.20           True
-      connectome - mlp mp15 10     -88.56 -90.96 -86.08           True
-      connectome - mlp mp20 10     -84.16 -85.92 -82.44           True
-      connectome - mlp mp30 10     -77.00 -79.28 -74.84           True
+      connectome - mlp  mp2 10      18.76  -1.44  48.16          False
+      connectome - mlp  mp5 10       9.44  -0.36  28.80          False
+      connectome - mlp  mp8 10      -0.04  -0.16   0.08          False
+      connectome - mlp mp10 10       0.00  -0.12   0.12          False
+      connectome - mlp mp15 10       0.00   0.00   0.00          False
+      connectome - mlp mp20 10      -0.16  -0.44   0.04          False
+      connectome - mlp mp30 10      -0.12  -0.32   0.08          False
 
 ===================== comparison =====================
 
@@ -221,63 +221,62 @@ maze316_rs      0/10 10/10          -                   10/10                  1
 ===================== tictactoe =====================
 
 --- tictactoe_rl_heuristic (9 rows) ---
-                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win
-               connectome 0.503 [0.454, 0.545] 0.008 [0.000, 0.024] 0.766 [0.655, 0.863] 0.610 [0.586, 0.630] 0.219 [0.129, 0.315]
-  connectome [gate_error] 0.463 [0.415, 0.511] 0.012 [0.000, 0.036] 0.738 [0.576, 0.900] 0.624 [0.609, 0.638] 0.000 [0.000, 0.000]
-  connectome [gate_visit] 0.559 [0.501, 0.613] 0.008 [0.000, 0.024] 0.542 [0.476, 0.650] 0.675 [0.660, 0.689] 0.000 [0.000, 0.000]
-         connectome [opt] 0.554 [0.502, 0.604] 0.000 [0.000, 0.000] 0.550 [0.500, 0.650] 0.664 [0.646, 0.682] 0.000 [0.000, 0.000]
-connectome [opt_sleep100] 0.547 [0.511, 0.580] 0.000 [0.000, 0.000] 0.600 [0.500, 0.750] 0.666 [0.653, 0.680] 0.000 [0.000, 0.000]
-                      mlp 0.391 [0.364, 0.418] 0.950 [0.898, 1.000] 0.000 [0.000, 0.000] 0.631 [0.610, 0.654] 0.035 [0.000, 0.070]
-                mlp [opt] 0.492 [0.438, 0.546] 0.761 [0.627, 0.895] 0.239 [0.105, 0.373] 0.688 [0.669, 0.708] 0.001 [0.000, 0.003]
-                qlearning 0.590 [0.573, 0.605] 0.847 [0.747, 0.933] 0.045 [0.000, 0.090] 0.599 [0.598, 0.600] 0.099 [0.013, 0.199]
-          qlearning [opt] 0.616 [0.601, 0.631] 0.500 [0.500, 0.500] 0.500 [0.500, 0.500] 0.600 [0.599, 0.602] 0.000 [0.000, 0.000]
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.503 [0.454, 0.545] 0.008 [0.000, 0.024] 0.766 [0.655, 0.863] 0.610 [0.586, 0.630] 0.219 [0.129, 0.315] 0.008 [0.000, 0.020]
+  connectome [gate_error] 0.507 [0.471, 0.542] 0.084 [0.016, 0.188] 0.733 [0.591, 0.875] 0.627 [0.612, 0.644] 0.181 [0.064, 0.309] 0.077 [0.011, 0.179]
+  connectome [gate_visit] 0.666 [0.638, 0.693] 0.526 [0.500, 0.553] 0.474 [0.447, 0.500] 0.618 [0.612, 0.623] 0.001 [0.000, 0.003] 0.516 [0.491, 0.546]
+         connectome [opt] 0.505 [0.424, 0.588] 0.193 [0.058, 0.350] 0.634 [0.526, 0.744] 0.592 [0.562, 0.624] 0.166 [0.065, 0.283] 0.241 [0.102, 0.395]
+connectome [opt_sleep100] 0.546 [0.474, 0.615] 0.320 [0.176, 0.461] 0.559 [0.483, 0.647] 0.595 [0.573, 0.617] 0.121 [0.037, 0.222] 0.308 [0.162, 0.454]
+                      mlp 0.391 [0.364, 0.418] 0.950 [0.898, 1.000] 0.000 [0.000, 0.000] 0.631 [0.610, 0.654] 0.035 [0.000, 0.070] 0.942 [0.902, 0.977]
+                mlp [opt] 0.465 [0.420, 0.513] 0.789 [0.639, 0.939] 0.000 [0.000, 0.000] 0.674 [0.657, 0.692] 0.207 [0.062, 0.352] 0.772 [0.627, 0.916]
+                qlearning 0.488 [0.452, 0.522] 0.949 [0.896, 1.000] 0.000 [0.000, 0.000] 0.599 [0.595, 0.602] 0.044 [0.000, 0.090] 0.935 [0.884, 0.979]
+          qlearning [opt] 0.505 [0.480, 0.531] 0.941 [0.841, 1.000] 0.000 [0.000, 0.000] 0.617 [0.613, 0.620] 0.064 [0.000, 0.160] 0.923 [0.820, 0.992]
 
 --- tictactoe_rl_random (9 rows) ---
-                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win
-               connectome 0.388 [0.362, 0.410] 0.025 [0.009, 0.041] 0.975 [0.959, 0.991] 0.576 [0.574, 0.579] 0.351 [0.325, 0.377]
-  connectome [gate_error] 0.454 [0.417, 0.497] 0.014 [0.000, 0.041] 0.987 [0.960, 1.000] 0.631 [0.623, 0.640] 0.353 [0.335, 0.373]
-  connectome [gate_visit] 0.435 [0.411, 0.461] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.642 [0.636, 0.648] 0.380 [0.355, 0.405]
-         connectome [opt] 0.424 [0.396, 0.454] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.643 [0.637, 0.649] 0.359 [0.336, 0.380]
-connectome [opt_sleep100] 0.446 [0.424, 0.469] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.640 [0.634, 0.646] 0.368 [0.347, 0.388]
-                      mlp 0.923 [0.913, 0.934] 0.517 [0.405, 0.633] 0.483 [0.367, 0.595] 0.914 [0.910, 0.918] 0.534 [0.506, 0.562]
-                mlp [opt] 0.919 [0.907, 0.932] 0.576 [0.394, 0.753] 0.424 [0.247, 0.606] 0.940 [0.936, 0.945] 0.468 [0.432, 0.500]
-                qlearning 0.745 [0.730, 0.760] 0.151 [0.069, 0.244] 0.848 [0.756, 0.931] 0.727 [0.722, 0.732] 0.506 [0.482, 0.531]
-          qlearning [opt] 0.816 [0.789, 0.843] 0.253 [0.070, 0.446] 0.747 [0.554, 0.930] 0.881 [0.875, 0.887] 0.464 [0.437, 0.495]
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.388 [0.362, 0.410] 0.025 [0.009, 0.041] 0.975 [0.959, 0.991] 0.576 [0.574, 0.579] 0.351 [0.325, 0.377] 0.129 [0.109, 0.149]
+  connectome [gate_error] 0.564 [0.521, 0.605] 0.152 [0.038, 0.307] 0.848 [0.693, 0.962] 0.628 [0.616, 0.641] 0.555 [0.521, 0.591] 0.093 [0.074, 0.112]
+  connectome [gate_visit] 0.528 [0.503, 0.553] 0.066 [0.018, 0.126] 0.911 [0.855, 0.960] 0.622 [0.616, 0.628] 0.521 [0.498, 0.544] 0.101 [0.081, 0.119]
+         connectome [opt] 0.498 [0.475, 0.524] 0.065 [0.025, 0.110] 0.929 [0.887, 0.969] 0.612 [0.608, 0.617] 0.485 [0.464, 0.504] 0.104 [0.086, 0.119]
+connectome [opt_sleep100] 0.491 [0.463, 0.522] 0.063 [0.024, 0.107] 0.930 [0.890, 0.969] 0.613 [0.608, 0.618] 0.492 [0.474, 0.511] 0.112 [0.094, 0.129]
+                      mlp 0.923 [0.913, 0.934] 0.517 [0.405, 0.633] 0.483 [0.367, 0.595] 0.914 [0.910, 0.918] 0.534 [0.506, 0.562] 0.131 [0.106, 0.158]
+                mlp [opt] 0.930 [0.921, 0.939] 0.627 [0.531, 0.747] 0.372 [0.253, 0.469] 0.917 [0.909, 0.925] 0.895 [0.877, 0.912] 0.061 [0.043, 0.081]
+                qlearning 0.706 [0.677, 0.731] 0.252 [0.151, 0.354] 0.746 [0.645, 0.847] 0.726 [0.721, 0.731] 0.495 [0.457, 0.534] 0.120 [0.095, 0.148]
+          qlearning [opt] 0.928 [0.915, 0.940] 0.599 [0.411, 0.774] 0.351 [0.210, 0.489] 0.837 [0.826, 0.849] 0.894 [0.871, 0.914] 0.050 [0.039, 0.061]
 
 --- tictactoe_rl_selfplay (9 rows) ---
-                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win
-               connectome 0.521 [0.477, 0.566] 0.014 [0.000, 0.029] 0.944 [0.900, 0.983] 0.622 [0.611, 0.633] 0.501 [0.315, 0.687]
-  connectome [gate_error] 0.465 [0.436, 0.494] 0.071 [0.026, 0.123] 0.928 [0.877, 0.975] 0.660 [0.647, 0.672] 0.446 [0.403, 0.499]
-  connectome [gate_visit] 0.471 [0.441, 0.500] 0.027 [0.000, 0.066] 0.973 [0.934, 1.000] 0.656 [0.653, 0.660] 0.422 [0.382, 0.463]
-         connectome [opt] 0.467 [0.439, 0.492] 0.027 [0.000, 0.066] 0.973 [0.934, 1.000] 0.656 [0.652, 0.661] 0.422 [0.390, 0.453]
-connectome [opt_sleep100] 0.441 [0.420, 0.462] 0.025 [0.000, 0.062] 0.975 [0.938, 1.000] 0.652 [0.648, 0.656] 0.419 [0.374, 0.461]
-                      mlp 0.906 [0.892, 0.918] 0.564 [0.457, 0.683] 0.436 [0.317, 0.543] 0.916 [0.912, 0.921] 0.414 [0.351, 0.473]
-                mlp [opt] 0.866 [0.841, 0.892] 0.589 [0.410, 0.753] 0.412 [0.246, 0.590] 0.916 [0.906, 0.926] 0.414 [0.390, 0.437]
-                qlearning 0.649 [0.627, 0.672] 0.361 [0.207, 0.523] 0.639 [0.477, 0.793] 0.715 [0.709, 0.721] 0.394 [0.363, 0.424]
-          qlearning [opt] 0.762 [0.730, 0.793] 0.399 [0.284, 0.504] 0.601 [0.496, 0.716] 0.831 [0.826, 0.836] 0.440 [0.410, 0.466]
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.521 [0.477, 0.566] 0.014 [0.000, 0.029] 0.944 [0.900, 0.983] 0.622 [0.611, 0.633] 0.501 [0.315, 0.687] 0.058 [0.006, 0.156]
+  connectome [gate_error] 0.533 [0.497, 0.570] 0.164 [0.052, 0.298] 0.781 [0.634, 0.914] 0.651 [0.641, 0.660] 0.646 [0.449, 0.842] 0.004 [0.000, 0.009]
+  connectome [gate_visit] 0.535 [0.503, 0.564] 0.245 [0.132, 0.377] 0.756 [0.623, 0.868] 0.657 [0.649, 0.665] 0.493 [0.488, 0.498] 0.008 [0.003, 0.014]
+         connectome [opt] 0.536 [0.517, 0.552] 0.251 [0.128, 0.378] 0.742 [0.617, 0.855] 0.657 [0.652, 0.661] 0.498 [0.488, 0.506] 0.008 [0.002, 0.015]
+connectome [opt_sleep100] 0.612 [0.578, 0.646] 0.288 [0.147, 0.431] 0.712 [0.569, 0.854] 0.676 [0.670, 0.683] 0.495 [0.489, 0.500] 0.009 [0.005, 0.013]
+                      mlp 0.906 [0.892, 0.918] 0.564 [0.457, 0.683] 0.436 [0.317, 0.543] 0.916 [0.912, 0.921] 0.414 [0.351, 0.473] 0.195 [0.147, 0.251]
+                mlp [opt] 0.920 [0.902, 0.939] 0.816 [0.693, 0.929] 0.185 [0.071, 0.307] 0.928 [0.916, 0.938] 0.189 [0.106, 0.291] 0.621 [0.529, 0.700]
+                qlearning 0.719 [0.696, 0.742] 0.236 [0.147, 0.331] 0.759 [0.666, 0.847] 0.723 [0.720, 0.726] 0.435 [0.403, 0.470] 0.119 [0.093, 0.150]
+          qlearning [opt] 0.867 [0.844, 0.889] 0.850 [0.716, 0.966] 0.151 [0.034, 0.284] 0.854 [0.841, 0.866] 0.081 [0.024, 0.178] 0.888 [0.791, 0.949]
 
---- tictactoe_collapse (3 rows) ---
+--- tictactoe_collapse (2 rows) ---
         task qlearning qlearning [opt]  mlp mlp [opt] connectome connectome [gate_error] connectome [gate_visit] connectome [opt] connectome [opt_sleep100]
-rl_heuristic      0/10            0/10 0/10      0/10       0/10                    0/10                    0/10             0/10                      0/10
+rl_heuristic      0/10            0/10 0/10      0/10       0/10                    1/10                    0/10             0/10                      0/10
    rl_random      0/10            0/10 0/10      0/10       0/10                    0/10                    0/10             0/10                      0/10
- rl_selfplay      0/10            0/10 1/10      0/10       3/10                    0/10                    0/10             0/10                      0/10
 
 --- tictactoe_imitation (7 rows) ---
                     label     coverage_acc_pre         coverage_acc
                connectome 0.547 [0.543, 0.552] 0.545 [0.543, 0.547]
-         connectome [sym] 0.570 [0.561, 0.578] 0.619 [0.613, 0.624]
-connectome [sym_sleep500] 0.570 [0.561, 0.578] 0.618 [0.613, 0.623]
+         connectome [sym] 0.567 [0.558, 0.574] 0.576 [0.569, 0.583]
+connectome [sym_sleep500] 0.567 [0.558, 0.574] 0.577 [0.570, 0.583]
                       mlp 0.577 [0.563, 0.590] 0.860 [0.856, 0.864]
-                mlp [sym] 0.575 [0.548, 0.605] 0.928 [0.921, 0.935]
-                qlearning 0.587 [0.587, 0.587] 0.917 [0.915, 0.919]
-          qlearning [sym] 0.587 [0.587, 0.587] 0.973 [0.972, 0.975]
+                mlp [sym] 0.573 [0.544, 0.602] 0.962 [0.958, 0.967]
+                qlearning 0.582 [0.580, 0.585] 0.922 [0.920, 0.924]
+          qlearning [sym] 0.582 [0.580, 0.585] 0.981 [0.979, 0.983]
 
 --- tictactoe_drift (4 rows) ---
         task           connectome connectome [gate_error] connectome [gate_visit]     connectome [opt] connectome [opt_sleep100]     connectome [sym] connectome [sym_sleep500]
-   imitation 26.40 [26.39, 26.42]                       -                       -                    -                         - 20.54 [20.52, 20.56]      19.08 [19.06, 19.09]
-rl_heuristic 14.04 [13.82, 14.29]       3.68 [3.28, 4.06]       9.53 [9.37, 9.67]  10.05 [9.92, 10.17]         8.31 [8.26, 8.38]                    -                         -
-   rl_random 23.79 [23.70, 23.88]    16.34 [16.24, 16.44]    18.56 [18.52, 18.60] 19.16 [19.11, 19.20]      16.48 [16.44, 16.52]                    -                         -
- rl_selfplay 21.08 [20.76, 21.40]    15.46 [15.42, 15.51]    17.78 [17.71, 17.85] 18.36 [18.30, 18.42]      15.50 [15.46, 15.53]                    -                         -
+   imitation 26.40 [26.39, 26.42]                       -                       -                    -                         - 20.52 [20.51, 20.54]      19.06 [19.05, 19.07]
+rl_heuristic 14.04 [13.82, 14.29]       3.45 [2.31, 4.57]       9.61 [9.51, 9.71] 11.01 [10.45, 11.55]         9.01 [8.57, 9.45]                    -                         -
+   rl_random 23.79 [23.70, 23.88]    14.56 [14.25, 14.90]    17.44 [17.34, 17.57] 17.87 [17.77, 17.97]      15.13 [15.03, 15.24]                    -                         -
+ rl_selfplay 21.08 [20.76, 21.40]    12.56 [12.32, 12.81]    14.76 [14.40, 15.09] 14.85 [14.57, 15.11]      12.17 [11.93, 12.40]                    -                         -
 
 --- tictactoe_paired (28 rows) ---
                                   comparison         task  n  mean_diff   ci_lo   ci_hi  excludes_zero
@@ -285,30 +284,30 @@ rl_heuristic 14.04 [13.82, 14.29]       3.68 [3.28, 4.06]       9.53 [9.37, 9.67
                      connectome - mlp (fair) rl_heuristic 10    -0.0212 -0.0498  0.0065          False
                      connectome - mlp (fair)    rl_random 10    -0.3379 -0.3422 -0.3329           True
                      connectome - mlp (fair)  rl_selfplay 10    -0.2946 -0.3023 -0.2869           True
-               connectome - qlearning (fair)    imitation 10    -0.3719 -0.3742 -0.3696           True
-               connectome - qlearning (fair) rl_heuristic 10     0.0106 -0.0137  0.0318          False
-               connectome - qlearning (fair)    rl_random 10    -0.1511 -0.1569 -0.1447           True
-               connectome - qlearning (fair)  rl_selfplay 10    -0.0934 -0.1069 -0.0796           True
-                      connectome - mlp (opt) rl_heuristic 10    -0.0248 -0.0495 -0.0005           True
-                      connectome - mlp (opt)    rl_random 10    -0.2976 -0.3062 -0.2880           True
-                      connectome - mlp (opt)  rl_selfplay 10    -0.2601 -0.2682 -0.2523           True
-                connectome - qlearning (opt) rl_heuristic 10     0.0632  0.0460  0.0815           True
-                connectome - qlearning (opt)    rl_random 10    -0.2378 -0.2426 -0.2336           True
-                connectome - qlearning (opt)  rl_selfplay 10    -0.1742 -0.1816 -0.1676           True
-                      connectome - mlp (sym)    imitation 10    -0.3092 -0.3162 -0.3019           True
-                connectome - qlearning (sym)    imitation 10    -0.3546 -0.3604 -0.3487           True
-               connectome [opt] - connectome rl_heuristic 10     0.0537  0.0304  0.0774           True
-               connectome [opt] - connectome    rl_random 10     0.0666  0.0608  0.0732           True
-               connectome [opt] - connectome  rl_selfplay 10     0.0345  0.0221  0.0472           True
-  connectome [gate_error] - connectome [opt] rl_heuristic 10    -0.0400 -0.0652 -0.0174           True
-  connectome [gate_error] - connectome [opt]    rl_random 10    -0.0114 -0.0211 -0.0019           True
-  connectome [gate_error] - connectome [opt]  rl_selfplay 10     0.0034 -0.0071  0.0136          False
-  connectome [gate_visit] - connectome [opt] rl_heuristic 10     0.0110  0.0016  0.0204           True
-  connectome [gate_visit] - connectome [opt]    rl_random 10    -0.0013 -0.0067  0.0046          False
-  connectome [gate_visit] - connectome [opt]  rl_selfplay 10     0.0002 -0.0029  0.0035          False
-connectome [opt_sleep100] - connectome [opt] rl_heuristic 10     0.0026 -0.0062  0.0118          False
-connectome [opt_sleep100] - connectome [opt]    rl_random 10    -0.0029 -0.0066  0.0010          False
-connectome [opt_sleep100] - connectome [opt]  rl_selfplay 10    -0.0044 -0.0077 -0.0009           True
+               connectome - qlearning (fair)    imitation 10    -0.3767 -0.3787 -0.3745           True
+               connectome - qlearning (fair) rl_heuristic 10     0.0112 -0.0123  0.0317          False
+               connectome - qlearning (fair)    rl_random 10    -0.1497 -0.1554 -0.1436           True
+               connectome - qlearning (fair)  rl_selfplay 10    -0.1013 -0.1132 -0.0900           True
+                      connectome - mlp (opt) rl_heuristic 10    -0.0814 -0.1106 -0.0499           True
+                      connectome - mlp (opt)    rl_random 10    -0.3048 -0.3119 -0.2986           True
+                      connectome - mlp (opt)  rl_selfplay 10    -0.2706 -0.2844 -0.2559           True
+                connectome - qlearning (opt) rl_heuristic 10    -0.0243 -0.0542  0.0057          False
+                connectome - qlearning (opt)    rl_random 10    -0.2243 -0.2377 -0.2108           True
+                connectome - qlearning (opt)  rl_selfplay 10    -0.1966 -0.2121 -0.1826           True
+                      connectome - mlp (sym)    imitation 10    -0.3859 -0.3948 -0.3771           True
+                connectome - qlearning (sym)    imitation 10    -0.4048 -0.4118 -0.3979           True
+               connectome [opt] - connectome rl_heuristic 10    -0.0175 -0.0554  0.0167          False
+               connectome [opt] - connectome    rl_random 10     0.0361  0.0321  0.0407           True
+               connectome [opt] - connectome  rl_selfplay 10     0.0352  0.0266  0.0436           True
+  connectome [gate_error] - connectome [opt] rl_heuristic 10     0.0346  0.0021  0.0658           True
+  connectome [gate_error] - connectome [opt]    rl_random 10     0.0161  0.0026  0.0296           True
+  connectome [gate_error] - connectome [opt]  rl_selfplay 10    -0.0058 -0.0171  0.0043          False
+  connectome [gate_visit] - connectome [opt] rl_heuristic 10     0.0254 -0.0037  0.0546          False
+  connectome [gate_visit] - connectome [opt]    rl_random 10     0.0100  0.0061  0.0138           True
+  connectome [gate_visit] - connectome [opt]  rl_selfplay 10    -0.0002 -0.0079  0.0076          False
+connectome [opt_sleep100] - connectome [opt] rl_heuristic 10     0.0028 -0.0221  0.0268          False
+connectome [opt_sleep100] - connectome [opt]    rl_random 10     0.0004 -0.0027  0.0032          False
+connectome [opt_sleep100] - connectome [opt]  rl_selfplay 10     0.0194  0.0127  0.0268           True
 
 ===================== addition =====================
 
@@ -404,18 +403,18 @@ comparison        mlp           lr0.03  0.9320     45    eval_acc_final
  gridworld rand_delta             a0.5  0.8996     20   overall_success
  gridworld rand_delta             a1.0  0.8776     20   overall_success
  gridworld rand_delta             a1.5  0.2548     20   overall_success
- tictactoe connectome gate_error_m0.01  0.6489     10      coverage_acc
- tictactoe connectome gate_error_m0.02  0.6478     10      coverage_acc
- tictactoe connectome gate_error_m0.05  0.6400     10      coverage_acc
- tictactoe connectome  gate_error_m0.2  0.6350     10      coverage_acc
- tictactoe        mlp         lr0.0003  0.8598     20      coverage_acc
- tictactoe        mlp          lr0.001  0.9210     20      coverage_acc
- tictactoe        mlp          lr0.003  0.9219     20      coverage_acc
- tictactoe        mlp           lr0.01  0.9133     20      coverage_acc
- tictactoe  qlearning            a0.02  0.7876     20      coverage_acc
- tictactoe  qlearning            a0.05  0.7915     20      coverage_acc
- tictactoe  qlearning             a0.1  0.7887     20      coverage_acc
- tictactoe  qlearning             a0.3  0.7890     20      coverage_acc
+ tictactoe connectome gate_error_m0.01  0.6397     10      coverage_acc
+ tictactoe connectome gate_error_m0.02  0.6286     10      coverage_acc
+ tictactoe connectome gate_error_m0.05  0.6391     10      coverage_acc
+ tictactoe connectome  gate_error_m0.2  0.6352     10      coverage_acc
+ tictactoe        mlp         lr0.0003  0.8520     20      coverage_acc
+ tictactoe        mlp          lr0.001  0.9215     20      coverage_acc
+ tictactoe        mlp          lr0.003  0.9202     20      coverage_acc
+ tictactoe        mlp           lr0.01  0.9084     20      coverage_acc
+ tictactoe  qlearning            a0.02  0.7719     20      coverage_acc
+ tictactoe  qlearning            a0.05  0.7777     20      coverage_acc
+ tictactoe  qlearning             a0.1  0.7793     20      coverage_acc
+ tictactoe  qlearning             a0.3  0.7847     20      coverage_acc
   addition connectome gate_error_m0.01  0.6140     10    eval_acc_final
   addition connectome gate_error_m0.02  0.6147     10    eval_acc_final
   addition connectome gate_error_m0.05  0.6070     10    eval_acc_final
@@ -625,46 +624,46 @@ rand_delta             a1.5       maze113_rs             NaN  gridworld         
 rand_delta             a1.5        maze26_rs             NaN  gridworld           0.6827           NaN                NaN
 rand_delta             a1.5       maze316_rs             NaN  gridworld           0.0583           NaN                NaN
 rand_delta             a1.5        maze72_rs             NaN  gridworld           0.1373           NaN                NaN
-connectome gate_error_m0.01    rl_random_sym             NaN  tictactoe              NaN        0.6336                NaN
-connectome gate_error_m0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.6642                NaN
-connectome gate_error_m0.02    rl_random_sym             NaN  tictactoe              NaN        0.6300                NaN
-connectome gate_error_m0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.6656                NaN
-connectome gate_error_m0.05    rl_random_sym             NaN  tictactoe              NaN        0.6326                NaN
-connectome gate_error_m0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.6474                NaN
-connectome  gate_error_m0.2    rl_random_sym             NaN  tictactoe              NaN        0.6254                NaN
-connectome  gate_error_m0.2  rl_selfplay_sym             NaN  tictactoe              NaN        0.6446                NaN
+connectome gate_error_m0.01    rl_random_sym             NaN  tictactoe              NaN        0.6184                NaN
+connectome gate_error_m0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.6610                NaN
+connectome gate_error_m0.02    rl_random_sym             NaN  tictactoe              NaN        0.6227                NaN
+connectome gate_error_m0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.6344                NaN
+connectome gate_error_m0.05    rl_random_sym             NaN  tictactoe              NaN        0.6392                NaN
+connectome gate_error_m0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.6390                NaN
+connectome  gate_error_m0.2    rl_random_sym             NaN  tictactoe              NaN        0.6189                NaN
+connectome  gate_error_m0.2  rl_selfplay_sym             NaN  tictactoe              NaN        0.6515                NaN
        mlp         lr0.0003   rl_random_fair             NaN  tictactoe              NaN        0.8078                NaN
-       mlp         lr0.0003    rl_random_sym             NaN  tictactoe              NaN        0.9298                NaN
+       mlp         lr0.0003    rl_random_sym             NaN  tictactoe              NaN        0.8868                NaN
        mlp         lr0.0003 rl_selfplay_fair             NaN  tictactoe              NaN        0.8104                NaN
-       mlp         lr0.0003  rl_selfplay_sym             NaN  tictactoe              NaN        0.8912                NaN
+       mlp         lr0.0003  rl_selfplay_sym             NaN  tictactoe              NaN        0.9028                NaN
        mlp          lr0.001   rl_random_fair             NaN  tictactoe              NaN        0.9157                NaN
-       mlp          lr0.001    rl_random_sym             NaN  tictactoe              NaN        0.9465                NaN
+       mlp          lr0.001    rl_random_sym             NaN  tictactoe              NaN        0.9272                NaN
        mlp          lr0.001 rl_selfplay_fair             NaN  tictactoe              NaN        0.9107                NaN
-       mlp          lr0.001  rl_selfplay_sym             NaN  tictactoe              NaN        0.9110                NaN
+       mlp          lr0.001  rl_selfplay_sym             NaN  tictactoe              NaN        0.9323                NaN
        mlp          lr0.003   rl_random_fair             NaN  tictactoe              NaN        0.9166                NaN
-       mlp          lr0.003    rl_random_sym             NaN  tictactoe              NaN        0.9388                NaN
+       mlp          lr0.003    rl_random_sym             NaN  tictactoe              NaN        0.9122                NaN
        mlp          lr0.003 rl_selfplay_fair             NaN  tictactoe              NaN        0.9130                NaN
-       mlp          lr0.003  rl_selfplay_sym             NaN  tictactoe              NaN        0.9192                NaN
+       mlp          lr0.003  rl_selfplay_sym             NaN  tictactoe              NaN        0.9390                NaN
        mlp           lr0.01   rl_random_fair             NaN  tictactoe              NaN        0.8954                NaN
-       mlp           lr0.01    rl_random_sym             NaN  tictactoe              NaN        0.9420                NaN
-       mlp           lr0.01 rl_selfplay_fair             NaN  tictactoe              NaN        0.8943                NaN
-       mlp           lr0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.9215                NaN
- qlearning            a0.02   rl_random_fair             NaN  tictactoe              NaN        0.7259                NaN
- qlearning            a0.02    rl_random_sym             NaN  tictactoe              NaN        0.8862                NaN
- qlearning            a0.02 rl_selfplay_fair             NaN  tictactoe              NaN        0.7069                NaN
- qlearning            a0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.8312                NaN
- qlearning            a0.05   rl_random_fair             NaN  tictactoe              NaN        0.7286                NaN
- qlearning            a0.05    rl_random_sym             NaN  tictactoe              NaN        0.8858                NaN
- qlearning            a0.05 rl_selfplay_fair             NaN  tictactoe              NaN        0.7131                NaN
- qlearning            a0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.8386                NaN
- qlearning             a0.1   rl_random_fair             NaN  tictactoe              NaN        0.7203                NaN
- qlearning             a0.1    rl_random_sym             NaN  tictactoe              NaN        0.8842                NaN
- qlearning             a0.1 rl_selfplay_fair             NaN  tictactoe              NaN        0.7173                NaN
- qlearning             a0.1  rl_selfplay_sym             NaN  tictactoe              NaN        0.8328                NaN
- qlearning             a0.3   rl_random_fair             NaN  tictactoe              NaN        0.7229                NaN
- qlearning             a0.3    rl_random_sym             NaN  tictactoe              NaN        0.8772                NaN
- qlearning             a0.3 rl_selfplay_fair             NaN  tictactoe              NaN        0.7256                NaN
- qlearning             a0.3  rl_selfplay_sym             NaN  tictactoe              NaN        0.8303                NaN
+       mlp           lr0.01    rl_random_sym             NaN  tictactoe              NaN        0.9106                NaN
+       mlp           lr0.01 rl_selfplay_fair             NaN  tictactoe              NaN        0.8951                NaN
+       mlp           lr0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.9326                NaN
+ qlearning            a0.02   rl_random_fair             NaN  tictactoe              NaN        0.7199                NaN
+ qlearning            a0.02    rl_random_sym             NaN  tictactoe              NaN        0.8197                NaN
+ qlearning            a0.02 rl_selfplay_fair             NaN  tictactoe              NaN        0.7103                NaN
+ qlearning            a0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.8377                NaN
+ qlearning            a0.05   rl_random_fair             NaN  tictactoe              NaN        0.7266                NaN
+ qlearning            a0.05    rl_random_sym             NaN  tictactoe              NaN        0.8249                NaN
+ qlearning            a0.05 rl_selfplay_fair             NaN  tictactoe              NaN        0.7142                NaN
+ qlearning            a0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.8450                NaN
+ qlearning             a0.1   rl_random_fair             NaN  tictactoe              NaN        0.7237                NaN
+ qlearning             a0.1    rl_random_sym             NaN  tictactoe              NaN        0.8254                NaN
+ qlearning             a0.1 rl_selfplay_fair             NaN  tictactoe              NaN        0.7219                NaN
+ qlearning             a0.1  rl_selfplay_sym             NaN  tictactoe              NaN        0.8462                NaN
+ qlearning             a0.3   rl_random_fair             NaN  tictactoe              NaN        0.7254                NaN
+ qlearning             a0.3    rl_random_sym             NaN  tictactoe              NaN        0.8414                NaN
+ qlearning             a0.3 rl_selfplay_fair             NaN  tictactoe              NaN        0.7154                NaN
+ qlearning             a0.3  rl_selfplay_sym             NaN  tictactoe              NaN        0.8566                NaN
 connectome gate_error_m0.01    single_online          0.6680   addition              NaN           NaN                NaN
 connectome gate_error_m0.01       two_online          0.5600   addition              NaN           NaN                NaN
 connectome gate_error_m0.02    single_online          0.6713   addition              NaN           NaN                NaN
