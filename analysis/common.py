@@ -89,8 +89,8 @@ def paired_table(df, metric, comps):
         diff = (A - B).dropna()
         for task, g in diff.groupby(level="task"):
             m, lo, hi = boot_ci(g.values)
-            rows.append({"comparison": name, "task": task, "n": len(g), "mean_diff": m,
-                         "ci_lo": lo, "ci_hi": hi, "excludes_zero": bool(lo > 0 or hi < 0)})
+            rows.append({"comparison": name, "task": task, "metric": metric, "n": len(g), "mean_diff": m,
+             "ci_lo": lo, "ci_hi": hi, "excludes_zero": bool(lo > 0 or hi < 0)})
     out = pd.DataFrame(rows)
     if len(out):
         out["_c"] = out.comparison.map({n: i for i, (n, _, _) in enumerate(comps)})

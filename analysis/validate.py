@@ -23,7 +23,8 @@ def read_manifests(exp):
             m = json.load(f)
         rows.append({"experiment": exp, "run_id": rid, "task": m["task"], "agent": m["agent"],
                      "tier": m["tier"], "seed": int(m["seed"]), "status": m["status"],
-                     "runtime_s": m.get("runtime_s"), "config_hash": m["config_hash"],
+                     "runtime_s": m.get("runtime_s"), "cpu_s": m.get("cpu_s"),
+                     "config_hash": m["config_hash"],
                      "repo_commit": (m.get("repo") or {}).get("commit"),
                      "repo_dirty": (m.get("repo") or {}).get("dirty"),
                      "sim_commit": (m.get("simulator") or {}).get("commit")})
@@ -55,8 +56,10 @@ def validate():
     inv = pd.concat(frames, ignore_index=True)
     cost = inv.groupby(["experiment", "agent", "tier"]).agg(
         runs=("runtime_s", "count"), total_h=("runtime_s", lambda s: s.sum() / 3600),
-        mean_s=("runtime_s", "mean"), median_s=("runtime_s", "median")).reset_index().round(2)
-    save_table(cost, "compute_cost", "Wall-clock cost per run (several workers shared the CPU; compare within an experiment only)", 3)
+        mean_s=("runtime_s", "mean"), median_s=("runtime_s", "median"),
+        cpu_median_s=("cpu_s", "median")).reset_index().round(2)
+    save_table(cost, "compute_cost",
+               "Per-run wall-clock and CPU time under parallel workers (CPU time is less sensitive to load; compare within an experiment only)", 3)
     print("\nVALIDATION", "PASSED" if ok else "FAILED")
     return ok
 

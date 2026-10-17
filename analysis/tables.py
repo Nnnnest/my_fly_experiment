@@ -18,7 +18,7 @@ def bandit():
     save_table(wide(c, "task", "cum_pseudo_regret"), "bandit_sweep", "Cumulative pseudo-regret by forced-exploration floor (min_pulls)")
     comps = [("connectome - qlearning", ("connectome", "-"), ("qlearning", "-")),
              ("connectome - mlp", ("connectome", "-"), ("mlp", "-"))]
-    save_table(paired_table(d, "cum_pseudo_regret", comps), "bandit_paired", "Paired differences in cumulative pseudo-regret (negative = connectome better)", 2)
+    save_table(paired_table(d, "cum_pseudo_regret", comps), "bandit_paired", "Paired differences in cumulative pseudo-regret (negative = connectome better)", 3)
 
 
 def comparison():
@@ -30,7 +30,7 @@ def comparison():
              ("connectome - linear", ("connectome", "fair"), ("linear", "fair")),
              ("connectome[sleep50] - connectome", ("connectome", "sleep50"), ("connectome", "fair")),
              ("connectome - untrained connectome", ("connectome", "fair"), ("connectome_notrain", "control"))]
-    save_table(paired_table(d, "eval_acc_final", comps), "comparison_paired", "Paired differences in held-out accuracy", 2)
+    save_table(paired_table(d, "eval_acc_final", comps), "comparison_paired", "Paired differences in held-out accuracy", 3)
 
 
 def gridworld():
@@ -55,7 +55,9 @@ def gridworld():
     comps += [("connectome [gate_error] - connectome [opt]", ("connectome", "gate_error"), ("connectome", "opt")),
               ("connectome [gate_visit] - connectome [opt]", ("connectome", "gate_visit"), ("connectome", "opt"))]
     comps += [("kc_delta - rand_delta, alpha 0.2 (best at 316)", ("kc_delta", "diagnostic_a0.2"), ("rand_delta", "diagnostic_a0.2"))]
-    save_table(paired_table(d, "final20", comps), "gridworld_paired", "Paired differences in last-20-episode success", 2)
+    save_table(paired_table(d, "final20", comps), "gridworld_paired", "Paired differences in last-20-episode success", 3)
+    save_table(paired_table(d, "overall_success", comps), "gridworld_paired_overall",
+               "Paired differences in success over the whole run", 3)
     d["never_f"] = (d.final20 < 0.5).astype(float)
     f = d.groupby(["task", "label"]).agg(k=("never_f", "sum"), n=("seed", "count")).reset_index()
     f["cell"] = f.k.astype(int).astype(str) + "/" + f.n.astype(str)
@@ -71,7 +73,8 @@ def tictactoe():
         save_table(c.drop(columns="n"), f"tictactoe_{task}", f"Tic-tac-toe, {task}: greedy evaluation after training, minimax coverage, last-100 training win rate")
     r = rl[rl.task != "rl_selfplay"].assign(cf=rl.collapsed.astype(float)).groupby(["task", "label"]).agg(k=("cf", "sum"), n=("seed", "count")).reset_index()
     r["cell"] = r.k.astype(int).astype(str) + "/" + r.n.astype(str)
-    save_table(wide(r, "task", "cell"), "tictactoe_collapse", "Tic-tac-toe: collapsed training runs (of 10)")
+    save_table(wide(r, "task", "cell"), "tictactoe_collapse",
+               "Tic-tac-toe: collapsed training runs (of 10). Self-play excluded: a drop in one learner's win rate can be the other learner improving.")
     im = d[d.task == "imitation"]
     save_table(cells(im, ["label"], ["coverage_acc_pre", "coverage_acc"], 3).drop(columns="n"), "tictactoe_imitation",
                "Imitation: minimax-optimal move coverage over all 4520 reachable states")
@@ -85,7 +88,7 @@ def tictactoe():
     comps += [("connectome [gate_error] - connectome [opt]", ("connectome", "gate_error"), ("connectome", "opt")),
               ("connectome [gate_visit] - connectome [opt]", ("connectome", "gate_visit"), ("connectome", "opt")),
               ("connectome [opt_sleep100] - connectome [opt]", ("connectome", "opt_sleep100"), ("connectome", "opt"))]
-    save_table(paired_table(d, "coverage_acc", comps), "tictactoe_paired", "Paired differences in minimax coverage accuracy", 2)
+    save_table(paired_table(d, "coverage_acc", comps), "tictactoe_paired", "Paired differences in minimax coverage accuracy", 3)
 
 
 def addition():
@@ -99,7 +102,7 @@ def addition():
              ("connectome - linear [feat] (oracle features)", k, ("linear", "feat")),
              ("connectome [gate_error] - connectome", ("connectome", "gate_error"), k),
              ("connectome - untrained connectome", k, ("connectome_notrain", "control"))]
-    save_table(paired_table(d, "eval_acc_final", comps), "addition_paired", "Paired differences in held-out accuracy", 2)
+    save_table(paired_table(d, "eval_acc_final", comps), "addition_paired", "Paired differences in held-out accuracy", 3)
     g = load("addition_diag")
     cols = [c for c in g.columns if c.startswith("jaccard_diff")]
     long = g.melt(id_vars=["task", "seed"], value_vars=cols, var_name="name", value_name="jaccard")
@@ -122,12 +125,14 @@ def tuning():
         except FileNotFoundError:
             continue
         d = d[d.status == "ok"]
-        g = d.groupby(["agent", "tier"])[met].agg(["mean", "count"]).reset_index()
+        dg = d[d.task != "maze316_rs"] if exp == "gridworld" else d
+        g = dg.groupby(["agent", "tier"])[met].agg(["mean", "count"]).reset_index()
         g.insert(0, "experiment", exp)
         g["metric"] = met
         rows.append(g)
-        bytask.append(d.groupby(["agent","tier","task"])[met].mean().reset_index().assign(experiment=exp))
-    save_table(pd.concat(rows), "tuning_grids", "Hyperparameter search on tuning seeds (mean over tasks and seeds)", 3)
+        bytask.append(d.groupby(["agent", "tier", "task"])[met].mean().reset_index().assign(experiment=exp))
+    save_table(pd.concat(rows), "tuning_grids",
+               "Hyperparameter search on tuning seeds (mean over tasks and seeds; gridworld pooled over maze26/72/113, maze316 only in tuning_by_task)", 3)
     save_table(pd.concat(bytask), "tuning_by_task", "Tuning results by task", 3)
 
 

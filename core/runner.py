@@ -60,6 +60,17 @@ def _git(path):
     return _GIT[path]
 
 
+def _cpu_model():
+    try:
+        with open("/proc/cpuinfo") as f:
+            for line in f:
+                if line.startswith("model name"):
+                    return line.split(":", 1)[1].strip()
+    except Exception:
+        pass
+    return platform.processor()
+
+
 def _versions():
     v = {"python": platform.python_version(), "numpy": np.__version__, "platform": platform.platform()}
     try:
@@ -68,6 +79,9 @@ def _versions():
         v["torch_threads"] = torch.get_num_threads()
     except Exception:
         pass
+    v["cpu_model"] = _cpu_model()
+    v["cpu_count"] = os.cpu_count()
+    v["workers"] = int(os.environ.get("FLY_WORKERS", "1"))
     return v
 
 
@@ -105,6 +119,7 @@ def execute(spec, run_fn, root, overwrite=False):
     _dump(mpath, manifest)            # stays "running" if interrupted with Ctrl-C
     seed_everything(spec.seed)
     log, t0, summary = RunLogger(), time.time(), {}
+    c0 = time.process_time()
     try:
         summary = run_fn(spec, log) or {}
         manifest["status"] = "ok"
@@ -112,6 +127,7 @@ def execute(spec, run_fn, root, overwrite=False):
         manifest["status"] = "failed"
         manifest["error"] = traceback.format_exc()
     manifest["runtime_s"] = round(time.time() - t0, 2)
+    manifest["cpu_s"] = round(time.process_time() - c0, 2)
     with open(os.path.join(d, "metrics.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["step", "split", "metric", "value"])
@@ -164,6 +180,7 @@ def run_all(specs, run_fn, args, cost=None):
     else:
         for k in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS"):
             os.environ[k] = "1"                # inherited by the spawned workers
+        os.environ["FLY_WORKERS"] = str(args.workers)
         ex = ProcessPoolExecutor(args.workers, mp_context=mp.get_context("spawn"), initializer=_init_worker)
         try:
             futs = {ex.submit(execute, s, run_fn, root, args.overwrite): s for s in specs}

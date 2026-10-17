@@ -15,7 +15,8 @@ def load_manifests(experiment, root=None):
         if os.path.exists(mp):
             with open(mp) as f:
                 m = json.load(f)
-            rows.append({k: m.get(k) for k in ("run_id", "task", "agent", "tier", "seed", "status", "runtime_s")})
+            rows.append({k: m.get(k) for k in ("run_id", "task", "agent", "tier", "seed", "status",
+                                               "runtime_s", "cpu_s")})
     return pd.DataFrame(rows)
 
 def load_metrics(experiment, metric=None, root=None, task=None):
