@@ -1,0 +1,70 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome - qlearning & maze26\_rs & overall\_success & 10 & -0.0263 & -0.079 & 0.0 & False \\
+connectome - qlearning & maze72\_rs & overall\_success & 10 & -0.1613 & -0.246 & -0.0797 & True \\
+connectome [opt] - qlearning & maze26\_rs & overall\_success & 10 & -0.0583 & -0.1173 & -0.016 & True \\
+connectome [opt] - qlearning & maze72\_rs & overall\_success & 10 & -0.8917 & -0.9203 & -0.8617 & True \\
+connectome [opt] - qlearning & maze113\_fs & overall\_success & 10 & -0.9502 & -0.977 & -0.9215 & True \\
+connectome [opt] - qlearning & maze113\_rs & overall\_success & 10 & -0.9417 & -0.9515 & -0.9328 & True \\
+connectome [opt] - qlearning & maze316\_rs & overall\_success & 10 & -0.9705 & -0.9762 & -0.9632 & True \\
+connectome [gate\_visit] - qlearning & maze26\_rs & overall\_success & 10 & -0.0557 & -0.109 & -0.016 & True \\
+connectome [gate\_visit] - qlearning & maze72\_rs & overall\_success & 10 & -0.885 & -0.9173 & -0.8503 & True \\
+connectome [gate\_visit] - qlearning & maze113\_fs & overall\_success & 10 & -0.9645 & -0.9757 & -0.9538 & True \\
+connectome [gate\_visit] - qlearning & maze113\_rs & overall\_success & 10 & -0.9405 & -0.951 & -0.93 & True \\
+connectome [gate\_visit] - qlearning & maze316\_rs & overall\_success & 10 & -0.9713 & -0.9768 & -0.9645 & True \\
+connectome [gate\_error] - qlearning & maze26\_rs & overall\_success & 10 & -0.0017 & -0.003 & -0.0003 & True \\
+connectome [gate\_error] - qlearning & maze72\_rs & overall\_success & 10 & -0.016 & -0.0217 & -0.01 & True \\
+connectome [gate\_error] - qlearning & maze113\_fs & overall\_success & 10 & -0.0042 & -0.0057 & -0.003 & True \\
+connectome [gate\_error] - qlearning & maze113\_rs & overall\_success & 10 & -0.0778 & -0.1022 & -0.0555 & True \\
+connectome [gate\_error] - qlearning & maze316\_rs & overall\_success & 10 & -0.9568 & -0.9643 & -0.9493 & True \\
+connectome [gate\_rank] - qlearning & maze26\_rs & overall\_success & 10 & -0.0003 & -0.001 & 0.0 & False \\
+connectome [gate\_rank] - qlearning & maze72\_rs & overall\_success & 10 & -0.0007 & -0.002 & 0.0007 & False \\
+connectome [gate\_rank] - qlearning & maze113\_fs & overall\_success & 10 & -0.0002 & -0.0007 & 0.0 & False \\
+connectome [gate\_rank] - qlearning & maze113\_rs & overall\_success & 10 & -0.264 & -0.3703 & -0.1645 & True \\
+connectome [gate\_rank] - qlearning & maze316\_rs & overall\_success & 10 & -0.9525 & -0.9583 & -0.9458 & True \\
+mlp - qlearning & maze26\_rs & overall\_success & 10 & -0.005 & -0.008 & -0.0023 & True \\
+mlp - qlearning & maze72\_rs & overall\_success & 10 & -0.0247 & -0.0323 & -0.0167 & True \\
+mlp - qlearning & maze113\_fs & overall\_success & 10 & -0.2463 & -0.5162 & -0.046 & True \\
+mlp - qlearning & maze113\_rs & overall\_success & 10 & -0.0973 & -0.2655 & -0.0118 & True \\
+mlp - qlearning & maze316\_rs & overall\_success & 10 & -0.9183 & -0.932 & -0.9048 & True \\
+kc\_delta [diagnostic] - qlearning & maze26\_rs & overall\_success & 10 & -0.0003 & -0.001 & 0.0 & False \\
+kc\_delta [diagnostic] - qlearning & maze72\_rs & overall\_success & 10 & -0.0123 & -0.016 & -0.009 & True \\
+kc\_delta [diagnostic] - qlearning & maze113\_fs & overall\_success & 10 & -0.0192 & -0.0242 & -0.0142 & True \\
+kc\_delta [diagnostic] - qlearning & maze113\_rs & overall\_success & 10 & -0.0038 & -0.0055 & -0.002 & True \\
+kc\_delta [diagnostic] - qlearning & maze316\_rs & overall\_success & 10 & -0.7717 & -0.7937 & -0.7482 & True \\
+rand\_delta [diagnostic] - qlearning & maze26\_rs & overall\_success & 10 & -0.0003 & -0.001 & 0.0 & False \\
+rand\_delta [diagnostic] - qlearning & maze72\_rs & overall\_success & 10 & -0.0067 & -0.01 & -0.0037 & True \\
+rand\_delta [diagnostic] - qlearning & maze113\_fs & overall\_success & 10 & -0.0225 & -0.0335 & -0.0132 & True \\
+rand\_delta [diagnostic] - qlearning & maze113\_rs & overall\_success & 10 & -0.0003 & -0.0015 & 0.0012 & False \\
+rand\_delta [diagnostic] - qlearning & maze316\_rs & overall\_success & 10 & -0.4712 & -0.4993 & -0.44 & True \\
+connectome [gate\_rank] - connectome [opt] & maze26\_rs & overall\_success & 10 & 0.058 & 0.016 & 0.1163 & True \\
+connectome [gate\_rank] - connectome [opt] & maze72\_rs & overall\_success & 10 & 0.891 & 0.8613 & 0.9193 & True \\
+connectome [gate\_rank] - connectome [opt] & maze113\_fs & overall\_success & 10 & 0.95 & 0.9212 & 0.9765 & True \\
+connectome [gate\_rank] - connectome [opt] & maze113\_rs & overall\_success & 10 & 0.6777 & 0.572 & 0.7765 & True \\
+connectome [gate\_rank] - connectome [opt] & maze316\_rs & overall\_success & 10 & 0.018 & 0.0137 & 0.022 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze26\_rs & overall\_success & 10 & 0.0 & -0.001 & 0.001 & False \\
+kc\_delta - rand\_delta (does the wiring help?) & maze72\_rs & overall\_success & 10 & -0.0057 & -0.01 & -0.0007 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze113\_fs & overall\_success & 10 & 0.0032 & -0.0073 & 0.0165 & False \\
+kc\_delta - rand\_delta (does the wiring help?) & maze113\_rs & overall\_success & 10 & -0.0035 & -0.005 & -0.002 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze316\_rs & overall\_success & 10 & -0.3005 & -0.3262 & -0.2808 & True \\
+connectome [gate\_error] - connectome [opt] & maze26\_rs & overall\_success & 10 & 0.0567 & 0.013 & 0.116 & True \\
+connectome [gate\_error] - connectome [opt] & maze72\_rs & overall\_success & 10 & 0.8757 & 0.8477 & 0.9027 & True \\
+connectome [gate\_error] - connectome [opt] & maze113\_fs & overall\_success & 10 & 0.946 & 0.917 & 0.9728 & True \\
+connectome [gate\_error] - connectome [opt] & maze113\_rs & overall\_success & 10 & 0.864 & 0.8358 & 0.8885 & True \\
+connectome [gate\_error] - connectome [opt] & maze316\_rs & overall\_success & 10 & 0.0137 & 0.0062 & 0.0222 & True \\
+connectome [gate\_visit] - connectome [opt] & maze26\_rs & overall\_success & 10 & 0.0027 & -0.007 & 0.0163 & False \\
+connectome [gate\_visit] - connectome [opt] & maze72\_rs & overall\_success & 10 & 0.0067 & -0.0033 & 0.0173 & False \\
+connectome [gate\_visit] - connectome [opt] & maze113\_fs & overall\_success & 10 & -0.0142 & -0.0358 & 0.0058 & False \\
+connectome [gate\_visit] - connectome [opt] & maze113\_rs & overall\_success & 10 & 0.0012 & -0.004 & 0.007 & False \\
+connectome [gate\_visit] - connectome [opt] & maze316\_rs & overall\_success & 10 & -0.0008 & -0.0018 & 0.0003 & False \\
+kc\_delta - rand\_delta, alpha 0.2 (best at 316) & maze316\_rs & overall\_success & 10 & -0.2912 & -0.3175 & -0.2573 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences in success over the whole run}
+\label{tab:gridworld_paired_overall}
+\end{table}

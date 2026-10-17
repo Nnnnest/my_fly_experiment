@@ -1,24 +1,24 @@
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{llrrrrr}
+\begin{tabular}{lllrrrrr}
 \toprule
-comparison & task & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
 \midrule
-connectome - qlearning & mp2 & 10 & 20.4 & -0.56 & 51.48 & False \\
-connectome - qlearning & mp5 & 10 & 9.84 & 0.0 & 29.52 & False \\
-connectome - qlearning & mp8 & 10 & -0.08 & -0.24 & 0.0 & False \\
-connectome - qlearning & mp10 & 10 & 0.0 & 0.0 & 0.0 & False \\
-connectome - qlearning & mp15 & 10 & 0.0 & 0.0 & 0.0 & False \\
-connectome - qlearning & mp20 & 10 & 0.0 & 0.0 & 0.0 & False \\
-connectome - qlearning & mp30 & 10 & 0.0 & 0.0 & 0.0 & False \\
-connectome - mlp & mp2 & 10 & 18.76 & -1.44 & 48.16 & False \\
-connectome - mlp & mp5 & 10 & 9.44 & -0.36 & 28.8 & False \\
-connectome - mlp & mp8 & 10 & -0.04 & -0.16 & 0.08 & False \\
-connectome - mlp & mp10 & 10 & 0.0 & -0.12 & 0.12 & False \\
-connectome - mlp & mp15 & 10 & 0.0 & 0.0 & 0.0 & False \\
-connectome - mlp & mp20 & 10 & -0.16 & -0.44 & 0.04 & False \\
-connectome - mlp & mp30 & 10 & -0.12 & -0.32 & 0.08 & False \\
+connectome - qlearning & mp2 & cum\_pseudo\_regret & 10 & 20.4 & -0.56 & 51.48 & False \\
+connectome - qlearning & mp5 & cum\_pseudo\_regret & 10 & 9.84 & 0.0 & 29.52 & False \\
+connectome - qlearning & mp8 & cum\_pseudo\_regret & 10 & -0.08 & -0.24 & 0.0 & False \\
+connectome - qlearning & mp10 & cum\_pseudo\_regret & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp15 & cum\_pseudo\_regret & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp20 & cum\_pseudo\_regret & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - qlearning & mp30 & cum\_pseudo\_regret & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - mlp & mp2 & cum\_pseudo\_regret & 10 & 18.76 & -1.44 & 48.16 & False \\
+connectome - mlp & mp5 & cum\_pseudo\_regret & 10 & 9.44 & -0.36 & 28.8 & False \\
+connectome - mlp & mp8 & cum\_pseudo\_regret & 10 & -0.04 & -0.16 & 0.08 & False \\
+connectome - mlp & mp10 & cum\_pseudo\_regret & 10 & 0.0 & -0.12 & 0.12 & False \\
+connectome - mlp & mp15 & cum\_pseudo\_regret & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome - mlp & mp20 & cum\_pseudo\_regret & 10 & -0.16 & -0.44 & 0.04 & False \\
+connectome - mlp & mp30 & cum\_pseudo\_regret & 10 & -0.12 & -0.32 & 0.08 & False \\
 \bottomrule
 \end{tabular}
 \caption{Paired differences in cumulative pseudo-regret (negative = connectome better)}
