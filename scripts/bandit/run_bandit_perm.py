@@ -17,7 +17,7 @@ from agents.bandit.mlp_agent import MLPBanditAgent
 from agents.shared.mb_value_cache import train_no_readout
 
 EXPERIMENT = "bandit_perm"
-PROBLEMS = {"k4_spread": ([0.2, 0.4, 0.6, 0.8], 300), "k4_close": ([0.50, 0.55, 0.60, 0.65], 1000)}
+PROBLEMS = {"k2": ([0.3, 0.7], 300), "k4_spread": ([0.2, 0.4, 0.6, 0.8], 300), "k4_close": ([0.50, 0.55, 0.60, 0.65], 1000)}
 ORDERS = ["rev", "perm"]
 MIN_PULLS_SWEEP = [5, 10, 20]
 LR_MLP = 0.1
