@@ -1,7 +1,7 @@
 """FlyBrainAPI(mode='mb') instances reused within a process, reset to pristine state between runs.
 slot=0 is the default; slot=1 is a second independent brain (self-play)."""
 import numpy as np
-from core.paths import FLY_ROOT, live_alpn
+from core.paths import CIRCUIT_ROOT, live_alpn
 
 _SLOTS = {}
 
@@ -16,7 +16,7 @@ def fresh_brain(slot=0):
     s = _SLOTS.get(slot)
     if s is None:
         from fly_api import FlyBrainAPI
-        b = FlyBrainAPI(mode="mb", path=FLY_ROOT)
+        b = FlyBrainAPI(mode="mb", path=CIRCUIT_ROOT)
         b.enable_scaling()
         if 0 in _SLOTS and getattr(_SLOTS[0]["brain"], "_mbc_shared", None) is not None:
             b._mbc_shared = _SLOTS[0]["brain"]._mbc_shared      # frozen ALPN->KC matrix: share it

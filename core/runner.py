@@ -82,8 +82,8 @@ def _versions():
     v["cpu_model"] = _cpu_model()
     v["cpu_count"] = os.cpu_count()
     v["workers"] = int(os.environ.get("FLY_WORKERS", "1"))
+    v["circuit_dir"] = os.environ.get("FLY_CIRCUIT_DIR", "default")
     return v
-
 
 def seed_everything(seed):
     random.seed(seed)
