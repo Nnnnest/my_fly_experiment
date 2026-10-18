@@ -1,5 +1,0 @@
-bandit {('221738de', True): 140}
-comparison {('09958cf9', True): 405}
-gridworld {('221738de', True): 90, ('09958cf9', True): 375}
-tictactoe {('080bc2ab', False): 200}
-addition {('145211ff', True): 280}

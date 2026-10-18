@@ -1,5 +1,0 @@
-wrote fig_bandit
-wrote fig_comparison
-wrote fig_gridworld
-wrote fig_tictactoe
-wrote fig_addition

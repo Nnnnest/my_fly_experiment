@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 *~
 notes/
+paper/
 runs/
 runs_*/
 assets/circuits/
