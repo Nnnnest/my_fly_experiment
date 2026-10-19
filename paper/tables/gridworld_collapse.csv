@@ -1,0 +1,6 @@
+task,qlearning,mlp,connectome,connectome [gate_error],connectome [gate_rank],connectome [gate_visit],connectome [opt],kc_delta [diagnostic],kc_delta [diagnostic_a0.2],rand_delta [diagnostic],rand_delta [diagnostic_a0.2]
+maze26_rs,0/10,0/10,1/10,0/10,0/10,0/10,1/10,0/10,-,0/10,-
+maze72_rs,0/10,0/10,4/10,0/10,0/10,4/10,4/10,0/10,-,0/10,-
+maze113_fs,0/10,0/10,-,0/10,0/10,6/10,4/10,0/10,-,0/10,-
+maze113_rs,0/10,0/10,-,2/10,6/10,1/10,1/10,0/10,-,0/10,-
+maze316_rs,0/10,1/10,-,3/10,6/10,0/10,0/10,7/10,7/10,7/10,3/10

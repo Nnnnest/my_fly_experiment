@@ -1,0 +1,59 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome - qlearning,maze26_rs,final20,10,-0.04500000000000002,-0.13500000000000006,0.0,False
+connectome - qlearning,maze72_rs,final20,10,-0.195,-0.31500000000000006,-0.08500000000000003,True
+connectome [opt] - qlearning,maze26_rs,final20,10,-0.08000000000000003,-0.16000000000000006,-0.025000000000000012,True
+connectome [opt] - qlearning,maze72_rs,final20,10,-0.9350000000000002,-0.9750000000000002,-0.8950000000000002,True
+connectome [opt] - qlearning,maze113_fs,final20,10,-0.9900000000000002,-1.0000000000000002,-0.9750000000000002,True
+connectome [opt] - qlearning,maze113_rs,final20,10,-0.9750000000000002,-1.0000000000000002,-0.9500000000000002,True
+connectome [opt] - qlearning,maze316_rs,final20,10,-0.9650000000000002,-0.9900000000000002,-0.9400000000000002,True
+connectome [gate_visit] - qlearning,maze26_rs,final20,10,-0.08000000000000002,-0.15500000000000003,-0.025,True
+connectome [gate_visit] - qlearning,maze72_rs,final20,10,-0.9250000000000002,-0.9600000000000002,-0.8900000000000002,True
+connectome [gate_visit] - qlearning,maze113_fs,final20,10,-1.0000000000000002,-1.0000000000000002,-1.0000000000000002,True
+connectome [gate_visit] - qlearning,maze113_rs,final20,10,-0.9750000000000002,-1.0000000000000002,-0.9500000000000002,True
+connectome [gate_visit] - qlearning,maze316_rs,final20,10,-0.9650000000000002,-0.9900000000000002,-0.9400000000000002,True
+connectome [gate_error] - qlearning,maze26_rs,final20,10,0.0,0.0,0.0,False
+connectome [gate_error] - qlearning,maze72_rs,final20,10,0.0,0.0,0.0,False
+connectome [gate_error] - qlearning,maze113_fs,final20,10,0.0,0.0,0.0,False
+connectome [gate_error] - qlearning,maze113_rs,final20,10,-0.11000000000000003,-0.2000000000000001,-0.034999999999999996,True
+connectome [gate_error] - qlearning,maze316_rs,final20,10,-0.9800000000000001,-0.9950000000000003,-0.9650000000000002,True
+connectome [gate_rank] - qlearning,maze26_rs,final20,10,0.0,0.0,0.0,False
+connectome [gate_rank] - qlearning,maze72_rs,final20,10,0.0,0.0,0.0,False
+connectome [gate_rank] - qlearning,maze113_fs,final20,10,0.0,0.0,0.0,False
+connectome [gate_rank] - qlearning,maze113_rs,final20,10,-0.4000000000000002,-0.5950000000000001,-0.2250000000000001,True
+connectome [gate_rank] - qlearning,maze316_rs,final20,10,-0.9700000000000003,-0.9950000000000003,-0.9450000000000001,True
+mlp - qlearning,maze26_rs,final20,10,0.0,0.0,0.0,False
+mlp - qlearning,maze72_rs,final20,10,0.0,0.0,0.0,False
+mlp - qlearning,maze113_fs,final20,10,-0.21500000000000002,-0.5050000000000001,-0.010000000000000009,True
+mlp - qlearning,maze113_rs,final20,10,-0.08000000000000003,-0.24000000000000007,0.0,False
+mlp - qlearning,maze316_rs,final20,10,-0.9400000000000002,-0.9700000000000003,-0.9100000000000001,True
+kc_delta [diagnostic] - qlearning,maze26_rs,final20,10,0.0,0.0,0.0,False
+kc_delta [diagnostic] - qlearning,maze72_rs,final20,10,0.0,0.0,0.0,False
+kc_delta [diagnostic] - qlearning,maze113_fs,final20,10,0.0,0.0,0.0,False
+kc_delta [diagnostic] - qlearning,maze113_rs,final20,10,0.0,0.0,0.0,False
+kc_delta [diagnostic] - qlearning,maze316_rs,final20,10,-0.7550000000000003,-0.8450000000000001,-0.6500000000000002,True
+rand_delta [diagnostic] - qlearning,maze26_rs,final20,10,0.0,0.0,0.0,False
+rand_delta [diagnostic] - qlearning,maze72_rs,final20,10,0.0,0.0,0.0,False
+rand_delta [diagnostic] - qlearning,maze113_fs,final20,10,0.0,0.0,0.0,False
+rand_delta [diagnostic] - qlearning,maze113_rs,final20,10,0.0,0.0,0.0,False
+rand_delta [diagnostic] - qlearning,maze316_rs,final20,10,-0.5000000000000002,-0.6100000000000002,-0.39000000000000007,True
+connectome [gate_rank] - connectome [opt],maze26_rs,final20,10,0.08000000000000003,0.025000000000000012,0.16000000000000006,True
+connectome [gate_rank] - connectome [opt],maze72_rs,final20,10,0.9350000000000002,0.8950000000000002,0.9750000000000002,True
+connectome [gate_rank] - connectome [opt],maze113_fs,final20,10,0.9900000000000002,0.9750000000000002,1.0000000000000002,True
+connectome [gate_rank] - connectome [opt],maze113_rs,final20,10,0.5750000000000002,0.38500000000000006,0.7500000000000001,True
+connectome [gate_rank] - connectome [opt],maze316_rs,final20,10,-0.005,-0.015000000000000003,0.0,False
+kc_delta - rand_delta (does the wiring help?),maze26_rs,final20,10,0.0,0.0,0.0,False
+kc_delta - rand_delta (does the wiring help?),maze72_rs,final20,10,0.0,0.0,0.0,False
+kc_delta - rand_delta (does the wiring help?),maze113_fs,final20,10,0.0,0.0,0.0,False
+kc_delta - rand_delta (does the wiring help?),maze113_rs,final20,10,0.0,0.0,0.0,False
+kc_delta - rand_delta (does the wiring help?),maze316_rs,final20,10,-0.25500000000000006,-0.32500000000000007,-0.19499999999999998,True
+connectome [gate_error] - connectome [opt],maze26_rs,final20,10,0.08000000000000003,0.025000000000000012,0.16000000000000006,True
+connectome [gate_error] - connectome [opt],maze72_rs,final20,10,0.9350000000000002,0.8950000000000002,0.9750000000000002,True
+connectome [gate_error] - connectome [opt],maze113_fs,final20,10,0.9900000000000002,0.9750000000000002,1.0000000000000002,True
+connectome [gate_error] - connectome [opt],maze113_rs,final20,10,0.8650000000000002,0.7800000000000001,0.9400000000000002,True
+connectome [gate_error] - connectome [opt],maze316_rs,final20,10,-0.015000000000000003,-0.03,-0.005,True
+connectome [gate_visit] - connectome [opt],maze26_rs,final20,10,1.1102230246251566e-17,-0.015000000000000003,0.015000000000000013,False
+connectome [gate_visit] - connectome [opt],maze72_rs,final20,10,0.01,-0.01,0.03,False
+connectome [gate_visit] - connectome [opt],maze113_fs,final20,10,-0.01,-0.025,0.0,False
+connectome [gate_visit] - connectome [opt],maze113_rs,final20,10,0.0,0.0,0.0,False
+connectome [gate_visit] - connectome [opt],maze316_rs,final20,10,0.0,-0.015000000000000003,0.015000000000000003,False
+"kc_delta - rand_delta, alpha 0.2 (best at 316)",maze316_rs,final20,10,-0.3450000000000001,-0.4450000000000002,-0.26000000000000006,True

@@ -1,0 +1,22 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+real - shuf0,mp2,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp5,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp8,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp10,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp15,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp20,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf0,mp30,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf1,mp2,cum_pseudo_regret,10,-10.880000000000056,-32.64000000000017,0.0,False
+real - shuf1,mp5,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf1,mp8,cum_pseudo_regret,10,-10.560000000000052,-31.680000000000156,0.0,False
+real - shuf1,mp10,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf1,mp15,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf1,mp20,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf1,mp30,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp2,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp5,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp8,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp10,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp15,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp20,cum_pseudo_regret,10,0.0,0.0,0.0,False
+real - shuf2,mp30,cum_pseudo_regret,10,0.0,0.0,0.0,False

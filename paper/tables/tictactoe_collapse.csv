@@ -1,0 +1,3 @@
+task,qlearning,qlearning [opt],mlp,mlp [opt],connectome,connectome [gate_error],connectome [gate_visit],connectome [opt],connectome [opt_sleep100]
+rl_heuristic,0/10,0/10,0/10,0/10,0/10,1/10,0/10,0/10,0/10
+rl_random,0/10,0/10,0/10,0/10,0/10,0/10,0/10,0/10,0/10

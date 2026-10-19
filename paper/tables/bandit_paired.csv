@@ -1,0 +1,15 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome - qlearning,mp2,cum_pseudo_regret,10,20.40000000000011,-0.5600000000000003,51.48000000000027,False
+connectome - qlearning,mp5,cum_pseudo_regret,10,9.84000000000005,0.0,29.520000000000145,False
+connectome - qlearning,mp8,cum_pseudo_regret,10,-0.08000000000000007,-0.2400000000000002,0.0,False
+connectome - qlearning,mp10,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome - qlearning,mp15,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome - qlearning,mp20,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome - qlearning,mp30,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome - mlp,mp2,cum_pseudo_regret,10,18.760000000000108,-1.4400000000000008,48.16000000000027,False
+connectome - mlp,mp5,cum_pseudo_regret,10,9.440000000000047,-0.36000000000000015,28.800000000000146,False
+connectome - mlp,mp8,cum_pseudo_regret,10,-0.040000000000000036,-0.16000000000000014,0.08000000000000007,False
+connectome - mlp,mp10,cum_pseudo_regret,10,0.0,-0.1200000000000001,0.1200000000000001,False
+connectome - mlp,mp15,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome - mlp,mp20,cum_pseudo_regret,10,-0.16000000000000014,-0.4400000000000004,0.040000000000000036,False
+connectome - mlp,mp30,cum_pseudo_regret,10,-0.11999999999999958,-0.31999999999999884,0.07999999999999971,False

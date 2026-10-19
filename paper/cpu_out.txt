@@ -1,0 +1,17 @@
+                                          cpu_ratio  wall_ratio
+experiment agent_par          tier_par                         
+addition   connectome         fair             3.04        3.05
+                              gate_error       3.50        3.50
+           connectome_notrain control          3.33        3.33
+           linear             feat             1.54        1.54
+                              raw              1.71        1.71
+           mlp                feat             1.56        1.56
+                              raw              1.79        1.79
+bandit     connectome         -                2.93        2.94
+           mlp                -                 NaN         NaN
+           qlearning          -                 NaN         NaN
+comparison connectome         fair             7.56        7.56
+                              sleep50          7.42        7.42
+           connectome_notrain control         22.19       22.20
+           linear             fair             4.00        4.00
+           mlp                fair             2.76        2.76

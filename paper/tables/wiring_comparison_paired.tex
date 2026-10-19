@@ -1,0 +1,39 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+real - shuf0 & digits\_2 & eval\_acc\_final & 10 & 0.091 & 0.062 & 0.1185 & True \\
+real - shuf0 & digits\_3 & eval\_acc\_final & 10 & 0.1445 & 0.085 & 0.1965 & True \\
+real - shuf0 & digits\_4 & eval\_acc\_final & 10 & 0.1775 & 0.1405 & 0.2115 & True \\
+real - shuf0 & digits\_5 & eval\_acc\_final & 10 & 0.182 & 0.1145 & 0.2385 & True \\
+real - shuf0 & digits\_9 & eval\_acc\_final & 10 & 0.1295 & 0.0385 & 0.2145 & True \\
+real - shuf0 & knob\_n9 & eval\_acc\_final & 10 & 0.012 & 0.0055 & 0.019 & True \\
+real - shuf0 & knob\_n19 & eval\_acc\_final & 10 & 0.031 & 0.0215 & 0.041 & True \\
+real - shuf0 & knob\_n49 & eval\_acc\_final & 10 & 0.044 & 0.034 & 0.057 & True \\
+real - shuf0 & knob\_n99 & eval\_acc\_final & 10 & 0.053 & 0.042 & 0.066 & True \\
+real - shuf1 & digits\_2 & eval\_acc\_final & 10 & 0.066 & 0.047 & 0.0875 & True \\
+real - shuf1 & digits\_3 & eval\_acc\_final & 10 & 0.079 & 0.0435 & 0.1125 & True \\
+real - shuf1 & digits\_4 & eval\_acc\_final & 10 & 0.108 & 0.067 & 0.146 & True \\
+real - shuf1 & digits\_5 & eval\_acc\_final & 10 & 0.1225 & 0.064 & 0.1735 & True \\
+real - shuf1 & digits\_9 & eval\_acc\_final & 10 & 0.093 & -0.009 & 0.1835 & False \\
+real - shuf1 & knob\_n9 & eval\_acc\_final & 10 & 0.0115 & 0.0055 & 0.0175 & True \\
+real - shuf1 & knob\_n19 & eval\_acc\_final & 10 & 0.031 & 0.022 & 0.04 & True \\
+real - shuf1 & knob\_n49 & eval\_acc\_final & 10 & 0.038 & 0.0275 & 0.05 & True \\
+real - shuf1 & knob\_n99 & eval\_acc\_final & 10 & 0.0485 & 0.035 & 0.063 & True \\
+real - shuf2 & digits\_2 & eval\_acc\_final & 10 & 0.091 & 0.0655 & 0.1195 & True \\
+real - shuf2 & digits\_3 & eval\_acc\_final & 10 & 0.12 & 0.068 & 0.164 & True \\
+real - shuf2 & digits\_4 & eval\_acc\_final & 10 & 0.1625 & 0.124 & 0.2025 & True \\
+real - shuf2 & digits\_5 & eval\_acc\_final & 10 & 0.1875 & 0.1275 & 0.2375 & True \\
+real - shuf2 & digits\_9 & eval\_acc\_final & 10 & 0.127 & 0.028 & 0.2225 & True \\
+real - shuf2 & knob\_n9 & eval\_acc\_final & 10 & 0.022 & 0.0145 & 0.0295 & True \\
+real - shuf2 & knob\_n19 & eval\_acc\_final & 10 & 0.04 & 0.0275 & 0.0555 & True \\
+real - shuf2 & knob\_n49 & eval\_acc\_final & 10 & 0.048 & 0.033 & 0.0655 & True \\
+real - shuf2 & knob\_n99 & eval\_acc\_final & 10 & 0.0565 & 0.0435 & 0.0715 & True \\
+\bottomrule
+\end{tabular}
+\caption{comparison: paired real - shuffled (matched on task, seed)}
+\label{tab:wiring_comparison_paired}
+\end{table}

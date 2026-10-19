@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+task & qlearning & qlearning [opt] & mlp & mlp [opt] & connectome & connectome [gate\_error] & connectome [gate\_visit] & connectome [opt] & connectome [opt\_sleep100] \\
+\midrule
+rl\_heuristic & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 & 1/10 & 0/10 & 0/10 & 0/10 \\
+rl\_random & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 & 0/10 \\
+\bottomrule
+\end{tabular}
+\caption{Tic-tac-toe: collapsed training runs (of 10). Self-play excluded: a drop in one learner's win rate can be the other learner improving.}
+\label{tab:tictactoe_collapse}
+\end{table}

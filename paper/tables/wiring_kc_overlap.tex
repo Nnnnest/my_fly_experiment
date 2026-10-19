@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrr}
+\toprule
+task & circuit & jaccard\_diff+1 & jaccard\_diff-1 & jaccard\_random\_mean & n \\
+\midrule
+single & real & 0.817 [0.806, 0.828] & 0.793 [0.772, 0.813] & 0.215 [0.213, 0.217] & 10 \\
+two & real & 0.740 [0.716, 0.763] & 0.767 [0.754, 0.780] & 0.180 [0.173, 0.187] & 10 \\
+single & shuf0 & 0.841 [0.830, 0.851] & 0.817 [0.795, 0.837] & 0.241 [0.238, 0.244] & 10 \\
+two & shuf0 & 0.748 [0.728, 0.768] & 0.776 [0.762, 0.791] & 0.197 [0.189, 0.204] & 10 \\
+single & shuf1 & 0.840 [0.830, 0.852] & 0.817 [0.796, 0.837] & 0.239 [0.235, 0.242] & 10 \\
+two & shuf1 & 0.747 [0.725, 0.768] & 0.776 [0.762, 0.790] & 0.197 [0.189, 0.204] & 10 \\
+single & shuf2 & 0.837 [0.826, 0.848] & 0.821 [0.798, 0.841] & 0.239 [0.236, 0.242] & 10 \\
+two & shuf2 & 0.746 [0.725, 0.767] & 0.777 [0.761, 0.793] & 0.195 [0.188, 0.203] & 10 \\
+\bottomrule
+\end{tabular}
+\caption{KC-code Jaccard overlap of the correct addition triple vs c off by +-1, and random baseline}
+\label{tab:wiring_kc_overlap}
+\end{table}

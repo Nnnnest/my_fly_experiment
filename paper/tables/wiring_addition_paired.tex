@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+real - shuf0 & single\_imitation & eval\_acc\_final & 10 & 0.0983 & 0.0657 & 0.136 & True \\
+real - shuf0 & single\_online & eval\_acc\_final & 10 & 0.1007 & 0.0703 & 0.1347 & True \\
+real - shuf0 & two\_imitation & eval\_acc\_final & 10 & -0.049 & -0.0817 & -0.0193 & True \\
+real - shuf0 & two\_online & eval\_acc\_final & 10 & -0.048 & -0.0817 & -0.0183 & True \\
+real - shuf1 & single\_imitation & eval\_acc\_final & 10 & 0.0987 & 0.066 & 0.1437 & True \\
+real - shuf1 & single\_online & eval\_acc\_final & 10 & 0.0963 & 0.07 & 0.132 & True \\
+real - shuf1 & two\_imitation & eval\_acc\_final & 10 & -0.0493 & -0.0723 & -0.0273 & True \\
+real - shuf1 & two\_online & eval\_acc\_final & 10 & -0.042 & -0.0637 & -0.02 & True \\
+real - shuf2 & single\_imitation & eval\_acc\_final & 10 & 0.107 & 0.0753 & 0.1503 & True \\
+real - shuf2 & single\_online & eval\_acc\_final & 10 & 0.1073 & 0.077 & 0.1483 & True \\
+real - shuf2 & two\_imitation & eval\_acc\_final & 10 & -0.0427 & -0.0683 & -0.0163 & True \\
+real - shuf2 & two\_online & eval\_acc\_final & 10 & -0.032 & -0.06 & -0.0067 & True \\
+\bottomrule
+\end{tabular}
+\caption{addition: paired real - shuffled (matched on task, seed)}
+\label{tab:wiring_addition_paired}
+\end{table}

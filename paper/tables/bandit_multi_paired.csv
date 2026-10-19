@@ -1,0 +1,13 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome - qlearning,k4_close_mp5,cum_pseudo_regret,10,13.989999999999934,0.6300000000000168,29.51574999999985,True
+connectome - qlearning,k4_close_mp10,cum_pseudo_regret,10,-14.829999999999732,-28.664999999999434,-2.2195000000000182,True
+connectome - qlearning,k4_close_mp20,cum_pseudo_regret,10,-4.3049999999999145,-11.079999999999739,-0.5800000000000025,True
+connectome - qlearning,k4_spread_mp5,cum_pseudo_regret,10,4.060000000000034,-0.3399999999999988,12.600000000000103,False
+connectome - qlearning,k4_spread_mp10,cum_pseudo_regret,10,-0.5199999999999978,-1.2199999999999946,0.0,False
+connectome - qlearning,k4_spread_mp20,cum_pseudo_regret,10,-0.1399999999999995,-0.4199999999999985,0.0,False
+connectome - mlp,k4_close_mp5,cum_pseudo_regret,10,-6.420000000000046,-26.430624999999893,15.990624999999923,False
+connectome - mlp,k4_close_mp10,cum_pseudo_regret,10,-27.614999999999952,-33.95999999999994,-20.71,True
+connectome - mlp,k4_close_mp20,cum_pseudo_regret,10,-37.24999999999979,-45.15024999999971,-29.859374999999943,True
+connectome - mlp,k4_spread_mp5,cum_pseudo_regret,10,1.760000000000043,-3.7199999999999855,9.340000000000114,False
+connectome - mlp,k4_spread_mp10,cum_pseudo_regret,10,-5.640000000000026,-14.48000000000009,0.30000000000000177,False
+connectome - mlp,k4_spread_mp20,cum_pseudo_regret,10,-2.2800000000000074,-5.240000000000036,-0.31999999999999423,True

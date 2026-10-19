@@ -1,0 +1,91 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome [block] - qlearning,k2_perm_mp5,cum_pseudo_regret,10,9.84000000000005,0.0,29.520000000000145,False
+connectome [block] - qlearning,k2_perm_mp10,cum_pseudo_regret,10,-0.040000000000000036,-0.1200000000000001,0.0,False
+connectome [block] - qlearning,k2_perm_mp20,cum_pseudo_regret,10,9.320000000000045,0.0,27.960000000000132,False
+connectome [block] - qlearning,k2_rev_mp5,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome [block] - qlearning,k2_rev_mp10,cum_pseudo_regret,10,-0.040000000000000036,-0.1200000000000001,0.0,False
+connectome [block] - qlearning,k2_rev_mp20,cum_pseudo_regret,10,9.320000000000045,0.0,27.960000000000132,False
+connectome [block] - qlearning,k4_close_perm_mp5,cum_pseudo_regret,10,23.245000000000196,3.5500000000000753,50.171000000000525,True
+connectome [block] - qlearning,k4_close_perm_mp10,cum_pseudo_regret,10,16.02999999999986,-9.710249999999833,43.12199999999953,False
+connectome [block] - qlearning,k4_close_perm_mp20,cum_pseudo_regret,10,35.99499999999972,13.754875000000018,60.12549999999922,True
+connectome [block] - qlearning,k4_close_rev_mp5,cum_pseudo_regret,10,34.655000000000335,7.114624999999921,66.67000000000081,True
+connectome [block] - qlearning,k4_close_rev_mp10,cum_pseudo_regret,10,52.12000000000097,20.88487500000064,82.69000000000167,True
+connectome [block] - qlearning,k4_close_rev_mp20,cum_pseudo_regret,10,63.55500000000033,40.46475000000005,87.05525000000088,True
+connectome [block] - qlearning,k4_spread_perm_mp5,cum_pseudo_regret,10,14.620000000000104,0.0,29.300000000000203,False
+connectome [block] - qlearning,k4_spread_perm_mp10,cum_pseudo_regret,10,13.080000000000116,-0.29999999999999893,27.30000000000023,False
+connectome [block] - qlearning,k4_spread_perm_mp20,cum_pseudo_regret,10,16.44000000000019,4.860000000000055,28.040000000000315,True
+connectome [block] - qlearning,k4_spread_rev_mp5,cum_pseudo_regret,10,16.52000000000015,3.5200000000000373,30.441000000000248,True
+connectome [block] - qlearning,k4_spread_rev_mp10,cum_pseudo_regret,10,4.020000000000041,-2.039999999999994,14.100000000000119,False
+connectome [block] - qlearning,k4_spread_rev_mp20,cum_pseudo_regret,10,18.80000000000022,7.020000000000087,30.66000000000035,True
+connectome [balanced] - qlearning,k2_perm_mp5,cum_pseudo_regret,10,15.840000000000037,0.0,39.3600000000002,False
+connectome [balanced] - qlearning,k2_perm_mp10,cum_pseudo_regret,10,10.000000000000048,-0.1200000000000001,30.120000000000147,False
+connectome [balanced] - qlearning,k2_perm_mp20,cum_pseudo_regret,10,14.800000000000026,0.0,36.96000000000017,False
+connectome [balanced] - qlearning,k2_rev_mp5,cum_pseudo_regret,10,11.04000000000005,0.0,31.76000000000015,False
+connectome [balanced] - qlearning,k2_rev_mp10,cum_pseudo_regret,10,10.080000000000048,-0.1200000000000001,30.360000000000145,False
+connectome [balanced] - qlearning,k2_rev_mp20,cum_pseudo_regret,10,9.480000000000043,0.0,28.440000000000133,False
+connectome [balanced] - qlearning,k4_close_perm_mp5,cum_pseudo_regret,10,42.92500000000034,15.789374999999827,74.56025000000118,True
+connectome [balanced] - qlearning,k4_close_perm_mp10,cum_pseudo_regret,10,52.72500000000035,28.77800000000056,75.25537500000144,True
+connectome [balanced] - qlearning,k4_close_perm_mp20,cum_pseudo_regret,10,63.10000000000072,35.149625000000135,90.42037500000112,True
+connectome [balanced] - qlearning,k4_close_rev_mp5,cum_pseudo_regret,10,29.250000000000103,2.194749999999901,59.714999999999804,True
+connectome [balanced] - qlearning,k4_close_rev_mp10,cum_pseudo_regret,10,40.48000000000009,14.842874999999912,69.9707500000006,True
+connectome [balanced] - qlearning,k4_close_rev_mp20,cum_pseudo_regret,10,47.56000000000002,23.819874999999602,73.77212500000077,True
+connectome [balanced] - qlearning,k4_spread_perm_mp5,cum_pseudo_regret,10,14.680000000000103,0.23999999999999916,29.360000000000205,True
+connectome [balanced] - qlearning,k4_spread_perm_mp10,cum_pseudo_regret,10,19.18000000000015,-0.8810000000000506,36.540000000000305,False
+connectome [balanced] - qlearning,k4_spread_perm_mp20,cum_pseudo_regret,10,27.740000000000276,11.920000000000142,43.58000000000042,True
+connectome [balanced] - qlearning,k4_spread_rev_mp5,cum_pseudo_regret,10,16.52000000000015,3.5200000000000373,30.441000000000248,True
+connectome [balanced] - qlearning,k4_spread_rev_mp10,cum_pseudo_regret,10,13.300000000000116,0.0,27.920000000000222,False
+connectome [balanced] - qlearning,k4_spread_rev_mp20,cum_pseudo_regret,10,18.78000000000022,5.840000000000082,31.700000000000358,True
+connectome [block] - mlp,k2_perm_mp5,cum_pseudo_regret,10,9.480000000000048,-0.2400000000000002,28.760000000000144,False
+connectome [block] - mlp,k2_perm_mp10,cum_pseudo_regret,10,-0.08000000000000007,-0.20000000000000018,0.0,False
+connectome [block] - mlp,k2_perm_mp20,cum_pseudo_regret,10,8.920000000000044,-0.7600000000000007,27.760000000000133,False
+connectome [block] - mlp,k2_rev_mp5,cum_pseudo_regret,10,-0.040000000000000036,-0.1200000000000001,0.0,False
+connectome [block] - mlp,k2_rev_mp10,cum_pseudo_regret,10,-0.28000000000000025,-0.7609999999999998,0.0,False
+connectome [block] - mlp,k2_rev_mp20,cum_pseudo_regret,10,9.080000000000044,-0.6000000000000005,27.92000000000013,False
+connectome [block] - mlp,k4_close_perm_mp5,cum_pseudo_regret,10,1.2050000000002221,-19.8049999999998,25.1205000000007,False
+connectome [block] - mlp,k4_close_perm_mp10,cum_pseudo_regret,10,0.22499999999972786,-21.07499999999995,22.82499999999962,False
+connectome [block] - mlp,k4_close_perm_mp20,cum_pseudo_regret,10,15.659999999999878,-12.591874999999815,44.09512499999992,False
+connectome [block] - mlp,k4_close_rev_mp5,cum_pseudo_regret,10,27.470000000000027,1.1897499999996912,54.80500000000009,True
+connectome [block] - mlp,k4_close_rev_mp10,cum_pseudo_regret,10,38.05000000000077,0.8086250000000275,75.45062500000144,True
+connectome [block] - mlp,k4_close_rev_mp20,cum_pseudo_regret,10,43.410000000000295,27.76474999999982,60.28000000000109,True
+connectome [block] - mlp,k4_spread_perm_mp5,cum_pseudo_regret,10,14.100000000000104,-0.11999999999999993,28.760000000000208,False
+connectome [block] - mlp,k4_spread_perm_mp10,cum_pseudo_regret,10,11.000000000000119,-1.4599999999999465,24.861500000000213,False
+connectome [block] - mlp,k4_spread_perm_mp20,cum_pseudo_regret,10,14.720000000000189,3.180000000000061,26.44000000000032,True
+connectome [block] - mlp,k4_spread_rev_mp5,cum_pseudo_regret,10,13.260000000000113,0.4600000000000144,27.440000000000214,True
+connectome [block] - mlp,k4_spread_rev_mp10,cum_pseudo_regret,10,2.140000000000039,-5.920000000000006,13.600000000000119,False
+connectome [block] - mlp,k4_spread_rev_mp20,cum_pseudo_regret,10,16.72000000000022,5.559500000000088,28.120000000000353,True
+connectome [balanced] - mlp,k2_perm_mp5,cum_pseudo_regret,10,15.480000000000038,-0.20000000000000018,38.240000000000194,False
+connectome [balanced] - mlp,k2_perm_mp10,cum_pseudo_regret,10,9.960000000000047,-0.1200000000000001,30.00000000000015,False
+connectome [balanced] - mlp,k2_perm_mp20,cum_pseudo_regret,10,14.400000000000025,-0.3600000000000003,36.760000000000176,False
+connectome [balanced] - mlp,k2_rev_mp5,cum_pseudo_regret,10,11.00000000000005,-0.08000000000000007,31.76000000000015,False
+connectome [balanced] - mlp,k2_rev_mp10,cum_pseudo_regret,10,9.84000000000005,-0.7200000000000006,30.320000000000146,False
+connectome [balanced] - mlp,k2_rev_mp20,cum_pseudo_regret,10,9.240000000000043,-0.6000000000000005,28.400000000000137,False
+connectome [balanced] - mlp,k4_close_perm_mp5,cum_pseudo_regret,10,20.885000000000367,-5.6058749999999185,46.73000000000097,False
+connectome [balanced] - mlp,k4_close_perm_mp10,cum_pseudo_regret,10,36.92000000000022,17.054624999999696,55.55000000000085,True
+connectome [balanced] - mlp,k4_close_perm_mp20,cum_pseudo_regret,10,42.76500000000087,14.099750000000483,69.22725000000217,True
+connectome [balanced] - mlp,k4_close_rev_mp5,cum_pseudo_regret,10,22.064999999999795,2.3292499999997864,44.620750000000285,True
+connectome [balanced] - mlp,k4_close_rev_mp10,cum_pseudo_regret,10,26.40999999999989,3.6099999999995975,50.79999999999952,True
+connectome [balanced] - mlp,k4_close_rev_mp20,cum_pseudo_regret,10,27.415,-1.4202500000000926,56.48087499999971,False
+connectome [balanced] - mlp,k4_spread_perm_mp5,cum_pseudo_regret,10,14.160000000000105,-0.11999999999999993,28.800500000000202,False
+connectome [balanced] - mlp,k4_spread_perm_mp10,cum_pseudo_regret,10,17.10000000000015,-2.183499999999994,34.060500000000296,False
+connectome [balanced] - mlp,k4_spread_perm_mp20,cum_pseudo_regret,10,26.020000000000277,10.500000000000147,42.12000000000037,True
+connectome [balanced] - mlp,k4_spread_rev_mp5,cum_pseudo_regret,10,13.260000000000113,0.4600000000000144,27.440000000000214,True
+connectome [balanced] - mlp,k4_spread_rev_mp10,cum_pseudo_regret,10,11.420000000000112,-0.2799999999999969,24.180500000000215,False
+connectome [balanced] - mlp,k4_spread_rev_mp20,cum_pseudo_regret,10,16.700000000000223,3.8195000000000743,29.600000000000364,True
+connectome [block] - connectome [balanced],k2_perm_mp5,cum_pseudo_regret,10,-5.99999999999999,-17.99999999999997,0.0,False
+connectome [block] - connectome [balanced],k2_perm_mp10,cum_pseudo_regret,10,-10.040000000000049,-30.120000000000147,0.0,False
+connectome [block] - connectome [balanced],k2_perm_mp20,cum_pseudo_regret,10,-5.479999999999981,-33.28000000000011,22.40000000000015,False
+connectome [block] - connectome [balanced],k2_rev_mp5,cum_pseudo_regret,10,-11.04000000000005,-31.76000000000015,0.0,False
+connectome [block] - connectome [balanced],k2_rev_mp10,cum_pseudo_regret,10,-10.120000000000049,-30.360000000000145,0.0,False
+connectome [block] - connectome [balanced],k2_rev_mp20,cum_pseudo_regret,10,-0.15999999999999942,-28.440000000000133,27.960000000000132,False
+connectome [block] - connectome [balanced],k4_close_perm_mp5,cum_pseudo_regret,10,-19.680000000000142,-50.80625000000061,5.695750000000145,False
+connectome [block] - connectome [balanced],k4_close_perm_mp10,cum_pseudo_regret,10,-36.69500000000049,-68.70525000000089,-7.079249999999893,True
+connectome [block] - connectome [balanced],k4_close_perm_mp20,cum_pseudo_regret,10,-27.10500000000099,-60.00600000000179,4.700124999999758,False
+connectome [block] - connectome [balanced],k4_close_rev_mp5,cum_pseudo_regret,10,5.405000000000236,-20.815999999999836,27.720000000000255,False
+connectome [block] - connectome [balanced],k4_close_rev_mp10,cum_pseudo_regret,10,11.64000000000088,-38.1960000000004,61.630250000001844,False
+connectome [block] - connectome [balanced],k4_close_rev_mp20,cum_pseudo_regret,10,15.995000000000307,-21.14675000000147,52.700375000000655,False
+connectome [block] - connectome [balanced],k4_spread_perm_mp5,cum_pseudo_regret,10,-0.05999999999999979,-0.17999999999999935,0.0,False
+connectome [block] - connectome [balanced],k4_spread_perm_mp10,cum_pseudo_regret,10,-6.100000000000032,-24.76000000000019,12.80000000000012,False
+connectome [block] - connectome [balanced],k4_spread_perm_mp20,cum_pseudo_regret,10,-11.300000000000091,-25.86000000000031,3.4005000000000756,False
+connectome [block] - connectome [balanced],k4_spread_rev_mp5,cum_pseudo_regret,10,0.0,0.0,0.0,False
+connectome [block] - connectome [balanced],k4_spread_rev_mp10,cum_pseudo_regret,10,-9.280000000000072,-23.180000000000177,0.0,False
+connectome [block] - connectome [balanced],k4_spread_rev_mp20,cum_pseudo_regret,10,0.019999999999998862,-16.00000000000018,16.04000000000018,False

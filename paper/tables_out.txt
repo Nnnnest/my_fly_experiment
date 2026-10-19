@@ -1,0 +1,811 @@
+
+===================== bandit =====================
+
+--- bandit_headline (3 rows) ---
+     label            total_reward  cum_pseudo_regret          cum_regret frac_optimal_last50
+connectome 196.30 [189.80, 202.50] 9.44 [8.72, 10.12] 13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
+       mlp 195.90 [189.60, 201.50] 9.44 [8.68, 10.20] 14.10 [8.50, 20.40]   0.95 [0.93, 0.96]
+ qlearning 196.30 [189.80, 202.50] 9.44 [8.72, 10.12] 13.70 [7.50, 20.20]   0.95 [0.93, 0.96]
+
+--- bandit_sweep (7 rows) ---
+task            qlearning                  mlp           connectome
+ mp2    7.84 [6.56, 9.20]   9.48 [7.20, 12.36]  28.24 [6.40, 60.40]
+ mp5    8.16 [7.08, 9.40]   8.56 [7.20, 10.24]  18.00 [7.12, 38.92]
+ mp8    8.76 [8.00, 9.56]    8.72 [7.96, 9.44]    8.68 [7.96, 9.40]
+mp10   9.44 [8.72, 10.12]   9.44 [8.68, 10.20]   9.44 [8.72, 10.12]
+mp15 11.24 [10.48, 11.96] 11.24 [10.48, 11.96] 11.24 [10.48, 11.96]
+mp20 13.08 [12.36, 13.76] 13.24 [12.44, 13.96] 13.08 [12.36, 13.76]
+mp30 16.60 [15.92, 17.24] 16.72 [15.92, 17.52] 16.60 [15.92, 17.24]
+
+--- bandit_paired (14 rows) ---
+            comparison task            metric  n  mean_diff  ci_lo  ci_hi  excludes_zero
+connectome - qlearning  mp2 cum_pseudo_regret 10      20.40  -0.56  51.48          False
+connectome - qlearning  mp5 cum_pseudo_regret 10       9.84   0.00  29.52          False
+connectome - qlearning  mp8 cum_pseudo_regret 10      -0.08  -0.24   0.00          False
+connectome - qlearning mp10 cum_pseudo_regret 10       0.00   0.00   0.00          False
+connectome - qlearning mp15 cum_pseudo_regret 10       0.00   0.00   0.00          False
+connectome - qlearning mp20 cum_pseudo_regret 10       0.00   0.00   0.00          False
+connectome - qlearning mp30 cum_pseudo_regret 10       0.00   0.00   0.00          False
+      connectome - mlp  mp2 cum_pseudo_regret 10      18.76  -1.44  48.16          False
+      connectome - mlp  mp5 cum_pseudo_regret 10       9.44  -0.36  28.80          False
+      connectome - mlp  mp8 cum_pseudo_regret 10      -0.04  -0.16   0.08          False
+      connectome - mlp mp10 cum_pseudo_regret 10       0.00  -0.12   0.12          False
+      connectome - mlp mp15 cum_pseudo_regret 10       0.00   0.00   0.00          False
+      connectome - mlp mp20 cum_pseudo_regret 10      -0.16  -0.44   0.04          False
+      connectome - mlp mp30 cum_pseudo_regret 10      -0.12  -0.32   0.08          False
+
+===================== comparison =====================
+
+--- comparison_final_acc (9 rows) ---
+    task                  mlp               linear           connectome connectome [sleep50] connectome_notrain [control]
+digits_2 0.962 [0.946, 0.976] 0.926 [0.895, 0.956] 0.919 [0.888, 0.944] 0.917 [0.886, 0.942]         0.505 [0.477, 0.534]
+digits_3 0.952 [0.925, 0.975] 0.899 [0.863, 0.931] 0.873 [0.814, 0.916] 0.874 [0.815, 0.916]         0.497 [0.458, 0.530]
+digits_4 0.959 [0.933, 0.980] 0.901 [0.864, 0.935] 0.858 [0.815, 0.897] 0.855 [0.810, 0.896]         0.518 [0.483, 0.551]
+digits_5 0.959 [0.933, 0.980] 0.901 [0.864, 0.935] 0.809 [0.725, 0.875] 0.809 [0.723, 0.875]         0.493 [0.457, 0.524]
+digits_9 0.935 [0.910, 0.958] 0.883 [0.850, 0.920] 0.695 [0.620, 0.769] 0.694 [0.620, 0.766]         0.510 [0.479, 0.541]
+ knob_n9 0.996 [0.989, 1.000] 0.994 [0.983, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000]         0.522 [0.470, 0.579]
+knob_n19 0.982 [0.964, 0.996] 0.952 [0.930, 0.974] 0.990 [0.987, 0.994] 0.990 [0.987, 0.994]         0.502 [0.441, 0.566]
+knob_n49 0.964 [0.946, 0.981] 0.952 [0.932, 0.970] 0.978 [0.972, 0.983] 0.978 [0.972, 0.983]         0.505 [0.455, 0.556]
+knob_n99 0.964 [0.951, 0.977] 0.940 [0.918, 0.961] 0.975 [0.968, 0.982] 0.975 [0.968, 0.982]         0.499 [0.444, 0.560]
+
+--- comparison_pre_acc (9 rows) ---
+    task                  mlp               linear           connectome connectome [sleep50] connectome_notrain [control]
+digits_2 0.485 [0.431, 0.533] 0.477 [0.426, 0.542] 0.505 [0.477, 0.534] 0.505 [0.477, 0.534]         0.505 [0.477, 0.534]
+digits_3 0.469 [0.438, 0.496] 0.516 [0.459, 0.581] 0.497 [0.458, 0.530] 0.497 [0.458, 0.530]         0.497 [0.458, 0.530]
+digits_4 0.473 [0.442, 0.499] 0.511 [0.455, 0.577] 0.518 [0.483, 0.551] 0.518 [0.483, 0.551]         0.518 [0.483, 0.551]
+digits_5 0.468 [0.438, 0.495] 0.507 [0.451, 0.573] 0.493 [0.457, 0.524] 0.493 [0.457, 0.524]         0.493 [0.457, 0.524]
+digits_9 0.462 [0.424, 0.498] 0.525 [0.473, 0.589] 0.510 [0.479, 0.541] 0.510 [0.479, 0.541]         0.510 [0.479, 0.541]
+ knob_n9 0.476 [0.426, 0.516] 0.502 [0.433, 0.586] 0.522 [0.470, 0.579] 0.522 [0.470, 0.579]         0.522 [0.470, 0.579]
+knob_n19 0.485 [0.436, 0.530] 0.481 [0.419, 0.559] 0.502 [0.441, 0.566] 0.502 [0.441, 0.566]         0.502 [0.441, 0.566]
+knob_n49 0.468 [0.421, 0.509] 0.485 [0.428, 0.558] 0.505 [0.455, 0.556] 0.505 [0.455, 0.556]         0.505 [0.455, 0.556]
+knob_n99 0.483 [0.428, 0.527] 0.494 [0.441, 0.559] 0.499 [0.444, 0.560] 0.499 [0.444, 0.560]         0.499 [0.444, 0.560]
+
+--- comparison_paired (36 rows) ---
+                       comparison     task         metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                 connectome - mlp digits_2 eval_acc_final 10    -0.0425 -0.0750 -0.0150           True
+                 connectome - mlp digits_3 eval_acc_final 10    -0.0780 -0.1185 -0.0485           True
+                 connectome - mlp digits_4 eval_acc_final 10    -0.1010 -0.1340 -0.0700           True
+                 connectome - mlp digits_5 eval_acc_final 10    -0.1495 -0.2125 -0.0975           True
+                 connectome - mlp digits_9 eval_acc_final 10    -0.2405 -0.3095 -0.1765           True
+                 connectome - mlp  knob_n9 eval_acc_final 10     0.0035  0.0000  0.0105          False
+                 connectome - mlp knob_n19 eval_acc_final 10     0.0080 -0.0060  0.0260          False
+                 connectome - mlp knob_n49 eval_acc_final 10     0.0140 -0.0060  0.0355          False
+                 connectome - mlp knob_n99 eval_acc_final 10     0.0110 -0.0030  0.0260          False
+              connectome - linear digits_2 eval_acc_final 10    -0.0065 -0.0525  0.0360          False
+              connectome - linear digits_3 eval_acc_final 10    -0.0250 -0.1045  0.0345          False
+              connectome - linear digits_4 eval_acc_final 10    -0.0430 -0.1080  0.0155          False
+              connectome - linear digits_5 eval_acc_final 10    -0.0915 -0.1955 -0.0085           True
+              connectome - linear digits_9 eval_acc_final 10    -0.1880 -0.2700 -0.1095           True
+              connectome - linear  knob_n9 eval_acc_final 10     0.0065  0.0000  0.0165          False
+              connectome - linear knob_n19 eval_acc_final 10     0.0385  0.0155  0.0610           True
+              connectome - linear knob_n49 eval_acc_final 10     0.0260  0.0055  0.0470           True
+              connectome - linear knob_n99 eval_acc_final 10     0.0345  0.0110  0.0600           True
+ connectome[sleep50] - connectome digits_2 eval_acc_final 10    -0.0020 -0.0040  0.0000          False
+ connectome[sleep50] - connectome digits_3 eval_acc_final 10     0.0010 -0.0010  0.0035          False
+ connectome[sleep50] - connectome digits_4 eval_acc_final 10    -0.0025 -0.0060  0.0005          False
+ connectome[sleep50] - connectome digits_5 eval_acc_final 10    -0.0005 -0.0035  0.0025          False
+ connectome[sleep50] - connectome digits_9 eval_acc_final 10    -0.0010 -0.0055  0.0040          False
+ connectome[sleep50] - connectome  knob_n9 eval_acc_final 10     0.0000  0.0000  0.0000          False
+ connectome[sleep50] - connectome knob_n19 eval_acc_final 10     0.0000  0.0000  0.0000          False
+ connectome[sleep50] - connectome knob_n49 eval_acc_final 10     0.0000  0.0000  0.0000          False
+ connectome[sleep50] - connectome knob_n99 eval_acc_final 10     0.0000  0.0000  0.0000          False
+connectome - untrained connectome digits_2 eval_acc_final 10     0.4135  0.3660  0.4575           True
+connectome - untrained connectome digits_3 eval_acc_final 10     0.3760  0.3100  0.4245           True
+connectome - untrained connectome digits_4 eval_acc_final 10     0.3400  0.2955  0.3815           True
+connectome - untrained connectome digits_5 eval_acc_final 10     0.3165  0.2295  0.3945           True
+connectome - untrained connectome digits_9 eval_acc_final 10     0.1845  0.1155  0.2510           True
+connectome - untrained connectome  knob_n9 eval_acc_final 10     0.4775  0.4215  0.5305           True
+connectome - untrained connectome knob_n19 eval_acc_final 10     0.4885  0.4255  0.5490           True
+connectome - untrained connectome knob_n49 eval_acc_final 10     0.4730  0.4215  0.5250           True
+connectome - untrained connectome knob_n99 eval_acc_final 10     0.4755  0.4095  0.5355           True
+
+===================== gridworld =====================
+
+--- gridworld_overall_success (5 rows) ---
+      task            qlearning                  mlp           connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit]     connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs 0.990 [0.989, 0.991] 0.985 [0.983, 0.988] 0.964 [0.911, 0.991]    0.989 [0.987, 0.990]   0.990 [0.989, 0.991]    0.935 [0.882, 0.975] 0.932 [0.873, 0.975]  0.990 [0.989, 0.991]                          -    0.990 [0.989, 0.991]                            -
+ maze72_rs 0.991 [0.988, 0.992] 0.966 [0.958, 0.973] 0.829 [0.744, 0.912]    0.975 [0.970, 0.980]   0.990 [0.989, 0.991]    0.106 [0.074, 0.139] 0.099 [0.072, 0.127]  0.978 [0.974, 0.983]                          -    0.984 [0.981, 0.987]                            -
+maze113_fs 0.995 [0.995, 0.995] 0.749 [0.479, 0.949]                    -    0.991 [0.989, 0.992]   0.995 [0.994, 0.995]    0.031 [0.019, 0.041] 0.045 [0.018, 0.073]  0.976 [0.971, 0.981]                          -    0.972 [0.962, 0.982]                            -
+maze113_rs 0.994 [0.993, 0.995] 0.897 [0.729, 0.983]                    -    0.917 [0.892, 0.939]   0.730 [0.625, 0.829]    0.054 [0.043, 0.064] 0.053 [0.043, 0.061]  0.990 [0.988, 0.992]                          -    0.994 [0.992, 0.996]                            -
+maze316_rs 0.989 [0.986, 0.992] 0.071 [0.056, 0.085]                    -    0.032 [0.025, 0.040]   0.037 [0.032, 0.043]    0.018 [0.013, 0.025] 0.019 [0.013, 0.026]  0.218 [0.196, 0.240]       0.419 [0.390, 0.445]    0.518 [0.491, 0.549]         0.710 [0.685, 0.734]
+
+--- gridworld_final20 (5 rows) ---
+      task            qlearning                  mlp           connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit]     connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.955 [0.865, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]    0.920 [0.845, 0.975] 0.920 [0.840, 0.975]  1.000 [1.000, 1.000]                          -    1.000 [1.000, 1.000]                            -
+ maze72_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.805 [0.685, 0.915]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]    0.075 [0.040, 0.110] 0.065 [0.025, 0.105]  1.000 [1.000, 1.000]                          -    1.000 [1.000, 1.000]                            -
+maze113_fs 1.000 [1.000, 1.000] 0.785 [0.495, 0.990]                    -    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]    0.000 [0.000, 0.000] 0.010 [0.000, 0.025]  1.000 [1.000, 1.000]                          -    1.000 [1.000, 1.000]                            -
+maze113_rs 1.000 [1.000, 1.000] 0.920 [0.760, 1.000]                    -    0.890 [0.800, 0.965]   0.600 [0.405, 0.775]    0.025 [0.000, 0.050] 0.025 [0.000, 0.050]  1.000 [1.000, 1.000]                          -    1.000 [1.000, 1.000]                            -
+maze316_rs 0.985 [0.970, 1.000] 0.045 [0.020, 0.075]                    -    0.005 [0.000, 0.015]   0.015 [0.000, 0.035]    0.020 [0.000, 0.040] 0.020 [0.005, 0.040]  0.230 [0.150, 0.325]       0.420 [0.310, 0.530]    0.485 [0.380, 0.590]         0.765 [0.685, 0.840]
+
+--- gridworld_path_efficiency (5 rows) ---
+      task            qlearning                  mlp           connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit]     connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs 0.969 [0.967, 0.972] 0.957 [0.951, 0.963] 0.945 [0.922, 0.963]    0.962 [0.958, 0.965]   0.967 [0.965, 0.969]    0.932 [0.895, 0.956] 0.935 [0.906, 0.957]  0.958 [0.953, 0.963]                          -    0.960 [0.954, 0.965]                            -
+ maze72_rs 0.959 [0.956, 0.963] 0.919 [0.911, 0.927] 0.780 [0.647, 0.894]    0.939 [0.934, 0.943]   0.951 [0.947, 0.955]    0.510 [0.365, 0.660] 0.503 [0.367, 0.635]  0.927 [0.922, 0.932]                          -    0.941 [0.933, 0.947]                            -
+maze113_fs 0.978 [0.976, 0.979] 0.726 [0.505, 0.892]                    -    0.973 [0.971, 0.976]   0.974 [0.972, 0.977]    0.126 [0.093, 0.150] 0.126 [0.080, 0.167]  0.970 [0.968, 0.971]                          -    0.971 [0.968, 0.972]                            -
+maze113_rs 0.953 [0.951, 0.954] 0.861 [0.732, 0.929]                    -    0.872 [0.858, 0.885]   0.771 [0.717, 0.821]    0.372 [0.270, 0.480] 0.366 [0.283, 0.454]  0.919 [0.915, 0.923]                          -    0.937 [0.930, 0.942]                            -
+maze316_rs 0.937 [0.932, 0.941] 0.260 [0.210, 0.339]                    -    0.374 [0.306, 0.440]   0.341 [0.267, 0.411]    0.566 [0.475, 0.647] 0.592 [0.490, 0.708]  0.447 [0.428, 0.461]       0.433 [0.414, 0.452]    0.706 [0.689, 0.720]         0.601 [0.589, 0.614]
+
+--- gridworld_final_policy_acc (5 rows) ---
+      task            qlearning                  mlp           connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit]     connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.988 [0.976, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]    0.980 [0.968, 0.992] 0.984 [0.972, 0.996]  0.968 [0.952, 0.984]                          -    0.960 [0.948, 0.972]                            -
+ maze72_rs 1.000 [1.000, 1.000] 0.980 [0.963, 0.994] 0.973 [0.961, 0.985]    0.993 [0.987, 0.999]   0.997 [0.992, 1.000]    0.596 [0.561, 0.631] 0.573 [0.544, 0.604]  0.966 [0.952, 0.979]                          -    0.972 [0.966, 0.977]                            -
+maze113_fs 0.668 [0.665, 0.670] 0.571 [0.489, 0.637]                    -    0.638 [0.597, 0.679]   0.593 [0.571, 0.612]    0.498 [0.473, 0.524] 0.492 [0.471, 0.511]  0.620 [0.600, 0.641]                          -    0.690 [0.663, 0.719]                            -
+maze113_rs 1.000 [1.000, 1.000] 0.912 [0.782, 0.982]                    -    0.935 [0.912, 0.956]   0.838 [0.798, 0.876]    0.407 [0.379, 0.437] 0.404 [0.376, 0.429]  0.973 [0.966, 0.979]                          -    0.981 [0.971, 0.988]                            -
+maze316_rs 0.998 [0.997, 0.999] 0.284 [0.237, 0.334]                    -    0.322 [0.305, 0.341]   0.314 [0.299, 0.331]    0.291 [0.279, 0.305] 0.290 [0.277, 0.303]  0.439 [0.425, 0.454]       0.516 [0.491, 0.541]    0.649 [0.626, 0.672]         0.754 [0.728, 0.782]
+
+--- gridworld_collapse (5 rows) ---
+      task qlearning  mlp connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit] connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs      0/10 0/10       1/10                    0/10                   0/10                    0/10             1/10                  0/10                          -                    0/10                            -
+ maze72_rs      0/10 0/10       4/10                    0/10                   0/10                    4/10             4/10                  0/10                          -                    0/10                            -
+maze113_fs      0/10 0/10          -                    0/10                   0/10                    6/10             4/10                  0/10                          -                    0/10                            -
+maze113_rs      0/10 0/10          -                    2/10                   6/10                    1/10             1/10                  0/10                          -                    0/10                            -
+maze316_rs      0/10 1/10          -                    3/10                   6/10                    0/10             0/10                  7/10                       7/10                    7/10                         3/10
+
+--- gridworld_trains (5 rows) ---
+      task connectome  connectome [gate_error]  connectome [gate_rank]  connectome [gate_visit]  connectome [opt]  kc_delta [diagnostic] kc_delta [diagnostic_a0.2]  rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs     1954.5                     64.0                    65.5                   1060.0            1995.5                 1997.5                          -                   1985.0                            -
+ maze72_rs    22665.0                    247.0                   212.5                   5829.5           69404.0                 8533.5                          -                   7631.5                            -
+maze113_fs          -                    190.5                   154.0                   8706.0          139081.5                15545.5                          -                  16003.0                            -
+maze113_rs          -                   1126.5                 30063.0                  10574.0          135211.5                10424.5                          -                   9728.5                            -
+maze316_rs          -                 232897.5                249694.5                  24870.5          296327.0               249350.5                   194386.0                 165507.0                     118821.5
+
+--- gridworld_paired (58 rows) ---
+                                    comparison       task  metric  n  mean_diff  ci_lo  ci_hi  excludes_zero
+                        connectome - qlearning  maze26_rs final20 10     -0.045 -0.135  0.000          False
+                        connectome - qlearning  maze72_rs final20 10     -0.195 -0.315 -0.085           True
+                  connectome [opt] - qlearning  maze26_rs final20 10     -0.080 -0.160 -0.025           True
+                  connectome [opt] - qlearning  maze72_rs final20 10     -0.935 -0.975 -0.895           True
+                  connectome [opt] - qlearning maze113_fs final20 10     -0.990 -1.000 -0.975           True
+                  connectome [opt] - qlearning maze113_rs final20 10     -0.975 -1.000 -0.950           True
+                  connectome [opt] - qlearning maze316_rs final20 10     -0.965 -0.990 -0.940           True
+           connectome [gate_visit] - qlearning  maze26_rs final20 10     -0.080 -0.155 -0.025           True
+           connectome [gate_visit] - qlearning  maze72_rs final20 10     -0.925 -0.960 -0.890           True
+           connectome [gate_visit] - qlearning maze113_fs final20 10     -1.000 -1.000 -1.000           True
+           connectome [gate_visit] - qlearning maze113_rs final20 10     -0.975 -1.000 -0.950           True
+           connectome [gate_visit] - qlearning maze316_rs final20 10     -0.965 -0.990 -0.940           True
+           connectome [gate_error] - qlearning  maze26_rs final20 10      0.000  0.000  0.000          False
+           connectome [gate_error] - qlearning  maze72_rs final20 10      0.000  0.000  0.000          False
+           connectome [gate_error] - qlearning maze113_fs final20 10      0.000  0.000  0.000          False
+           connectome [gate_error] - qlearning maze113_rs final20 10     -0.110 -0.200 -0.035           True
+           connectome [gate_error] - qlearning maze316_rs final20 10     -0.980 -0.995 -0.965           True
+            connectome [gate_rank] - qlearning  maze26_rs final20 10      0.000  0.000  0.000          False
+            connectome [gate_rank] - qlearning  maze72_rs final20 10      0.000  0.000  0.000          False
+            connectome [gate_rank] - qlearning maze113_fs final20 10      0.000  0.000  0.000          False
+            connectome [gate_rank] - qlearning maze113_rs final20 10     -0.400 -0.595 -0.225           True
+            connectome [gate_rank] - qlearning maze316_rs final20 10     -0.970 -0.995 -0.945           True
+                               mlp - qlearning  maze26_rs final20 10      0.000  0.000  0.000          False
+                               mlp - qlearning  maze72_rs final20 10      0.000  0.000  0.000          False
+                               mlp - qlearning maze113_fs final20 10     -0.215 -0.505 -0.010           True
+                               mlp - qlearning maze113_rs final20 10     -0.080 -0.240  0.000          False
+                               mlp - qlearning maze316_rs final20 10     -0.940 -0.970 -0.910           True
+             kc_delta [diagnostic] - qlearning  maze26_rs final20 10      0.000  0.000  0.000          False
+             kc_delta [diagnostic] - qlearning  maze72_rs final20 10      0.000  0.000  0.000          False
+             kc_delta [diagnostic] - qlearning maze113_fs final20 10      0.000  0.000  0.000          False
+             kc_delta [diagnostic] - qlearning maze113_rs final20 10      0.000  0.000  0.000          False
+             kc_delta [diagnostic] - qlearning maze316_rs final20 10     -0.755 -0.845 -0.650           True
+           rand_delta [diagnostic] - qlearning  maze26_rs final20 10      0.000  0.000  0.000          False
+           rand_delta [diagnostic] - qlearning  maze72_rs final20 10      0.000  0.000  0.000          False
+           rand_delta [diagnostic] - qlearning maze113_fs final20 10      0.000  0.000  0.000          False
+           rand_delta [diagnostic] - qlearning maze113_rs final20 10      0.000  0.000  0.000          False
+           rand_delta [diagnostic] - qlearning maze316_rs final20 10     -0.500 -0.610 -0.390           True
+     connectome [gate_rank] - connectome [opt]  maze26_rs final20 10      0.080  0.025  0.160           True
+     connectome [gate_rank] - connectome [opt]  maze72_rs final20 10      0.935  0.895  0.975           True
+     connectome [gate_rank] - connectome [opt] maze113_fs final20 10      0.990  0.975  1.000           True
+     connectome [gate_rank] - connectome [opt] maze113_rs final20 10      0.575  0.385  0.750           True
+     connectome [gate_rank] - connectome [opt] maze316_rs final20 10     -0.005 -0.015  0.000          False
+ kc_delta - rand_delta (does the wiring help?)  maze26_rs final20 10      0.000  0.000  0.000          False
+ kc_delta - rand_delta (does the wiring help?)  maze72_rs final20 10      0.000  0.000  0.000          False
+ kc_delta - rand_delta (does the wiring help?) maze113_fs final20 10      0.000  0.000  0.000          False
+ kc_delta - rand_delta (does the wiring help?) maze113_rs final20 10      0.000  0.000  0.000          False
+ kc_delta - rand_delta (does the wiring help?) maze316_rs final20 10     -0.255 -0.325 -0.195           True
+    connectome [gate_error] - connectome [opt]  maze26_rs final20 10      0.080  0.025  0.160           True
+    connectome [gate_error] - connectome [opt]  maze72_rs final20 10      0.935  0.895  0.975           True
+    connectome [gate_error] - connectome [opt] maze113_fs final20 10      0.990  0.975  1.000           True
+    connectome [gate_error] - connectome [opt] maze113_rs final20 10      0.865  0.780  0.940           True
+    connectome [gate_error] - connectome [opt] maze316_rs final20 10     -0.015 -0.030 -0.005           True
+    connectome [gate_visit] - connectome [opt]  maze26_rs final20 10      0.000 -0.015  0.015          False
+    connectome [gate_visit] - connectome [opt]  maze72_rs final20 10      0.010 -0.010  0.030          False
+    connectome [gate_visit] - connectome [opt] maze113_fs final20 10     -0.010 -0.025  0.000          False
+    connectome [gate_visit] - connectome [opt] maze113_rs final20 10      0.000  0.000  0.000          False
+    connectome [gate_visit] - connectome [opt] maze316_rs final20 10      0.000 -0.015  0.015          False
+kc_delta - rand_delta, alpha 0.2 (best at 316) maze316_rs final20 10     -0.345 -0.445 -0.260           True
+
+--- gridworld_paired_overall (58 rows) ---
+                                    comparison       task          metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                        connectome - qlearning  maze26_rs overall_success 10    -0.0263 -0.0790  0.0000          False
+                        connectome - qlearning  maze72_rs overall_success 10    -0.1613 -0.2460 -0.0797           True
+                  connectome [opt] - qlearning  maze26_rs overall_success 10    -0.0583 -0.1173 -0.0160           True
+                  connectome [opt] - qlearning  maze72_rs overall_success 10    -0.8917 -0.9203 -0.8617           True
+                  connectome [opt] - qlearning maze113_fs overall_success 10    -0.9502 -0.9770 -0.9215           True
+                  connectome [opt] - qlearning maze113_rs overall_success 10    -0.9417 -0.9515 -0.9328           True
+                  connectome [opt] - qlearning maze316_rs overall_success 10    -0.9705 -0.9762 -0.9632           True
+           connectome [gate_visit] - qlearning  maze26_rs overall_success 10    -0.0557 -0.1090 -0.0160           True
+           connectome [gate_visit] - qlearning  maze72_rs overall_success 10    -0.8850 -0.9173 -0.8503           True
+           connectome [gate_visit] - qlearning maze113_fs overall_success 10    -0.9645 -0.9757 -0.9538           True
+           connectome [gate_visit] - qlearning maze113_rs overall_success 10    -0.9405 -0.9510 -0.9300           True
+           connectome [gate_visit] - qlearning maze316_rs overall_success 10    -0.9713 -0.9768 -0.9645           True
+           connectome [gate_error] - qlearning  maze26_rs overall_success 10    -0.0017 -0.0030 -0.0003           True
+           connectome [gate_error] - qlearning  maze72_rs overall_success 10    -0.0160 -0.0217 -0.0100           True
+           connectome [gate_error] - qlearning maze113_fs overall_success 10    -0.0042 -0.0057 -0.0030           True
+           connectome [gate_error] - qlearning maze113_rs overall_success 10    -0.0778 -0.1022 -0.0555           True
+           connectome [gate_error] - qlearning maze316_rs overall_success 10    -0.9568 -0.9643 -0.9493           True
+            connectome [gate_rank] - qlearning  maze26_rs overall_success 10    -0.0003 -0.0010  0.0000          False
+            connectome [gate_rank] - qlearning  maze72_rs overall_success 10    -0.0007 -0.0020  0.0007          False
+            connectome [gate_rank] - qlearning maze113_fs overall_success 10    -0.0002 -0.0007  0.0000          False
+            connectome [gate_rank] - qlearning maze113_rs overall_success 10    -0.2640 -0.3703 -0.1645           True
+            connectome [gate_rank] - qlearning maze316_rs overall_success 10    -0.9525 -0.9583 -0.9458           True
+                               mlp - qlearning  maze26_rs overall_success 10    -0.0050 -0.0080 -0.0023           True
+                               mlp - qlearning  maze72_rs overall_success 10    -0.0247 -0.0323 -0.0167           True
+                               mlp - qlearning maze113_fs overall_success 10    -0.2463 -0.5162 -0.0460           True
+                               mlp - qlearning maze113_rs overall_success 10    -0.0973 -0.2655 -0.0118           True
+                               mlp - qlearning maze316_rs overall_success 10    -0.9183 -0.9320 -0.9048           True
+             kc_delta [diagnostic] - qlearning  maze26_rs overall_success 10    -0.0003 -0.0010  0.0000          False
+             kc_delta [diagnostic] - qlearning  maze72_rs overall_success 10    -0.0123 -0.0160 -0.0090           True
+             kc_delta [diagnostic] - qlearning maze113_fs overall_success 10    -0.0192 -0.0242 -0.0142           True
+             kc_delta [diagnostic] - qlearning maze113_rs overall_success 10    -0.0038 -0.0055 -0.0020           True
+             kc_delta [diagnostic] - qlearning maze316_rs overall_success 10    -0.7717 -0.7937 -0.7482           True
+           rand_delta [diagnostic] - qlearning  maze26_rs overall_success 10    -0.0003 -0.0010  0.0000          False
+           rand_delta [diagnostic] - qlearning  maze72_rs overall_success 10    -0.0067 -0.0100 -0.0037           True
+           rand_delta [diagnostic] - qlearning maze113_fs overall_success 10    -0.0225 -0.0335 -0.0132           True
+           rand_delta [diagnostic] - qlearning maze113_rs overall_success 10    -0.0003 -0.0015  0.0012          False
+           rand_delta [diagnostic] - qlearning maze316_rs overall_success 10    -0.4712 -0.4993 -0.4400           True
+     connectome [gate_rank] - connectome [opt]  maze26_rs overall_success 10     0.0580  0.0160  0.1163           True
+     connectome [gate_rank] - connectome [opt]  maze72_rs overall_success 10     0.8910  0.8613  0.9193           True
+     connectome [gate_rank] - connectome [opt] maze113_fs overall_success 10     0.9500  0.9212  0.9765           True
+     connectome [gate_rank] - connectome [opt] maze113_rs overall_success 10     0.6777  0.5720  0.7765           True
+     connectome [gate_rank] - connectome [opt] maze316_rs overall_success 10     0.0180  0.0137  0.0220           True
+ kc_delta - rand_delta (does the wiring help?)  maze26_rs overall_success 10     0.0000 -0.0010  0.0010          False
+ kc_delta - rand_delta (does the wiring help?)  maze72_rs overall_success 10    -0.0057 -0.0100 -0.0007           True
+ kc_delta - rand_delta (does the wiring help?) maze113_fs overall_success 10     0.0032 -0.0073  0.0165          False
+ kc_delta - rand_delta (does the wiring help?) maze113_rs overall_success 10    -0.0035 -0.0050 -0.0020           True
+ kc_delta - rand_delta (does the wiring help?) maze316_rs overall_success 10    -0.3005 -0.3262 -0.2808           True
+    connectome [gate_error] - connectome [opt]  maze26_rs overall_success 10     0.0567  0.0130  0.1160           True
+    connectome [gate_error] - connectome [opt]  maze72_rs overall_success 10     0.8757  0.8477  0.9027           True
+    connectome [gate_error] - connectome [opt] maze113_fs overall_success 10     0.9460  0.9170  0.9728           True
+    connectome [gate_error] - connectome [opt] maze113_rs overall_success 10     0.8640  0.8358  0.8885           True
+    connectome [gate_error] - connectome [opt] maze316_rs overall_success 10     0.0137  0.0062  0.0222           True
+    connectome [gate_visit] - connectome [opt]  maze26_rs overall_success 10     0.0027 -0.0070  0.0163          False
+    connectome [gate_visit] - connectome [opt]  maze72_rs overall_success 10     0.0067 -0.0033  0.0173          False
+    connectome [gate_visit] - connectome [opt] maze113_fs overall_success 10    -0.0142 -0.0358  0.0058          False
+    connectome [gate_visit] - connectome [opt] maze113_rs overall_success 10     0.0012 -0.0040  0.0070          False
+    connectome [gate_visit] - connectome [opt] maze316_rs overall_success 10    -0.0008 -0.0018  0.0003          False
+kc_delta - rand_delta, alpha 0.2 (best at 316) maze316_rs overall_success 10    -0.2912 -0.3175 -0.2573           True
+
+--- gridworld_failed_final (5 rows) ---
+      task qlearning   mlp connectome connectome [gate_error] connectome [gate_rank] connectome [gate_visit] connectome [opt] kc_delta [diagnostic] kc_delta [diagnostic_a0.2] rand_delta [diagnostic] rand_delta [diagnostic_a0.2]
+ maze26_rs      0/10  0/10       0/10                    0/10                   0/10                    0/10             0/10                  0/10                          -                    0/10                            -
+ maze72_rs      0/10  0/10       1/10                    0/10                   0/10                   10/10            10/10                  0/10                          -                    0/10                            -
+maze113_fs      0/10  2/10          -                    0/10                   0/10                   10/10            10/10                  0/10                          -                    0/10                            -
+maze113_rs      0/10  1/10          -                    0/10                   3/10                   10/10            10/10                  0/10                          -                    0/10                            -
+maze316_rs      0/10 10/10          -                   10/10                  10/10                   10/10            10/10                  9/10                       7/10                    5/10                         0/10
+
+===================== tictactoe =====================
+
+--- tictactoe_rl_heuristic (9 rows) ---
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.503 [0.454, 0.545] 0.008 [0.000, 0.024] 0.766 [0.655, 0.863] 0.610 [0.586, 0.630] 0.219 [0.129, 0.315] 0.008 [0.000, 0.020]
+  connectome [gate_error] 0.507 [0.471, 0.542] 0.084 [0.016, 0.188] 0.733 [0.591, 0.875] 0.627 [0.612, 0.644] 0.181 [0.064, 0.309] 0.077 [0.011, 0.179]
+  connectome [gate_visit] 0.666 [0.638, 0.693] 0.526 [0.500, 0.553] 0.474 [0.447, 0.500] 0.618 [0.612, 0.623] 0.001 [0.000, 0.003] 0.516 [0.491, 0.546]
+         connectome [opt] 0.505 [0.424, 0.588] 0.193 [0.058, 0.350] 0.634 [0.526, 0.744] 0.592 [0.562, 0.624] 0.166 [0.065, 0.283] 0.241 [0.102, 0.395]
+connectome [opt_sleep100] 0.546 [0.474, 0.615] 0.320 [0.176, 0.461] 0.559 [0.483, 0.647] 0.595 [0.573, 0.617] 0.121 [0.037, 0.222] 0.308 [0.162, 0.454]
+                      mlp 0.391 [0.364, 0.418] 0.950 [0.898, 1.000] 0.000 [0.000, 0.000] 0.631 [0.610, 0.654] 0.035 [0.000, 0.070] 0.942 [0.902, 0.977]
+                mlp [opt] 0.465 [0.420, 0.513] 0.789 [0.639, 0.939] 0.000 [0.000, 0.000] 0.674 [0.657, 0.692] 0.207 [0.062, 0.352] 0.772 [0.627, 0.916]
+                qlearning 0.488 [0.452, 0.522] 0.949 [0.896, 1.000] 0.000 [0.000, 0.000] 0.599 [0.595, 0.602] 0.044 [0.000, 0.090] 0.935 [0.884, 0.979]
+          qlearning [opt] 0.505 [0.480, 0.531] 0.941 [0.841, 1.000] 0.000 [0.000, 0.000] 0.617 [0.613, 0.620] 0.064 [0.000, 0.160] 0.923 [0.820, 0.992]
+
+--- tictactoe_rl_random (9 rows) ---
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.388 [0.362, 0.410] 0.025 [0.009, 0.041] 0.975 [0.959, 0.991] 0.576 [0.574, 0.579] 0.351 [0.325, 0.377] 0.129 [0.109, 0.149]
+  connectome [gate_error] 0.564 [0.521, 0.605] 0.152 [0.038, 0.307] 0.848 [0.693, 0.962] 0.628 [0.616, 0.641] 0.555 [0.521, 0.591] 0.093 [0.074, 0.112]
+  connectome [gate_visit] 0.528 [0.503, 0.553] 0.066 [0.018, 0.126] 0.911 [0.855, 0.960] 0.622 [0.616, 0.628] 0.521 [0.498, 0.544] 0.101 [0.081, 0.119]
+         connectome [opt] 0.498 [0.475, 0.524] 0.065 [0.025, 0.110] 0.929 [0.887, 0.969] 0.612 [0.608, 0.617] 0.485 [0.464, 0.504] 0.104 [0.086, 0.119]
+connectome [opt_sleep100] 0.491 [0.463, 0.522] 0.063 [0.024, 0.107] 0.930 [0.890, 0.969] 0.613 [0.608, 0.618] 0.492 [0.474, 0.511] 0.112 [0.094, 0.129]
+                      mlp 0.923 [0.913, 0.934] 0.517 [0.405, 0.633] 0.483 [0.367, 0.595] 0.914 [0.910, 0.918] 0.534 [0.506, 0.562] 0.131 [0.106, 0.158]
+                mlp [opt] 0.930 [0.921, 0.939] 0.627 [0.531, 0.747] 0.372 [0.253, 0.469] 0.917 [0.909, 0.925] 0.895 [0.877, 0.912] 0.061 [0.043, 0.081]
+                qlearning 0.706 [0.677, 0.731] 0.252 [0.151, 0.354] 0.746 [0.645, 0.847] 0.726 [0.721, 0.731] 0.495 [0.457, 0.534] 0.120 [0.095, 0.148]
+          qlearning [opt] 0.928 [0.915, 0.940] 0.599 [0.411, 0.774] 0.351 [0.210, 0.489] 0.837 [0.826, 0.849] 0.894 [0.871, 0.914] 0.050 [0.039, 0.061]
+
+--- tictactoe_rl_selfplay (9 rows) ---
+                    label      eval_random_win  eval_heuristic_draw  eval_heuristic_loss         coverage_acc          last100_win         last100_draw
+               connectome 0.521 [0.477, 0.566] 0.014 [0.000, 0.029] 0.944 [0.900, 0.983] 0.622 [0.611, 0.633] 0.501 [0.315, 0.687] 0.058 [0.006, 0.156]
+  connectome [gate_error] 0.533 [0.497, 0.570] 0.164 [0.052, 0.298] 0.781 [0.634, 0.914] 0.651 [0.641, 0.660] 0.646 [0.449, 0.842] 0.004 [0.000, 0.009]
+  connectome [gate_visit] 0.535 [0.503, 0.564] 0.245 [0.132, 0.377] 0.756 [0.623, 0.868] 0.657 [0.649, 0.665] 0.493 [0.488, 0.498] 0.008 [0.003, 0.014]
+         connectome [opt] 0.536 [0.517, 0.552] 0.251 [0.128, 0.378] 0.742 [0.617, 0.855] 0.657 [0.652, 0.661] 0.498 [0.488, 0.506] 0.008 [0.002, 0.015]
+connectome [opt_sleep100] 0.612 [0.578, 0.646] 0.288 [0.147, 0.431] 0.712 [0.569, 0.854] 0.676 [0.670, 0.683] 0.495 [0.489, 0.500] 0.009 [0.005, 0.013]
+                      mlp 0.906 [0.892, 0.918] 0.564 [0.457, 0.683] 0.436 [0.317, 0.543] 0.916 [0.912, 0.921] 0.414 [0.351, 0.473] 0.195 [0.147, 0.251]
+                mlp [opt] 0.920 [0.902, 0.939] 0.816 [0.693, 0.929] 0.185 [0.071, 0.307] 0.928 [0.916, 0.938] 0.189 [0.106, 0.291] 0.621 [0.529, 0.700]
+                qlearning 0.719 [0.696, 0.742] 0.236 [0.147, 0.331] 0.759 [0.666, 0.847] 0.723 [0.720, 0.726] 0.435 [0.403, 0.470] 0.119 [0.093, 0.150]
+          qlearning [opt] 0.867 [0.844, 0.889] 0.850 [0.716, 0.966] 0.151 [0.034, 0.284] 0.854 [0.841, 0.866] 0.081 [0.024, 0.178] 0.888 [0.791, 0.949]
+
+--- tictactoe_collapse (2 rows) ---
+        task qlearning qlearning [opt]  mlp mlp [opt] connectome connectome [gate_error] connectome [gate_visit] connectome [opt] connectome [opt_sleep100]
+rl_heuristic      0/10            0/10 0/10      0/10       0/10                    1/10                    0/10             0/10                      0/10
+   rl_random      0/10            0/10 0/10      0/10       0/10                    0/10                    0/10             0/10                      0/10
+
+--- tictactoe_imitation (7 rows) ---
+                    label     coverage_acc_pre         coverage_acc
+               connectome 0.547 [0.543, 0.552] 0.545 [0.543, 0.547]
+         connectome [sym] 0.567 [0.558, 0.574] 0.576 [0.569, 0.583]
+connectome [sym_sleep500] 0.567 [0.558, 0.574] 0.577 [0.570, 0.583]
+                      mlp 0.577 [0.563, 0.590] 0.860 [0.856, 0.864]
+                mlp [sym] 0.573 [0.544, 0.602] 0.962 [0.958, 0.967]
+                qlearning 0.582 [0.580, 0.585] 0.922 [0.920, 0.924]
+          qlearning [sym] 0.582 [0.580, 0.585] 0.981 [0.979, 0.983]
+
+--- tictactoe_drift (4 rows) ---
+        task           connectome connectome [gate_error] connectome [gate_visit]     connectome [opt] connectome [opt_sleep100]     connectome [sym] connectome [sym_sleep500]
+   imitation 26.40 [26.39, 26.42]                       -                       -                    -                         - 20.52 [20.51, 20.54]      19.06 [19.05, 19.07]
+rl_heuristic 14.04 [13.82, 14.29]       3.45 [2.31, 4.57]       9.61 [9.51, 9.71] 11.01 [10.45, 11.55]         9.01 [8.57, 9.45]                    -                         -
+   rl_random 23.79 [23.70, 23.88]    14.56 [14.25, 14.90]    17.44 [17.34, 17.57] 17.87 [17.77, 17.97]      15.13 [15.03, 15.24]                    -                         -
+ rl_selfplay 21.08 [20.76, 21.40]    12.56 [12.32, 12.81]    14.76 [14.40, 15.09] 14.85 [14.57, 15.11]      12.17 [11.93, 12.40]                    -                         -
+
+--- tictactoe_paired (28 rows) ---
+                                  comparison         task       metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                     connectome - mlp (fair)    imitation coverage_acc 10    -0.3152 -0.3191 -0.3112           True
+                     connectome - mlp (fair) rl_heuristic coverage_acc 10    -0.0212 -0.0498  0.0065          False
+                     connectome - mlp (fair)    rl_random coverage_acc 10    -0.3379 -0.3422 -0.3329           True
+                     connectome - mlp (fair)  rl_selfplay coverage_acc 10    -0.2946 -0.3023 -0.2869           True
+               connectome - qlearning (fair)    imitation coverage_acc 10    -0.3767 -0.3787 -0.3745           True
+               connectome - qlearning (fair) rl_heuristic coverage_acc 10     0.0112 -0.0123  0.0317          False
+               connectome - qlearning (fair)    rl_random coverage_acc 10    -0.1497 -0.1554 -0.1436           True
+               connectome - qlearning (fair)  rl_selfplay coverage_acc 10    -0.1013 -0.1132 -0.0900           True
+                      connectome - mlp (opt) rl_heuristic coverage_acc 10    -0.0814 -0.1106 -0.0499           True
+                      connectome - mlp (opt)    rl_random coverage_acc 10    -0.3048 -0.3119 -0.2986           True
+                      connectome - mlp (opt)  rl_selfplay coverage_acc 10    -0.2706 -0.2844 -0.2559           True
+                connectome - qlearning (opt) rl_heuristic coverage_acc 10    -0.0243 -0.0542  0.0057          False
+                connectome - qlearning (opt)    rl_random coverage_acc 10    -0.2243 -0.2377 -0.2108           True
+                connectome - qlearning (opt)  rl_selfplay coverage_acc 10    -0.1966 -0.2121 -0.1826           True
+                      connectome - mlp (sym)    imitation coverage_acc 10    -0.3859 -0.3948 -0.3771           True
+                connectome - qlearning (sym)    imitation coverage_acc 10    -0.4048 -0.4118 -0.3979           True
+               connectome [opt] - connectome rl_heuristic coverage_acc 10    -0.0175 -0.0554  0.0167          False
+               connectome [opt] - connectome    rl_random coverage_acc 10     0.0361  0.0321  0.0407           True
+               connectome [opt] - connectome  rl_selfplay coverage_acc 10     0.0352  0.0266  0.0436           True
+  connectome [gate_error] - connectome [opt] rl_heuristic coverage_acc 10     0.0346  0.0021  0.0658           True
+  connectome [gate_error] - connectome [opt]    rl_random coverage_acc 10     0.0161  0.0026  0.0296           True
+  connectome [gate_error] - connectome [opt]  rl_selfplay coverage_acc 10    -0.0058 -0.0171  0.0043          False
+  connectome [gate_visit] - connectome [opt] rl_heuristic coverage_acc 10     0.0254 -0.0037  0.0546          False
+  connectome [gate_visit] - connectome [opt]    rl_random coverage_acc 10     0.0100  0.0061  0.0138           True
+  connectome [gate_visit] - connectome [opt]  rl_selfplay coverage_acc 10    -0.0002 -0.0079  0.0076          False
+connectome [opt_sleep100] - connectome [opt] rl_heuristic coverage_acc 10     0.0028 -0.0221  0.0268          False
+connectome [opt_sleep100] - connectome [opt]    rl_random coverage_acc 10     0.0004 -0.0027  0.0032          False
+connectome [opt_sleep100] - connectome [opt]  rl_selfplay coverage_acc 10     0.0194  0.0127  0.0268           True
+
+===================== addition =====================
+
+--- addition_final_acc (4 rows) ---
+            task           mlp [feat]            mlp [raw]        linear [feat]         linear [raw]           connectome connectome [gate_error] connectome_notrain [control]
+single_imitation 0.864 [0.762, 0.934] 0.535 [0.501, 0.577] 0.688 [0.649, 0.726] 0.538 [0.509, 0.573] 0.615 [0.587, 0.648]                       -                            -
+   single_online 0.953 [0.918, 0.984] 0.571 [0.475, 0.672] 0.712 [0.688, 0.738] 0.543 [0.495, 0.593] 0.616 [0.588, 0.646]    0.693 [0.661, 0.726]         0.529 [0.492, 0.572]
+   two_imitation 0.695 [0.669, 0.717] 0.524 [0.497, 0.550] 0.724 [0.697, 0.746] 0.492 [0.468, 0.512] 0.513 [0.497, 0.526]                       -                            -
+      two_online 0.722 [0.664, 0.763] 0.547 [0.522, 0.571] 0.753 [0.740, 0.765] 0.518 [0.499, 0.538] 0.514 [0.496, 0.529]    0.550 [0.526, 0.575]         0.526 [0.492, 0.559]
+
+--- addition_pre_acc (4 rows) ---
+            task           mlp [feat]            mlp [raw]        linear [feat]         linear [raw]           connectome connectome [gate_error] connectome_notrain [control]
+single_imitation 0.485 [0.473, 0.495] 0.523 [0.502, 0.546] 0.499 [0.482, 0.516] 0.499 [0.482, 0.516] 0.529 [0.492, 0.572]                       -                            -
+   single_online 0.485 [0.473, 0.495] 0.523 [0.502, 0.546] 0.499 [0.482, 0.516] 0.499 [0.482, 0.516] 0.529 [0.492, 0.572]    0.529 [0.492, 0.572]         0.529 [0.492, 0.572]
+   two_imitation 0.481 [0.457, 0.508] 0.505 [0.482, 0.525] 0.512 [0.493, 0.531] 0.512 [0.493, 0.531] 0.526 [0.492, 0.559]                       -                            -
+      two_online 0.481 [0.457, 0.508] 0.505 [0.482, 0.525] 0.512 [0.493, 0.531] 0.512 [0.493, 0.531] 0.526 [0.492, 0.559]    0.526 [0.492, 0.559]         0.526 [0.492, 0.559]
+
+--- addition_paired (20 rows) ---
+                                  comparison             task         metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                      connectome - mlp [raw] single_imitation eval_acc_final 10     0.0797  0.0217  0.1377           True
+                      connectome - mlp [raw]    single_online eval_acc_final 10     0.0447 -0.0677  0.1420          False
+                      connectome - mlp [raw]    two_imitation eval_acc_final 10    -0.0110 -0.0403  0.0203          False
+                      connectome - mlp [raw]       two_online eval_acc_final 10    -0.0323 -0.0607 -0.0023           True
+                   connectome - linear [raw] single_imitation eval_acc_final 10     0.0767  0.0340  0.1217           True
+                   connectome - linear [raw]    single_online eval_acc_final 10     0.0733  0.0127  0.1287           True
+                   connectome - linear [raw]    two_imitation eval_acc_final 10     0.0207 -0.0097  0.0497          False
+                   connectome - linear [raw]       two_online eval_acc_final 10    -0.0040 -0.0297  0.0193          False
+   connectome - mlp [feat] (oracle features) single_imitation eval_acc_final 10    -0.2490 -0.3340 -0.1427           True
+   connectome - mlp [feat] (oracle features)    single_online eval_acc_final 10    -0.3373 -0.3797 -0.2973           True
+   connectome - mlp [feat] (oracle features)    two_imitation eval_acc_final 10    -0.1817 -0.2107 -0.1507           True
+   connectome - mlp [feat] (oracle features)       two_online eval_acc_final 10    -0.2080 -0.2473 -0.1463           True
+connectome - linear [feat] (oracle features) single_imitation eval_acc_final 10    -0.0727 -0.1190 -0.0220           True
+connectome - linear [feat] (oracle features)    single_online eval_acc_final 10    -0.0957 -0.1347 -0.0507           True
+connectome - linear [feat] (oracle features)    two_imitation eval_acc_final 10    -0.2107 -0.2370 -0.1820           True
+connectome - linear [feat] (oracle features)       two_online eval_acc_final 10    -0.2383 -0.2567 -0.2207           True
+        connectome [gate_error] - connectome    single_online eval_acc_final 10     0.0770  0.0593  0.1003           True
+        connectome [gate_error] - connectome       two_online eval_acc_final 10     0.0357  0.0167  0.0543           True
+           connectome - untrained connectome    single_online eval_acc_final 10     0.0867  0.0340  0.1380           True
+           connectome - untrained connectome       two_online eval_acc_final 10    -0.0117 -0.0420  0.0203          False
+
+--- addition_kc_overlap (7 rows) ---
+ d               single                  two
+-3 0.538 [0.516, 0.567] 0.455 [0.430, 0.478]
+-2 0.649 [0.627, 0.675] 0.580 [0.552, 0.607]
+-1 0.793 [0.772, 0.813] 0.767 [0.754, 0.780]
+ 0 1.000 [1.000, 1.000] 1.000 [1.000, 1.000]
+ 1 0.817 [0.806, 0.828] 0.740 [0.716, 0.763]
+ 2 0.702 [0.684, 0.720] 0.567 [0.545, 0.592]
+ 3 0.619 [0.601, 0.638] 0.426 [0.407, 0.448]
+
+--- addition_kc_random (2 rows) ---
+  task  jaccard_random_mean
+single 0.215 [0.213, 0.217]
+   two 0.180 [0.173, 0.187]
+
+===================== tuning =====================
+
+--- tuning_grids (80 rows) ---
+experiment      agent             tier    mean  count            metric
+comparison     linear            lr0.1  0.9190     45    eval_acc_final
+comparison     linear            lr0.5  0.9436     45    eval_acc_final
+comparison     linear            lr2.0  0.9449     45    eval_acc_final
+comparison     linear            lr8.0  0.9386     45    eval_acc_final
+comparison        mlp         lr0.0003  0.8684     45    eval_acc_final
+comparison        mlp          lr0.001  0.9288     45    eval_acc_final
+comparison        mlp          lr0.003  0.9461     45    eval_acc_final
+comparison        mlp           lr0.01  0.9379     45    eval_acc_final
+comparison        mlp           lr0.03  0.9320     45    eval_acc_final
+ gridworld connectome gate_error_m0.01  0.9607     15   overall_success
+ gridworld connectome gate_error_m0.02  0.9663     15   overall_success
+ gridworld connectome gate_error_m0.05  0.9540     15   overall_success
+ gridworld connectome  gate_error_m0.2  0.9238     15   overall_success
+ gridworld connectome  gate_rank_m0.01  0.8834     15   overall_success
+ gridworld connectome  gate_rank_m0.02  0.8970     15   overall_success
+ gridworld connectome  gate_rank_m0.05  0.9522     15   overall_success
+ gridworld connectome   gate_rank_m0.2  0.9217     15   overall_success
+ gridworld   kc_delta            a0.05  0.8158     15   overall_success
+ gridworld   kc_delta             a0.1  0.8825     15   overall_success
+ gridworld   kc_delta             a0.2  0.9557     15   overall_success
+ gridworld   kc_delta             a0.5  0.9799     15   overall_success
+ gridworld   kc_delta             a1.0  0.9859     15   overall_success
+ gridworld   kc_delta             a1.5  0.2902     15   overall_success
+ gridworld        mlp          lr0.003  0.9194     15   overall_success
+ gridworld        mlp           lr0.01  0.9704     15   overall_success
+ gridworld        mlp           lr0.03  0.4993     15   overall_success
+ gridworld  qlearning            a0.05  0.9907     15   overall_success
+ gridworld  qlearning             a0.1  0.9907     15   overall_success
+ gridworld  qlearning             a0.3  0.9679     15   overall_success
+ gridworld  qlearning             a0.5  0.9238     15   overall_success
+ gridworld rand_delta            a0.05  0.7874     15   overall_success
+ gridworld rand_delta             a0.1  0.8929     15   overall_success
+ gridworld rand_delta             a0.2  0.9600     15   overall_success
+ gridworld rand_delta             a0.5  0.9842     15   overall_success
+ gridworld rand_delta             a1.0  0.9877     15   overall_success
+ gridworld rand_delta             a1.5  0.3203     15   overall_success
+ tictactoe connectome gate_error_m0.01  0.6397     10      coverage_acc
+ tictactoe connectome gate_error_m0.02  0.6286     10      coverage_acc
+ tictactoe connectome gate_error_m0.05  0.6391     10      coverage_acc
+ tictactoe connectome  gate_error_m0.2  0.6352     10      coverage_acc
+ tictactoe        mlp         lr0.0003  0.8520     20      coverage_acc
+ tictactoe        mlp          lr0.001  0.9215     20      coverage_acc
+ tictactoe        mlp          lr0.003  0.9202     20      coverage_acc
+ tictactoe        mlp           lr0.01  0.9084     20      coverage_acc
+ tictactoe  qlearning            a0.02  0.7719     20      coverage_acc
+ tictactoe  qlearning            a0.05  0.7777     20      coverage_acc
+ tictactoe  qlearning             a0.1  0.7793     20      coverage_acc
+ tictactoe  qlearning             a0.3  0.7847     20      coverage_acc
+  addition connectome gate_error_m0.01  0.6140     10    eval_acc_final
+  addition connectome gate_error_m0.02  0.6147     10    eval_acc_final
+  addition connectome gate_error_m0.05  0.6070     10    eval_acc_final
+  addition connectome  gate_error_m0.2  0.5817     10    eval_acc_final
+  addition     linear    feat_s_lr0.01  0.5183     10    eval_acc_final
+  addition     linear    feat_s_lr0.02  0.5200     10    eval_acc_final
+  addition     linear    feat_s_lr0.05  0.5330     10    eval_acc_final
+  addition     linear     feat_s_lr0.2  0.5710     10    eval_acc_final
+  addition     linear    feat_u_lr0.01  0.7137     10    eval_acc_final
+  addition     linear    feat_u_lr0.02  0.7390     10    eval_acc_final
+  addition     linear    feat_u_lr0.05  0.7457     10    eval_acc_final
+  addition     linear     feat_u_lr0.2  0.6970     10    eval_acc_final
+  addition     linear     raw_s_lr0.01  0.5003     10    eval_acc_final
+  addition     linear     raw_s_lr0.02  0.4960     10    eval_acc_final
+  addition     linear     raw_s_lr0.05  0.5030     10    eval_acc_final
+  addition     linear      raw_s_lr0.2  0.5143     10    eval_acc_final
+  addition     linear     raw_u_lr0.01  0.5420     10    eval_acc_final
+  addition     linear     raw_u_lr0.02  0.5170     10    eval_acc_final
+  addition     linear     raw_u_lr0.05  0.5287     10    eval_acc_final
+  addition     linear      raw_u_lr0.2  0.5503     10    eval_acc_final
+  addition        mlp    feat_lr0.0003  0.6100     10    eval_acc_final
+  addition        mlp     feat_lr0.001  0.7740     10    eval_acc_final
+  addition        mlp     feat_lr0.003  0.8737     10    eval_acc_final
+  addition        mlp      feat_lr0.01  0.7943     10    eval_acc_final
+  addition        mlp     raw_lr0.0003  0.5313     10    eval_acc_final
+  addition        mlp      raw_lr0.001  0.5447     10    eval_acc_final
+  addition        mlp      raw_lr0.003  0.6240     10    eval_acc_final
+  addition        mlp       raw_lr0.01  0.5143     10    eval_acc_final
+    bandit        mlp           lr0.03 14.5714     35 cum_pseudo_regret
+    bandit        mlp            lr0.1 11.5543     35 cum_pseudo_regret
+    bandit        mlp            lr0.3 14.0343     35 cum_pseudo_regret
+    bandit        mlp            lr1.0 96.4914     35 cum_pseudo_regret
+
+--- tuning_by_task (298 rows) ---
+     agent             tier             task  eval_acc_final experiment  overall_success  coverage_acc  cum_pseudo_regret
+    linear            lr0.1         digits_2          0.9270 comparison              NaN           NaN                NaN
+    linear            lr0.1         digits_3          0.8740 comparison              NaN           NaN                NaN
+    linear            lr0.1         digits_4          0.8740 comparison              NaN           NaN                NaN
+    linear            lr0.1         digits_5          0.8800 comparison              NaN           NaN                NaN
+    linear            lr0.1         digits_9          0.8710 comparison              NaN           NaN                NaN
+    linear            lr0.1         knob_n19          0.9840 comparison              NaN           NaN                NaN
+    linear            lr0.1         knob_n49          0.9450 comparison              NaN           NaN                NaN
+    linear            lr0.1          knob_n9          0.9860 comparison              NaN           NaN                NaN
+    linear            lr0.1         knob_n99          0.9300 comparison              NaN           NaN                NaN
+    linear            lr0.5         digits_2          0.9520 comparison              NaN           NaN                NaN
+    linear            lr0.5         digits_3          0.9330 comparison              NaN           NaN                NaN
+    linear            lr0.5         digits_4          0.9330 comparison              NaN           NaN                NaN
+    linear            lr0.5         digits_5          0.9210 comparison              NaN           NaN                NaN
+    linear            lr0.5         digits_9          0.8880 comparison              NaN           NaN                NaN
+    linear            lr0.5         knob_n19          0.9950 comparison              NaN           NaN                NaN
+    linear            lr0.5         knob_n49          0.9520 comparison              NaN           NaN                NaN
+    linear            lr0.5          knob_n9          0.9840 comparison              NaN           NaN                NaN
+    linear            lr0.5         knob_n99          0.9340 comparison              NaN           NaN                NaN
+    linear            lr2.0         digits_2          0.9440 comparison              NaN           NaN                NaN
+    linear            lr2.0         digits_3          0.9500 comparison              NaN           NaN                NaN
+    linear            lr2.0         digits_4          0.9510 comparison              NaN           NaN                NaN
+    linear            lr2.0         digits_5          0.9290 comparison              NaN           NaN                NaN
+    linear            lr2.0         digits_9          0.8780 comparison              NaN           NaN                NaN
+    linear            lr2.0         knob_n19          0.9890 comparison              NaN           NaN                NaN
+    linear            lr2.0         knob_n49          0.9450 comparison              NaN           NaN                NaN
+    linear            lr2.0          knob_n9          0.9840 comparison              NaN           NaN                NaN
+    linear            lr2.0         knob_n99          0.9340 comparison              NaN           NaN                NaN
+    linear            lr8.0         digits_2          0.9600 comparison              NaN           NaN                NaN
+    linear            lr8.0         digits_3          0.9200 comparison              NaN           NaN                NaN
+    linear            lr8.0         digits_4          0.9150 comparison              NaN           NaN                NaN
+    linear            lr8.0         digits_5          0.8880 comparison              NaN           NaN                NaN
+    linear            lr8.0         digits_9          0.8860 comparison              NaN           NaN                NaN
+    linear            lr8.0         knob_n19          0.9810 comparison              NaN           NaN                NaN
+    linear            lr8.0         knob_n49          0.9770 comparison              NaN           NaN                NaN
+    linear            lr8.0          knob_n9          1.0000 comparison              NaN           NaN                NaN
+    linear            lr8.0         knob_n99          0.9200 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         digits_2          0.9020 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         digits_3          0.8210 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         digits_4          0.8210 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         digits_5          0.8240 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         digits_9          0.8700 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         knob_n19          0.8860 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         knob_n49          0.8820 comparison              NaN           NaN                NaN
+       mlp         lr0.0003          knob_n9          0.9050 comparison              NaN           NaN                NaN
+       mlp         lr0.0003         knob_n99          0.9050 comparison              NaN           NaN                NaN
+       mlp          lr0.001         digits_2          0.9350 comparison              NaN           NaN                NaN
+       mlp          lr0.001         digits_3          0.8880 comparison              NaN           NaN                NaN
+       mlp          lr0.001         digits_4          0.8870 comparison              NaN           NaN                NaN
+       mlp          lr0.001         digits_5          0.8820 comparison              NaN           NaN                NaN
+       mlp          lr0.001         digits_9          0.9100 comparison              NaN           NaN                NaN
+       mlp          lr0.001         knob_n19          0.9730 comparison              NaN           NaN                NaN
+       mlp          lr0.001         knob_n49          0.9460 comparison              NaN           NaN                NaN
+       mlp          lr0.001          knob_n9          1.0000 comparison              NaN           NaN                NaN
+       mlp          lr0.001         knob_n99          0.9380 comparison              NaN           NaN                NaN
+       mlp          lr0.003         digits_2          0.9270 comparison              NaN           NaN                NaN
+       mlp          lr0.003         digits_3          0.9250 comparison              NaN           NaN                NaN
+       mlp          lr0.003         digits_4          0.9250 comparison              NaN           NaN                NaN
+       mlp          lr0.003         digits_5          0.9270 comparison              NaN           NaN                NaN
+       mlp          lr0.003         digits_9          0.9360 comparison              NaN           NaN                NaN
+       mlp          lr0.003         knob_n19          0.9870 comparison              NaN           NaN                NaN
+       mlp          lr0.003         knob_n49          0.9480 comparison              NaN           NaN                NaN
+       mlp          lr0.003          knob_n9          1.0000 comparison              NaN           NaN                NaN
+       mlp          lr0.003         knob_n99          0.9400 comparison              NaN           NaN                NaN
+       mlp           lr0.01         digits_2          0.9240 comparison              NaN           NaN                NaN
+       mlp           lr0.01         digits_3          0.9230 comparison              NaN           NaN                NaN
+       mlp           lr0.01         digits_4          0.9180 comparison              NaN           NaN                NaN
+       mlp           lr0.01         digits_5          0.9160 comparison              NaN           NaN                NaN
+       mlp           lr0.01         digits_9          0.9320 comparison              NaN           NaN                NaN
+       mlp           lr0.01         knob_n19          0.9560 comparison              NaN           NaN                NaN
+       mlp           lr0.01         knob_n49          0.9460 comparison              NaN           NaN                NaN
+       mlp           lr0.01          knob_n9          1.0000 comparison              NaN           NaN                NaN
+       mlp           lr0.01         knob_n99          0.9260 comparison              NaN           NaN                NaN
+       mlp           lr0.03         digits_2          0.9190 comparison              NaN           NaN                NaN
+       mlp           lr0.03         digits_3          0.9130 comparison              NaN           NaN                NaN
+       mlp           lr0.03         digits_4          0.9140 comparison              NaN           NaN                NaN
+       mlp           lr0.03         digits_5          0.9040 comparison              NaN           NaN                NaN
+       mlp           lr0.03         digits_9          0.9350 comparison              NaN           NaN                NaN
+       mlp           lr0.03         knob_n19          0.9610 comparison              NaN           NaN                NaN
+       mlp           lr0.03         knob_n49          0.9250 comparison              NaN           NaN                NaN
+       mlp           lr0.03          knob_n9          0.9920 comparison              NaN           NaN                NaN
+       mlp           lr0.03         knob_n99          0.9250 comparison              NaN           NaN                NaN
+connectome gate_error_m0.01       maze113_rs             NaN  gridworld           0.9360           NaN                NaN
+connectome gate_error_m0.01        maze26_rs             NaN  gridworld           0.9880           NaN                NaN
+connectome gate_error_m0.01        maze72_rs             NaN  gridworld           0.9580           NaN                NaN
+connectome gate_error_m0.02       maze113_rs             NaN  gridworld           0.9335           NaN                NaN
+connectome gate_error_m0.02        maze26_rs             NaN  gridworld           0.9880           NaN                NaN
+connectome gate_error_m0.02        maze72_rs             NaN  gridworld           0.9773           NaN                NaN
+connectome gate_error_m0.05       maze113_rs             NaN  gridworld           0.9040           NaN                NaN
+connectome gate_error_m0.05        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+connectome gate_error_m0.05        maze72_rs             NaN  gridworld           0.9693           NaN                NaN
+connectome  gate_error_m0.2       maze113_rs             NaN  gridworld           0.7940           NaN                NaN
+connectome  gate_error_m0.2        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+connectome  gate_error_m0.2        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+connectome  gate_rank_m0.01       maze113_rs             NaN  gridworld           0.6775           NaN                NaN
+connectome  gate_rank_m0.01        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+connectome  gate_rank_m0.01        maze72_rs             NaN  gridworld           0.9833           NaN                NaN
+connectome  gate_rank_m0.02       maze113_rs             NaN  gridworld           0.7130           NaN                NaN
+connectome  gate_rank_m0.02        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+connectome  gate_rank_m0.02        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+connectome  gate_rank_m0.05       maze113_rs             NaN  gridworld           0.8780           NaN                NaN
+connectome  gate_rank_m0.05        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+connectome  gate_rank_m0.05        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+connectome   gate_rank_m0.2       maze113_rs             NaN  gridworld           0.7870           NaN                NaN
+connectome   gate_rank_m0.2        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+connectome   gate_rank_m0.2        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+  kc_delta            a0.05       maze113_rs             NaN  gridworld           0.7735           NaN                NaN
+  kc_delta            a0.05        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+  kc_delta            a0.05       maze316_rs             NaN  gridworld           0.2277           NaN                NaN
+  kc_delta            a0.05        maze72_rs             NaN  gridworld           0.6853           NaN                NaN
+  kc_delta             a0.1       maze113_rs             NaN  gridworld           0.8655           NaN                NaN
+  kc_delta             a0.1        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+  kc_delta             a0.1       maze316_rs             NaN  gridworld           0.3437           NaN                NaN
+  kc_delta             a0.1        maze72_rs             NaN  gridworld           0.7927           NaN                NaN
+  kc_delta             a0.2       maze113_rs             NaN  gridworld           0.9610           NaN                NaN
+  kc_delta             a0.2        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+  kc_delta             a0.2       maze316_rs             NaN  gridworld           0.4157           NaN                NaN
+  kc_delta             a0.2        maze72_rs             NaN  gridworld           0.9167           NaN                NaN
+  kc_delta             a0.5       maze113_rs             NaN  gridworld           0.9745           NaN                NaN
+  kc_delta             a0.5        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+  kc_delta             a0.5       maze316_rs             NaN  gridworld           0.3507           NaN                NaN
+  kc_delta             a0.5        maze72_rs             NaN  gridworld           0.9767           NaN                NaN
+  kc_delta             a1.0       maze113_rs             NaN  gridworld           0.9910           NaN                NaN
+  kc_delta             a1.0        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+  kc_delta             a1.0       maze316_rs             NaN  gridworld           0.1853           NaN                NaN
+  kc_delta             a1.0        maze72_rs             NaN  gridworld           0.9780           NaN                NaN
+  kc_delta             a1.5       maze113_rs             NaN  gridworld           0.1700           NaN                NaN
+  kc_delta             a1.5        maze26_rs             NaN  gridworld           0.5667           NaN                NaN
+  kc_delta             a1.5       maze316_rs             NaN  gridworld           0.0467           NaN                NaN
+  kc_delta             a1.5        maze72_rs             NaN  gridworld           0.1340           NaN                NaN
+       mlp          lr0.003       maze113_rs             NaN  gridworld           0.9855           NaN                NaN
+       mlp          lr0.003        maze26_rs             NaN  gridworld           0.9860           NaN                NaN
+       mlp          lr0.003        maze72_rs             NaN  gridworld           0.7867           NaN                NaN
+       mlp           lr0.01       maze113_rs             NaN  gridworld           0.9540           NaN                NaN
+       mlp           lr0.01        maze26_rs             NaN  gridworld           0.9840           NaN                NaN
+       mlp           lr0.01        maze72_rs             NaN  gridworld           0.9733           NaN                NaN
+       mlp           lr0.03       maze113_rs             NaN  gridworld           0.2840           NaN                NaN
+       mlp           lr0.03        maze26_rs             NaN  gridworld           0.9747           NaN                NaN
+       mlp           lr0.03        maze72_rs             NaN  gridworld           0.2393           NaN                NaN
+ qlearning            a0.05       maze113_rs             NaN  gridworld           0.9935           NaN                NaN
+ qlearning            a0.05        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+ qlearning            a0.05        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+ qlearning             a0.1       maze113_rs             NaN  gridworld           0.9935           NaN                NaN
+ qlearning             a0.1        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+ qlearning             a0.1        maze72_rs             NaN  gridworld           0.9887           NaN                NaN
+ qlearning             a0.3       maze113_rs             NaN  gridworld           0.9690           NaN                NaN
+ qlearning             a0.3        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+ qlearning             a0.3        maze72_rs             NaN  gridworld           0.9447           NaN                NaN
+ qlearning             a0.5       maze113_rs             NaN  gridworld           0.9220           NaN                NaN
+ qlearning             a0.5        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+ qlearning             a0.5        maze72_rs             NaN  gridworld           0.8593           NaN                NaN
+rand_delta            a0.05       maze113_rs             NaN  gridworld           0.7450           NaN                NaN
+rand_delta            a0.05        maze26_rs             NaN  gridworld           0.9900           NaN                NaN
+rand_delta            a0.05       maze316_rs             NaN  gridworld           0.4567           NaN                NaN
+rand_delta            a0.05        maze72_rs             NaN  gridworld           0.6273           NaN                NaN
+rand_delta             a0.1       maze113_rs             NaN  gridworld           0.8900           NaN                NaN
+rand_delta             a0.1        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+rand_delta             a0.1       maze316_rs             NaN  gridworld           0.5527           NaN                NaN
+rand_delta             a0.1        maze72_rs             NaN  gridworld           0.7993           NaN                NaN
+rand_delta             a0.2       maze113_rs             NaN  gridworld           0.9680           NaN                NaN
+rand_delta             a0.2        maze26_rs             NaN  gridworld           0.9893           NaN                NaN
+rand_delta             a0.2       maze316_rs             NaN  gridworld           0.7307           NaN                NaN
+rand_delta             a0.2        maze72_rs             NaN  gridworld           0.9227           NaN                NaN
+rand_delta             a0.5       maze113_rs             NaN  gridworld           0.9900           NaN                NaN
+rand_delta             a0.5        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+rand_delta             a0.5       maze316_rs             NaN  gridworld           0.6457           NaN                NaN
+rand_delta             a0.5        maze72_rs             NaN  gridworld           0.9740           NaN                NaN
+rand_delta             a1.0       maze113_rs             NaN  gridworld           0.9905           NaN                NaN
+rand_delta             a1.0        maze26_rs             NaN  gridworld           0.9887           NaN                NaN
+rand_delta             a1.0       maze316_rs             NaN  gridworld           0.5473           NaN                NaN
+rand_delta             a1.0        maze72_rs             NaN  gridworld           0.9840           NaN                NaN
+rand_delta             a1.5       maze113_rs             NaN  gridworld           0.1410           NaN                NaN
+rand_delta             a1.5        maze26_rs             NaN  gridworld           0.6827           NaN                NaN
+rand_delta             a1.5       maze316_rs             NaN  gridworld           0.0583           NaN                NaN
+rand_delta             a1.5        maze72_rs             NaN  gridworld           0.1373           NaN                NaN
+connectome gate_error_m0.01    rl_random_sym             NaN  tictactoe              NaN        0.6184                NaN
+connectome gate_error_m0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.6610                NaN
+connectome gate_error_m0.02    rl_random_sym             NaN  tictactoe              NaN        0.6227                NaN
+connectome gate_error_m0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.6344                NaN
+connectome gate_error_m0.05    rl_random_sym             NaN  tictactoe              NaN        0.6392                NaN
+connectome gate_error_m0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.6390                NaN
+connectome  gate_error_m0.2    rl_random_sym             NaN  tictactoe              NaN        0.6189                NaN
+connectome  gate_error_m0.2  rl_selfplay_sym             NaN  tictactoe              NaN        0.6515                NaN
+       mlp         lr0.0003   rl_random_fair             NaN  tictactoe              NaN        0.8078                NaN
+       mlp         lr0.0003    rl_random_sym             NaN  tictactoe              NaN        0.8868                NaN
+       mlp         lr0.0003 rl_selfplay_fair             NaN  tictactoe              NaN        0.8104                NaN
+       mlp         lr0.0003  rl_selfplay_sym             NaN  tictactoe              NaN        0.9028                NaN
+       mlp          lr0.001   rl_random_fair             NaN  tictactoe              NaN        0.9157                NaN
+       mlp          lr0.001    rl_random_sym             NaN  tictactoe              NaN        0.9272                NaN
+       mlp          lr0.001 rl_selfplay_fair             NaN  tictactoe              NaN        0.9107                NaN
+       mlp          lr0.001  rl_selfplay_sym             NaN  tictactoe              NaN        0.9323                NaN
+       mlp          lr0.003   rl_random_fair             NaN  tictactoe              NaN        0.9166                NaN
+       mlp          lr0.003    rl_random_sym             NaN  tictactoe              NaN        0.9122                NaN
+       mlp          lr0.003 rl_selfplay_fair             NaN  tictactoe              NaN        0.9130                NaN
+       mlp          lr0.003  rl_selfplay_sym             NaN  tictactoe              NaN        0.9390                NaN
+       mlp           lr0.01   rl_random_fair             NaN  tictactoe              NaN        0.8954                NaN
+       mlp           lr0.01    rl_random_sym             NaN  tictactoe              NaN        0.9106                NaN
+       mlp           lr0.01 rl_selfplay_fair             NaN  tictactoe              NaN        0.8951                NaN
+       mlp           lr0.01  rl_selfplay_sym             NaN  tictactoe              NaN        0.9326                NaN
+ qlearning            a0.02   rl_random_fair             NaN  tictactoe              NaN        0.7199                NaN
+ qlearning            a0.02    rl_random_sym             NaN  tictactoe              NaN        0.8197                NaN
+ qlearning            a0.02 rl_selfplay_fair             NaN  tictactoe              NaN        0.7103                NaN
+ qlearning            a0.02  rl_selfplay_sym             NaN  tictactoe              NaN        0.8377                NaN
+ qlearning            a0.05   rl_random_fair             NaN  tictactoe              NaN        0.7266                NaN
+ qlearning            a0.05    rl_random_sym             NaN  tictactoe              NaN        0.8249                NaN
+ qlearning            a0.05 rl_selfplay_fair             NaN  tictactoe              NaN        0.7142                NaN
+ qlearning            a0.05  rl_selfplay_sym             NaN  tictactoe              NaN        0.8450                NaN
+ qlearning             a0.1   rl_random_fair             NaN  tictactoe              NaN        0.7237                NaN
+ qlearning             a0.1    rl_random_sym             NaN  tictactoe              NaN        0.8254                NaN
+ qlearning             a0.1 rl_selfplay_fair             NaN  tictactoe              NaN        0.7219                NaN
+ qlearning             a0.1  rl_selfplay_sym             NaN  tictactoe              NaN        0.8462                NaN
+ qlearning             a0.3   rl_random_fair             NaN  tictactoe              NaN        0.7254                NaN
+ qlearning             a0.3    rl_random_sym             NaN  tictactoe              NaN        0.8414                NaN
+ qlearning             a0.3 rl_selfplay_fair             NaN  tictactoe              NaN        0.7154                NaN
+ qlearning             a0.3  rl_selfplay_sym             NaN  tictactoe              NaN        0.8566                NaN
+connectome gate_error_m0.01    single_online          0.6680   addition              NaN           NaN                NaN
+connectome gate_error_m0.01       two_online          0.5600   addition              NaN           NaN                NaN
+connectome gate_error_m0.02    single_online          0.6713   addition              NaN           NaN                NaN
+connectome gate_error_m0.02       two_online          0.5580   addition              NaN           NaN                NaN
+connectome gate_error_m0.05    single_online          0.6593   addition              NaN           NaN                NaN
+connectome gate_error_m0.05       two_online          0.5547   addition              NaN           NaN                NaN
+connectome  gate_error_m0.2    single_online          0.6180   addition              NaN           NaN                NaN
+connectome  gate_error_m0.2       two_online          0.5453   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.01    single_online          0.5220   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.01       two_online          0.5147   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.02    single_online          0.5240   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.02       two_online          0.5160   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.05    single_online          0.5200   addition              NaN           NaN                NaN
+    linear    feat_s_lr0.05       two_online          0.5460   addition              NaN           NaN                NaN
+    linear     feat_s_lr0.2    single_online          0.5847   addition              NaN           NaN                NaN
+    linear     feat_s_lr0.2       two_online          0.5573   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.01    single_online          0.6553   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.01       two_online          0.7720   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.02    single_online          0.6987   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.02       two_online          0.7793   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.05    single_online          0.7060   addition              NaN           NaN                NaN
+    linear    feat_u_lr0.05       two_online          0.7853   addition              NaN           NaN                NaN
+    linear     feat_u_lr0.2    single_online          0.7147   addition              NaN           NaN                NaN
+    linear     feat_u_lr0.2       two_online          0.6793   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.01    single_online          0.4940   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.01       two_online          0.5067   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.02    single_online          0.4927   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.02       two_online          0.4993   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.05    single_online          0.4940   addition              NaN           NaN                NaN
+    linear     raw_s_lr0.05       two_online          0.5120   addition              NaN           NaN                NaN
+    linear      raw_s_lr0.2    single_online          0.5160   addition              NaN           NaN                NaN
+    linear      raw_s_lr0.2       two_online          0.5127   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.01    single_online          0.5813   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.01       two_online          0.5027   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.02    single_online          0.5387   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.02       two_online          0.4953   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.05    single_online          0.5527   addition              NaN           NaN                NaN
+    linear     raw_u_lr0.05       two_online          0.5047   addition              NaN           NaN                NaN
+    linear      raw_u_lr0.2    single_online          0.5847   addition              NaN           NaN                NaN
+    linear      raw_u_lr0.2       two_online          0.5160   addition              NaN           NaN                NaN
+       mlp    feat_lr0.0003    single_online          0.6267   addition              NaN           NaN                NaN
+       mlp    feat_lr0.0003       two_online          0.5933   addition              NaN           NaN                NaN
+       mlp     feat_lr0.001    single_online          0.8100   addition              NaN           NaN                NaN
+       mlp     feat_lr0.001       two_online          0.7380   addition              NaN           NaN                NaN
+       mlp     feat_lr0.003    single_online          0.9573   addition              NaN           NaN                NaN
+       mlp     feat_lr0.003       two_online          0.7900   addition              NaN           NaN                NaN
+       mlp      feat_lr0.01    single_online          0.9113   addition              NaN           NaN                NaN
+       mlp      feat_lr0.01       two_online          0.6773   addition              NaN           NaN                NaN
+       mlp     raw_lr0.0003    single_online          0.5313   addition              NaN           NaN                NaN
+       mlp     raw_lr0.0003       two_online          0.5313   addition              NaN           NaN                NaN
+       mlp      raw_lr0.001    single_online          0.5427   addition              NaN           NaN                NaN
+       mlp      raw_lr0.001       two_online          0.5467   addition              NaN           NaN                NaN
+       mlp      raw_lr0.003    single_online          0.7060   addition              NaN           NaN                NaN
+       mlp      raw_lr0.003       two_online          0.5420   addition              NaN           NaN                NaN
+       mlp       raw_lr0.01    single_online          0.4967   addition              NaN           NaN                NaN
+       mlp       raw_lr0.01       two_online          0.5320   addition              NaN           NaN                NaN
+       mlp           lr0.03             mp10             NaN     bandit              NaN           NaN              14.64
+       mlp           lr0.03             mp15             NaN     bandit              NaN           NaN              11.68
+       mlp           lr0.03              mp2             NaN     bandit              NaN           NaN              27.68
+       mlp           lr0.03             mp20             NaN     bandit              NaN           NaN              13.28
+       mlp           lr0.03             mp30             NaN     bandit              NaN           NaN              16.80
+       mlp           lr0.03              mp5             NaN     bandit              NaN           NaN               8.16
+       mlp           lr0.03              mp8             NaN     bandit              NaN           NaN               9.76
+       mlp            lr0.1             mp10             NaN     bandit              NaN           NaN              10.16
+       mlp            lr0.1             mp15             NaN     bandit              NaN           NaN              11.92
+       mlp            lr0.1              mp2             NaN     bandit              NaN           NaN              10.56
+       mlp            lr0.1             mp20             NaN     bandit              NaN           NaN              13.28
+       mlp            lr0.1             mp30             NaN     bandit              NaN           NaN              17.20
+       mlp            lr0.1              mp5             NaN     bandit              NaN           NaN               8.24
+       mlp            lr0.1              mp8             NaN     bandit              NaN           NaN               9.52
+       mlp            lr0.3             mp10             NaN     bandit              NaN           NaN              12.56
+       mlp            lr0.3             mp15             NaN     bandit              NaN           NaN              15.04
+       mlp            lr0.3              mp2             NaN     bandit              NaN           NaN              12.64
+       mlp            lr0.3             mp20             NaN     bandit              NaN           NaN              16.40
+       mlp            lr0.3             mp30             NaN     bandit              NaN           NaN              19.36
+       mlp            lr0.3              mp5             NaN     bandit              NaN           NaN              10.16
+       mlp            lr0.3              mp8             NaN     bandit              NaN           NaN              12.08
+       mlp            lr1.0             mp10             NaN     bandit              NaN           NaN              96.48
+       mlp            lr1.0             mp15             NaN     bandit              NaN           NaN              98.08
+       mlp            lr1.0              mp2             NaN     bandit              NaN           NaN             100.72
+       mlp            lr1.0             mp20             NaN     bandit              NaN           NaN              93.12
+       mlp            lr1.0             mp30             NaN     bandit              NaN           NaN              92.56
+       mlp            lr1.0              mp5             NaN     bandit              NaN           NaN             101.36
+       mlp            lr1.0              mp8             NaN     bandit              NaN           NaN              93.12

@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+task & qlearning & mlp & connectome \\
+\midrule
+k4\_close\_mp5 & 23.90 [14.28, 36.59] & 44.31 [35.33, 52.89] & 37.89 [19.30, 58.62] \\
+k4\_close\_mp10 & 24.76 [12.32, 38.53] & 37.55 [30.56, 43.88] & 9.94 [9.45, 10.44] \\
+k4\_close\_mp20 & 17.79 [12.93, 26.47] & 50.74 [44.05, 57.98] & 13.49 [12.27, 15.41] \\
+k4\_spread\_mp5 & 15.06 [13.62, 16.88] & 17.36 [14.22, 21.58] & 19.12 [13.52, 29.38] \\
+k4\_spread\_mp10 & 20.10 [18.96, 21.32] & 25.22 [19.10, 34.34] & 19.58 [18.78, 20.40] \\
+k4\_spread\_mp20 & 30.30 [29.28, 31.14] & 32.44 [30.16, 35.66] & 30.16 [29.22, 30.92] \\
+\bottomrule
+\end{tabular}
+\caption{4-armed bandit: cum\_pseudo\_regret by min\_pulls (mp)}
+\label{tab:bandit_multi_cum_pseudo_regret}
+\end{table}

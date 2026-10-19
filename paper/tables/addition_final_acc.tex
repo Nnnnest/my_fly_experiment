@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+task & mlp [feat] & mlp [raw] & linear [feat] & linear [raw] & connectome & connectome [gate\_error] & connectome\_notrain [control] \\
+\midrule
+single\_imitation & 0.864 [0.762, 0.934] & 0.535 [0.501, 0.577] & 0.688 [0.649, 0.726] & 0.538 [0.509, 0.573] & 0.615 [0.587, 0.648] & - & - \\
+single\_online & 0.953 [0.918, 0.984] & 0.571 [0.475, 0.672] & 0.712 [0.688, 0.738] & 0.543 [0.495, 0.593] & 0.616 [0.588, 0.646] & 0.693 [0.661, 0.726] & 0.529 [0.492, 0.572] \\
+two\_imitation & 0.695 [0.669, 0.717] & 0.524 [0.497, 0.550] & 0.724 [0.697, 0.746] & 0.492 [0.468, 0.512] & 0.513 [0.497, 0.526] & - & - \\
+two\_online & 0.722 [0.664, 0.763] & 0.547 [0.522, 0.571] & 0.753 [0.740, 0.765] & 0.518 [0.499, 0.538] & 0.514 [0.496, 0.529] & 0.550 [0.526, 0.575] & 0.526 [0.492, 0.559] \\
+\bottomrule
+\end{tabular}
+\caption{Addition: held-out accuracy after training (chance = 0.5)}
+\label{tab:addition_final_acc}
+\end{table}
