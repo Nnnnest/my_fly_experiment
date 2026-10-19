@@ -1,0 +1,8 @@
+wrote fig_bandit
+wrote fig_bandit_perm
+wrote fig_comparison
+wrote fig_wiring
+wrote fig_gridworld_scaling
+wrote fig_gridworld_curves
+wrote fig_tictactoe
+wrote fig_addition
