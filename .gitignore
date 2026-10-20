@@ -4,8 +4,8 @@ __pycache__/
 *.pyc
 *~
 notes/
-paper/
 runs/
 runs_*/
 assets/circuits/
 runs_pre_freeze/
+*.tar.gz

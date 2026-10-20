@@ -119,11 +119,11 @@ assets/       live ALPN indices (real circuit and the three shuffled circuits)
 | group | runs | code |
 |---|---|---|
 | bandit (2 arms), comparison, gridworld, tictactoe, addition, addition_diag | 1,700 | `2cfae74` (tag `v2-final`) |
-| wiring control (shuffled circuits) and first 4-arm bandit | 3 × 930 + 180 | `245dd05` (tag `v2-controls`) |
+| wiring control (shuffled circuits) and first 4-arm bandit | 3 × 920 + 180 | `245dd05` (tag `v2-controls`) |
 | arm-order control `bandit_perm` | 720 | `6d532fd` (480 runs), `5201997` (240 runs) |
 
 A full second run of all 1,700 main runs was bit-identical to the first (`analysis.compare_runs`; the only differences are
-floating-point noise up to 4e-4 in `addition_diag`). Wall-clock times of the batch runs are inflated 3–7x by
+floating-point noise up to 4e-4 in `addition_diag`). Wall-clock times of the batch runs are inflated 2–7x by
 14 parallel workers on 8 physical cores. Costs in the paper come from sequential single-thread runs (`analysis.cost`),
 and for the maze experiments from the number of `train()` calls.
 
