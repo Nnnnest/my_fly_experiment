@@ -1,0 +1,9 @@
+comparison,task,n,mean_diff,ci_lo,ci_hi,excludes_zero
+native - delta (KC code),single_online,10,-0.196,-0.22767500000000002,-0.16299999999999998,True
+native - ridge_kc_1x,single_online,10,-0.374,-0.3963333333333333,-0.3436666666666667,True
+ridge_kc_5x - native,single_online,10,0.3813333333333333,0.34800000000000003,0.40599999999999997,True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),single_online,10,0.4840000000000001,0.45866666666666667,0.513,True
+native - delta (KC code),two_online,10,-0.03799999999999999,-0.06933333333333332,-0.004999999999999993,True
+native - ridge_kc_1x,two_online,10,-0.25033333333333335,-0.27300833333333335,-0.22966666666666669,True
+ridge_kc_5x - native,two_online,10,0.29333333333333333,0.27133333333333337,0.3126666666666667,True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),two_online,10,0.28200000000000003,0.2623333333333333,0.30233333333333334,True

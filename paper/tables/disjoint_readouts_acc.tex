@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+task & acc\_untrained & acc\_native & acc\_delta & acc\_ridge\_kc\_1x & acc\_ridge\_kc\_5x & acc\_ridge\_raw\_1x & acc\_ridge\_raw\_5x \\
+\midrule
+single\_online & 0.528 [0.476, 0.572] & 0.609 [0.581, 0.644] & 0.805 [0.768, 0.842] & 0.983 [0.970, 0.993] & 0.990 [0.983, 0.996] & 0.499 [0.471, 0.523] & 0.500 [0.464, 0.530] \\
+two\_online & 0.510 [0.486, 0.531] & 0.517 [0.500, 0.534] & 0.555 [0.534, 0.576] & 0.767 [0.755, 0.780] & 0.810 [0.795, 0.822] & 0.485 [0.472, 0.498] & 0.498 [0.481, 0.518] \\
+\bottomrule
+\end{tabular}
+\caption{Readouts on identical KC codes, held-out operand pairs (mean [95\% CI], 10 seeds)}
+\label{tab:disjoint_readouts_acc}
+\end{table}

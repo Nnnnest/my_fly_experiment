@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrr}
+\toprule
+task & mlp [feat] & mlp [raw] & linear [feat] & linear [raw] & connectome & connectome [gate\_error] & connectome\_notrain [control] \\
+\midrule
+single\_online & 0.479 [0.454, 0.498] & 0.503 [0.489, 0.518] & 0.499 [0.488, 0.512] & 0.499 [0.488, 0.512] & 0.528 [0.476, 0.572] & 0.528 [0.476, 0.572] & 0.528 [0.476, 0.572] \\
+two\_online & 0.484 [0.467, 0.501] & 0.497 [0.481, 0.513] & 0.498 [0.485, 0.511] & 0.498 [0.485, 0.511] & 0.510 [0.486, 0.531] & 0.510 [0.486, 0.531] & 0.510 [0.486, 0.531] \\
+\bottomrule
+\end{tabular}
+\caption{Addition with held-out operand pairs: accuracy before training}
+\label{tab:disjoint_addition_pre_acc}
+\end{table}

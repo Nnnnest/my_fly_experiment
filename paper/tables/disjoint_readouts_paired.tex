@@ -1,0 +1,20 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+comparison & task & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+native - delta (KC code) & single\_online & 10 & -0.196 & -0.2277 & -0.163 & True \\
+native - ridge\_kc\_1x & single\_online & 10 & -0.374 & -0.3963 & -0.3437 & True \\
+ridge\_kc\_5x - native & single\_online & 10 & 0.3813 & 0.348 & 0.406 & True \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & single\_online & 10 & 0.484 & 0.4587 & 0.513 & True \\
+native - delta (KC code) & two\_online & 10 & -0.038 & -0.0693 & -0.005 & True \\
+native - ridge\_kc\_1x & two\_online & 10 & -0.2503 & -0.273 & -0.2297 & True \\
+ridge\_kc\_5x - native & two\_online & 10 & 0.2933 & 0.2713 & 0.3127 & True \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & two\_online & 10 & 0.282 & 0.2623 & 0.3023 & True \\
+\bottomrule
+\end{tabular}
+\caption{Readouts, held-out operand pairs: paired differences}
+\label{tab:disjoint_readouts_paired}
+\end{table}

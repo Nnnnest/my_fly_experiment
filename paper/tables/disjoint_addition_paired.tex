@@ -1,0 +1,24 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome - mlp [raw] & single\_online & eval\_acc\_final & 10 & 0.024 & -0.0543 & 0.1003 & False \\
+connectome - mlp [raw] & two\_online & eval\_acc\_final & 10 & -0.0367 & -0.096 & 0.017 & False \\
+connectome - linear [raw] & single\_online & eval\_acc\_final & 10 & 0.083 & 0.0247 & 0.1393 & True \\
+connectome - linear [raw] & two\_online & eval\_acc\_final & 10 & 0.0317 & 0.005 & 0.0573 & True \\
+connectome - mlp [feat] (oracle features) & single\_online & eval\_acc\_final & 10 & -0.3333 & -0.3757 & -0.2917 & True \\
+connectome - mlp [feat] (oracle features) & two\_online & eval\_acc\_final & 10 & -0.2197 & -0.2543 & -0.182 & True \\
+connectome - linear [feat] (oracle features) & single\_online & eval\_acc\_final & 10 & -0.0603 & -0.0987 & -0.013 & True \\
+connectome - linear [feat] (oracle features) & two\_online & eval\_acc\_final & 10 & -0.2307 & -0.2637 & -0.1923 & True \\
+connectome [gate\_error] - connectome & single\_online & eval\_acc\_final & 10 & 0.0507 & 0.034 & 0.0703 & True \\
+connectome [gate\_error] - connectome & two\_online & eval\_acc\_final & 10 & 0.0363 & 0.021 & 0.05 & True \\
+connectome - untrained connectome & single\_online & eval\_acc\_final & 10 & 0.0807 & 0.022 & 0.1437 & True \\
+connectome - untrained connectome & two\_online & eval\_acc\_final & 10 & 0.0067 & -0.0123 & 0.0273 & False \\
+\bottomrule
+\end{tabular}
+\caption{Addition with held-out operand pairs: paired differences in accuracy}
+\label{tab:disjoint_addition_paired}
+\end{table}

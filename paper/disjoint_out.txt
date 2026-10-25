@@ -1,0 +1,43 @@
+status: {'ok': 160} | commits: {'271247d110a8c98cec0f67ba16725a23d56ef7e7': 160} | dirty: 0
+max train/eval overlap over runs: 0
+
+--- disjoint_addition_final_acc (2 rows) ---
+         task           mlp [feat]            mlp [raw]        linear [feat]         linear [raw]           connectome connectome [gate_error] connectome_notrain [control]
+single_online 0.942 [0.903, 0.975] 0.585 [0.525, 0.647] 0.669 [0.651, 0.688] 0.526 [0.490, 0.564] 0.609 [0.581, 0.644]    0.659 [0.631, 0.696]         0.528 [0.476, 0.572]
+   two_online 0.737 [0.698, 0.772] 0.554 [0.511, 0.605] 0.748 [0.718, 0.774] 0.485 [0.473, 0.499] 0.517 [0.500, 0.534]    0.553 [0.535, 0.572]         0.510 [0.486, 0.531]
+
+--- disjoint_addition_pre_acc (2 rows) ---
+         task           mlp [feat]            mlp [raw]        linear [feat]         linear [raw]           connectome connectome [gate_error] connectome_notrain [control]
+single_online 0.479 [0.454, 0.498] 0.503 [0.489, 0.518] 0.499 [0.488, 0.512] 0.499 [0.488, 0.512] 0.528 [0.476, 0.572]    0.528 [0.476, 0.572]         0.528 [0.476, 0.572]
+   two_online 0.484 [0.467, 0.501] 0.497 [0.481, 0.513] 0.498 [0.485, 0.511] 0.498 [0.485, 0.511] 0.510 [0.486, 0.531]    0.510 [0.486, 0.531]         0.510 [0.486, 0.531]
+
+--- disjoint_addition_paired (12 rows) ---
+                                  comparison          task         metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                      connectome - mlp [raw] single_online eval_acc_final 10     0.0240 -0.0543  0.1003          False
+                      connectome - mlp [raw]    two_online eval_acc_final 10    -0.0367 -0.0960  0.0170          False
+                   connectome - linear [raw] single_online eval_acc_final 10     0.0830  0.0247  0.1393           True
+                   connectome - linear [raw]    two_online eval_acc_final 10     0.0317  0.0050  0.0573           True
+   connectome - mlp [feat] (oracle features) single_online eval_acc_final 10    -0.3333 -0.3757 -0.2917           True
+   connectome - mlp [feat] (oracle features)    two_online eval_acc_final 10    -0.2197 -0.2543 -0.1820           True
+connectome - linear [feat] (oracle features) single_online eval_acc_final 10    -0.0603 -0.0987 -0.0130           True
+connectome - linear [feat] (oracle features)    two_online eval_acc_final 10    -0.2307 -0.2637 -0.1923           True
+        connectome [gate_error] - connectome single_online eval_acc_final 10     0.0507  0.0340  0.0703           True
+        connectome [gate_error] - connectome    two_online eval_acc_final 10     0.0363  0.0210  0.0500           True
+           connectome - untrained connectome single_online eval_acc_final 10     0.0807  0.0220  0.1437           True
+           connectome - untrained connectome    two_online eval_acc_final 10     0.0067 -0.0123  0.0273          False
+
+--- disjoint_readouts_acc (2 rows) ---
+         task        acc_untrained           acc_native            acc_delta      acc_ridge_kc_1x      acc_ridge_kc_5x     acc_ridge_raw_1x     acc_ridge_raw_5x
+single_online 0.528 [0.476, 0.572] 0.609 [0.581, 0.644] 0.805 [0.768, 0.842] 0.983 [0.970, 0.993] 0.990 [0.983, 0.996] 0.499 [0.471, 0.523] 0.500 [0.464, 0.530]
+   two_online 0.510 [0.486, 0.531] 0.517 [0.500, 0.534] 0.555 [0.534, 0.576] 0.767 [0.755, 0.780] 0.810 [0.795, 0.822] 0.485 [0.472, 0.498] 0.498 [0.481, 0.518]
+
+--- disjoint_readouts_paired (8 rows) ---
+                                             comparison          task  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                               native - delta (KC code) single_online 10    -0.1960 -0.2277 -0.1630           True
+                                   native - ridge_kc_1x single_online 10    -0.3740 -0.3963 -0.3437           True
+                                   ridge_kc_5x - native single_online 10     0.3813  0.3480  0.4060           True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds) single_online 10     0.4840  0.4587  0.5130           True
+                               native - delta (KC code)    two_online 10    -0.0380 -0.0693 -0.0050           True
+                                   native - ridge_kc_1x    two_online 10    -0.2503 -0.2730 -0.2297           True
+                                   ridge_kc_5x - native    two_online 10     0.2933  0.2713  0.3127           True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds)    two_online 10     0.2820  0.2623  0.3023           True

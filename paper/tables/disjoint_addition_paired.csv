@@ -1,0 +1,13 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome - mlp [raw],single_online,eval_acc_final,10,0.024000000000000004,-0.05433333333333333,0.10034166666666655,False
+connectome - mlp [raw],two_online,eval_acc_final,10,-0.03666666666666668,-0.09600000000000002,0.017008333333333205,False
+connectome - linear [raw],single_online,eval_acc_final,10,0.083,0.024666666666666663,0.1393333333333333,True
+connectome - linear [raw],two_online,eval_acc_final,10,0.03166666666666667,0.00500000000000001,0.05733333333333333,True
+connectome - mlp [feat] (oracle features),single_online,eval_acc_final,10,-0.33333333333333337,-0.37566666666666665,-0.29166666666666663,True
+connectome - mlp [feat] (oracle features),two_online,eval_acc_final,10,-0.21966666666666668,-0.25433333333333336,-0.182,True
+connectome - linear [feat] (oracle features),single_online,eval_acc_final,10,-0.060333333333333336,-0.09866666666666667,-0.013000000000000034,True
+connectome - linear [feat] (oracle features),two_online,eval_acc_final,10,-0.23066666666666666,-0.263675,-0.19233333333333333,True
+connectome [gate_error] - connectome,single_online,eval_acc_final,10,0.05066666666666666,0.03400000000000001,0.07033333333333332,True
+connectome [gate_error] - connectome,two_online,eval_acc_final,10,0.03633333333333332,0.020999999999999998,0.05000833333333322,True
+connectome - untrained connectome,single_online,eval_acc_final,10,0.08066666666666666,0.022,0.1436666666666666,True
+connectome - untrained connectome,two_online,eval_acc_final,10,0.006666666666666665,-0.012341666666666666,0.0273333333333333,False
