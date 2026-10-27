@@ -9,7 +9,7 @@ from core import paths
 from core.config import FINAL_SEEDS
 from analysis.common import save_table
 
-EXPERIMENTS = ["bandit", "comparison", "gridworld", "tictactoe", "addition", "addition_diag"]
+EXPERIMENTS = ["bandit", "comparison", "gridworld", "tictactoe", "addition", "addition_diag", "comparison_disjoint"]
 
 
 def read_manifests(exp):
