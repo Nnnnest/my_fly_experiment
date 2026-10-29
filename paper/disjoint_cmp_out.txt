@@ -1,0 +1,72 @@
+status: {'ok': 360} | commits: {'8a59d4cab86b55d2c75212864dc3b6b144676155': 360} | dirty: 0
+max overlap with evaluation pairs: 0
+
+--- disjoint_cmp_final_acc (4 rows) ---
+    task                  mlp      mlp [fair_main]               linear   linear [fair_main]           connectome connectome [fair_main] connectome_notrain [control]           delta [kc]        ridge [kc_1x]        ridge [kc_5x]       ridge [raw_1x]       ridge [raw_5x]
+digits_2 0.968 [0.945, 0.985] 0.962 [0.946, 0.976] 0.905 [0.871, 0.935] 0.926 [0.895, 0.956] 0.919 [0.887, 0.943]   0.919 [0.888, 0.944]         0.507 [0.478, 0.537] 0.952 [0.935, 0.968] 0.985 [0.982, 0.989] 0.997 [0.995, 0.999] 0.982 [0.975, 0.989] 0.992 [0.987, 0.996]
+digits_5 0.959 [0.933, 0.980] 0.959 [0.933, 0.980] 0.901 [0.864, 0.935] 0.901 [0.864, 0.935] 0.809 [0.725, 0.875]   0.809 [0.725, 0.875]         0.493 [0.457, 0.524] 0.884 [0.854, 0.917] 0.921 [0.896, 0.941] 0.953 [0.948, 0.958] 0.960 [0.951, 0.971] 0.984 [0.979, 0.989]
+digits_9 0.935 [0.910, 0.958] 0.935 [0.910, 0.958] 0.883 [0.850, 0.920] 0.883 [0.850, 0.920] 0.695 [0.620, 0.769]   0.695 [0.620, 0.769]         0.510 [0.479, 0.541] 0.850 [0.826, 0.874] 0.897 [0.887, 0.906] 0.927 [0.914, 0.940] 0.948 [0.942, 0.954] 0.972 [0.966, 0.979]
+knob_n49 0.960 [0.942, 0.977] 0.964 [0.946, 0.981] 0.931 [0.915, 0.948] 0.952 [0.932, 0.970] 0.978 [0.972, 0.984]   0.978 [0.972, 0.983]         0.508 [0.450, 0.567] 0.991 [0.985, 0.996] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.991 [0.986, 0.996] 0.999 [0.997, 1.000]
+
+--- disjoint_cmp_paired (48 rows) ---
+                                             comparison     task         metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                                       connectome - mlp digits_2 eval_acc_final 10    -0.0495 -0.0680 -0.0305           True
+                                       connectome - mlp digits_5 eval_acc_final 10    -0.1495 -0.2125 -0.0975           True
+                                       connectome - mlp digits_9 eval_acc_final 10    -0.2405 -0.3095 -0.1765           True
+                                       connectome - mlp knob_n49 eval_acc_final 10     0.0185  0.0035  0.0335           True
+                                    connectome - linear digits_2 eval_acc_final 10     0.0135 -0.0400  0.0605          False
+                                    connectome - linear digits_5 eval_acc_final 10    -0.0915 -0.1955 -0.0085           True
+                                    connectome - linear digits_9 eval_acc_final 10    -0.1880 -0.2700 -0.1095           True
+                                    connectome - linear knob_n49 eval_acc_final 10     0.0470  0.0280  0.0650           True
+                      connectome - untrained connectome digits_2 eval_acc_final 10     0.4110  0.3605  0.4580           True
+                      connectome - untrained connectome digits_5 eval_acc_final 10     0.3165  0.2295  0.3945           True
+                      connectome - untrained connectome digits_9 eval_acc_final 10     0.1845  0.1155  0.2510           True
+                      connectome - untrained connectome knob_n49 eval_acc_final 10     0.4700  0.4105  0.5300           True
+                               native - delta (KC code) digits_2 eval_acc_final 10    -0.0335 -0.0660 -0.0045           True
+                               native - delta (KC code) digits_5 eval_acc_final 10    -0.0750 -0.1560 -0.0140           True
+                               native - delta (KC code) digits_9 eval_acc_final 10    -0.1550 -0.2310 -0.0850           True
+                               native - delta (KC code) knob_n49 eval_acc_final 10    -0.0130 -0.0200 -0.0070           True
+                                   native - ridge_kc_1x digits_2 eval_acc_final 10    -0.0670 -0.0990 -0.0410           True
+                                   native - ridge_kc_1x digits_5 eval_acc_final 10    -0.1115 -0.1745 -0.0590           True
+                                   native - ridge_kc_1x digits_9 eval_acc_final 10    -0.2020 -0.2770 -0.1295           True
+                                   native - ridge_kc_1x knob_n49 eval_acc_final 10    -0.0220 -0.0285 -0.0160           True
+                                   ridge_kc_5x - native digits_2 eval_acc_final 10     0.0785  0.0550  0.1100           True
+                                   ridge_kc_5x - native digits_5 eval_acc_final 10     0.1435  0.0790  0.2270           True
+                                   ridge_kc_5x - native digits_9 eval_acc_final 10     0.2325  0.1545  0.3110           True
+                                   ridge_kc_5x - native knob_n49 eval_acc_final 10     0.0220  0.0160  0.0285           True
+                              ridge_kc_5x - ridge_kc_1x digits_2 eval_acc_final 10     0.0115  0.0070  0.0160           True
+                              ridge_kc_5x - ridge_kc_1x digits_5 eval_acc_final 10     0.0320  0.0150  0.0530           True
+                              ridge_kc_5x - ridge_kc_1x digits_9 eval_acc_final 10     0.0305  0.0165  0.0420           True
+                              ridge_kc_5x - ridge_kc_1x knob_n49 eval_acc_final 10     0.0000  0.0000  0.0000          False
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds) digits_2 eval_acc_final 10     0.0030 -0.0055  0.0120          False
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds) digits_5 eval_acc_final 10    -0.0395 -0.0580 -0.0240           True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds) digits_9 eval_acc_final 10    -0.0515 -0.0615 -0.0415           True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds) knob_n49 eval_acc_final 10     0.0085  0.0040  0.0140           True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds) digits_2 eval_acc_final 10     0.0055  0.0000  0.0105          False
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds) digits_5 eval_acc_final 10    -0.0310 -0.0385 -0.0245           True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds) digits_9 eval_acc_final 10    -0.0450 -0.0580 -0.0315           True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds) knob_n49 eval_acc_final 10     0.0010  0.0000  0.0025          False
+                            connectome: disjoint - main digits_2 eval_acc_final 10    -0.0005 -0.0020  0.0010          False
+                            connectome: disjoint - main digits_5 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                            connectome: disjoint - main digits_9 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                            connectome: disjoint - main knob_n49 eval_acc_final 10     0.0000 -0.0030  0.0040          False
+                                   mlp: disjoint - main digits_2 eval_acc_final 10     0.0065 -0.0200  0.0315          False
+                                   mlp: disjoint - main digits_5 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                                   mlp: disjoint - main digits_9 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                                   mlp: disjoint - main knob_n49 eval_acc_final 10    -0.0045 -0.0335  0.0270          False
+                                linear: disjoint - main digits_2 eval_acc_final 10    -0.0205 -0.0610  0.0200          False
+                                linear: disjoint - main digits_5 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                                linear: disjoint - main digits_9 eval_acc_final 10     0.0000  0.0000  0.0000          False
+                                linear: disjoint - main knob_n49 eval_acc_final 10    -0.0210 -0.0435  0.0040          False
+
+mean accuracy by task (ranking check):
+lab       connectome [fair]  delta [kc]  ridge [kc_1x]  ridge [raw_1x]
+task                                                                  
+digits_2              0.919       0.952          0.986           0.982
+digits_5              0.810       0.885          0.921           0.960
+digits_9              0.695       0.850          0.897           0.948
+knob_n49              0.978       0.991          1.000           0.991
+  digits_2: connectome [fair] < delta [kc] < ridge [raw_1x] < ridge [kc_1x]
+  digits_5: connectome [fair] < delta [kc] < ridge [kc_1x] < ridge [raw_1x]
+  digits_9: connectome [fair] < delta [kc] < ridge [kc_1x] < ridge [raw_1x]
+  knob_n49: connectome [fair] < delta [kc] < ridge [raw_1x] < ridge [kc_1x]

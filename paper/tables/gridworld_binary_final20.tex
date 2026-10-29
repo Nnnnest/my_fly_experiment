@@ -1,0 +1,17 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+task & qlearning & qlearning [binary] & mlp & mlp [binary] & connectome [gate\_error] & connectome [gate\_rank] \\
+\midrule
+maze26\_rs & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] \\
+maze72\_rs & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] \\
+maze113\_fs & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 0.785 [0.495, 0.990] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] \\
+maze113\_rs & 1.000 [1.000, 1.000] & 1.000 [1.000, 1.000] & 0.920 [0.760, 1.000] & 1.000 [1.000, 1.000] & 0.890 [0.800, 0.965] & 0.600 [0.405, 0.775] \\
+maze316\_rs & 0.985 [0.970, 1.000] & 1.000 [1.000, 1.000] & 0.045 [0.020, 0.075] & 0.900 [0.700, 1.000] & 0.005 [0.000, 0.015] & 0.015 [0.000, 0.035] \\
+\bottomrule
+\end{tabular}
+\caption{Maze, baselines with shaped vs binary feedback: success in the last 20 episodes (qlearning/mlp = shaped as in the main experiment)}
+\label{tab:gridworld_binary_final20}
+\end{table}

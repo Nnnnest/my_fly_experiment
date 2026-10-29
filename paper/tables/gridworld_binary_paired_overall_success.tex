@@ -1,0 +1,42 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+qlearning [binary] - qlearning [shaped] & maze26\_rs & overall\_success & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze72\_rs & overall\_success & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze113\_fs & overall\_success & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze113\_rs & overall\_success & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze316\_rs & overall\_success & 10 & 0.0035 & 0.0008 & 0.007 & True \\
+mlp [binary] - mlp [shaped] & maze26\_rs & overall\_success & 10 & -0.003 & -0.006 & 0.0007 & False \\
+mlp [binary] - mlp [shaped] & maze72\_rs & overall\_success & 10 & 0.0147 & 0.007 & 0.0223 & True \\
+mlp [binary] - mlp [shaped] & maze113\_fs & overall\_success & 10 & 0.2395 & 0.04 & 0.508 & True \\
+mlp [binary] - mlp [shaped] & maze113\_rs & overall\_success & 10 & 0.0895 & 0.0022 & 0.2595 & True \\
+mlp [binary] - mlp [shaped] & maze316\_rs & overall\_success & 10 & 0.82 & 0.6377 & 0.9202 & True \\
+connectome [gate\_error] - qlearning [binary] & maze26\_rs & overall\_success & 10 & -0.0017 & -0.003 & -0.0003 & True \\
+connectome [gate\_error] - qlearning [binary] & maze72\_rs & overall\_success & 10 & -0.016 & -0.0217 & -0.01 & True \\
+connectome [gate\_error] - qlearning [binary] & maze113\_fs & overall\_success & 10 & -0.0042 & -0.0057 & -0.003 & True \\
+connectome [gate\_error] - qlearning [binary] & maze113\_rs & overall\_success & 10 & -0.0778 & -0.1022 & -0.0555 & True \\
+connectome [gate\_error] - qlearning [binary] & maze316\_rs & overall\_success & 10 & -0.9603 & -0.9683 & -0.9518 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze26\_rs & overall\_success & 10 & -0.0003 & -0.001 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze72\_rs & overall\_success & 10 & -0.0007 & -0.002 & 0.0007 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze113\_fs & overall\_success & 10 & -0.0002 & -0.0007 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze113\_rs & overall\_success & 10 & -0.264 & -0.3703 & -0.1645 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze316\_rs & overall\_success & 10 & -0.956 & -0.9617 & -0.9487 & True \\
+connectome [gate\_error] - mlp [binary] & maze26\_rs & overall\_success & 10 & 0.0063 & 0.003 & 0.01 & True \\
+connectome [gate\_error] - mlp [binary] & maze72\_rs & overall\_success & 10 & -0.006 & -0.0113 & -0.0003 & True \\
+connectome [gate\_error] - mlp [binary] & maze113\_fs & overall\_success & 10 & 0.0025 & -0.0007 & 0.006 & False \\
+connectome [gate\_error] - mlp [binary] & maze113\_rs & overall\_success & 10 & -0.07 & -0.0943 & -0.048 & True \\
+connectome [gate\_error] - mlp [binary] & maze316\_rs & overall\_success & 10 & -0.8585 & -0.9525 & -0.6815 & True \\
+connectome [gate\_rank] - mlp [binary] & maze26\_rs & overall\_success & 10 & 0.0077 & 0.0047 & 0.0107 & True \\
+connectome [gate\_rank] - mlp [binary] & maze72\_rs & overall\_success & 10 & 0.0093 & 0.0073 & 0.0113 & True \\
+connectome [gate\_rank] - mlp [binary] & maze113\_fs & overall\_success & 10 & 0.0065 & 0.0042 & 0.0095 & True \\
+connectome [gate\_rank] - mlp [binary] & maze113\_rs & overall\_success & 10 & -0.2562 & -0.3613 & -0.1575 & True \\
+connectome [gate\_rank] - mlp [binary] & maze316\_rs & overall\_success & 10 & -0.8542 & -0.9455 & -0.6787 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences (overall\_success) with binary-feedback baselines, matched on task and seed}
+\label{tab:gridworld_binary_paired_overall_success}
+\end{table}

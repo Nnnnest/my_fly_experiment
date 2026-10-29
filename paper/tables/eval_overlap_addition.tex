@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrr}
+\toprule
+task & n\_train & frac\_all & frac\_positives \\
+\midrule
+addition\_single & 800 & 0.673 [0.663, 0.683] & 0.982 [0.973, 0.990] \\
+addition\_single & 4000 & 0.908 [0.900, 0.915] & 1.000 [1.000, 1.000] \\
+addition\_two & 800 & 0.084 [0.075, 0.094] & 0.147 [0.131, 0.165] \\
+addition\_two & 4000 & 0.321 [0.304, 0.339] & 0.550 [0.524, 0.573] \\
+\bottomrule
+\end{tabular}
+\caption{Fraction of evaluation triples (all / positives) that also occur in the online training stream}
+\label{tab:eval_overlap_addition}
+\end{table}

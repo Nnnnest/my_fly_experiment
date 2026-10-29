@@ -1,0 +1,60 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome - mlp & digits\_2 & eval\_acc\_final & 10 & -0.0495 & -0.068 & -0.0305 & True \\
+connectome - mlp & digits\_5 & eval\_acc\_final & 10 & -0.1495 & -0.2125 & -0.0975 & True \\
+connectome - mlp & digits\_9 & eval\_acc\_final & 10 & -0.2405 & -0.3095 & -0.1765 & True \\
+connectome - mlp & knob\_n49 & eval\_acc\_final & 10 & 0.0185 & 0.0035 & 0.0335 & True \\
+connectome - linear & digits\_2 & eval\_acc\_final & 10 & 0.0135 & -0.04 & 0.0605 & False \\
+connectome - linear & digits\_5 & eval\_acc\_final & 10 & -0.0915 & -0.1955 & -0.0085 & True \\
+connectome - linear & digits\_9 & eval\_acc\_final & 10 & -0.188 & -0.27 & -0.1095 & True \\
+connectome - linear & knob\_n49 & eval\_acc\_final & 10 & 0.047 & 0.028 & 0.065 & True \\
+connectome - untrained connectome & digits\_2 & eval\_acc\_final & 10 & 0.411 & 0.3605 & 0.458 & True \\
+connectome - untrained connectome & digits\_5 & eval\_acc\_final & 10 & 0.3165 & 0.2295 & 0.3945 & True \\
+connectome - untrained connectome & digits\_9 & eval\_acc\_final & 10 & 0.1845 & 0.1155 & 0.251 & True \\
+connectome - untrained connectome & knob\_n49 & eval\_acc\_final & 10 & 0.47 & 0.4105 & 0.53 & True \\
+native - delta (KC code) & digits\_2 & eval\_acc\_final & 10 & -0.0335 & -0.066 & -0.0045 & True \\
+native - delta (KC code) & digits\_5 & eval\_acc\_final & 10 & -0.075 & -0.156 & -0.014 & True \\
+native - delta (KC code) & digits\_9 & eval\_acc\_final & 10 & -0.155 & -0.231 & -0.085 & True \\
+native - delta (KC code) & knob\_n49 & eval\_acc\_final & 10 & -0.013 & -0.02 & -0.007 & True \\
+native - ridge\_kc\_1x & digits\_2 & eval\_acc\_final & 10 & -0.067 & -0.099 & -0.041 & True \\
+native - ridge\_kc\_1x & digits\_5 & eval\_acc\_final & 10 & -0.1115 & -0.1745 & -0.059 & True \\
+native - ridge\_kc\_1x & digits\_9 & eval\_acc\_final & 10 & -0.202 & -0.277 & -0.1295 & True \\
+native - ridge\_kc\_1x & knob\_n49 & eval\_acc\_final & 10 & -0.022 & -0.0285 & -0.016 & True \\
+ridge\_kc\_5x - native & digits\_2 & eval\_acc\_final & 10 & 0.0785 & 0.055 & 0.11 & True \\
+ridge\_kc\_5x - native & digits\_5 & eval\_acc\_final & 10 & 0.1435 & 0.079 & 0.227 & True \\
+ridge\_kc\_5x - native & digits\_9 & eval\_acc\_final & 10 & 0.2325 & 0.1545 & 0.311 & True \\
+ridge\_kc\_5x - native & knob\_n49 & eval\_acc\_final & 10 & 0.022 & 0.016 & 0.0285 & True \\
+ridge\_kc\_5x - ridge\_kc\_1x & digits\_2 & eval\_acc\_final & 10 & 0.0115 & 0.007 & 0.016 & True \\
+ridge\_kc\_5x - ridge\_kc\_1x & digits\_5 & eval\_acc\_final & 10 & 0.032 & 0.015 & 0.053 & True \\
+ridge\_kc\_5x - ridge\_kc\_1x & digits\_9 & eval\_acc\_final & 10 & 0.0305 & 0.0165 & 0.042 & True \\
+ridge\_kc\_5x - ridge\_kc\_1x & knob\_n49 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & digits\_2 & eval\_acc\_final & 10 & 0.003 & -0.0055 & 0.012 & False \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & digits\_5 & eval\_acc\_final & 10 & -0.0395 & -0.058 & -0.024 & True \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & digits\_9 & eval\_acc\_final & 10 & -0.0515 & -0.0615 & -0.0415 & True \\
+ridge\_kc\_1x - ridge\_raw\_1x (what the KC expansion adds) & knob\_n49 & eval\_acc\_final & 10 & 0.0085 & 0.004 & 0.014 & True \\
+ridge\_kc\_5x - ridge\_raw\_5x (what the KC expansion adds) & digits\_2 & eval\_acc\_final & 10 & 0.0055 & 0.0 & 0.0105 & False \\
+ridge\_kc\_5x - ridge\_raw\_5x (what the KC expansion adds) & digits\_5 & eval\_acc\_final & 10 & -0.031 & -0.0385 & -0.0245 & True \\
+ridge\_kc\_5x - ridge\_raw\_5x (what the KC expansion adds) & digits\_9 & eval\_acc\_final & 10 & -0.045 & -0.058 & -0.0315 & True \\
+ridge\_kc\_5x - ridge\_raw\_5x (what the KC expansion adds) & knob\_n49 & eval\_acc\_final & 10 & 0.001 & 0.0 & 0.0025 & False \\
+connectome: disjoint - main & digits\_2 & eval\_acc\_final & 10 & -0.0005 & -0.002 & 0.001 & False \\
+connectome: disjoint - main & digits\_5 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome: disjoint - main & digits\_9 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome: disjoint - main & knob\_n49 & eval\_acc\_final & 10 & 0.0 & -0.003 & 0.004 & False \\
+mlp: disjoint - main & digits\_2 & eval\_acc\_final & 10 & 0.0065 & -0.02 & 0.0315 & False \\
+mlp: disjoint - main & digits\_5 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp: disjoint - main & digits\_9 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp: disjoint - main & knob\_n49 & eval\_acc\_final & 10 & -0.0045 & -0.0335 & 0.027 & False \\
+linear: disjoint - main & digits\_2 & eval\_acc\_final & 10 & -0.0205 & -0.061 & 0.02 & False \\
+linear: disjoint - main & digits\_5 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+linear: disjoint - main & digits\_9 & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+linear: disjoint - main & knob\_n49 & eval\_acc\_final & 10 & -0.021 & -0.0435 & 0.004 & False \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences in evaluation accuracy, disjoint evaluation (matched on task and seed)}
+\label{tab:disjoint_cmp_paired}
+\end{table}

@@ -1,0 +1,49 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome - mlp,digits_2,eval_acc_final,10,-0.04949999999999997,-0.06799999999999996,-0.03049999999999997,True
+connectome - mlp,digits_5,eval_acc_final,10,-0.14950000000000002,-0.2125,-0.09749999999999999,True
+connectome - mlp,digits_9,eval_acc_final,10,-0.2405,-0.3095,-0.17650000000000002,True
+connectome - mlp,knob_n49,eval_acc_final,10,0.018499999999999982,0.003499999999999981,0.03349999999999996,True
+connectome - linear,digits_2,eval_acc_final,10,0.013500000000000012,-0.039999999999999945,0.0605,False
+connectome - linear,digits_5,eval_acc_final,10,-0.0915,-0.1955,-0.008500000000000008,True
+connectome - linear,digits_9,eval_acc_final,10,-0.188,-0.2699999999999999,-0.10947500000000034,True
+connectome - linear,knob_n49,eval_acc_final,10,0.04699999999999997,0.02799999999999999,0.06499999999999997,True
+connectome - untrained connectome,digits_2,eval_acc_final,10,0.41100000000000003,0.3605,0.458,True
+connectome - untrained connectome,digits_5,eval_acc_final,10,0.31649999999999995,0.22949999999999998,0.3945,True
+connectome - untrained connectome,digits_9,eval_acc_final,10,0.18449999999999997,0.11549999999999998,0.251,True
+connectome - untrained connectome,knob_n49,eval_acc_final,10,0.4699999999999999,0.41050000000000003,0.53,True
+native - delta (KC code),digits_2,eval_acc_final,10,-0.033499999999999974,-0.06599999999999995,-0.004499999999999993,True
+native - delta (KC code),digits_5,eval_acc_final,10,-0.07499999999999998,-0.15599999999999997,-0.01398750000000015,True
+native - delta (KC code),digits_9,eval_acc_final,10,-0.15499999999999997,-0.23099999999999996,-0.08499999999999999,True
+native - delta (KC code),knob_n49,eval_acc_final,10,-0.013000000000000012,-0.020000000000000018,-0.007000000000000006,True
+native - ridge_kc_1x,digits_2,eval_acc_final,10,-0.06699999999999998,-0.09899999999999995,-0.04099999999999996,True
+native - ridge_kc_1x,digits_5,eval_acc_final,10,-0.1115,-0.17450000000000004,-0.059,True
+native - ridge_kc_1x,digits_9,eval_acc_final,10,-0.202,-0.277,-0.12950000000000003,True
+native - ridge_kc_1x,knob_n49,eval_acc_final,10,-0.02200000000000002,-0.028500000000000025,-0.016000000000000014,True
+ridge_kc_5x - native,digits_2,eval_acc_final,10,0.07849999999999999,0.05499999999999998,0.10999999999999996,True
+ridge_kc_5x - native,digits_5,eval_acc_final,10,0.14349999999999996,0.07899999999999996,0.22699999999999995,True
+ridge_kc_5x - native,digits_9,eval_acc_final,10,0.23249999999999998,0.1545,0.311,True
+ridge_kc_5x - native,knob_n49,eval_acc_final,10,0.02200000000000002,0.016000000000000014,0.028500000000000025,True
+ridge_kc_5x - ridge_kc_1x,digits_2,eval_acc_final,10,0.01150000000000001,0.007000000000000006,0.016000000000000014,True
+ridge_kc_5x - ridge_kc_1x,digits_5,eval_acc_final,10,0.03199999999999996,0.014999999999999968,0.05299999999999996,True
+ridge_kc_5x - ridge_kc_1x,digits_9,eval_acc_final,10,0.030499999999999982,0.01649999999999998,0.04199999999999997,True
+ridge_kc_5x - ridge_kc_1x,knob_n49,eval_acc_final,10,0.0,0.0,0.0,False
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),digits_2,eval_acc_final,10,0.0030000000000000027,-0.005500000000000005,0.012012499999999829,False
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),digits_5,eval_acc_final,10,-0.03949999999999998,-0.05801249999999998,-0.023999999999999987,True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),digits_9,eval_acc_final,10,-0.05149999999999995,-0.06149999999999996,-0.04149999999999994,True
+ridge_kc_1x - ridge_raw_1x (what the KC expansion adds),knob_n49,eval_acc_final,10,0.008500000000000008,0.0040000000000000036,0.014000000000000012,True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds),digits_2,eval_acc_final,10,0.005500000000000005,0.0,0.01050000000000001,False
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds),digits_5,eval_acc_final,10,-0.031000000000000028,-0.038500000000000034,-0.024500000000000022,True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds),digits_9,eval_acc_final,10,-0.04499999999999997,-0.05799999999999996,-0.03149999999999997,True
+ridge_kc_5x - ridge_raw_5x (what the KC expansion adds),knob_n49,eval_acc_final,10,0.0010000000000000009,0.0,0.0025000000000000022,False
+connectome: disjoint - main,digits_2,eval_acc_final,10,-0.0005000000000000004,-0.0020000000000000018,0.0010000000000000009,False
+connectome: disjoint - main,digits_5,eval_acc_final,10,0.0,0.0,0.0,False
+connectome: disjoint - main,digits_9,eval_acc_final,10,0.0,0.0,0.0,False
+connectome: disjoint - main,knob_n49,eval_acc_final,10,0.0,-0.0030000000000000027,0.0040000000000000036,False
+mlp: disjoint - main,digits_2,eval_acc_final,10,0.0064999999999999945,-0.019999999999999997,0.03150000000000001,False
+mlp: disjoint - main,digits_5,eval_acc_final,10,0.0,0.0,0.0,False
+mlp: disjoint - main,digits_9,eval_acc_final,10,0.0,0.0,0.0,False
+mlp: disjoint - main,knob_n49,eval_acc_final,10,-0.004500000000000004,-0.03350000000000001,0.027000000000000003,False
+linear: disjoint - main,digits_2,eval_acc_final,10,-0.020499999999999984,-0.06101249999999998,0.020000000000000018,False
+linear: disjoint - main,digits_5,eval_acc_final,10,0.0,0.0,0.0,False
+linear: disjoint - main,digits_9,eval_acc_final,10,0.0,0.0,0.0,False
+linear: disjoint - main,knob_n49,eval_acc_final,10,-0.020999999999999984,-0.04349999999999997,0.003999999999999992,False

@@ -1,0 +1,42 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+qlearning [binary] - qlearning [shaped] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze113\_fs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze113\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze316\_rs & final20 & 10 & 0.015 & 0.0 & 0.03 & False \\
+mlp [binary] - mlp [shaped] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp [binary] - mlp [shaped] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp [binary] - mlp [shaped] & maze113\_fs & final20 & 10 & 0.215 & 0.01 & 0.505 & True \\
+mlp [binary] - mlp [shaped] & maze113\_rs & final20 & 10 & 0.08 & 0.0 & 0.24 & False \\
+mlp [binary] - mlp [shaped] & maze316\_rs & final20 & 10 & 0.855 & 0.655 & 0.97 & True \\
+connectome [gate\_error] - qlearning [binary] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - qlearning [binary] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - qlearning [binary] & maze113\_fs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - qlearning [binary] & maze113\_rs & final20 & 10 & -0.11 & -0.2 & -0.035 & True \\
+connectome [gate\_error] - qlearning [binary] & maze316\_rs & final20 & 10 & -0.995 & -1.0 & -0.985 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze113\_fs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze113\_rs & final20 & 10 & -0.4 & -0.595 & -0.225 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze316\_rs & final20 & 10 & -0.985 & -1.0 & -0.9649 & True \\
+connectome [gate\_error] - mlp [binary] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - mlp [binary] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - mlp [binary] & maze113\_fs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - mlp [binary] & maze113\_rs & final20 & 10 & -0.11 & -0.2 & -0.035 & True \\
+connectome [gate\_error] - mlp [binary] & maze316\_rs & final20 & 10 & -0.895 & -1.0 & -0.695 & True \\
+connectome [gate\_rank] - mlp [binary] & maze26\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - mlp [binary] & maze72\_rs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - mlp [binary] & maze113\_fs & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - mlp [binary] & maze113\_rs & final20 & 10 & -0.4 & -0.595 & -0.225 & True \\
+connectome [gate\_rank] - mlp [binary] & maze316\_rs & final20 & 10 & -0.885 & -1.0 & -0.68 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences (final20) with binary-feedback baselines, matched on task and seed}
+\label{tab:gridworld_binary_paired_final20}
+\end{table}

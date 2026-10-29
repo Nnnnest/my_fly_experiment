@@ -1,0 +1,91 @@
+status: {'ok': 100} | commits: {'8a59d4cab86b55d2c75212864dc3b6b144676155': 100} | dirty: 100
+
+--- gridworld_binary_overall_success (5 rows) ---
+      task            qlearning   qlearning [binary]                  mlp         mlp [binary] connectome [gate_error] connectome [gate_rank]
+ maze26_rs 0.990 [0.989, 0.991] 0.990 [0.989, 0.991] 0.985 [0.983, 0.988] 0.982 [0.979, 0.985]    0.989 [0.987, 0.990]   0.990 [0.989, 0.991]
+ maze72_rs 0.991 [0.988, 0.992] 0.991 [0.988, 0.992] 0.966 [0.958, 0.973] 0.981 [0.978, 0.983]    0.975 [0.970, 0.980]   0.990 [0.989, 0.991]
+maze113_fs 0.995 [0.995, 0.995] 0.995 [0.995, 0.995] 0.749 [0.479, 0.949] 0.988 [0.985, 0.990]    0.991 [0.989, 0.992]   0.995 [0.994, 0.995]
+maze113_rs 0.994 [0.993, 0.995] 0.994 [0.993, 0.995] 0.897 [0.729, 0.983] 0.987 [0.985, 0.988]    0.917 [0.892, 0.939]   0.730 [0.625, 0.829]
+maze316_rs 0.989 [0.986, 0.992] 0.993 [0.992, 0.994] 0.071 [0.056, 0.085] 0.891 [0.716, 0.980]    0.032 [0.025, 0.040]   0.037 [0.032, 0.043]
+
+--- gridworld_binary_final20 (5 rows) ---
+      task            qlearning   qlearning [binary]                  mlp         mlp [binary] connectome [gate_error] connectome [gate_rank]
+ maze26_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]
+ maze72_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]
+maze113_fs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.785 [0.495, 0.990] 1.000 [1.000, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]
+maze113_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.920 [0.760, 1.000] 1.000 [1.000, 1.000]    0.890 [0.800, 0.965]   0.600 [0.405, 0.775]
+maze316_rs 0.985 [0.970, 1.000] 1.000 [1.000, 1.000] 0.045 [0.020, 0.075] 0.900 [0.700, 1.000]    0.005 [0.000, 0.015]   0.015 [0.000, 0.035]
+
+--- gridworld_binary_final_policy_acc (5 rows) ---
+      task            qlearning   qlearning [binary]                  mlp         mlp [binary] connectome [gate_error] connectome [gate_rank]
+ maze26_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.992 [0.980, 1.000]    1.000 [1.000, 1.000]   1.000 [1.000, 1.000]
+ maze72_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.980 [0.963, 0.994] 0.997 [0.993, 1.000]    0.993 [0.987, 0.999]   0.997 [0.992, 1.000]
+maze113_fs 0.668 [0.665, 0.670] 0.668 [0.665, 0.670] 0.571 [0.489, 0.637] 0.715 [0.666, 0.763]    0.638 [0.597, 0.679]   0.593 [0.571, 0.612]
+maze113_rs 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.912 [0.782, 0.982] 0.999 [0.997, 1.000]    0.935 [0.912, 0.956]   0.838 [0.798, 0.876]
+maze316_rs 0.998 [0.997, 0.999] 1.000 [1.000, 1.000] 0.284 [0.237, 0.334] 0.882 [0.722, 0.970]    0.322 [0.305, 0.341]   0.314 [0.299, 0.331]
+
+--- gridworld_binary_paired_overall_success (30 rows) ---
+                                  comparison       task          metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+     qlearning [binary] - qlearning [shaped]  maze26_rs overall_success 10     0.0000  0.0000  0.0000          False
+     qlearning [binary] - qlearning [shaped]  maze72_rs overall_success 10     0.0000  0.0000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze113_fs overall_success 10     0.0000  0.0000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze113_rs overall_success 10     0.0000  0.0000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze316_rs overall_success 10     0.0035  0.0008  0.0070           True
+                 mlp [binary] - mlp [shaped]  maze26_rs overall_success 10    -0.0030 -0.0060  0.0007          False
+                 mlp [binary] - mlp [shaped]  maze72_rs overall_success 10     0.0147  0.0070  0.0223           True
+                 mlp [binary] - mlp [shaped] maze113_fs overall_success 10     0.2395  0.0400  0.5080           True
+                 mlp [binary] - mlp [shaped] maze113_rs overall_success 10     0.0895  0.0022  0.2595           True
+                 mlp [binary] - mlp [shaped] maze316_rs overall_success 10     0.8200  0.6377  0.9202           True
+connectome [gate_error] - qlearning [binary]  maze26_rs overall_success 10    -0.0017 -0.0030 -0.0003           True
+connectome [gate_error] - qlearning [binary]  maze72_rs overall_success 10    -0.0160 -0.0217 -0.0100           True
+connectome [gate_error] - qlearning [binary] maze113_fs overall_success 10    -0.0042 -0.0057 -0.0030           True
+connectome [gate_error] - qlearning [binary] maze113_rs overall_success 10    -0.0778 -0.1022 -0.0555           True
+connectome [gate_error] - qlearning [binary] maze316_rs overall_success 10    -0.9603 -0.9683 -0.9518           True
+ connectome [gate_rank] - qlearning [binary]  maze26_rs overall_success 10    -0.0003 -0.0010  0.0000          False
+ connectome [gate_rank] - qlearning [binary]  maze72_rs overall_success 10    -0.0007 -0.0020  0.0007          False
+ connectome [gate_rank] - qlearning [binary] maze113_fs overall_success 10    -0.0002 -0.0007  0.0000          False
+ connectome [gate_rank] - qlearning [binary] maze113_rs overall_success 10    -0.2640 -0.3703 -0.1645           True
+ connectome [gate_rank] - qlearning [binary] maze316_rs overall_success 10    -0.9560 -0.9617 -0.9487           True
+      connectome [gate_error] - mlp [binary]  maze26_rs overall_success 10     0.0063  0.0030  0.0100           True
+      connectome [gate_error] - mlp [binary]  maze72_rs overall_success 10    -0.0060 -0.0113 -0.0003           True
+      connectome [gate_error] - mlp [binary] maze113_fs overall_success 10     0.0025 -0.0007  0.0060          False
+      connectome [gate_error] - mlp [binary] maze113_rs overall_success 10    -0.0700 -0.0943 -0.0480           True
+      connectome [gate_error] - mlp [binary] maze316_rs overall_success 10    -0.8585 -0.9525 -0.6815           True
+       connectome [gate_rank] - mlp [binary]  maze26_rs overall_success 10     0.0077  0.0047  0.0107           True
+       connectome [gate_rank] - mlp [binary]  maze72_rs overall_success 10     0.0093  0.0073  0.0113           True
+       connectome [gate_rank] - mlp [binary] maze113_fs overall_success 10     0.0065  0.0042  0.0095           True
+       connectome [gate_rank] - mlp [binary] maze113_rs overall_success 10    -0.2562 -0.3613 -0.1575           True
+       connectome [gate_rank] - mlp [binary] maze316_rs overall_success 10    -0.8542 -0.9455 -0.6787           True
+
+--- gridworld_binary_paired_final20 (30 rows) ---
+                                  comparison       task  metric  n  mean_diff  ci_lo   ci_hi  excludes_zero
+     qlearning [binary] - qlearning [shaped]  maze26_rs final20 10      0.000  0.000  0.0000          False
+     qlearning [binary] - qlearning [shaped]  maze72_rs final20 10      0.000  0.000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze113_fs final20 10      0.000  0.000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze113_rs final20 10      0.000  0.000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze316_rs final20 10      0.015  0.000  0.0300          False
+                 mlp [binary] - mlp [shaped]  maze26_rs final20 10      0.000  0.000  0.0000          False
+                 mlp [binary] - mlp [shaped]  maze72_rs final20 10      0.000  0.000  0.0000          False
+                 mlp [binary] - mlp [shaped] maze113_fs final20 10      0.215  0.010  0.5050           True
+                 mlp [binary] - mlp [shaped] maze113_rs final20 10      0.080  0.000  0.2400          False
+                 mlp [binary] - mlp [shaped] maze316_rs final20 10      0.855  0.655  0.9700           True
+connectome [gate_error] - qlearning [binary]  maze26_rs final20 10      0.000  0.000  0.0000          False
+connectome [gate_error] - qlearning [binary]  maze72_rs final20 10      0.000  0.000  0.0000          False
+connectome [gate_error] - qlearning [binary] maze113_fs final20 10      0.000  0.000  0.0000          False
+connectome [gate_error] - qlearning [binary] maze113_rs final20 10     -0.110 -0.200 -0.0350           True
+connectome [gate_error] - qlearning [binary] maze316_rs final20 10     -0.995 -1.000 -0.9850           True
+ connectome [gate_rank] - qlearning [binary]  maze26_rs final20 10      0.000  0.000  0.0000          False
+ connectome [gate_rank] - qlearning [binary]  maze72_rs final20 10      0.000  0.000  0.0000          False
+ connectome [gate_rank] - qlearning [binary] maze113_fs final20 10      0.000  0.000  0.0000          False
+ connectome [gate_rank] - qlearning [binary] maze113_rs final20 10     -0.400 -0.595 -0.2250           True
+ connectome [gate_rank] - qlearning [binary] maze316_rs final20 10     -0.985 -1.000 -0.9649           True
+      connectome [gate_error] - mlp [binary]  maze26_rs final20 10      0.000  0.000  0.0000          False
+      connectome [gate_error] - mlp [binary]  maze72_rs final20 10      0.000  0.000  0.0000          False
+      connectome [gate_error] - mlp [binary] maze113_fs final20 10      0.000  0.000  0.0000          False
+      connectome [gate_error] - mlp [binary] maze113_rs final20 10     -0.110 -0.200 -0.0350           True
+      connectome [gate_error] - mlp [binary] maze316_rs final20 10     -0.895 -1.000 -0.6950           True
+       connectome [gate_rank] - mlp [binary]  maze26_rs final20 10      0.000  0.000  0.0000          False
+       connectome [gate_rank] - mlp [binary]  maze72_rs final20 10      0.000  0.000  0.0000          False
+       connectome [gate_rank] - mlp [binary] maze113_fs final20 10      0.000  0.000  0.0000          False
+       connectome [gate_rank] - mlp [binary] maze113_rs final20 10     -0.400 -0.595 -0.2250           True
+       connectome [gate_rank] - mlp [binary] maze316_rs final20 10     -0.885 -1.000 -0.6800           True
