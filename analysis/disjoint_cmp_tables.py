@@ -1,10 +1,31 @@
 """python -m analysis.disjoint_cmp_tables
-Tables for the disjoint-evaluation number-comparison experiment (runs/comparison_disjoint), including pairing
-with the main comparison runs (same seeds, same evaluation pairs)."""
+Tables for the disjoint-evaluation number-comparison experiment (runs/comparison_disjoint), paired with the main
+comparison runs (same seeds, same evaluation pairs), plus a reproduction check against runs/readouts."""
 import pandas as pd
 
+from core.load import load_summaries
 from analysis.common import load, add_label, cells, wide, paired_table, save_table
 from analysis.validate import read_manifests
+
+# (agent, tier) in comparison_disjoint  ->  key in runs/readouts summaries
+READOUT_KEYS = {("delta", "kc"): "acc_delta",
+                ("ridge", "kc_1x"): "acc_ridge_kc_1x", ("ridge", "kc_5x"): "acc_ridge_kc_5x",
+                ("ridge", "raw_1x"): "acc_ridge_raw_1x", ("ridge", "raw_5x"): "acc_ridge_raw_5x"}
+
+
+def reproduction_check(d):
+    """Where no evaluation pair is rejected from the training stream (digits_5, digits_9), the readouts of the disjoint
+    experiment must equal those of the 'readouts' experiment exactly."""
+    old = load_summaries("readouts")
+    old = old[old.status == "ok"].copy()
+    print("\nreproduction check against runs/readouts (digits_5, digits_9: max |difference| must be 0)")
+    for task in ("digits_5", "digits_9"):
+        o = old[old.task == "cmp_" + task].set_index("seed")
+        for (agent, tier), key in READOUT_KEYS.items():
+            n = d[(d.task == task) & (d.agent == agent) & (d.tier == tier)].set_index("seed")
+            diff = (n.eval_acc_final - o[key]).abs().max()
+            print(f"  {task:9s} {agent:6s} {tier:7s} max diff {diff:.3g}")
+    print("digits_2 and knob_n49 may differ slightly (rejected pairs change the training stream).")
 
 
 def main():
@@ -13,6 +34,7 @@ def main():
           "| dirty:", int(m0.repo_dirty.fillna(False).sum()))
     d = load("comparison_disjoint")
     print("max overlap with evaluation pairs:", int(d.n_overlap_with_eval.max()))
+    reproduction_check(d)
     main_runs = load("comparison")
     main_runs = main_runs[main_runs.task.isin(d.task.unique()) & (main_runs.tier == "fair")
                           & main_runs.agent.isin(["connectome", "linear", "mlp"])].copy()
@@ -44,7 +66,6 @@ def main():
     order = ["connectome [fair]", "delta [kc]", "ridge [kc_1x]", "ridge [raw_1x]"]
     print("\nmean accuracy by task (ranking check):")
     mean = d.assign(lab=d.agent + " [" + d.tier + "]").groupby(["task", "lab"]).eval_acc_final.mean().unstack()
-    mean = mean.rename(columns={"connectome [fair]": "connectome [fair]"})
     cols = [x for x in order if x in mean.columns]
     print(mean[cols].round(3).to_string())
     for task, row in mean[cols].iterrows():

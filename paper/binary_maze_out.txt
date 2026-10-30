@@ -1,4 +1,4 @@
-status: {'ok': 100} | commits: {'8a59d4cab86b55d2c75212864dc3b6b144676155': 100} | dirty: 100
+status: {'ok': 100} | commits: {'c1eb7db01c023ea54ceb50c81a87d91d7ee3a3ae': 100} | dirty: 0
 
 --- gridworld_binary_overall_success (5 rows) ---
       task            qlearning   qlearning [binary]                  mlp         mlp [binary] connectome [gate_error] connectome [gate_rank]

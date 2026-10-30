@@ -1,13 +1,19 @@
 """Number comparison with training and evaluation operand pairs strictly disjoint.
 
-Both orientations, (a, b) and (b, a), of every evaluation pair are excluded from the training and
-calibration streams. Evaluation pairs are the SAME as in scripts/comparison/run_comparison.py for the same
-seed (random stream [seed, 1]), so the results are paired with the main runs.
+Both orientations, (a, b) and (b, a), of every evaluation pair are excluded from the training and calibration
+streams. Evaluation pairs are the SAME as in scripts/comparison/run_comparison.py for the same seed (random stream
+[seed, 1]), so results are paired with the main runs. The training stream is the main experiment's stream [seed, 3]
+with evaluation pairs rejected: it is identical to the main stream whenever no rejection occurs (always the case for
+5 and 9 digits).
+
+Readouts use EXACTLY the code of scripts/readouts/run_readouts.py (agents/shared/readouts.py: prep_l2, prep_scaled,
+delta_fit, ridge_fit_select with penalty chosen by hold-out ACCURACY; constants LAMBDAS and ALPHA_DELTA imported from
+that script) and reproduce its random-generator sequence ([seed, 91], one permutation per ridge fit in the order
+kc_1x, kc_5x, raw_1x, raw_5x). Therefore, wherever no pair is rejected (digits_5, digits_9) the delta and ridge accuracies
+must equal those of the 'readouts' experiment exactly; analysis.disjoint_cmp_tables checks this.
 
 Agents (tier): connectome (fair, native rule), connectome_notrain (control), linear (fair), mlp (fair),
-               delta (kc: online logistic delta rule on the KC code), ridge (kc_1x, kc_5x, raw_1x, raw_5x).
-Constants are reused from the main comparison (LR_LINEAR, LR_MLP) and from the readout experiment
-(delta step 3.0); nothing is tuned here.
+               delta (kc), ridge (kc_1x, kc_5x, raw_1x, raw_5x).
 
     python -m scripts.comparison.run_comparison_disjoint --smoke
     python -m scripts.comparison.run_comparison_disjoint --workers 14
@@ -22,17 +28,17 @@ from core.runner import RunSpec, common_parser, resolve_seeds, run_all
 from core.brain_pool import fresh_brain, value_fn
 from agents.comparison.connectome_compare_agent import ConnectomeCompareAgent
 from agents.comparison.baseline_compare_agents import LinearCompareAgent, MLPCompareAgent
-from scripts.comparison.run_comparison import (build, acc, truth, ROUNDS, N_EVAL, N_CALIB, EVAL_EVERY,
-                                               LR_LINEAR, LR_MLP)
+from agents.shared.readouts import prep_l2, prep_scaled, accuracy, delta_fit, ridge_fit_select
+from scripts.comparison.run_comparison import (build, acc, ROUNDS, N_EVAL, N_CALIB, EVAL_EVERY, LR_LINEAR, LR_MLP)
+from scripts.readouts.run_readouts import codes_of, LAMBDAS, ALPHA_DELTA
 
 EXPERIMENT = "comparison_disjoint"
 TASKS = {"knob_n49": {"kind": "knob", "n_max": 49},
          "digits_2": {"kind": "digits", "n_digits": 2},
          "digits_5": {"kind": "digits", "n_digits": 5},
          "digits_9": {"kind": "digits", "n_digits": 9}}
-ALPHA_DELTA = 3.0
-RIDGE_LAMS = [1e-3, 1e-2, 1e-1, 1.0, 10.0]
 MAX_MULT = 5
+RIDGE_ORDER = [("kc", 1), ("kc", 5), ("raw", 1), ("raw", 5)]     # order of ridge fits in run_readouts.readouts()
 
 # (agent, tier, extra config)
 VARIANTS = [("connectome", "fair", {"train": True}),
@@ -47,9 +53,7 @@ VARIANTS = [("connectome", "fair", {"train": True}),
 
 
 def make_split(cfg, seed, n_train):
-    """Returns enc, scale, eval_pairs, calibration_pairs, train_pairs, forbidden.
-    eval_pairs reproduce run_comparison.py (stream [seed, 1]); calibration and training streams use the
-    streams [seed, 2] and [seed, 3] of the main experiment with forbidden pairs rejected."""
+    """Returns enc, scale, eval_pairs, calibration_pairs, train_pairs, forbidden."""
     enc, sample, scale = build(cfg, seed)
     r_eval, r_cal, r_tr = (np.random.default_rng([seed, k]) for k in (1, 2, 3))
     eval_pairs = [sample(r_eval) for _ in range(N_EVAL)]
@@ -66,6 +70,16 @@ def make_split(cfg, seed, n_train):
     return enc, scale, eval_pairs, draw(r_cal, N_CALIB), draw(r_tr, n_train), forbidden
 
 
+def ridge_rng(seed, feat, mult, rounds):
+    """Generator state of run_readouts.readouts() just before the ridge fit (feat, mult)."""
+    rng = np.random.default_rng([seed, 91])
+    for f, m in RIDGE_ORDER:
+        if (f, m) == (feat, mult):
+            return rng
+        rng.permutation(m * rounds)          # ridge_fit_select consumes exactly one permutation of len(X)
+    raise ValueError((feat, mult))
+
+
 def _save_split(cfg, task, seed, eval_pairs, cal, train):
     d = os.path.join(paths.RUNS_DIR, "_splits_smoke" if cfg["smoke"] else "_splits", EXPERIMENT)
     os.makedirs(d, exist_ok=True)
@@ -76,51 +90,6 @@ def _save_split(cfg, task, seed, eval_pairs, cal, train):
     with open(tmp, "w") as f:
         json.dump({"eval": eval_pairs, "calibration": cal, "train": train}, f)
     os.replace(tmp, p)          # content is deterministic, so concurrent writers are harmless
-
-
-def _kc_features(cache, enc, pairs):
-    V = np.stack([enc.encode(a, b) for a, b in pairs])
-    C = cache._codes(V).astype(np.float64)
-    C /= np.maximum(np.linalg.norm(C, axis=1, keepdims=True), 1e-12)
-    return np.hstack([C, np.ones((len(C), 1))])
-
-
-def _raw_features(enc, pairs):
-    V = np.stack([enc.encode(a, b) for a, b in pairs]).astype(np.float64) / enc.mag
-    return np.hstack([V, np.ones((len(V), 1))])
-
-
-def _labels(pairs):
-    return np.array([1.0 if a > b else -1.0 for a, b in pairs])
-
-
-def fit_delta(X, y, alpha):
-    """One online pass of a logistic delta rule over the training stream."""
-    w = np.zeros(X.shape[1])
-    for x, t in zip(X, (y > 0).astype(float)):
-        p = 1.0 / (1.0 + np.exp(-np.clip(x @ w, -30, 30)))
-        w += alpha * (t - p) * x
-    return w
-
-
-def fit_ridge(X, y, seed):
-    """Ridge in dual form. Penalty chosen by squared error on a 20% hold-out of the readout's own
-    training set, then refitted on all examples."""
-    rng = np.random.default_rng([seed, 9])
-    n = len(X)
-    idx = rng.permutation(n)
-    k = max(1, int(0.2 * n))
-    va, tr = idx[:k], idx[k:]
-    Xt, yt, Xv, yv = X[tr], y[tr], X[va], y[va]
-    K = Xt @ Xt.T
-    best_lam, best_err = RIDGE_LAMS[0], np.inf
-    for lam in RIDGE_LAMS:
-        alpha = np.linalg.solve(K + lam * np.eye(len(tr)), yt)
-        err = float(np.mean((Xv @ (Xt.T @ alpha) - yv) ** 2))
-        if err < best_err:
-            best_lam, best_err = lam, err
-    alpha = np.linalg.solve(X @ X.T + best_lam * np.eye(n), y)
-    return X.T @ alpha, best_lam
 
 
 def run_one(spec, log):
@@ -163,18 +132,21 @@ def run_one(spec, log):
         stream = train[:n]
         fresh_brain()
         cache, _ = value_fn()
+        Xr_tr = np.stack([enc.encode(a, b) for a, b in train])           # full 5x stream, as in run_readouts.py
+        Xr_ev = np.stack([enc.encode(a, b) for a, b in eval_pairs])
+        ytr = np.array([float(a > b) for a, b in train])
+        yev = np.array([float(a > b) for a, b in eval_pairs])
         if cfg["feat"] == "kc":
-            Xtr, Xev = _kc_features(cache, enc, stream), _kc_features(cache, enc, eval_pairs)
+            Xtr, Xev = prep_l2(codes_of(cache, Xr_tr)), prep_l2(codes_of(cache, Xr_ev))
         else:
-            Xtr, Xev = _raw_features(enc, stream), _raw_features(enc, eval_pairs)
-        ytr, yev = _labels(stream), _labels(eval_pairs)
+            Xtr, Xev = prep_scaled(Xr_tr, Xr_ev)
         out = {}
         if spec.agent == "delta":
-            w = fit_delta(Xtr, ytr, cfg["alpha"])
+            w = delta_fit(Xtr[:rounds], ytr[:rounds], cfg["alpha"])
         else:
-            w, lam = fit_ridge(Xtr, ytr, seed)
+            w, lam = ridge_fit_select(Xtr[:n], ytr[:n], LAMBDAS, ridge_rng(seed, cfg["feat"], cfg["mult"], rounds))
             out["ridge_lambda"] = float(lam)
-        a = float(np.mean((Xev @ w > 0) == (yev > 0)))
+        a = accuracy(Xev, yev, w)
         log.log(n, "eval_acc", a, split="eval")
         out["eval_acc_final"] = a
     assert all(p not in forbidden for p in stream)
