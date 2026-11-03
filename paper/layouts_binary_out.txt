@@ -1,0 +1,55 @@
+status: {'ok': 120} | commits: {'11d704a9bec0d967ed9b788a05017e99a4666709': 120} | dirty: 0
+
+--- layouts_binary_summary (12 rows) ---
+   size                   label  n_layouts      overall_success              final20     final_policy_acc          collapsed_f  worst_layout_final20
+maze113               qlearning         10 0.989 [0.981, 0.994] 0.998 [0.995, 1.000] 0.999 [0.996, 1.000] 0.000 [0.000, 0.000]                 0.983
+maze113      qlearning [binary]         10 0.993 [0.991, 0.994] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000]                 1.000
+maze113                     mlp         10 0.717 [0.527, 0.875] 0.728 [0.552, 0.882] 0.723 [0.589, 0.848] 0.067 [0.000, 0.167]                 0.133
+maze113            mlp [binary]         10 0.986 [0.984, 0.987] 1.000 [1.000, 1.000] 0.993 [0.988, 0.996] 0.000 [0.000, 0.000]                 1.000
+maze113 connectome [gate_error]         10 0.858 [0.828, 0.889] 0.810 [0.740, 0.882] 0.932 [0.916, 0.943] 0.200 [0.100, 0.300]                 0.650
+maze113  connectome [gate_rank]         10 0.756 [0.696, 0.821] 0.702 [0.628, 0.790] 0.843 [0.819, 0.868] 0.367 [0.233, 0.500]                 0.567
+ maze72               qlearning         10 0.990 [0.989, 0.992] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000]                 1.000
+ maze72      qlearning [binary]         10 0.990 [0.989, 0.992] 1.000 [1.000, 1.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000]                 1.000
+ maze72                     mlp         10 0.959 [0.938, 0.978] 0.998 [0.995, 1.000] 0.969 [0.946, 0.987] 0.000 [0.000, 0.000]                 0.983
+ maze72            mlp [binary]         10 0.982 [0.979, 0.985] 1.000 [1.000, 1.000] 0.997 [0.992, 1.000] 0.000 [0.000, 0.000]                 1.000
+ maze72 connectome [gate_error]         10 0.968 [0.964, 0.971] 0.998 [0.995, 1.000] 0.987 [0.980, 0.993] 0.000 [0.000, 0.000]                 0.983
+ maze72  connectome [gate_rank]         10 0.990 [0.988, 0.991] 1.000 [1.000, 1.000] 0.992 [0.986, 0.997] 0.000 [0.000, 0.000]                 1.000
+
+--- layouts_binary_paired (36 rows) ---
+                                  comparison    size           metric  n_layouts  mean_diff   ci_lo   ci_hi  excludes_zero
+     qlearning [binary] - qlearning [shaped] maze113  overall_success         10     0.0036  0.0000  0.0107          False
+     qlearning [binary] - qlearning [shaped]  maze72  overall_success         10     0.0000  0.0000  0.0000          False
+                 mlp [binary] - mlp [shaped] maze113  overall_success         10     0.2682  0.1114  0.4566           True
+                 mlp [binary] - mlp [shaped]  maze72  overall_success         10     0.0230  0.0063  0.0430           True
+connectome [gate_error] - qlearning [binary] maze113  overall_success         10    -0.1346 -0.1640 -0.1044           True
+connectome [gate_error] - qlearning [binary]  maze72  overall_success         10    -0.0226 -0.0264 -0.0192           True
+ connectome [gate_rank] - qlearning [binary] maze113  overall_success         10    -0.2367 -0.2963 -0.1730           True
+ connectome [gate_rank] - qlearning [binary]  maze72  overall_success         10    -0.0004 -0.0011  0.0002          False
+      connectome [gate_error] - mlp [binary] maze113  overall_success         10    -0.1274 -0.1563 -0.0978           True
+      connectome [gate_error] - mlp [binary]  maze72  overall_success         10    -0.0144 -0.0200 -0.0094           True
+       connectome [gate_rank] - mlp [binary] maze113  overall_success         10    -0.2295 -0.2891 -0.1660           True
+       connectome [gate_rank] - mlp [binary]  maze72  overall_success         10     0.0077  0.0057  0.0098           True
+     qlearning [binary] - qlearning [shaped] maze113          final20         10     0.0017  0.0000  0.0050          False
+     qlearning [binary] - qlearning [shaped]  maze72          final20         10     0.0000  0.0000  0.0000          False
+                 mlp [binary] - mlp [shaped] maze113          final20         10     0.2717  0.1183  0.4483           True
+                 mlp [binary] - mlp [shaped]  maze72          final20         10     0.0017  0.0000  0.0050          False
+connectome [gate_error] - qlearning [binary] maze113          final20         10    -0.1900 -0.2600 -0.1183           True
+connectome [gate_error] - qlearning [binary]  maze72          final20         10    -0.0017 -0.0050  0.0000          False
+ connectome [gate_rank] - qlearning [binary] maze113          final20         10    -0.2983 -0.3717 -0.2100           True
+ connectome [gate_rank] - qlearning [binary]  maze72          final20         10     0.0000  0.0000  0.0000          False
+      connectome [gate_error] - mlp [binary] maze113          final20         10    -0.1900 -0.2600 -0.1183           True
+      connectome [gate_error] - mlp [binary]  maze72          final20         10    -0.0017 -0.0050  0.0000          False
+       connectome [gate_rank] - mlp [binary] maze113          final20         10    -0.2983 -0.3717 -0.2100           True
+       connectome [gate_rank] - mlp [binary]  maze72          final20         10     0.0000  0.0000  0.0000          False
+     qlearning [binary] - qlearning [shaped] maze113 final_policy_acc         10     0.0012  0.0000  0.0036          False
+     qlearning [binary] - qlearning [shaped]  maze72 final_policy_acc         10     0.0000  0.0000  0.0000          False
+                 mlp [binary] - mlp [shaped] maze113 final_policy_acc         10     0.2696  0.1485  0.4002           True
+                 mlp [binary] - mlp [shaped]  maze72 final_policy_acc         10     0.0276  0.0102  0.0504           True
+connectome [gate_error] - qlearning [binary] maze113 final_policy_acc         10    -0.0684 -0.0836 -0.0568           True
+connectome [gate_error] - qlearning [binary]  maze72 final_policy_acc         10    -0.0132 -0.0202 -0.0066           True
+ connectome [gate_rank] - qlearning [binary] maze113 final_policy_acc         10    -0.1565 -0.1809 -0.1324           True
+ connectome [gate_rank] - qlearning [binary]  maze72 final_policy_acc         10    -0.0081 -0.0144 -0.0028           True
+      connectome [gate_error] - mlp [binary] maze113 final_policy_acc         10    -0.0610 -0.0777 -0.0491           True
+      connectome [gate_error] - mlp [binary]  maze72 final_policy_acc         10    -0.0100 -0.0179 -0.0017           True
+       connectome [gate_rank] - mlp [binary] maze113 final_policy_acc         10    -0.1490 -0.1740 -0.1251           True
+       connectome [gate_rank] - mlp [binary]  maze72 final_policy_acc         10    -0.0048 -0.0114  0.0025          False

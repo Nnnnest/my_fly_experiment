@@ -1,0 +1,48 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+comparison & size & metric & n\_layouts & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+qlearning [binary] - qlearning [shaped] & maze113 & overall\_success & 10 & 0.0036 & 0.0 & 0.0107 & False \\
+qlearning [binary] - qlearning [shaped] & maze72 & overall\_success & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp [binary] - mlp [shaped] & maze113 & overall\_success & 10 & 0.2682 & 0.1114 & 0.4566 & True \\
+mlp [binary] - mlp [shaped] & maze72 & overall\_success & 10 & 0.023 & 0.0063 & 0.043 & True \\
+connectome [gate\_error] - qlearning [binary] & maze113 & overall\_success & 10 & -0.1346 & -0.164 & -0.1044 & True \\
+connectome [gate\_error] - qlearning [binary] & maze72 & overall\_success & 10 & -0.0226 & -0.0264 & -0.0192 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze113 & overall\_success & 10 & -0.2367 & -0.2963 & -0.173 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze72 & overall\_success & 10 & -0.0004 & -0.0011 & 0.0002 & False \\
+connectome [gate\_error] - mlp [binary] & maze113 & overall\_success & 10 & -0.1274 & -0.1563 & -0.0978 & True \\
+connectome [gate\_error] - mlp [binary] & maze72 & overall\_success & 10 & -0.0144 & -0.02 & -0.0094 & True \\
+connectome [gate\_rank] - mlp [binary] & maze113 & overall\_success & 10 & -0.2295 & -0.2891 & -0.166 & True \\
+connectome [gate\_rank] - mlp [binary] & maze72 & overall\_success & 10 & 0.0077 & 0.0057 & 0.0098 & True \\
+qlearning [binary] - qlearning [shaped] & maze113 & final20 & 10 & 0.0017 & 0.0 & 0.005 & False \\
+qlearning [binary] - qlearning [shaped] & maze72 & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp [binary] - mlp [shaped] & maze113 & final20 & 10 & 0.2717 & 0.1183 & 0.4483 & True \\
+mlp [binary] - mlp [shaped] & maze72 & final20 & 10 & 0.0017 & 0.0 & 0.005 & False \\
+connectome [gate\_error] - qlearning [binary] & maze113 & final20 & 10 & -0.19 & -0.26 & -0.1183 & True \\
+connectome [gate\_error] - qlearning [binary] & maze72 & final20 & 10 & -0.0017 & -0.005 & 0.0 & False \\
+connectome [gate\_rank] - qlearning [binary] & maze113 & final20 & 10 & -0.2983 & -0.3717 & -0.21 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze72 & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_error] - mlp [binary] & maze113 & final20 & 10 & -0.19 & -0.26 & -0.1183 & True \\
+connectome [gate\_error] - mlp [binary] & maze72 & final20 & 10 & -0.0017 & -0.005 & 0.0 & False \\
+connectome [gate\_rank] - mlp [binary] & maze113 & final20 & 10 & -0.2983 & -0.3717 & -0.21 & True \\
+connectome [gate\_rank] - mlp [binary] & maze72 & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+qlearning [binary] - qlearning [shaped] & maze113 & final\_policy\_acc & 10 & 0.0012 & 0.0 & 0.0036 & False \\
+qlearning [binary] - qlearning [shaped] & maze72 & final\_policy\_acc & 10 & 0.0 & 0.0 & 0.0 & False \\
+mlp [binary] - mlp [shaped] & maze113 & final\_policy\_acc & 10 & 0.2696 & 0.1485 & 0.4002 & True \\
+mlp [binary] - mlp [shaped] & maze72 & final\_policy\_acc & 10 & 0.0276 & 0.0102 & 0.0504 & True \\
+connectome [gate\_error] - qlearning [binary] & maze113 & final\_policy\_acc & 10 & -0.0684 & -0.0836 & -0.0568 & True \\
+connectome [gate\_error] - qlearning [binary] & maze72 & final\_policy\_acc & 10 & -0.0132 & -0.0202 & -0.0066 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze113 & final\_policy\_acc & 10 & -0.1565 & -0.1809 & -0.1324 & True \\
+connectome [gate\_rank] - qlearning [binary] & maze72 & final\_policy\_acc & 10 & -0.0081 & -0.0144 & -0.0028 & True \\
+connectome [gate\_error] - mlp [binary] & maze113 & final\_policy\_acc & 10 & -0.061 & -0.0777 & -0.0491 & True \\
+connectome [gate\_error] - mlp [binary] & maze72 & final\_policy\_acc & 10 & -0.01 & -0.0179 & -0.0017 & True \\
+connectome [gate\_rank] - mlp [binary] & maze113 & final\_policy\_acc & 10 & -0.149 & -0.174 & -0.1251 & True \\
+connectome [gate\_rank] - mlp [binary] & maze72 & final\_policy\_acc & 10 & -0.0048 & -0.0114 & 0.0025 & False \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences over layouts (shaped vs binary baselines, gates)}
+\label{tab:layouts_binary_paired}
+\end{table}

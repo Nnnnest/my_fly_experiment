@@ -1,0 +1,199 @@
+status: {'ok': 720} | commits: {'6d532fd187f21ea51cd528da3c36ecaedb4aa238': 480, '52019974559c89c8016c7eae9e821a3f3c659a63': 240} | dirty: 0
+
+--- bandit_perm_cum_pseudo_regret (18 rows) ---
+               task            qlearning                  mlp connectome [balanced]    connectome [block]
+        k2_perm_mp5    8.28 [7.24, 9.48]   8.64 [7.36, 10.28]   24.12 [7.36, 48.56]   18.12 [7.24, 39.00]
+       k2_perm_mp10   9.48 [8.68, 10.20]   9.52 [8.68, 10.28]   19.48 [8.68, 40.16]    9.44 [8.60, 10.20]
+       k2_perm_mp20 13.16 [12.40, 13.84] 13.56 [12.96, 14.12]  27.96 [12.96, 50.60]  22.48 [12.48, 41.52]
+         k2_rev_mp5    7.20 [6.56, 7.84]    7.24 [6.64, 7.88]   18.24 [6.88, 39.28]     7.20 [6.56, 7.84]
+        k2_rev_mp10    9.04 [8.36, 9.76]   9.28 [8.40, 10.20]   19.12 [8.40, 39.72]     9.00 [8.28, 9.76]
+        k2_rev_mp20 12.64 [11.96, 13.36] 12.88 [12.28, 13.52]  22.12 [12.12, 41.32]  21.96 [12.00, 41.08]
+  k4_close_perm_mp5 15.83 [10.31, 24.97] 37.87 [28.60, 48.11]  58.76 [31.63, 89.74]  39.08 [18.86, 66.19]
+ k4_close_perm_mp10 25.84 [15.27, 37.87] 41.64 [34.07, 48.77] 78.57 [55.86, 100.43]  41.87 [22.51, 64.08]
+ k4_close_perm_mp20 25.90 [17.38, 35.89] 46.24 [37.89, 54.79] 89.01 [60.69, 116.68]  61.90 [39.08, 84.92]
+   k4_close_rev_mp5 26.16 [14.90, 38.92] 33.35 [28.83, 38.12]  55.41 [33.60, 80.25]  60.82 [35.71, 88.37]
+  k4_close_rev_mp10 24.39 [13.71, 36.52] 38.46 [30.35, 46.85]  64.87 [41.24, 90.02] 76.52 [44.07, 109.59]
+  k4_close_rev_mp20 20.58 [13.85, 29.89] 40.72 [33.67, 48.00]  68.14 [41.92, 95.96] 84.14 [66.92, 103.64]
+ k4_spread_perm_mp5 14.22 [12.76, 16.12] 14.74 [12.96, 17.24]  28.90 [14.54, 43.84]  28.84 [14.48, 43.80]
+k4_spread_perm_mp10 24.68 [18.86, 34.50] 26.76 [19.86, 36.86]  43.86 [29.74, 57.58]  37.76 [23.82, 51.88]
+k4_spread_perm_mp20 29.80 [28.86, 30.58] 31.52 [30.08, 32.94]  57.54 [41.70, 73.66]  46.24 [34.88, 57.68]
+  k4_spread_rev_mp5 17.36 [13.26, 22.66] 20.62 [13.56, 31.32]  33.88 [18.74, 49.36]  33.88 [18.74, 49.36]
+ k4_spread_rev_mp10 19.72 [18.14, 21.52] 21.60 [18.66, 26.24]  33.02 [18.90, 47.90]  23.74 [18.14, 33.70]
+ k4_spread_rev_mp20 30.90 [29.18, 33.10] 32.98 [30.64, 35.70]  49.68 [36.96, 62.32]  49.70 [37.38, 61.92]
+
+--- bandit_perm_frac_optimal_last50 (18 rows) ---
+               task         qlearning               mlp connectome [balanced] connectome [block]
+        k2_perm_mp5 0.93 [0.92, 0.95] 0.94 [0.92, 0.95]     0.75 [0.48, 0.94]  0.84 [0.66, 0.94]
+       k2_perm_mp10 0.95 [0.92, 0.96] 0.95 [0.93, 0.96]     0.85 [0.66, 0.96]  0.95 [0.92, 0.96]
+       k2_perm_mp20 0.94 [0.92, 0.95] 0.94 [0.92, 0.96]     0.73 [0.49, 0.93]  0.85 [0.66, 0.95]
+         k2_rev_mp5 0.94 [0.92, 0.96] 0.95 [0.92, 0.97]     0.82 [0.63, 0.95]  0.94 [0.92, 0.96]
+        k2_rev_mp10 0.95 [0.93, 0.97] 0.95 [0.93, 0.97]     0.87 [0.70, 0.96]  0.95 [0.93, 0.97]
+        k2_rev_mp20 0.95 [0.94, 0.96] 0.95 [0.94, 0.96]     0.87 [0.70, 0.96]  0.86 [0.68, 0.96]
+  k4_close_perm_mp5 0.83 [0.64, 0.93] 0.63 [0.44, 0.80]     0.30 [0.03, 0.57]  0.37 [0.10, 0.64]
+ k4_close_perm_mp10 0.65 [0.38, 0.91] 0.52 [0.31, 0.72]     0.11 [0.01, 0.30]  0.38 [0.11, 0.66]
+ k4_close_perm_mp20 0.81 [0.64, 0.93] 0.45 [0.21, 0.69]     0.11 [0.01, 0.30]  0.29 [0.02, 0.57]
+   k4_close_rev_mp5 0.65 [0.39, 0.90] 0.37 [0.19, 0.58]     0.39 [0.12, 0.67]  0.19 [0.01, 0.45]
+  k4_close_rev_mp10 0.66 [0.38, 0.92] 0.63 [0.41, 0.83]     0.31 [0.04, 0.60]  0.09 [0.01, 0.22]
+  k4_close_rev_mp20 0.83 [0.63, 0.95] 0.38 [0.15, 0.63]     0.21 [0.02, 0.46]  0.03 [0.01, 0.04]
+ k4_spread_perm_mp5 0.92 [0.89, 0.95] 0.92 [0.89, 0.94]     0.64 [0.37, 0.85]  0.64 [0.37, 0.86]
+k4_spread_perm_mp10 0.84 [0.66, 0.94] 0.77 [0.57, 0.91]     0.40 [0.14, 0.67]  0.57 [0.30, 0.83]
+k4_spread_perm_mp20 0.93 [0.91, 0.94] 0.89 [0.85, 0.93]     0.39 [0.12, 0.66]  0.48 [0.21, 0.74]
+  k4_spread_rev_mp5 0.92 [0.90, 0.95] 0.85 [0.71, 0.93]     0.57 [0.30, 0.83]  0.57 [0.30, 0.83]
+ k4_spread_rev_mp10 0.93 [0.91, 0.94] 0.90 [0.87, 0.93]     0.66 [0.39, 0.92]  0.84 [0.67, 0.94]
+ k4_spread_rev_mp20 0.93 [0.92, 0.95] 0.93 [0.91, 0.95]     0.49 [0.21, 0.76]  0.48 [0.21, 0.75]
+
+--- bandit_perm_pick_best (18 rows) ---
+               task         qlearning               mlp connectome [balanced] connectome [block]
+        k2_perm_mp5 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.80 [0.50, 1.00]  0.90 [0.70, 1.00]
+       k2_perm_mp10 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.90 [0.70, 1.00]  1.00 [1.00, 1.00]
+       k2_perm_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.80 [0.50, 1.00]  0.90 [0.70, 1.00]
+         k2_rev_mp5 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.90 [0.70, 1.00]  1.00 [1.00, 1.00]
+        k2_rev_mp10 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.90 [0.70, 1.00]  1.00 [1.00, 1.00]
+        k2_rev_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.90 [0.70, 1.00]  0.90 [0.70, 1.00]
+  k4_close_perm_mp5 0.90 [0.70, 1.00] 0.70 [0.40, 1.00]     0.30 [0.00, 0.60]  0.40 [0.10, 0.70]
+ k4_close_perm_mp10 0.70 [0.40, 1.00] 0.80 [0.50, 1.00]     0.10 [0.00, 0.30]  0.40 [0.10, 0.70]
+ k4_close_perm_mp20 0.80 [0.50, 1.00] 0.60 [0.30, 0.90]     0.10 [0.00, 0.30]  0.30 [0.00, 0.60]
+   k4_close_rev_mp5 0.70 [0.40, 1.00] 0.50 [0.20, 0.80]     0.40 [0.10, 0.70]  0.20 [0.00, 0.50]
+  k4_close_rev_mp10 0.70 [0.40, 1.00] 0.70 [0.40, 1.00]     0.30 [0.00, 0.60]  0.10 [0.00, 0.30]
+  k4_close_rev_mp20 0.90 [0.70, 1.00] 0.40 [0.10, 0.70]     0.20 [0.00, 0.50]  0.00 [0.00, 0.00]
+ k4_spread_perm_mp5 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.70 [0.40, 1.00]  0.70 [0.40, 1.00]
+k4_spread_perm_mp10 0.90 [0.70, 1.00] 0.90 [0.70, 1.00]     0.50 [0.20, 0.80]  0.60 [0.30, 0.90]
+k4_spread_perm_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.40 [0.10, 0.70]  0.60 [0.30, 0.90]
+  k4_spread_rev_mp5 1.00 [1.00, 1.00] 0.90 [0.70, 1.00]     0.60 [0.30, 0.90]  0.60 [0.30, 0.90]
+ k4_spread_rev_mp10 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.70 [0.40, 1.00]  0.90 [0.70, 1.00]
+ k4_spread_rev_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.50 [0.20, 0.80]  0.50 [0.20, 0.80]
+
+--- bandit_perm_pick_last_index (18 rows) ---
+               task         qlearning               mlp connectome [balanced] connectome [block]
+        k2_perm_mp5 0.60 [0.30, 0.90] 0.60 [0.30, 0.90]     0.40 [0.10, 0.70]  0.50 [0.20, 0.80]
+       k2_perm_mp10 0.60 [0.30, 0.90] 0.60 [0.30, 0.90]     0.50 [0.20, 0.80]  0.60 [0.30, 0.90]
+       k2_perm_mp20 0.60 [0.30, 0.90] 0.60 [0.30, 0.90]     0.40 [0.10, 0.70]  0.70 [0.40, 1.00]
+         k2_rev_mp5 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.10 [0.00, 0.30]  0.00 [0.00, 0.00]
+        k2_rev_mp10 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.10 [0.00, 0.30]  0.00 [0.00, 0.00]
+        k2_rev_mp20 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.10 [0.00, 0.30]  0.10 [0.00, 0.30]
+  k4_close_perm_mp5 0.30 [0.00, 0.60] 0.40 [0.10, 0.70]     0.10 [0.00, 0.30]  0.70 [0.40, 1.00]
+ k4_close_perm_mp10 0.20 [0.00, 0.50] 0.20 [0.00, 0.50]     0.20 [0.00, 0.50]  0.70 [0.40, 1.00]
+ k4_close_perm_mp20 0.30 [0.00, 0.60] 0.40 [0.10, 0.70]     0.30 [0.00, 0.60]  0.90 [0.70, 1.00]
+   k4_close_rev_mp5 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.10 [0.00, 0.30]  0.40 [0.10, 0.70]
+  k4_close_rev_mp10 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.20 [0.00, 0.50]  0.50 [0.20, 0.80]
+  k4_close_rev_mp20 0.00 [0.00, 0.00] 0.10 [0.00, 0.30]     0.30 [0.00, 0.60]  0.70 [0.40, 1.00]
+ k4_spread_perm_mp5 0.30 [0.00, 0.60] 0.30 [0.00, 0.60]     0.30 [0.00, 0.60]  0.30 [0.00, 0.60]
+k4_spread_perm_mp10 0.40 [0.10, 0.70] 0.40 [0.10, 0.70]     0.10 [0.00, 0.30]  0.50 [0.20, 0.80]
+k4_spread_perm_mp20 0.30 [0.00, 0.60] 0.30 [0.00, 0.60]     0.10 [0.00, 0.30]  0.50 [0.20, 0.80]
+  k4_spread_rev_mp5 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.00 [0.00, 0.00]  0.00 [0.00, 0.00]
+ k4_spread_rev_mp10 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.00 [0.00, 0.00]  0.00 [0.00, 0.00]
+ k4_spread_rev_mp20 0.00 [0.00, 0.00] 0.00 [0.00, 0.00]     0.00 [0.00, 0.00]  0.00 [0.00, 0.00]
+
+--- bandit_perm_paired (90 rows) ---
+                                comparison                task            metric  n  mean_diff    ci_lo   ci_hi  excludes_zero
+            connectome [block] - qlearning         k2_perm_mp5 cum_pseudo_regret 10      9.840   0.0000 29.5200          False
+            connectome [block] - qlearning        k2_perm_mp10 cum_pseudo_regret 10     -0.040  -0.1200  0.0000          False
+            connectome [block] - qlearning        k2_perm_mp20 cum_pseudo_regret 10      9.320   0.0000 27.9600          False
+            connectome [block] - qlearning          k2_rev_mp5 cum_pseudo_regret 10      0.000   0.0000  0.0000          False
+            connectome [block] - qlearning         k2_rev_mp10 cum_pseudo_regret 10     -0.040  -0.1200  0.0000          False
+            connectome [block] - qlearning         k2_rev_mp20 cum_pseudo_regret 10      9.320   0.0000 27.9600          False
+            connectome [block] - qlearning   k4_close_perm_mp5 cum_pseudo_regret 10     23.245   3.5500 50.1710           True
+            connectome [block] - qlearning  k4_close_perm_mp10 cum_pseudo_regret 10     16.030  -9.7102 43.1220          False
+            connectome [block] - qlearning  k4_close_perm_mp20 cum_pseudo_regret 10     35.995  13.7549 60.1255           True
+            connectome [block] - qlearning    k4_close_rev_mp5 cum_pseudo_regret 10     34.655   7.1146 66.6700           True
+            connectome [block] - qlearning   k4_close_rev_mp10 cum_pseudo_regret 10     52.120  20.8849 82.6900           True
+            connectome [block] - qlearning   k4_close_rev_mp20 cum_pseudo_regret 10     63.555  40.4648 87.0553           True
+            connectome [block] - qlearning  k4_spread_perm_mp5 cum_pseudo_regret 10     14.620   0.0000 29.3000          False
+            connectome [block] - qlearning k4_spread_perm_mp10 cum_pseudo_regret 10     13.080  -0.3000 27.3000          False
+            connectome [block] - qlearning k4_spread_perm_mp20 cum_pseudo_regret 10     16.440   4.8600 28.0400           True
+            connectome [block] - qlearning   k4_spread_rev_mp5 cum_pseudo_regret 10     16.520   3.5200 30.4410           True
+            connectome [block] - qlearning  k4_spread_rev_mp10 cum_pseudo_regret 10      4.020  -2.0400 14.1000          False
+            connectome [block] - qlearning  k4_spread_rev_mp20 cum_pseudo_regret 10     18.800   7.0200 30.6600           True
+         connectome [balanced] - qlearning         k2_perm_mp5 cum_pseudo_regret 10     15.840   0.0000 39.3600          False
+         connectome [balanced] - qlearning        k2_perm_mp10 cum_pseudo_regret 10     10.000  -0.1200 30.1200          False
+         connectome [balanced] - qlearning        k2_perm_mp20 cum_pseudo_regret 10     14.800   0.0000 36.9600          False
+         connectome [balanced] - qlearning          k2_rev_mp5 cum_pseudo_regret 10     11.040   0.0000 31.7600          False
+         connectome [balanced] - qlearning         k2_rev_mp10 cum_pseudo_regret 10     10.080  -0.1200 30.3600          False
+         connectome [balanced] - qlearning         k2_rev_mp20 cum_pseudo_regret 10      9.480   0.0000 28.4400          False
+         connectome [balanced] - qlearning   k4_close_perm_mp5 cum_pseudo_regret 10     42.925  15.7894 74.5603           True
+         connectome [balanced] - qlearning  k4_close_perm_mp10 cum_pseudo_regret 10     52.725  28.7780 75.2554           True
+         connectome [balanced] - qlearning  k4_close_perm_mp20 cum_pseudo_regret 10     63.100  35.1496 90.4204           True
+         connectome [balanced] - qlearning    k4_close_rev_mp5 cum_pseudo_regret 10     29.250   2.1947 59.7150           True
+         connectome [balanced] - qlearning   k4_close_rev_mp10 cum_pseudo_regret 10     40.480  14.8429 69.9708           True
+         connectome [balanced] - qlearning   k4_close_rev_mp20 cum_pseudo_regret 10     47.560  23.8199 73.7721           True
+         connectome [balanced] - qlearning  k4_spread_perm_mp5 cum_pseudo_regret 10     14.680   0.2400 29.3600           True
+         connectome [balanced] - qlearning k4_spread_perm_mp10 cum_pseudo_regret 10     19.180  -0.8810 36.5400          False
+         connectome [balanced] - qlearning k4_spread_perm_mp20 cum_pseudo_regret 10     27.740  11.9200 43.5800           True
+         connectome [balanced] - qlearning   k4_spread_rev_mp5 cum_pseudo_regret 10     16.520   3.5200 30.4410           True
+         connectome [balanced] - qlearning  k4_spread_rev_mp10 cum_pseudo_regret 10     13.300   0.0000 27.9200          False
+         connectome [balanced] - qlearning  k4_spread_rev_mp20 cum_pseudo_regret 10     18.780   5.8400 31.7000           True
+                  connectome [block] - mlp         k2_perm_mp5 cum_pseudo_regret 10      9.480  -0.2400 28.7600          False
+                  connectome [block] - mlp        k2_perm_mp10 cum_pseudo_regret 10     -0.080  -0.2000  0.0000          False
+                  connectome [block] - mlp        k2_perm_mp20 cum_pseudo_regret 10      8.920  -0.7600 27.7600          False
+                  connectome [block] - mlp          k2_rev_mp5 cum_pseudo_regret 10     -0.040  -0.1200  0.0000          False
+                  connectome [block] - mlp         k2_rev_mp10 cum_pseudo_regret 10     -0.280  -0.7610  0.0000          False
+                  connectome [block] - mlp         k2_rev_mp20 cum_pseudo_regret 10      9.080  -0.6000 27.9200          False
+                  connectome [block] - mlp   k4_close_perm_mp5 cum_pseudo_regret 10      1.205 -19.8050 25.1205          False
+                  connectome [block] - mlp  k4_close_perm_mp10 cum_pseudo_regret 10      0.225 -21.0750 22.8250          False
+                  connectome [block] - mlp  k4_close_perm_mp20 cum_pseudo_regret 10     15.660 -12.5919 44.0951          False
+                  connectome [block] - mlp    k4_close_rev_mp5 cum_pseudo_regret 10     27.470   1.1897 54.8050           True
+                  connectome [block] - mlp   k4_close_rev_mp10 cum_pseudo_regret 10     38.050   0.8086 75.4506           True
+                  connectome [block] - mlp   k4_close_rev_mp20 cum_pseudo_regret 10     43.410  27.7647 60.2800           True
+                  connectome [block] - mlp  k4_spread_perm_mp5 cum_pseudo_regret 10     14.100  -0.1200 28.7600          False
+                  connectome [block] - mlp k4_spread_perm_mp10 cum_pseudo_regret 10     11.000  -1.4600 24.8615          False
+                  connectome [block] - mlp k4_spread_perm_mp20 cum_pseudo_regret 10     14.720   3.1800 26.4400           True
+                  connectome [block] - mlp   k4_spread_rev_mp5 cum_pseudo_regret 10     13.260   0.4600 27.4400           True
+                  connectome [block] - mlp  k4_spread_rev_mp10 cum_pseudo_regret 10      2.140  -5.9200 13.6000          False
+                  connectome [block] - mlp  k4_spread_rev_mp20 cum_pseudo_regret 10     16.720   5.5595 28.1200           True
+               connectome [balanced] - mlp         k2_perm_mp5 cum_pseudo_regret 10     15.480  -0.2000 38.2400          False
+               connectome [balanced] - mlp        k2_perm_mp10 cum_pseudo_regret 10      9.960  -0.1200 30.0000          False
+               connectome [balanced] - mlp        k2_perm_mp20 cum_pseudo_regret 10     14.400  -0.3600 36.7600          False
+               connectome [balanced] - mlp          k2_rev_mp5 cum_pseudo_regret 10     11.000  -0.0800 31.7600          False
+               connectome [balanced] - mlp         k2_rev_mp10 cum_pseudo_regret 10      9.840  -0.7200 30.3200          False
+               connectome [balanced] - mlp         k2_rev_mp20 cum_pseudo_regret 10      9.240  -0.6000 28.4000          False
+               connectome [balanced] - mlp   k4_close_perm_mp5 cum_pseudo_regret 10     20.885  -5.6059 46.7300          False
+               connectome [balanced] - mlp  k4_close_perm_mp10 cum_pseudo_regret 10     36.920  17.0546 55.5500           True
+               connectome [balanced] - mlp  k4_close_perm_mp20 cum_pseudo_regret 10     42.765  14.0998 69.2273           True
+               connectome [balanced] - mlp    k4_close_rev_mp5 cum_pseudo_regret 10     22.065   2.3292 44.6208           True
+               connectome [balanced] - mlp   k4_close_rev_mp10 cum_pseudo_regret 10     26.410   3.6100 50.8000           True
+               connectome [balanced] - mlp   k4_close_rev_mp20 cum_pseudo_regret 10     27.415  -1.4203 56.4809          False
+               connectome [balanced] - mlp  k4_spread_perm_mp5 cum_pseudo_regret 10     14.160  -0.1200 28.8005          False
+               connectome [balanced] - mlp k4_spread_perm_mp10 cum_pseudo_regret 10     17.100  -2.1835 34.0605          False
+               connectome [balanced] - mlp k4_spread_perm_mp20 cum_pseudo_regret 10     26.020  10.5000 42.1200           True
+               connectome [balanced] - mlp   k4_spread_rev_mp5 cum_pseudo_regret 10     13.260   0.4600 27.4400           True
+               connectome [balanced] - mlp  k4_spread_rev_mp10 cum_pseudo_regret 10     11.420  -0.2800 24.1805          False
+               connectome [balanced] - mlp  k4_spread_rev_mp20 cum_pseudo_regret 10     16.700   3.8195 29.6000           True
+connectome [block] - connectome [balanced]         k2_perm_mp5 cum_pseudo_regret 10     -6.000 -18.0000  0.0000          False
+connectome [block] - connectome [balanced]        k2_perm_mp10 cum_pseudo_regret 10    -10.040 -30.1200  0.0000          False
+connectome [block] - connectome [balanced]        k2_perm_mp20 cum_pseudo_regret 10     -5.480 -33.2800 22.4000          False
+connectome [block] - connectome [balanced]          k2_rev_mp5 cum_pseudo_regret 10    -11.040 -31.7600  0.0000          False
+connectome [block] - connectome [balanced]         k2_rev_mp10 cum_pseudo_regret 10    -10.120 -30.3600  0.0000          False
+connectome [block] - connectome [balanced]         k2_rev_mp20 cum_pseudo_regret 10     -0.160 -28.4400 27.9600          False
+connectome [block] - connectome [balanced]   k4_close_perm_mp5 cum_pseudo_regret 10    -19.680 -50.8063  5.6958          False
+connectome [block] - connectome [balanced]  k4_close_perm_mp10 cum_pseudo_regret 10    -36.695 -68.7053 -7.0792           True
+connectome [block] - connectome [balanced]  k4_close_perm_mp20 cum_pseudo_regret 10    -27.105 -60.0060  4.7001          False
+connectome [block] - connectome [balanced]    k4_close_rev_mp5 cum_pseudo_regret 10      5.405 -20.8160 27.7200          False
+connectome [block] - connectome [balanced]   k4_close_rev_mp10 cum_pseudo_regret 10     11.640 -38.1960 61.6303          False
+connectome [block] - connectome [balanced]   k4_close_rev_mp20 cum_pseudo_regret 10     15.995 -21.1468 52.7004          False
+connectome [block] - connectome [balanced]  k4_spread_perm_mp5 cum_pseudo_regret 10     -0.060  -0.1800  0.0000          False
+connectome [block] - connectome [balanced] k4_spread_perm_mp10 cum_pseudo_regret 10     -6.100 -24.7600 12.8000          False
+connectome [block] - connectome [balanced] k4_spread_perm_mp20 cum_pseudo_regret 10    -11.300 -25.8600  3.4005          False
+connectome [block] - connectome [balanced]   k4_spread_rev_mp5 cum_pseudo_regret 10      0.000   0.0000  0.0000          False
+connectome [block] - connectome [balanced]  k4_spread_rev_mp10 cum_pseudo_regret 10     -9.280 -23.1800  0.0000          False
+connectome [block] - connectome [balanced]  k4_spread_rev_mp20 cum_pseudo_regret 10      0.020 -16.0000 16.0400          False
+
+seeds (of 10) where the best arm is the last index:
+task
+k2_perm_mp10           6
+k2_perm_mp20           6
+k2_perm_mp5            6
+k2_rev_mp10            0
+k2_rev_mp20            0
+k2_rev_mp5             0
+k4_close_perm_mp10     3
+k4_close_perm_mp20     3
+k4_close_perm_mp5      3
+k4_close_rev_mp10      0
+k4_close_rev_mp20      0
+k4_close_rev_mp5       0
+k4_spread_perm_mp10    3
+k4_spread_perm_mp20    3
+k4_spread_perm_mp5     3
+k4_spread_rev_mp10     0
+k4_spread_rev_mp20     0
+k4_spread_rev_mp5      0

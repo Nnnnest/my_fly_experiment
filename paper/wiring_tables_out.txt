@@ -1,0 +1,121 @@
+bandit [real] status/commit/dirty: {('ok', '2cfae740', False): 210}
+bandit [shuf0] status/commit/dirty: {('ok', '245dd05f', False): 210}
+bandit [shuf1] status/commit/dirty: {('ok', '245dd05f', False): 210}
+bandit [shuf2] status/commit/dirty: {('ok', '245dd05f', False): 210}
+
+--- wiring_bandit (7 rows) ---
+task                    real                   shuf0                   shuf1                   shuf2
+ mp2  28.240 [6.400, 60.401]  28.240 [6.400, 60.401]  39.120 [7.239, 71.520]  28.240 [6.400, 60.401]
+ mp5  18.000 [7.120, 38.920]  18.000 [7.120, 38.920]  18.000 [7.120, 38.920]  18.000 [7.120, 38.920]
+ mp8    8.680 [7.960, 9.400]    8.680 [7.960, 9.400]  19.240 [8.240, 40.360]    8.680 [7.960, 9.400]
+mp10   9.440 [8.720, 10.120]   9.440 [8.720, 10.120]   9.440 [8.720, 10.120]   9.440 [8.720, 10.120]
+mp15 11.240 [10.480, 11.960] 11.240 [10.480, 11.960] 11.240 [10.480, 11.960] 11.240 [10.480, 11.960]
+mp20 13.080 [12.360, 13.760] 13.080 [12.360, 13.760] 13.080 [12.360, 13.760] 13.080 [12.360, 13.760]
+mp30 16.600 [15.920, 17.240] 16.600 [15.920, 17.240] 16.600 [15.920, 17.240] 16.600 [15.920, 17.240]
+
+--- wiring_bandit_paired (21 rows) ---
+  comparison task            metric  n  mean_diff  ci_lo  ci_hi  excludes_zero
+real - shuf0  mp2 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0  mp5 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0  mp8 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0 mp10 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0 mp15 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0 mp20 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf0 mp30 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf1  mp2 cum_pseudo_regret 10     -10.88 -32.64    0.0          False
+real - shuf1  mp5 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf1  mp8 cum_pseudo_regret 10     -10.56 -31.68    0.0          False
+real - shuf1 mp10 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf1 mp15 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf1 mp20 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf1 mp30 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2  mp2 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2  mp5 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2  mp8 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2 mp10 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2 mp15 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2 mp20 cum_pseudo_regret 10       0.00   0.00    0.0          False
+real - shuf2 mp30 cum_pseudo_regret 10       0.00   0.00    0.0          False
+comparison [real] status/commit/dirty: {('ok', '2cfae740', False): 450}
+comparison [shuf0] status/commit/dirty: {('ok', '245dd05f', False): 450}
+comparison [shuf1] status/commit/dirty: {('ok', '245dd05f', False): 450}
+comparison [shuf2] status/commit/dirty: {('ok', '245dd05f', False): 450}
+
+--- wiring_comparison (9 rows) ---
+    task                 real                shuf0                shuf1                shuf2
+digits_2 0.919 [0.888, 0.944] 0.828 [0.803, 0.852] 0.853 [0.831, 0.871] 0.828 [0.800, 0.852]
+digits_3 0.873 [0.814, 0.916] 0.729 [0.683, 0.773] 0.794 [0.755, 0.831] 0.754 [0.715, 0.791]
+digits_4 0.858 [0.815, 0.897] 0.680 [0.638, 0.727] 0.750 [0.708, 0.788] 0.696 [0.649, 0.743]
+digits_5 0.809 [0.725, 0.875] 0.627 [0.580, 0.676] 0.687 [0.642, 0.730] 0.622 [0.568, 0.679]
+digits_9 0.695 [0.620, 0.769] 0.566 [0.540, 0.593] 0.602 [0.559, 0.656] 0.568 [0.534, 0.606]
+ knob_n9 1.000 [1.000, 1.000] 0.988 [0.981, 0.995] 0.988 [0.982, 0.995] 0.978 [0.970, 0.985]
+knob_n19 0.990 [0.987, 0.994] 0.959 [0.950, 0.969] 0.959 [0.951, 0.967] 0.950 [0.937, 0.962]
+knob_n49 0.978 [0.972, 0.983] 0.934 [0.921, 0.946] 0.940 [0.927, 0.953] 0.930 [0.913, 0.944]
+knob_n99 0.975 [0.968, 0.982] 0.922 [0.905, 0.934] 0.927 [0.908, 0.943] 0.919 [0.900, 0.933]
+
+--- wiring_comparison_paired (27 rows) ---
+  comparison     task         metric  n  mean_diff   ci_lo  ci_hi  excludes_zero
+real - shuf0 digits_2 eval_acc_final 10     0.0910  0.0620 0.1185           True
+real - shuf0 digits_3 eval_acc_final 10     0.1445  0.0850 0.1965           True
+real - shuf0 digits_4 eval_acc_final 10     0.1775  0.1405 0.2115           True
+real - shuf0 digits_5 eval_acc_final 10     0.1820  0.1145 0.2385           True
+real - shuf0 digits_9 eval_acc_final 10     0.1295  0.0385 0.2145           True
+real - shuf0  knob_n9 eval_acc_final 10     0.0120  0.0055 0.0190           True
+real - shuf0 knob_n19 eval_acc_final 10     0.0310  0.0215 0.0410           True
+real - shuf0 knob_n49 eval_acc_final 10     0.0440  0.0340 0.0570           True
+real - shuf0 knob_n99 eval_acc_final 10     0.0530  0.0420 0.0660           True
+real - shuf1 digits_2 eval_acc_final 10     0.0660  0.0470 0.0875           True
+real - shuf1 digits_3 eval_acc_final 10     0.0790  0.0435 0.1125           True
+real - shuf1 digits_4 eval_acc_final 10     0.1080  0.0670 0.1460           True
+real - shuf1 digits_5 eval_acc_final 10     0.1225  0.0640 0.1735           True
+real - shuf1 digits_9 eval_acc_final 10     0.0930 -0.0090 0.1835          False
+real - shuf1  knob_n9 eval_acc_final 10     0.0115  0.0055 0.0175           True
+real - shuf1 knob_n19 eval_acc_final 10     0.0310  0.0220 0.0400           True
+real - shuf1 knob_n49 eval_acc_final 10     0.0380  0.0275 0.0500           True
+real - shuf1 knob_n99 eval_acc_final 10     0.0485  0.0350 0.0630           True
+real - shuf2 digits_2 eval_acc_final 10     0.0910  0.0655 0.1195           True
+real - shuf2 digits_3 eval_acc_final 10     0.1200  0.0680 0.1640           True
+real - shuf2 digits_4 eval_acc_final 10     0.1625  0.1240 0.2025           True
+real - shuf2 digits_5 eval_acc_final 10     0.1875  0.1275 0.2375           True
+real - shuf2 digits_9 eval_acc_final 10     0.1270  0.0280 0.2225           True
+real - shuf2  knob_n9 eval_acc_final 10     0.0220  0.0145 0.0295           True
+real - shuf2 knob_n19 eval_acc_final 10     0.0400  0.0275 0.0555           True
+real - shuf2 knob_n49 eval_acc_final 10     0.0480  0.0330 0.0655           True
+real - shuf2 knob_n99 eval_acc_final 10     0.0565  0.0435 0.0715           True
+addition [real] status/commit/dirty: {('ok', '2cfae740', False): 240}
+addition [shuf0] status/commit/dirty: {('ok', '245dd05f', False): 240}
+addition [shuf1] status/commit/dirty: {('ok', '245dd05f', False): 240}
+addition [shuf2] status/commit/dirty: {('ok', '245dd05f', False): 240}
+
+--- wiring_addition (4 rows) ---
+            task                 real                shuf0                shuf1                shuf2
+single_imitation 0.615 [0.587, 0.648] 0.517 [0.507, 0.528] 0.516 [0.492, 0.541] 0.508 [0.488, 0.528]
+   single_online 0.616 [0.588, 0.646] 0.515 [0.507, 0.526] 0.520 [0.498, 0.541] 0.509 [0.487, 0.530]
+   two_imitation 0.513 [0.497, 0.526] 0.562 [0.538, 0.588] 0.562 [0.544, 0.582] 0.556 [0.529, 0.582]
+      two_online 0.514 [0.496, 0.529] 0.562 [0.541, 0.586] 0.556 [0.543, 0.569] 0.546 [0.525, 0.572]
+
+--- wiring_addition_paired (12 rows) ---
+  comparison             task         metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+real - shuf0 single_imitation eval_acc_final 10     0.0983  0.0657  0.1360           True
+real - shuf0    single_online eval_acc_final 10     0.1007  0.0703  0.1347           True
+real - shuf0    two_imitation eval_acc_final 10    -0.0490 -0.0817 -0.0193           True
+real - shuf0       two_online eval_acc_final 10    -0.0480 -0.0817 -0.0183           True
+real - shuf1 single_imitation eval_acc_final 10     0.0987  0.0660  0.1437           True
+real - shuf1    single_online eval_acc_final 10     0.0963  0.0700  0.1320           True
+real - shuf1    two_imitation eval_acc_final 10    -0.0493 -0.0723 -0.0273           True
+real - shuf1       two_online eval_acc_final 10    -0.0420 -0.0637 -0.0200           True
+real - shuf2 single_imitation eval_acc_final 10     0.1070  0.0753  0.1503           True
+real - shuf2    single_online eval_acc_final 10     0.1073  0.0770  0.1483           True
+real - shuf2    two_imitation eval_acc_final 10    -0.0427 -0.0683 -0.0163           True
+real - shuf2       two_online eval_acc_final 10    -0.0320 -0.0600 -0.0067           True
+
+--- wiring_kc_overlap (8 rows) ---
+  task circuit       jaccard_diff+1       jaccard_diff-1  jaccard_random_mean  n
+single    real 0.817 [0.806, 0.828] 0.793 [0.772, 0.813] 0.215 [0.213, 0.217] 10
+   two    real 0.740 [0.716, 0.763] 0.767 [0.754, 0.780] 0.180 [0.173, 0.187] 10
+single   shuf0 0.841 [0.830, 0.851] 0.817 [0.795, 0.837] 0.241 [0.238, 0.244] 10
+   two   shuf0 0.748 [0.728, 0.768] 0.776 [0.762, 0.791] 0.197 [0.189, 0.204] 10
+single   shuf1 0.840 [0.830, 0.852] 0.817 [0.796, 0.837] 0.239 [0.235, 0.242] 10
+   two   shuf1 0.747 [0.725, 0.768] 0.776 [0.762, 0.790] 0.197 [0.189, 0.204] 10
+single   shuf2 0.837 [0.826, 0.848] 0.821 [0.798, 0.841] 0.239 [0.236, 0.242] 10
+   two   shuf2 0.746 [0.725, 0.767] 0.777 [0.761, 0.793] 0.195 [0.188, 0.203] 10

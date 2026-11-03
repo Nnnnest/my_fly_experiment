@@ -1,0 +1,43 @@
+status: {'ok': 180} | commits: {'245dd05fc19b4438190c5c6699a2e7153dddaba0': 180} | dirty: 0
+
+--- bandit_multi_cum_pseudo_regret (6 rows) ---
+          task            qlearning                  mlp           connectome
+  k4_close_mp5 23.90 [14.28, 36.59] 44.31 [35.33, 52.89] 37.89 [19.30, 58.62]
+ k4_close_mp10 24.76 [12.32, 38.53] 37.55 [30.56, 43.88]   9.94 [9.45, 10.44]
+ k4_close_mp20 17.79 [12.93, 26.47] 50.74 [44.05, 57.98] 13.49 [12.27, 15.41]
+ k4_spread_mp5 15.06 [13.62, 16.88] 17.36 [14.22, 21.58] 19.12 [13.52, 29.38]
+k4_spread_mp10 20.10 [18.96, 21.32] 25.22 [19.10, 34.34] 19.58 [18.78, 20.40]
+k4_spread_mp20 30.30 [29.28, 31.14] 32.44 [30.16, 35.66] 30.16 [29.22, 30.92]
+
+--- bandit_multi_frac_optimal_last50 (6 rows) ---
+          task         qlearning               mlp        connectome
+  k4_close_mp5 0.83 [0.65, 0.94] 0.55 [0.35, 0.74] 0.84 [0.65, 0.94]
+ k4_close_mp10 0.65 [0.37, 0.90] 0.64 [0.45, 0.82] 0.92 [0.90, 0.95]
+ k4_close_mp20 0.84 [0.65, 0.95] 0.48 [0.26, 0.70] 0.93 [0.91, 0.96]
+ k4_spread_mp5 0.93 [0.89, 0.95] 0.89 [0.82, 0.93] 0.84 [0.65, 0.94]
+k4_spread_mp10 0.92 [0.90, 0.94] 0.86 [0.78, 0.92] 0.92 [0.90, 0.95]
+k4_spread_mp20 0.93 [0.91, 0.94] 0.91 [0.89, 0.93] 0.93 [0.91, 0.94]
+
+--- bandit_multi_total_reward (6 rows) ---
+          task               qlearning                     mlp              connectome
+  k4_close_mp5 627.50 [606.80, 644.90] 608.00 [596.20, 619.90] 613.80 [589.00, 636.10]
+ k4_close_mp10 623.80 [605.90, 640.10] 612.30 [601.00, 623.00] 640.10 [630.50, 648.70]
+ k4_close_mp20 633.80 [622.30, 644.40] 602.50 [588.70, 615.60] 637.70 [628.10, 646.70]
+ k4_spread_mp5 221.90 [216.50, 226.90] 218.80 [213.40, 224.20] 217.70 [205.40, 227.00]
+k4_spread_mp10 216.30 [211.00, 221.00] 211.70 [200.00, 220.70] 216.90 [211.50, 221.70]
+k4_spread_mp20 205.80 [201.20, 209.90] 204.80 [197.70, 210.50] 206.00 [201.60, 209.90]
+
+--- bandit_multi_paired (12 rows) ---
+            comparison           task            metric  n  mean_diff    ci_lo    ci_hi  excludes_zero
+connectome - qlearning   k4_close_mp5 cum_pseudo_regret 10     13.990   0.6300  29.5157           True
+connectome - qlearning  k4_close_mp10 cum_pseudo_regret 10    -14.830 -28.6650  -2.2195           True
+connectome - qlearning  k4_close_mp20 cum_pseudo_regret 10     -4.305 -11.0800  -0.5800           True
+connectome - qlearning  k4_spread_mp5 cum_pseudo_regret 10      4.060  -0.3400  12.6000          False
+connectome - qlearning k4_spread_mp10 cum_pseudo_regret 10     -0.520  -1.2200   0.0000          False
+connectome - qlearning k4_spread_mp20 cum_pseudo_regret 10     -0.140  -0.4200   0.0000          False
+      connectome - mlp   k4_close_mp5 cum_pseudo_regret 10     -6.420 -26.4306  15.9906          False
+      connectome - mlp  k4_close_mp10 cum_pseudo_regret 10    -27.615 -33.9600 -20.7100           True
+      connectome - mlp  k4_close_mp20 cum_pseudo_regret 10    -37.250 -45.1502 -29.8594           True
+      connectome - mlp  k4_spread_mp5 cum_pseudo_regret 10      1.760  -3.7200   9.3400          False
+      connectome - mlp k4_spread_mp10 cum_pseudo_regret 10     -5.640 -14.4800   0.3000          False
+      connectome - mlp k4_spread_mp20 cum_pseudo_regret 10     -2.280  -5.2400  -0.3200           True

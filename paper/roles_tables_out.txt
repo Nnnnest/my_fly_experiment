@@ -1,0 +1,37 @@
+status: {'ok': 50} | commits: {'c1eb7db01c023ea54ceb50c81a87d91d7ee3a3ae': 50} | dirty: 0
+
+reproduction check (50 matched runs): max |main - replay| per key (must be 0)
+  eval_heuristic_win: 0
+  eval_heuristic_draw: 0
+  eval_heuristic_loss: 0
+  coverage_acc: 0
+  last100_win: 0
+
+--- tictactoe_roles (5 rows) ---
+                  label            first_win           first_draw           first_loss           second_win          second_draw          second_loss
+connectome [gate_error] 0.372 [0.135, 0.637] 0.132 [0.000, 0.332] 0.495 [0.226, 0.791] 0.000 [0.000, 0.000] 0.034 [0.000, 0.083] 0.966 [0.917, 1.000]
+connectome [gate_visit] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.063 [0.000, 0.127] 0.937 [0.873, 1.000]
+       connectome [opt] 0.340 [0.137, 0.570] 0.359 [0.118, 0.631] 0.301 [0.112, 0.509] 0.000 [0.000, 0.000] 0.037 [0.000, 0.090] 0.963 [0.909, 1.000]
+              mlp [opt] 0.422 [0.123, 0.722] 0.578 [0.277, 0.878] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000]
+        qlearning [opt] 0.128 [0.000, 0.328] 0.872 [0.672, 1.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000] 0.000 [0.000, 0.000]
+
+connectome [gate_visit] per seed:
+ seed  first_move_greedy  second_reply_greedy  first_win  first_draw  first_loss  second_win  second_draw  second_loss
+    0                  4                    6        0.0         1.0         0.0         0.0        0.215        0.785
+    1                  4                    2        0.0         1.0         0.0         0.0        0.205        0.795
+    2                  4                    8        0.0         1.0         0.0         0.0        0.000        1.000
+    3                  4                    6        0.0         1.0         0.0         0.0        0.210        0.790
+    4                  4                    1        0.0         1.0         0.0         0.0        0.000        1.000
+    5                  4                    0        0.0         1.0         0.0         0.0        0.000        1.000
+    6                  4                    6        0.0         1.0         0.0         0.0        0.000        1.000
+    7                  4                    8        0.0         1.0         0.0         0.0        0.000        1.000
+    8                  4                    8        0.0         1.0         0.0         0.0        0.000        1.000
+    9                  4                    8        0.0         1.0         0.0         0.0        0.000        1.000
+
+seeds showing 'one role always draws, the other always loses' (>0.95 each), by label:
+label
+connectome [gate_error]    1
+connectome [gate_visit]    7
+connectome [opt]           1
+mlp [opt]                  0
+qlearning [opt]            0

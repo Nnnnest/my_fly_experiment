@@ -2,34 +2,45 @@
 
 Code, run records and analysis for a controlled comparison of the `mb` mode of the
 [fly-brain](https://github.com/onnxaa/fly-brain) simulator (FlyWire mushroom-body circuit, 6,289 neurons) against
-tabular Q-learning, a linear learner and a small MLP on a bandit, number comparison, maze navigation,
-tic-tac-toe and addition tasks.
+tabular Q-learning, a linear learner and a small MLP on bandit, number-comparison, maze, tic-tac-toe and addition tasks,
+with diagnostics of the Kenyon-cell code, of the plasticity rule and of the ALPN-to-KC wiring.
 
-Paper: *(preprint link and DOI: to be added)*  ·  Archive of all run records: *(Zenodo DOI: to be added)*
+- Paper: *(preprint link: to be added)*
+- Code archive (Zenodo): *(DOI: to be added)*
+- Run records, saved splits, tables and figures (Zenodo): *(DOI: to be added)*
 
 ## Main findings
 
-- **Bandit.** With two arms the connectome is statistically indistinguishable from Q-learning once at least 8 forced pulls
-  per arm are used (with an occasional wrong-arm lock-in). With four arms and arm order controlled it is worse than
-  Q-learning. An apparent advantage in the first 4-arm run (`bandit_multi`) was a positional artifact, exposed by the
-  arm-order control (`bandit_perm`).
-- **Number comparison.** Competitive when a number is one intensity; it degrades with positional digit encodings
-  relative to tuned baselines.
-- **Wiring control.** Degree-preserving shuffles of the ALPN→KC wiring lower accuracy on number comparison and
-  single-digit addition. They do not lower it on two-digit addition, where the real circuit does not learn.
-- **Maze.** The untouched connectome agent degrades from 72 states. External training gates recover most of the gap up
-  to 113 states. All connectome variants fail at 316 states.
-- **Tic-tac-toe.** Far below Q-learning and the MLP on minimax coverage in every tier.
-- **Addition.** Single-digit: above raw-input baselines, below baselines given oracle features. Two-digit: no learning.
-
 Numbers, confidence intervals and caveats are in the paper and in `paper/tables/`.
+
+- **Bandit.** With two arms the connectome is indistinguishable from Q-learning once at least 8 pulls per arm are forced
+  (with an occasional wrong-arm lock-in). With four arms and arm order controlled it is worse than Q-learning. An apparent
+  advantage in the first four-armed run (`bandit_multi`) was a positional artifact, exposed by the arm-order control
+  (`bandit_perm`).
+- **Number comparison.** Competitive when a number is one intensity, including when evaluation pairs are strictly
+  excluded from training; it degrades with positional digit encodings relative to tuned baselines.
+- **Readouts on the same KC codes.** A delta rule or ridge regression reading the same KC codes beats the native
+  plasticity rule on every task tested, so the native rule leaves task-relevant information unused. The contribution of
+  the KC code itself is task-dependent (on digit comparison with 5 and 9 digits, raw inputs work better than the KC code).
+- **Maze.** The ungated connectome agent degrades from 72 states. Training gates bring it within 0.02 of Q-learning at
+  72 states and on the 113-state fixed start, also when the baselines receive the same binary feedback, but not on
+  independent layouts of about 113 states or at 316 states. An MLP given the same binary feedback solves the 316-state
+  maze, so that failure is not a property of the task.
+- **Tic-tac-toe.** Far below Q-learning and the MLP on minimax coverage in every tier. The odd `gate_visit` result against
+  the heuristic opponent is a role effect (draws as first mover, loses as second mover).
+- **Addition.** Single-digit: above raw-input baselines, below baselines given oracle features. Two-digit: no learning by
+  the native rule, although a ridge readout on the KC code reaches 0.77 on held-out operand pairs.
+- **Update strength and frequency.** Shrinking the native step to a tenth raises ungated maze success from 0.08 to 0.81
+  (5 seeds) but does not remove collapses.
+- **Wiring control.** Degree-preserving shuffles of the ALPN-to-KC wiring lower accuracy on number comparison and
+  single-digit addition but not on two-digit addition.
 
 ## Requirements
 
-- Linux, Python 3 (exact interpreter and package versions are in `requirements.txt` and in every run's `manifest.json`).
+- Linux, Python 3 (exact versions in `requirements.txt` and in every run's `manifest.json`).
 - The fly-brain simulator at commit `0ef5d843431f0a4bec8a199d6aca0a5a02f6e449`. The data files it ships
   (`mb_circuit.npz`, `mb_groups*.npz`) are used directly.
-- All results were produced on an Intel i9-9900KF (8 cores / 16 threads), 62 GB RAM, no GPU.
+- All results were produced on an Intel Core i9-9900KF (8 cores / 16 threads), 62 GB RAM, no GPU.
 
 ## Installation
 
@@ -44,8 +55,8 @@ pip install -r requirements.txt
 ls ../mb_circuit.npz ../mb_groups*.npz      # must list the simulator data files
 ```
 
-This repository must live **inside** the fly-brain directory: `core/paths.py` takes the parent directory as the
-simulator root.
+This repository must live **inside** the fly-brain directory: `core/paths.py` takes the parent directory as the simulator
+root.
 
 ## Quick check (minutes)
 
@@ -53,20 +64,24 @@ simulator root.
 bash scripts/pre_freeze_check.sh
 ```
 
-Runs the exactness and equivalence checks (value cache vs `brain.step`, pooled-brain reset, symmetry wrapper, v2 vs v1
-agents) and a smoke run of every experiment.
+Runs the exactness and equivalence checks (value cache against `brain.step`, pooled-brain reset, symmetry wrapper, v2
+against v1 agents) and a smoke run of every main experiment.
 
 ## Reproducing the results
 
 Working rules:
 
-- One run = one folder `runs/<experiment>/<task>__<agent>__<tier>__s<SEED>/` with `manifest.json` (config, seed, commits,
-  versions, hardware, status, runtime), `metrics.csv` (long format: step, split, metric, value) and `summary.json`.
-- Final seeds are 0–9, tuning seeds 1000–1004 (disjoint).
-- The runner caches by config hash and does **not** see code changes. After changing code that affects results, delete
-  the affected `runs/<experiment>/` folder.
-- Do not edit tracked files while a batch runs: runs record the git commit and a `dirty` flag, and `run_final.sh`
-  refuses to start on a dirty tree.
+- One run is one folder `runs/<experiment>/<task>__<agent>__<tier>__s<SEED>/` with `manifest.json` (configuration, seed,
+  code and simulator commits, dirty flag, versions, hardware, status, runtime), `metrics.csv` (long format: step, split,
+  metric, value) and `summary.json`.
+- Final seeds are 0 to 9, tuning seeds 1000 to 1004 (disjoint). The layout experiments use layout seeds 100 to 109 with
+  agent seeds 0 to 2.
+- The runner caches by configuration hash and does **not** see code changes. After changing code that affects results,
+  delete the affected `runs/<experiment>/` folder.
+- Do not edit tracked files while a batch runs: runs record the git commit and a `dirty` flag, and the launcher scripts
+  refuse to start on a dirty tree. All reported runs have `dirty = false`.
+
+### Main experiments and controls
 
 ```bash
 # hyperparameter tuning (separate seeds; stored in runs/_tuning)
@@ -81,62 +96,103 @@ bash scripts/run_final.sh 14
 
 # controls
 bash scripts/run_wiring_control.sh 14                  # 3 shuffled ALPN->KC circuits -> runs_shuffled_s{0,1,2}/
-python -m scripts.bandit.run_bandit_perm --workers 14  # arm-order control of the bandit (2 and 4 arms)
+python -m scripts.bandit.run_bandit_perm --workers 14  # arm-order control (2 and 4 arms)
 python -m scripts.bandit.run_bandit_multi --workers 14 # first 4-arm run, superseded by run_bandit_perm (kept for transparency)
 ```
 
 Wiring controls use environment variables handled in `core/paths.py`: `FLY_CIRCUIT_DIR` (directory with a modified
 `mb_circuit.npz`) and `FLY_RUNS_DIR` (output directory). Each shuffled circuit has its own live-ALPN file in `assets/`.
 
-### Analysis (run in this order)
+### Follow-up experiments
 
 ```bash
-python -m analysis.validate         # run inventory, seeds, status, commits; writes compute_cost
-python -m analysis.tables           # paper/tables/*.csv and *.tex, printed to stdout
-python -m analysis.wiring_tables    # real vs shuffled wiring
-python -m analysis.perm_tables      # arm-order control
-python -m analysis.extra_tables     # first 4-arm run
-python -m analysis.figures          # paper/figures/*.pdf and *.png (needs the tables above)
+# readouts (delta rule, ridge) on the same KC codes
+python -m scripts.readouts.run_readouts --tuning --workers 4      # choose ALPHA_DELTA, edit it, commit
+python -m scripts.readouts.run_readouts --workers 14
+
+# plasticity sweep (update strength g and frequency f)            <TODO: script name from `git ls-files scripts`>
+# addition with held-out operand pairs                            <TODO: script name from `git ls-files scripts`>
+
+# independent maze layouts (add --ungated for the slow ungated agent)
+python -m scripts.gridworld.run_gridworld_layouts --workers 14
+
+# number comparison with strictly disjoint evaluation pairs
+bash scripts/run_disjoint.sh 14
+
+# maze baselines with the connectome's binary feedback (tune first, then final)
+python -m scripts.gridworld.run_gridworld_binary --tuning --workers 14
+python -m analysis.binary_maze_tables --tuning                    # set ALPHA_Q_BIN / LR_MLP_BIN, commit
+python -m scripts.gridworld.run_gridworld_binary --workers 14
+
+# the same baselines on the independent layouts
+python -m scripts.gridworld.run_gridworld_layouts_binary --workers 14
+
+# role breakdown of tic-tac-toe play against the heuristic opponent
+python -m scripts.tictactoe.run_tictactoe_roles --workers 14
+```
+
+### Analysis (run after the batches)
+
+```bash
+python -m analysis.validate            # run inventory, seeds, status, commits; writes compute_cost
+python -m analysis.tables              # paper/tables/*.csv and *.tex
+python -m analysis.wiring_tables       # real versus shuffled wiring
+python -m analysis.perm_tables         # arm-order control
+python -m analysis.extra_tables        # first 4-arm run
+python -m analysis.readout_tables      # readouts on KC codes
+python -m analysis.eval_overlap        # training/evaluation overlap in the main experiments
+python -m analysis.disjoint_cmp_tables # disjoint number comparison, with a reproduction check against the readouts
+python -m analysis.binary_maze_tables  # binary-feedback maze baselines
+python -m analysis.layouts_binary_tables
+python -m analysis.roles_tables        # role breakdown (with a reproduction check against the main runs)
+python -m analysis.figures             # paper/figures/*.pdf and *.png (needs the tables above)
 python -m analysis.cost <runs_dir>              # per-task timing from any runs directory
 python -m analysis.compare_runs <old_runs_dir>  # determinism check against an earlier run of the same ids
 ```
 
+The plasticity-sweep and layout table scripts from the follow-up phase are in `analysis/` as well
+(`git ls-files analysis`).
+
 ## Repository layout
 
 ```
-agents/       connectome and baseline agents, per task; shared caches, encoders, tic-tac-toe solver, symmetry wrapper
+agents/       connectome and baseline agents, per task; shared caches, readouts, encoders, tic-tac-toe solver, symmetry wrapper
 encoders/     task -> ALPN-vector encoders (comparison, addition, tic-tac-toe)
 envs/         bandit, grid world, maze generator, tic-tac-toe
 opponents/    random and heuristic tic-tac-toe opponents
 core/         paths, config (seeds), pooled brain instances, runner (manifests, caching, parallelism), loaders
-scripts/      one runner per experiment, controls/, diagnostics/ (equivalence and exactness checks), run_final.sh
+scripts/      one runner per experiment, controls/, diagnostics/ (equivalence and exactness checks), launcher .sh files
 analysis/     validation, tables, figures, controls, timing, determinism comparison
 assets/       live ALPN indices (real circuit and the three shuffled circuits)
+paper/        tables (csv, tex) and figures (pdf, png) used in the paper
 ```
 
 ## Provenance of the reported runs
 
-| group | runs | code |
+| group | runs | code commit |
 |---|---|---|
 | bandit (2 arms), comparison, gridworld, tictactoe, addition, addition_diag | 1,700 | `2cfae74` (tag `v2-final`) |
-| wiring control (shuffled circuits) and first 4-arm bandit | 3 × 920 + 180 | `245dd05` (tag `v2-controls`) |
-| arm-order control `bandit_perm` | 720 | `6d532fd` (480 runs), `5201997` (240 runs) |
+| wiring control (3 shuffled circuits, 920 runs each) | 2,760 | `245dd05` (tag `v2-controls`) |
+| first 4-arm bandit (`bandit_multi`, superseded) | 180 | `245dd05` |
+| arm-order control `bandit_perm` | 720 | `6d532fd` (480), `5201997` (240) |
+| readouts, plasticity sweep, independent layouts, addition with held-out operand pairs | 60, 505, 360, 160 | `271247d` |
+| number comparison, disjoint evaluation (`comparison_disjoint`) | 360 | `8431750` |
+| maze baselines with binary feedback (`gridworld_binary`), tic-tac-toe role replay (`tictactoe_roles`) | 100, 50 | `c1eb7db` |
+| layouts with binary-feedback baselines (`gridworld_layouts_binary`) | 120 | `11d704a` |
 
-A full second run of all 1,700 main runs was bit-identical to the first (`analysis.compare_runs`; the only differences are
-floating-point noise up to 4e-4 in `addition_diag`). Wall-clock times of the batch runs are inflated 2–7x by
-14 parallel workers on 8 physical cores. Costs in the paper come from sequential single-thread runs (`analysis.cost`),
-and for the maze experiments from the number of `train()` calls.
+A complete second execution of the 1,700 main runs was bit-identical to the first (`analysis.compare_runs`, maximum
+difference 0). The role replays reproduced the corresponding main runs exactly. Wall-clock times of the batch runs are
+inflated by parallel workers (14 workers on 8 physical cores); costs in the paper come from sequential single-process
+runs (`analysis.cost`) and from the number of `train()` calls.
 
 ## Known limitations
 
-- One maze instance per size (`generate_maze(..., seed=0)`). The 316-state maze was tuned only for the delta agents.
-- Tic-tac-toe Q-learning step size 0.1 was used; 0.3 (grid edge) was marginally better in tuning.
-- Best-cell tuning optimism: baselines were tuned on the same task families they are evaluated on.
-- The wiring control shuffles only the ALPN→KC connections (3 shuffles).
-- `connectome [gate_visit]` against the heuristic tic-tac-toe opponent shows draw 0.526 / loss 0.474,
-  which means one role always draws and the other always loses. This affects one cell of one task.
-- Exploratory diagnostics and vision experiments of the first analysis are not part of this pipeline
-  (see tag `v1-article`).
+See the Limitations section of the paper. In short: one maze instance per size in the main experiment; the 316-state maze
+was not used for tuning; the connectome receives assists the baselines cannot use (calibration, k-hot encoding, training
+gates); evaluation items overlap with training in the main number-comparison and addition experiments (quantified by
+`analysis.eval_overlap`; disjoint controls exist for the key conditions); the wiring control covers only three shuffles of
+the ALPN-to-KC projection; all experiments use `hops=1` and toy tasks. Vision experiments and early exploratory
+diagnostics are not part of this pipeline (tag `v1-article`).
 
 ## Licenses
 
@@ -146,9 +202,9 @@ and for the maze experiments from the number of `train()` calls.
 
 ## Acknowledgements
 
-FlyWire connectome (Dorkenwald et al., *Nature* 2024) and the `fly-brain` simulator (`onnxaa/fly-brain`). Parts of the code
-and the analysis planning were developed with the assistance of an AI model (Claude, Anthropic); the author is
-responsible for all content.
+FlyWire connectome (Dorkenwald et al., *Nature* 2024) and the `fly-brain` simulator (`onnxaa/fly-brain`). Parts of the code,
+the analysis planning and the drafting of the manuscript were done with the assistance of an AI model (Claude, Anthropic);
+the author is responsible for all content.
 
 ## Citation
 
