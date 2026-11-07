@@ -5,9 +5,12 @@ Code, run records and analysis for a controlled comparison of the `mb` mode of t
 tabular Q-learning, a linear learner and a small MLP on bandit, number-comparison, maze, tic-tac-toe and addition tasks,
 with diagnostics of the Kenyon-cell code, of the plasticity rule and of the ALPN-to-KC wiring.
 
-- Paper: *(preprint link: to be added)*
-- Code archive (Zenodo): *(DOI: to be added)*
-- Run records, saved splits, tables and figures (Zenodo): *(DOI: to be added)*
+- Paper: *(preprint link to be added after publication)*
+- Code archive (Zenodo, v2.1): https://doi.org/10.5281/zenodo.23919513
+- Run records and experiment splits (Zenodo): https://doi.org/10.5281/zenodo.23501884
+
+The Zenodo dataset contains the raw experimental run records and associated experiment splits. The analysis code,
+tables and figures are maintained in this GitHub repository.
 
 ## Main findings
 
@@ -50,6 +53,7 @@ git checkout 0ef5d843431f0a4bec8a199d6aca0a5a02f6e449
 python3 -m venv .venv && source .venv/bin/activate
 git clone https://github.com/Nnnnest/my_fly_experiment.git
 cd my_fly_experiment
+git checkout v2.1-release
 pip install -r requirements.txt
 ls ../mb_circuit.npz ../mb_groups*.npz      # must list the simulator data files
 ```
@@ -201,8 +205,9 @@ diagnostics are not part of this pipeline (tag `v1-article`).
 ## Licenses
 
 - **Code:** MIT (`LICENSE`).
-- **Run records, tables and figures:** CC BY-NC 4.0 (`DATA_LICENSE.md`), because they derive from the simulator and
-  FlyWire data, which are CC BY-NC 4.0 (non-commercial use only).
+- **Run records and associated research data:** CC BY-NC 4.0 (`DATA_LICENSE.md`), because they derive from the
+  simulator and FlyWire data, which are CC BY-NC 4.0 (non-commercial use only).
+- **Tables and figures:** available in `paper/`; see `DATA_LICENSE.md` for the applicable terms.
 
 ## Acknowledgements
 
@@ -213,4 +218,5 @@ the analysis planning and the drafting of the manuscript were done with the assi
 ## Citation
 
 See `CITATION.cff`.
+
 
