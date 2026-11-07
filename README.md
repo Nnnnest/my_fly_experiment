@@ -13,8 +13,7 @@ with diagnostics of the Kenyon-cell code, of the plasticity rule and of the ALPN
 
 Numbers, confidence intervals and caveats are in the paper and in `paper/tables/`.
 
-- **Bandit.** With two arms the connectome is indistinguishable from Q-learning once at least 8 pulls per arm are forced
-  (with an occasional wrong-arm lock-in). With four arms and arm order controlled it is worse than Q-learning. An apparent
+- **Bandit.** At `min_pulls = 10`, mean cumulative pseudo-regret matched sample-average Q-learning (9.44 for both). From 8 pulls upward, observed mean differences were at most 0.2, but no equivalence margin was specified; below 8 pulls the connectome was worse and noisier. Occasional wrong-arm lock-in remained. With four arms and arm order controlled it was worse than Q-learning. An apparent
   advantage in the first four-armed run (`bandit_multi`) was a positional artifact, exposed by the arm-order control
   (`bandit_perm`).
 - **Number comparison.** Competitive when a number is one intensity, including when evaluation pairs are strictly
@@ -24,20 +23,20 @@ Numbers, confidence intervals and caveats are in the paper and in `paper/tables/
   the KC code itself is task-dependent (on digit comparison with 5 and 9 digits, raw inputs work better than the KC code).
 - **Maze.** The ungated connectome agent degrades from 72 states. Training gates bring it within 0.02 of Q-learning at
   72 states and on the 113-state fixed start, also when the baselines receive the same binary feedback, but not on
-  independent layouts of about 113 states or at 316 states. An MLP given the same binary feedback solves the 316-state
-  maze, so that failure is not a property of the task.
+  independent layouts of about 113 states or at 316 states. An MLP given the same binary feedback reaches 0.891
+  success on the 316-state maze, showing that the connectome's failure is not an inherent impossibility of the task.
 - **Tic-tac-toe.** Far below Q-learning and the MLP on minimax coverage in every tier. The odd `gate_visit` result against
   the heuristic opponent is a role effect (draws as first mover, loses as second mover).
 - **Addition.** Single-digit: above raw-input baselines, below baselines given oracle features. Two-digit: no learning by
   the native rule, although a ridge readout on the KC code reaches 0.77 on held-out operand pairs.
 - **Update strength and frequency.** Shrinking the native step to a tenth raises ungated maze success from 0.08 to 0.81
   (5 seeds) but does not remove collapses.
-- **Wiring control.** Degree-preserving shuffles of the ALPN-to-KC wiring lower accuracy on number comparison and
-  single-digit addition but not on two-digit addition.
+- **Wiring control.** Degree-preserving shuffles lower accuracy on number comparison and single-digit addition; on
+  two-digit addition, the real circuit performs worse than the shuffled circuits.
 
 ## Requirements
 
-- Linux, Python 3 (exact versions in `requirements.txt` and in every run's `manifest.json`).
+- Linux and Python 3.12.3. Package versions are pinned in `requirements.txt`; run manifests record the interpreter, package versions and execution environment.
 - The fly-brain simulator at commit `0ef5d843431f0a4bec8a199d6aca0a5a02f6e449`. The data files it ships
   (`mb_circuit.npz`, `mb_groups*.npz`) are used directly.
 - All results were produced on an Intel Core i9-9900KF (8 cores / 16 threads), 62 GB RAM, no GPU.
@@ -110,8 +109,14 @@ Wiring controls use environment variables handled in `core/paths.py`: `FLY_CIRCU
 python -m scripts.readouts.run_readouts --tuning --workers 4      # choose ALPHA_DELTA, edit it, commit
 python -m scripts.readouts.run_readouts --workers 14
 
-# plasticity sweep (update strength g and frequency f)            <TODO: script name from `git ls-files scripts`>
-# addition with held-out operand pairs                            <TODO: script name from `git ls-files scripts`>
+# plasticity sweep (update strength g and frequency f)
+python -m scripts.plasticity.run_plasticity
+
+# addition with held-out operand pairs
+python -m scripts.addition.run_addition_disjoint
+
+# KC-code overlap diagnostic (addition_diag; standalone rerun)
+python -m scripts.addition.run_addition_diagnostic
 
 # independent maze layouts (add --ungated for the slow ungated agent)
 python -m scripts.gridworld.run_gridworld_layouts --workers 14
@@ -143,15 +148,14 @@ python -m analysis.readout_tables      # readouts on KC codes
 python -m analysis.eval_overlap        # training/evaluation overlap in the main experiments
 python -m analysis.disjoint_cmp_tables # disjoint number comparison, with a reproduction check against the readouts
 python -m analysis.binary_maze_tables  # binary-feedback maze baselines
+python -m analysis.layout_tables       # maze layout tables
 python -m analysis.layouts_binary_tables
+python -m analysis.plasticity_tables   # plasticity sweep
 python -m analysis.roles_tables        # role breakdown (with a reproduction check against the main runs)
 python -m analysis.figures             # paper/figures/*.pdf and *.png (needs the tables above)
 python -m analysis.cost <runs_dir>              # per-task timing from any runs directory
 python -m analysis.compare_runs <old_runs_dir>  # determinism check against an earlier run of the same ids
 ```
-
-The plasticity-sweep and layout table scripts from the follow-up phase are in `analysis/` as well
-(`git ls-files analysis`).
 
 ## Repository layout
 
@@ -203,9 +207,10 @@ diagnostics are not part of this pipeline (tag `v1-article`).
 ## Acknowledgements
 
 FlyWire connectome (Dorkenwald et al., *Nature* 2024) and the `fly-brain` simulator (`onnxaa/fly-brain`). Parts of the code,
-the analysis planning and the drafting of the manuscript were done with the assistance of an AI model (Claude, Anthropic);
-the author is responsible for all content.
+the analysis planning and the drafting of the manuscript were done with the assistance of Claude (Anthropic). ChatGPT
+(OpenAI; GPT-6) was used for critical manuscript review and editorial revision. The author is responsible for all content.
 
 ## Citation
 
 See `CITATION.cff`.
+
