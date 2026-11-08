@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+task & connectome [const] & connectome [full] & connectome [raw] \\
+\midrule
+digits\_2 & 0.552 [0.424, 0.685] & 0.507 [0.478, 0.537] & 0.546 [0.410, 0.684] \\
+digits\_5 & 0.482 [0.401, 0.565] & 0.493 [0.457, 0.524] & 0.490 [0.408, 0.570] \\
+digits\_9 & 0.503 [0.465, 0.545] & 0.510 [0.479, 0.541] & 0.516 [0.475, 0.556] \\
+knob\_n49 & 0.541 [0.324, 0.749] & 0.508 [0.450, 0.567] & 0.562 [0.343, 0.767] \\
+single\_online & 0.526 [0.493, 0.559] & 0.528 [0.476, 0.572] & 0.517 [0.491, 0.543] \\
+two\_online & 0.520 [0.505, 0.538] & 0.510 [0.486, 0.531] & 0.512 [0.496, 0.526] \\
+\bottomrule
+\end{tabular}
+\caption{Native rule with full, constant-offset-only and no calibration: eval\_acc\_pre (mean [95\% CI], 10 seeds)}
+\label{tab:nocalib_eval_acc_pre}
+\end{table}

@@ -1,0 +1,30 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+const - full & digits\_2 & eval\_acc\_final & 10 & 0.0325 & 0.017 & 0.048 & True \\
+const - full & digits\_5 & eval\_acc\_final & 10 & 0.029 & -0.0215 & 0.095 & False \\
+const - full & digits\_9 & eval\_acc\_final & 10 & 0.0295 & -0.054 & 0.1185 & False \\
+const - full & knob\_n49 & eval\_acc\_final & 10 & 0.0195 & 0.013 & 0.0265 & True \\
+const - full & single\_online & eval\_acc\_final & 10 & -0.0497 & -0.1027 & 0.034 & False \\
+const - full & two\_online & eval\_acc\_final & 10 & 0.0097 & -0.026 & 0.0483 & False \\
+raw - full & digits\_2 & eval\_acc\_final & 10 & 0.038 & 0.0185 & 0.0595 & True \\
+raw - full & digits\_5 & eval\_acc\_final & 10 & -0.024 & -0.0675 & 0.027 & False \\
+raw - full & digits\_9 & eval\_acc\_final & 10 & -0.041 & -0.1325 & 0.055 & False \\
+raw - full & knob\_n49 & eval\_acc\_final & 10 & 0.022 & 0.016 & 0.0285 & True \\
+raw - full & single\_online & eval\_acc\_final & 10 & 0.0017 & -0.062 & 0.0577 & False \\
+raw - full & two\_online & eval\_acc\_final & 10 & 0.0683 & 0.0297 & 0.1067 & True \\
+raw - const & digits\_2 & eval\_acc\_final & 10 & 0.0055 & -0.0065 & 0.0185 & False \\
+raw - const & digits\_5 & eval\_acc\_final & 10 & -0.053 & -0.0755 & -0.0315 & True \\
+raw - const & digits\_9 & eval\_acc\_final & 10 & -0.0705 & -0.1255 & -0.016 & True \\
+raw - const & knob\_n49 & eval\_acc\_final & 10 & 0.0025 & 0.0005 & 0.0045 & True \\
+raw - const & single\_online & eval\_acc\_final & 10 & 0.0513 & -0.038 & 0.13 & False \\
+raw - const & two\_online & eval\_acc\_final & 10 & 0.0587 & 0.0063 & 0.106 & True \\
+\bottomrule
+\end{tabular}
+\caption{Accuracy after training without calibration minus with it (paired on task and seed)}
+\label{tab:nocalib_paired}
+\end{table}
