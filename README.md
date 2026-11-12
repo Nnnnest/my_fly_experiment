@@ -138,6 +138,14 @@ python -m scripts.gridworld.run_gridworld_layouts_binary --workers 14
 
 # role breakdown of tic-tac-toe play against the heuristic opponent
 python -m scripts.tictactoe.run_tictactoe_roles --workers 14
+
+bash scripts/check_followup2.sh                                           # equivalence checks + smoke runs
+python -m scripts.readouts.run_readouts_constrained --tuning --workers 14 # choose N0_DECAY
+python -m analysis.constrained_tables --tuning                            # edit N0_DECAY in the script, commit
+bash scripts/run_followup2.sh 14                                          # kc_diag, comparison_capacity, readouts_constrained
+python -m analysis.kc_diag_tables
+python -m analysis.constrained_tables
+python -m analysis.capacity_tables
 ```
 
 ### Analysis (run after the batches)
