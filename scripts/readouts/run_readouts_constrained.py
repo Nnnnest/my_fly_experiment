@@ -32,7 +32,7 @@ import scripts.addition.run_addition as ra
 
 EXPERIMENT = "readouts_constrained"
 ROUNDS, BIG = 800, 5
-N0_DECAY = 10.0            # PLACEHOLDER: set from `analysis.constrained_tables --tuning`, then commit
+N0_DECAY = 30.0
 TUNE_N0 = [3.0, 10.0, 30.0, 100.0]
 WIDTHS, SPLITS = ("single", "two"), ("main", "disjoint")
 
