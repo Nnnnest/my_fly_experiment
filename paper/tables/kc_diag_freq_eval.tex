@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+task & eval\_frac\_zero & eval\_frac\_lt\_k & eval\_frac\_mismatch & eval\_frac\_all\_kc & eval\_frac\_none & eval\_frac\_same & eval\_frac\_tie\_extended & eval\_mean\_pos & eval\_mean\_plast & eval\_mean\_read \\
+\midrule
+single\_online & 0.005 [0.003, 0.007] & 0.005 [0.003, 0.007] & 0.005 [0.003, 0.007] & 0.005 [0.003, 0.007] & 0.000 [0.000, 0.000] & 0.995 [0.993, 0.997] & 0.048 [0.040, 0.056] & 4811.437 [4803.061, 4820.923] & 282.675 [272.841, 290.895] & 256.790 [256.337, 257.307] \\
+two\_online & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 1.000 [1.000, 1.000] & 0.032 [0.027, 0.038] & 4827.216 [4824.573, 4829.378] & 258.042 [258.033, 258.052] & 258.042 [258.033, 258.052] \\
+\bottomrule
+\end{tabular}
+\caption{Plasticity-mask diagnostics on evaluation inputs (input-only KC code): mean [95\% CI] over 10 seeds}
+\label{tab:kc_diag_freq_eval}
+\end{table}

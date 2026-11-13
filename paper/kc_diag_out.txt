@@ -1,0 +1,41 @@
+status: {'ok': 60} | commits: {'baa8a3d786cdd6a16c85a591f1f07382c34e760c': 60} | dirty: 0
+n_kc, k: [(5177, 258)] | cache vs simulator KC activity disagreed in 48000 updates (0 = US drive does not reach KCs)
+
+reproduction check vs runs/addition (20 matched runs; must be 0): 0.0 0.0
+
+--- kc_diag_freq_train (2 rows) ---
+         task      train_frac_zero      train_frac_lt_k  train_frac_mismatch    train_frac_all_kc      train_frac_none      train_frac_same train_frac_tie_extended                train_mean_pos           train_mean_plast            train_mean_read
+single_online 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000]    0.017 [0.014, 0.020] 5138.704 [5138.312, 5139.152] 258.025 [258.021, 258.029] 258.025 [258.021, 258.029]
+   two_online 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000]    0.005 [0.004, 0.007] 5138.693 [5138.114, 5139.326] 258.005 [258.003, 258.007] 258.005 [258.003, 258.007]
+
+--- kc_diag_freq_eval (2 rows) ---
+         task       eval_frac_zero       eval_frac_lt_k   eval_frac_mismatch     eval_frac_all_kc       eval_frac_none       eval_frac_same eval_frac_tie_extended                 eval_mean_pos            eval_mean_plast             eval_mean_read
+single_online 0.005 [0.003, 0.007] 0.005 [0.003, 0.007] 0.005 [0.003, 0.007] 0.005 [0.003, 0.007] 0.000 [0.000, 0.000] 0.995 [0.993, 0.997]   0.048 [0.040, 0.056] 4811.437 [4803.061, 4820.923] 282.675 [272.841, 290.895] 256.790 [256.337, 257.307]
+   two_online 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1.000 [1.000, 1.000]   0.032 [0.027, 0.038] 4827.216 [4824.573, 4829.378] 258.042 [258.033, 258.052] 258.042 [258.033, 258.052]
+
+--- kc_diag_updates (2 rows) ---
+         task  train_frac_zero_pos  train_frac_zero_neg              mean_n_sel_edges          mean_n_changed_edges      mean_rel_change
+single_online 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1474.379 [1462.838, 1484.400] 3858.210 [3792.985, 3927.486] 0.001 [0.001, 0.001]
+   two_online 0.000 [0.000, 0.000] 0.000 [0.000, 0.000] 1493.094 [1480.026, 1506.049] 6736.776 [6618.814, 6836.007] 0.002 [0.002, 0.002]
+
+--- kc_diag_eval_acc_final (2 rows) ---
+         task connectome [exclude_mismatch] connectome [exclude_zero] connectome [reproduce]
+single_online          0.616 [0.588, 0.646]      0.616 [0.588, 0.646]   0.616 [0.588, 0.646]
+   two_online          0.514 [0.496, 0.529]      0.514 [0.496, 0.529]   0.514 [0.496, 0.529]
+
+--- kc_diag_n_skipped (2 rows) ---
+         task connectome [exclude_mismatch] connectome [exclude_zero] connectome [reproduce]
+single_online          0.000 [0.000, 0.000]      0.000 [0.000, 0.000]   0.000 [0.000, 0.000]
+   two_online          0.000 [0.000, 0.000]      0.000 [0.000, 0.000]   0.000 [0.000, 0.000]
+
+--- kc_diag_n_trained (2 rows) ---
+         task connectome [exclude_mismatch]  connectome [exclude_zero]     connectome [reproduce]
+single_online    800.000 [800.000, 800.000] 800.000 [800.000, 800.000] 800.000 [800.000, 800.000]
+   two_online    800.000 [800.000, 800.000] 800.000 [800.000, 800.000] 800.000 [800.000, 800.000]
+
+--- kc_diag_paired (4 rows) ---
+                  comparison          task         metric  n  mean_diff  ci_lo  ci_hi  excludes_zero
+    exclude_zero - reproduce single_online eval_acc_final 10        0.0    0.0    0.0          False
+    exclude_zero - reproduce    two_online eval_acc_final 10        0.0    0.0    0.0          False
+exclude_mismatch - reproduce single_online eval_acc_final 10        0.0    0.0    0.0          False
+exclude_mismatch - reproduce    two_online eval_acc_final 10        0.0    0.0    0.0          False

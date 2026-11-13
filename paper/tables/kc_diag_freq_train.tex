@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+task & train\_frac\_zero & train\_frac\_lt\_k & train\_frac\_mismatch & train\_frac\_all\_kc & train\_frac\_none & train\_frac\_same & train\_frac\_tie\_extended & train\_mean\_pos & train\_mean\_plast & train\_mean\_read \\
+\midrule
+single\_online & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 1.000 [1.000, 1.000] & 0.017 [0.014, 0.020] & 5138.704 [5138.312, 5139.152] & 258.025 [258.021, 258.029] & 258.025 [258.021, 258.029] \\
+two\_online & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 0.000 [0.000, 0.000] & 1.000 [1.000, 1.000] & 0.005 [0.004, 0.007] & 5138.693 [5138.114, 5139.326] & 258.005 [258.003, 258.007] & 258.005 [258.003, 258.007] \\
+\bottomrule
+\end{tabular}
+\caption{Plasticity-mask diagnostics on training updates (US drive included in the KC activity): mean [95\% CI] over 10 seeds}
+\label{tab:kc_diag_freq_train}
+\end{table}

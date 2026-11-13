@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+comparison & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+drop(2->5) fixed - drop(2->5) g16 & 10 & -0.005 & -0.14 & 0.112 & False \\
+drop(2->9) fixed - drop(2->9) g16 & 10 & 0.277 & 0.173 & 0.365 & True \\
+\bottomrule
+\end{tabular}
+\caption{Does the digit-count effect shrink when per-position capacity is held constant? (positive = fixed degrades more)}
+\label{tab:capacity_drop_paired}
+\end{table}

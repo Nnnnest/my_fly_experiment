@@ -1,0 +1,5 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+exclude_zero - reproduce,single_online,eval_acc_final,10,0.0,0.0,0.0,False
+exclude_zero - reproduce,two_online,eval_acc_final,10,0.0,0.0,0.0,False
+exclude_mismatch - reproduce,single_online,eval_acc_final,10,0.0,0.0,0.0,False
+exclude_mismatch - reproduce,two_online,eval_acc_final,10,0.0,0.0,0.0,False

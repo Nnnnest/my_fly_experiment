@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+exclude\_zero - reproduce & single\_online & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+exclude\_zero - reproduce & two\_online & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+exclude\_mismatch - reproduce & single\_online & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+exclude\_mismatch - reproduce & two\_online & eval\_acc\_final & 10 & 0.0 & 0.0 & 0.0 & False \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences in held-out accuracy (same seeds, same evaluation set)}
+\label{tab:kc_diag_paired}
+\end{table}

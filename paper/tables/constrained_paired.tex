@@ -1,0 +1,64 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrr}
+\toprule
+comparison & task & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+ridge\_1x - native & single\_disjoint & 10 & 0.374 & 0.3437 & 0.3963 & True \\
+nonneg\_1x - ridge\_1x (sign constraint) & single\_disjoint & 10 & -0.0727 & -0.0977 & -0.0503 & True \\
+anat\_1x - nonneg\_1x (anatomical channels) & single\_disjoint & 10 & 0.068 & 0.0463 & 0.0943 & True \\
+anat\_1x - native & single\_disjoint & 10 & 0.3693 & 0.3387 & 0.393 & True \\
+anat\_5x - native & single\_disjoint & 10 & 0.3757 & 0.344 & 0.3997 & True \\
+anat\_5x - anat\_1x & single\_disjoint & 10 & 0.0063 & 0.0027 & 0.0103 & True \\
+rule\_native - native (replica check) & single\_disjoint & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_no\_renorm - rule\_native & single\_disjoint & 10 & -0.0123 & -0.0173 & -0.0077 & True \\
+rule\_push\_pull - rule\_native & single\_disjoint & 10 & 0.0393 & -0.0437 & 0.1007 & False \\
+rule\_decay - rule\_native & single\_disjoint & 10 & -0.0033 & -0.014 & 0.0057 & False \\
+rule\_mask\_active - rule\_native & single\_disjoint & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_relax\_all - rule\_native & single\_disjoint & 10 & -0.1097 & -0.146 & -0.0807 & True \\
+rule\_relax\_all - ridge\_1x & single\_disjoint & 10 & -0.4837 & -0.4993 & -0.467 & True \\
+ridge\_1x - native & single\_main & 10 & 0.379 & 0.35 & 0.4063 & True \\
+nonneg\_1x - ridge\_1x (sign constraint) & single\_main & 10 & -0.0653 & -0.078 & -0.054 & True \\
+anat\_1x - nonneg\_1x (anatomical channels) & single\_main & 10 & 0.0613 & 0.0487 & 0.0747 & True \\
+anat\_1x - native & single\_main & 10 & 0.375 & 0.3443 & 0.4023 & True \\
+anat\_5x - native & single\_main & 10 & 0.3803 & 0.3507 & 0.4083 & True \\
+anat\_5x - anat\_1x & single\_main & 10 & 0.0053 & 0.0023 & 0.0083 & True \\
+rule\_native - native (replica check) & single\_main & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_no\_renorm - rule\_native & single\_main & 10 & -0.01 & -0.0163 & -0.004 & True \\
+rule\_push\_pull - rule\_native & single\_main & 10 & 0.0353 & -0.006 & 0.0767 & False \\
+rule\_decay - rule\_native & single\_main & 10 & 0.0037 & 0.0007 & 0.007 & True \\
+rule\_mask\_active - rule\_native & single\_main & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_relax\_all - rule\_native & single\_main & 10 & -0.0883 & -0.1373 & -0.047 & True \\
+rule\_relax\_all - ridge\_1x & single\_main & 10 & -0.4673 & -0.4963 & -0.437 & True \\
+ridge\_1x - native & two\_disjoint & 10 & 0.2503 & 0.2297 & 0.273 & True \\
+nonneg\_1x - ridge\_1x (sign constraint) & two\_disjoint & 10 & -0.0137 & -0.0253 & -0.0013 & True \\
+anat\_1x - nonneg\_1x (anatomical channels) & two\_disjoint & 10 & 0.017 & 0.005 & 0.029 & True \\
+anat\_1x - native & two\_disjoint & 10 & 0.2537 & 0.2297 & 0.2803 & True \\
+anat\_5x - native & two\_disjoint & 10 & 0.3047 & 0.2837 & 0.3267 & True \\
+anat\_5x - anat\_1x & two\_disjoint & 10 & 0.051 & 0.0387 & 0.0637 & True \\
+rule\_native - native (replica check) & two\_disjoint & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_no\_renorm - rule\_native & two\_disjoint & 10 & -0.0087 & -0.0117 & -0.0057 & True \\
+rule\_push\_pull - rule\_native & two\_disjoint & 10 & 0.017 & -0.003 & 0.0403 & False \\
+rule\_decay - rule\_native & two\_disjoint & 10 & 0.003 & -0.001 & 0.0077 & False \\
+rule\_mask\_active - rule\_native & two\_disjoint & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_relax\_all - rule\_native & two\_disjoint & 10 & -0.019 & -0.0467 & 0.006 & False \\
+rule\_relax\_all - ridge\_1x & two\_disjoint & 10 & -0.2693 & -0.292 & -0.2463 & True \\
+ridge\_1x - native & two\_main & 10 & 0.2367 & 0.2157 & 0.2617 & True \\
+nonneg\_1x - ridge\_1x (sign constraint) & two\_main & 10 & -0.014 & -0.0323 & 0.003 & False \\
+anat\_1x - nonneg\_1x (anatomical channels) & two\_main & 10 & 0.0237 & 0.0113 & 0.037 & True \\
+anat\_1x - native & two\_main & 10 & 0.2463 & 0.224 & 0.27 & True \\
+anat\_5x - native & two\_main & 10 & 0.3113 & 0.2953 & 0.328 & True \\
+anat\_5x - anat\_1x & two\_main & 10 & 0.065 & 0.0513 & 0.0787 & True \\
+rule\_native - native (replica check) & two\_main & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_no\_renorm - rule\_native & two\_main & 10 & -0.0117 & -0.0157 & -0.0077 & True \\
+rule\_push\_pull - rule\_native & two\_main & 10 & 0.002 & -0.0283 & 0.038 & False \\
+rule\_decay - rule\_native & two\_main & 10 & 0.0063 & -0.0027 & 0.0153 & False \\
+rule\_mask\_active - rule\_native & two\_main & 10 & 0.0 & 0.0 & 0.0 & False \\
+rule\_relax\_all - rule\_native & two\_main & 10 & 0.004 & -0.0233 & 0.0343 & False \\
+rule\_relax\_all - ridge\_1x & two\_main & 10 & -0.2327 & -0.2593 & -0.2047 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences in held-out accuracy (matched on task, seed)}
+\label{tab:constrained_paired}
+\end{table}

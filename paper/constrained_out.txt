@@ -1,0 +1,80 @@
+status: {'ok': 40} | commits: {'baa8a3d786cdd6a16c85a591f1f07382c34e760c': 40} | dirty: 0
+
+reproduction checks (max |difference|, must be 0 unless noted)
+  rule_native vs native, weights: 0.0 | accuracy: 0.0
+  single_main vs runs/readouts: ridge_1x 0.00333, ridge_5x 0, native 0
+  two_main vs runs/readouts: ridge_1x 0.0167, ridge_5x 0.00667, native 0
+  single_disjoint vs runs/addition_disjoint: ridge_1x 0, ridge_5x 0, native 0
+  two_disjoint vs runs/addition_disjoint: ridge_1x 0, ridge_5x 0, native 0
+decay N0 used: see scripts/readouts/run_readouts_constrained.py (N0_DECAY)
+
+--- constrained_acc (4 rows) ---
+           task        acc_untrained           acc_native         acc_ridge_1x         acc_ridge_5x        acc_nonneg_1x        acc_nonneg_5x          acc_anat_1x          acc_anat_5x      acc_rule_native   acc_rule_no_renorm   acc_rule_push_pull       acc_rule_decay acc_rule_mask_active   acc_rule_relax_all
+single_disjoint 0.528 [0.476, 0.572] 0.609 [0.581, 0.644] 0.983 [0.970, 0.993] 0.990 [0.983, 0.996] 0.910 [0.886, 0.931] 0.918 [0.899, 0.937] 0.978 [0.967, 0.988] 0.984 [0.975, 0.993] 0.609 [0.581, 0.644] 0.596 [0.572, 0.628] 0.648 [0.590, 0.700] 0.605 [0.575, 0.642] 0.609 [0.581, 0.644] 0.499 [0.488, 0.512]
+    single_main 0.529 [0.492, 0.572] 0.616 [0.588, 0.646] 0.995 [0.992, 0.998] 1.000 [0.999, 1.000] 0.930 [0.916, 0.942] 0.941 [0.929, 0.953] 0.991 [0.987, 0.994] 0.996 [0.994, 0.999] 0.616 [0.588, 0.646] 0.606 [0.580, 0.633] 0.651 [0.607, 0.700] 0.620 [0.592, 0.651] 0.616 [0.588, 0.646] 0.528 [0.499, 0.558]
+   two_disjoint 0.510 [0.486, 0.531] 0.517 [0.500, 0.534] 0.767 [0.755, 0.780] 0.810 [0.795, 0.822] 0.754 [0.742, 0.767] 0.795 [0.778, 0.811] 0.771 [0.759, 0.783] 0.822 [0.808, 0.835] 0.517 [0.500, 0.534] 0.508 [0.491, 0.526] 0.534 [0.513, 0.558] 0.520 [0.501, 0.540] 0.517 [0.500, 0.534] 0.498 [0.484, 0.511]
+       two_main 0.526 [0.492, 0.559] 0.514 [0.496, 0.529] 0.751 [0.736, 0.767] 0.823 [0.806, 0.842] 0.737 [0.722, 0.753] 0.786 [0.769, 0.807] 0.761 [0.743, 0.777] 0.826 [0.811, 0.842] 0.514 [0.496, 0.529] 0.503 [0.485, 0.518] 0.516 [0.497, 0.540] 0.521 [0.505, 0.536] 0.514 [0.496, 0.529] 0.518 [0.502, 0.537]
+
+--- constrained_paired (52 rows) ---
+                               comparison            task  n  mean_diff   ci_lo   ci_hi  excludes_zero
+                        ridge_1x - native single_disjoint 10     0.3740  0.3437  0.3963           True
+   nonneg_1x - ridge_1x (sign constraint) single_disjoint 10    -0.0727 -0.0977 -0.0503           True
+anat_1x - nonneg_1x (anatomical channels) single_disjoint 10     0.0680  0.0463  0.0943           True
+                         anat_1x - native single_disjoint 10     0.3693  0.3387  0.3930           True
+                         anat_5x - native single_disjoint 10     0.3757  0.3440  0.3997           True
+                        anat_5x - anat_1x single_disjoint 10     0.0063  0.0027  0.0103           True
+     rule_native - native (replica check) single_disjoint 10     0.0000  0.0000  0.0000          False
+             rule_no_renorm - rule_native single_disjoint 10    -0.0123 -0.0173 -0.0077           True
+             rule_push_pull - rule_native single_disjoint 10     0.0393 -0.0437  0.1007          False
+                 rule_decay - rule_native single_disjoint 10    -0.0033 -0.0140  0.0057          False
+           rule_mask_active - rule_native single_disjoint 10     0.0000  0.0000  0.0000          False
+             rule_relax_all - rule_native single_disjoint 10    -0.1097 -0.1460 -0.0807           True
+                rule_relax_all - ridge_1x single_disjoint 10    -0.4837 -0.4993 -0.4670           True
+                        ridge_1x - native     single_main 10     0.3790  0.3500  0.4063           True
+   nonneg_1x - ridge_1x (sign constraint)     single_main 10    -0.0653 -0.0780 -0.0540           True
+anat_1x - nonneg_1x (anatomical channels)     single_main 10     0.0613  0.0487  0.0747           True
+                         anat_1x - native     single_main 10     0.3750  0.3443  0.4023           True
+                         anat_5x - native     single_main 10     0.3803  0.3507  0.4083           True
+                        anat_5x - anat_1x     single_main 10     0.0053  0.0023  0.0083           True
+     rule_native - native (replica check)     single_main 10     0.0000  0.0000  0.0000          False
+             rule_no_renorm - rule_native     single_main 10    -0.0100 -0.0163 -0.0040           True
+             rule_push_pull - rule_native     single_main 10     0.0353 -0.0060  0.0767          False
+                 rule_decay - rule_native     single_main 10     0.0037  0.0007  0.0070           True
+           rule_mask_active - rule_native     single_main 10     0.0000  0.0000  0.0000          False
+             rule_relax_all - rule_native     single_main 10    -0.0883 -0.1373 -0.0470           True
+                rule_relax_all - ridge_1x     single_main 10    -0.4673 -0.4963 -0.4370           True
+                        ridge_1x - native    two_disjoint 10     0.2503  0.2297  0.2730           True
+   nonneg_1x - ridge_1x (sign constraint)    two_disjoint 10    -0.0137 -0.0253 -0.0013           True
+anat_1x - nonneg_1x (anatomical channels)    two_disjoint 10     0.0170  0.0050  0.0290           True
+                         anat_1x - native    two_disjoint 10     0.2537  0.2297  0.2803           True
+                         anat_5x - native    two_disjoint 10     0.3047  0.2837  0.3267           True
+                        anat_5x - anat_1x    two_disjoint 10     0.0510  0.0387  0.0637           True
+     rule_native - native (replica check)    two_disjoint 10     0.0000  0.0000  0.0000          False
+             rule_no_renorm - rule_native    two_disjoint 10    -0.0087 -0.0117 -0.0057           True
+             rule_push_pull - rule_native    two_disjoint 10     0.0170 -0.0030  0.0403          False
+                 rule_decay - rule_native    two_disjoint 10     0.0030 -0.0010  0.0077          False
+           rule_mask_active - rule_native    two_disjoint 10     0.0000  0.0000  0.0000          False
+             rule_relax_all - rule_native    two_disjoint 10    -0.0190 -0.0467  0.0060          False
+                rule_relax_all - ridge_1x    two_disjoint 10    -0.2693 -0.2920 -0.2463           True
+                        ridge_1x - native        two_main 10     0.2367  0.2157  0.2617           True
+   nonneg_1x - ridge_1x (sign constraint)        two_main 10    -0.0140 -0.0323  0.0030          False
+anat_1x - nonneg_1x (anatomical channels)        two_main 10     0.0237  0.0113  0.0370           True
+                         anat_1x - native        two_main 10     0.2463  0.2240  0.2700           True
+                         anat_5x - native        two_main 10     0.3113  0.2953  0.3280           True
+                        anat_5x - anat_1x        two_main 10     0.0650  0.0513  0.0787           True
+     rule_native - native (replica check)        two_main 10     0.0000  0.0000  0.0000          False
+             rule_no_renorm - rule_native        two_main 10    -0.0117 -0.0157 -0.0077           True
+             rule_push_pull - rule_native        two_main 10     0.0020 -0.0283  0.0380          False
+                 rule_decay - rule_native        two_main 10     0.0063 -0.0027  0.0153          False
+           rule_mask_active - rule_native        two_main 10     0.0000  0.0000  0.0000          False
+             rule_relax_all - rule_native        two_main 10     0.0040 -0.0233  0.0343          False
+                rule_relax_all - ridge_1x        two_main 10    -0.2327 -0.2593 -0.2047           True
+
+--- constrained_params (4 rows) ---
+           task   n_kc  n_km_edges  n_kc_app  n_kc_avo  n_params_ridge  n_params_nonneg  n_params_anat  nnz_nonneg_1x  nnz_nonneg_5x  nnz_anat_1x  nnz_anat_5x
+single_disjoint 5177.0     62261.0    5177.0    5102.0          5178.0           5178.0        10280.0          496.1          509.3       2002.7       2039.1
+    single_main 5177.0     62261.0    5177.0    5102.0          5178.0           5178.0        10280.0          373.1          417.5       2026.4       2048.6
+   two_disjoint 5177.0     62261.0    5177.0    5102.0          5178.0           5178.0        10280.0         1369.5         1561.5       2432.5       2941.9
+       two_main 5177.0     62261.0    5177.0    5102.0          5178.0           5178.0        10280.0         1339.3         1552.9       2581.0       3081.9
+
+per-seed accuracies written to paper/tables/constrained_per_seed.csv

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrrrrrrrrr}
+\toprule
+task & n\_kc & n\_km\_edges & n\_kc\_app & n\_kc\_avo & n\_params\_ridge & n\_params\_nonneg & n\_params\_anat & nnz\_nonneg\_1x & nnz\_nonneg\_5x & nnz\_anat\_1x & nnz\_anat\_5x \\
+\midrule
+single\_disjoint & 5177.0 & 62261.0 & 5177.0 & 5102.0 & 5178.0 & 5178.0 & 10280.0 & 496.1 & 509.3 & 2002.7 & 2039.1 \\
+single\_main & 5177.0 & 62261.0 & 5177.0 & 5102.0 & 5178.0 & 5178.0 & 10280.0 & 373.1 & 417.5 & 2026.4 & 2048.6 \\
+two\_disjoint & 5177.0 & 62261.0 & 5177.0 & 5102.0 & 5178.0 & 5178.0 & 10280.0 & 1369.5 & 1561.5 & 2432.5 & 2941.9 \\
+two\_main & 5177.0 & 62261.0 & 5177.0 & 5102.0 & 5178.0 & 5178.0 & 10280.0 & 1339.3 & 1552.9 & 2581.0 & 3081.9 \\
+\bottomrule
+\end{tabular}
+\caption{Trainable parameters and number of non-zero constrained weights (mean over seeds)}
+\label{tab:constrained_params}
+\end{table}

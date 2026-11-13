@@ -1,0 +1,20 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome [g16] - connectome [fixed],digits_2,eval_acc_final,10,-0.277,-0.365,-0.17298750000000018,True
+connectome [g16] - connectome [fixed],digits_3,eval_acc_final,10,-0.2575,-0.3385,-0.1624875000000002,True
+connectome [g16] - connectome [fixed],digits_4,eval_acc_final,10,-0.21949999999999997,-0.31249999999999994,-0.121,True
+connectome [g16] - connectome [fixed],digits_5,eval_acc_final,10,-0.282,-0.395,-0.16599999999999998,True
+connectome [g16] - connectome [fixed],digits_9,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [g30] - connectome [fixed],digits_2,eval_acc_final,10,-0.16350000000000003,-0.2250125000000001,-0.0979875000000002,True
+connectome [g30] - connectome [fixed],digits_3,eval_acc_final,10,-0.22750000000000004,-0.29750000000000004,-0.15550000000000003,True
+connectome [g30] - connectome [fixed],digits_4,eval_acc_final,10,-0.19499999999999998,-0.27149999999999996,-0.11698750000000015,True
+connectome [g30] - connectome [fixed],digits_5,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [g16] - connectome_notrain [g16],digits_2,eval_acc_final,10,0.146,0.07050000000000003,0.23500000000000001,True
+connectome [g16] - connectome_notrain [g16],digits_3,eval_acc_final,10,0.13099999999999995,0.07149999999999997,0.19149999999999995,True
+connectome [g16] - connectome_notrain [g16],digits_4,eval_acc_final,10,0.12,0.057499999999999996,0.188,True
+connectome [g16] - connectome_notrain [g16],digits_5,eval_acc_final,10,0.02,-0.06401250000000001,0.10550000000000001,False
+connectome [g16] - connectome_notrain [g16],digits_9,eval_acc_final,10,0.18449999999999997,0.11549999999999998,0.251,True
+connectome [fixed] - connectome [main] (reproduction),digits_2,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [fixed] - connectome [main] (reproduction),digits_3,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [fixed] - connectome [main] (reproduction),digits_4,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [fixed] - connectome [main] (reproduction),digits_5,eval_acc_final,10,0.0,0.0,0.0,False
+connectome [fixed] - connectome [main] (reproduction),digits_9,eval_acc_final,10,0.0,0.0,0.0,False
