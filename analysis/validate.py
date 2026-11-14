@@ -9,8 +9,7 @@ from core import paths
 from core.config import FINAL_SEEDS
 from analysis.common import save_table
 
-EXPERIMENTS = ["bandit", "comparison", "gridworld", "tictactoe", "addition", "addition_diag", "comparison_disjoint", "gridworld_binary", "tictactoe_roles", "kc_diag", "readouts_constrained", "comparison_capacity"]
-
+EXPERIMENTS = ["bandit", "comparison", "gridworld", "tictactoe", "addition", "addition_diag", "comparison_disjoint", "gridworld_binary", "tictactoe_roles", "kc_diag", "readouts_constrained", "comparison_capacity", "addition_dan_kc", "bandit_punish"]
 
 def read_manifests(exp):
     base = os.path.join(paths.RUNS_DIR, exp)
