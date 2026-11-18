@@ -8,4 +8,5 @@ runs/
 runs_*/
 assets/circuits/
 runs_pre_freeze/
+dist/
 *.tar.gz

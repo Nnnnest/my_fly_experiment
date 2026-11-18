@@ -1,16 +1,18 @@
+
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below. For the experimental run records, cite the separate Zenodo dataset."
-title: "What a Drosophila mushroom-body connectome model can and cannot learn: code and run records"
+title: "What a Drosophila mushroom-body connectome model can and cannot learn in a simulator: a benchmark against Q-learning and small neural networks"
 type: software
 authors:
   - family-names: Zudov
     given-names: Nestor
+    affiliation: "University of Nicosia"
     orcid: "https://orcid.org/0009-0007-0856-5339"
 repository-code: "https://github.com/Nnnnest/my_fly_experiment"
 license: MIT
-version: "2.1"
-date-released: "2026-11-03"
-doi: "10.5281/zenodo.23919513"
+version: "2.3"
+date-released: "2026-11-18"
+doi: "10.5281/zenodo.23492904"
 keywords:
   - Drosophila
   - connectome

@@ -1,16 +1,18 @@
-# What a *Drosophila* mushroom-body connectome model can and cannot learn
+# What a Drosophila mushroom-body connectome model can and cannot learn in a simulator: a benchmark against Q-learning and small neural networks
 
 Code, run records and analysis for a controlled comparison of the `mb` mode of the
 [fly-brain](https://github.com/onnxaa/fly-brain) simulator (FlyWire mushroom-body circuit, 6,289 neurons) against
 tabular Q-learning, a linear learner and a small MLP on bandit, number-comparison, maze, tic-tac-toe and addition tasks,
 with diagnostics of the Kenyon-cell code, of the plasticity rule and of the ALPN-to-KC wiring.
 
-- Paper: *(preprint link to be added after publication)*
-- Code archive (Zenodo, v2.1): https://doi.org/10.5281/zenodo.23919513
-- Run records and experiment splits (Zenodo): https://doi.org/10.5281/zenodo.23501884
+- Paper: *(add the public preprint link after submission)*
+- Code archive (Zenodo, `v2.3-release`): 10.5281/zenodo.23492904
+- Run records and experiment splits (Zenodo): 10.5281/zenodo.23501883
 
-The Zenodo dataset contains the raw experimental run records and associated experiment splits. The analysis code,
-tables and figures are maintained in this GitHub repository.
+The dataset contains **8,075 retained experimental run records** and the saved splits used for disjoint evaluation.
+This total includes the 1,700 main runs, follow-up experiments and controls, and the superseded first four-arm bandit
+records retained for transparency. It excludes tuning, smoke-test and obsolete tuning runs. The analysis code,
+supplementary tables and figures are maintained in this GitHub repository.
 
 ## Main findings
 
@@ -36,6 +38,19 @@ Numbers, confidence intervals and caveats are in the paper and in `paper/tables/
   (5 seeds) but does not remove collapses.
 - **Wiring control.** Degree-preserving shuffles lower accuracy on number comparison and single-digit addition; on
   two-digit addition, the real circuit performs worse than the shuffled circuits.
+- **Baseline calibration.** The standard label-blind OLS calibration is not necessary for the reported performance and is not
+  uniformly beneficial: a constant offset alone beat it on all four number-comparison conditions (paired CIs exclude 0 for
+  2-digit and n_max 49), and no correction beat it on two-digit addition (+0.068). Effects are task-dependent (exploratory).
+- **KC selection and DAN drive.** No zero-activity or all-KC edge cases occurred during training. DAN drive changes the
+  top-5% KC mask used for the update (mask Jaccard 0.90-0.95 with the input-only mask), but computing the mask from the
+  input-only code changed addition accuracy by at most 0.009, so it does not explain the gap to fitted readouts.
+- **Constrained readouts.** A non-negative, anatomically restricted two-channel readout reaches 0.991/0.978 (single-digit)
+  and 0.761/0.771 (two-digit) on main/held-out splits; one-at-a-time relaxations of the native rule do not recover this.
+- **ALPN capacity.** Digit-comparison performance depends on the allocation of live ALPN inputs. The fixed-per-position
+  controls do not isolate per-position allocation from total input capacity, so the original digit-length trend cannot
+  be attributed to positional complexity alone.
+- **Reward-plus-punishment bandit.** Training the connectome on unrewarded trials as well did not consistently help; it
+  stayed worse than Q-learning in 12/12 four-arm conditions.
 
 ## Requirements
 
@@ -53,7 +68,7 @@ git checkout 0ef5d843431f0a4bec8a199d6aca0a5a02f6e449
 python3 -m venv .venv && source .venv/bin/activate
 git clone https://github.com/Nnnnest/my_fly_experiment.git
 cd my_fly_experiment
-git checkout v2.1-release
+git checkout v2.3-release
 pip install -r requirements.txt
 ls ../mb_circuit.npz ../mb_groups*.npz      # must list the simulator data files
 ```
@@ -149,8 +164,15 @@ python -m analysis.capacity_tables
 
 # training-time (DAN-modulated) versus input-only KC activity, with odour-mask ablation (addition)
 python -m scripts.addition.run_addition_dan_kc --workers 14
+python -m analysis.dan_kc_tables
+
 # four-arm bandit with reward-only versus reward+punishment feedback
 python -m scripts.bandit.run_bandit_punish --workers 14
+python -m analysis.punish_tables
+
+# baseline-calibration ablation
+python -m scripts.calibration.run_nocalib --workers 14
+python -m analysis.nocalib_tables
 ```
 
 ### Analysis (run after the batches)
@@ -200,11 +222,32 @@ paper/        tables (csv, tex) and figures (pdf, png) used in the paper
 | number comparison, disjoint evaluation (`comparison_disjoint`) | 360 | `8431750` |
 | maze baselines with binary feedback (`gridworld_binary`), tic-tac-toe role replay (`tictactoe_roles`) | 100, 50 | `c1eb7db` |
 | layouts with binary-feedback baselines (`gridworld_layouts_binary`) | 120 | `11d704a` |
+| calibration ablation (`nocalib`) | 180 | `c064e1b` |
+| ALPN-capacity comparison (`comparison_capacity`), KC-selection diagnostic (`kc_diag`), constrained readouts (`readouts_constrained`) | 420, 60, 40 | `baa8a3d` |
+| DAN/KC addition diagnostic (`addition_dan_kc`), reward-plus-punishment bandit (`bandit_punish`) | 60, 240 | `9cba3cb` |
+
+**Total retained run records: 8,075**, including the three shuffled-wiring groups. Tuning, smoke-test and obsolete tuning
+records are not included in this total or in the dataset archive.
 
 A complete second execution of the 1,700 main runs was bit-identical to the first (`analysis.compare_runs`, maximum
 difference 0). The role replays reproduced the corresponding main runs exactly. Wall-clock times of the batch runs are
 inflated by parallel workers (14 workers on 8 physical cores); costs in the paper come from sequential single-process
 runs (`analysis.cost`) and from the number of `train()` calls.
+
+## Building the dataset archive
+
+From the repository root, run:
+
+```bash
+python scripts/package_dataset.py --check-only
+python scripts/package_dataset.py --output dist/fly_mb_dataset_v2.3.zip
+sha256sum dist/fly_mb_dataset_v2.3.zip
+```
+
+The packaging script checks the expected run counts, manifest status and clean-run flags before creating the ZIP.
+It includes the retained run folders, saved disjoint-evaluation splits, `DATA_README.md` and `DATA_LICENSE.md`;
+it deliberately excludes tuning, smoke-test and obsolete tuning records. Keep the printed SHA-256 checksum with
+the Zenodo upload notes.
 
 ## Known limitations
 
@@ -231,5 +274,6 @@ the analysis planning and the drafting of the manuscript were done with the assi
 ## Citation
 
 See `CITATION.cff`.
+
 
 
