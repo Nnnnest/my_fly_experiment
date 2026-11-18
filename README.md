@@ -146,6 +146,11 @@ bash scripts/run_followup2.sh 14                                          # kc_d
 python -m analysis.kc_diag_tables
 python -m analysis.constrained_tables
 python -m analysis.capacity_tables
+
+# training-time (DAN-modulated) versus input-only KC activity, with odour-mask ablation (addition)
+python -m scripts.addition.run_addition_dan_kc --workers 14
+# four-arm bandit with reward-only versus reward+punishment feedback
+python -m scripts.bandit.run_bandit_punish --workers 14
 ```
 
 ### Analysis (run after the batches)

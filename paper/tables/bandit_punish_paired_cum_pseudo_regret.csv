@@ -1,0 +1,49 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome [punish] - connectome [reward-only],k4_close_perm_mp5,cum_pseudo_regret,10,7.895000000000148,-7.839999999999973,24.030500000000657,False
+connectome [punish] - connectome [reward-only],k4_close_perm_mp10,cum_pseudo_regret,10,-5.455000000000138,-26.270000000000653,12.560125000000133,False
+connectome [punish] - connectome [reward-only],k4_close_perm_mp20,cum_pseudo_regret,10,-19.370000000000577,-49.33000000000135,4.375124999999798,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp5,cum_pseudo_regret,10,2.604999999999916,-14.275875000000124,20.629999999999946,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp10,cum_pseudo_regret,10,2.549999999999767,-12.181500000000492,19.820124999999944,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp20,cum_pseudo_regret,10,-4.305000000000381,-25.1150000000009,12.260124999999759,False
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp5,cum_pseudo_regret,10,9.90000000000002,0.2999999999999895,20.601500000000094,True
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp10,cum_pseudo_regret,10,8.220000000000017,-7.183000000000088,24.900000000000144,False
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp20,cum_pseudo_regret,10,2.9000000000000252,-1.9000000000000274,10.200000000000108,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp5,cum_pseudo_regret,10,0.9799999999999542,-6.700000000000094,9.660499999999978,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp10,cum_pseudo_regret,10,8.400000000000023,-1.3405000000000655,19.700000000000124,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp20,cum_pseudo_regret,10,0.8600000000000001,-3.1800000000000415,6.180000000000055,False
+connectome [punish] - qlearning,k4_close_perm_mp5,cum_pseudo_regret,10,50.82000000000049,20.409749999999875,82.71050000000103,True
+connectome [punish] - qlearning,k4_close_perm_mp10,cum_pseudo_regret,10,47.270000000000216,24.509874999999894,68.7863750000005,True
+connectome [punish] - qlearning,k4_close_perm_mp20,cum_pseudo_regret,10,43.73000000000013,17.804749999999636,71.27525000000085,True
+connectome [punish] - qlearning,k4_close_rev_mp5,cum_pseudo_regret,10,31.85500000000001,8.17862499999988,60.43125000000009,True
+connectome [punish] - qlearning,k4_close_rev_mp10,cum_pseudo_regret,10,43.02999999999985,20.474249999999664,68.94062499999997,True
+connectome [punish] - qlearning,k4_close_rev_mp20,cum_pseudo_regret,10,43.25499999999964,23.48999999999953,66.72000000000011,True
+connectome [punish] - qlearning,k4_spread_perm_mp5,cum_pseudo_regret,10,24.580000000000123,11.940000000000001,36.980500000000205,True
+connectome [punish] - qlearning,k4_spread_perm_mp10,cum_pseudo_regret,10,27.40000000000016,7.82000000000005,43.74000000000023,True
+connectome [punish] - qlearning,k4_spread_perm_mp20,cum_pseudo_regret,10,30.6400000000003,17.20000000000018,44.880500000000424,True
+connectome [punish] - qlearning,k4_spread_rev_mp5,cum_pseudo_regret,10,17.500000000000103,7.159000000000039,29.020500000000144,True
+connectome [punish] - qlearning,k4_spread_rev_mp10,cum_pseudo_regret,10,21.700000000000138,8.980000000000052,34.8605000000002,True
+connectome [punish] - qlearning,k4_spread_rev_mp20,cum_pseudo_regret,10,19.64000000000022,8.580000000000101,30.42050000000033,True
+connectome [reward-only] - qlearning,k4_close_perm_mp5,cum_pseudo_regret,10,42.92500000000034,15.789374999999827,74.56025000000118,True
+connectome [reward-only] - qlearning,k4_close_perm_mp10,cum_pseudo_regret,10,52.72500000000035,28.77800000000056,75.25537500000144,True
+connectome [reward-only] - qlearning,k4_close_perm_mp20,cum_pseudo_regret,10,63.10000000000072,35.149625000000135,90.42037500000112,True
+connectome [reward-only] - qlearning,k4_close_rev_mp5,cum_pseudo_regret,10,29.250000000000103,2.194749999999901,59.714999999999804,True
+connectome [reward-only] - qlearning,k4_close_rev_mp10,cum_pseudo_regret,10,40.48000000000009,14.842874999999912,69.9707500000006,True
+connectome [reward-only] - qlearning,k4_close_rev_mp20,cum_pseudo_regret,10,47.56000000000002,23.819874999999602,73.77212500000077,True
+connectome [reward-only] - qlearning,k4_spread_perm_mp5,cum_pseudo_regret,10,14.680000000000103,0.23999999999999916,29.360000000000205,True
+connectome [reward-only] - qlearning,k4_spread_perm_mp10,cum_pseudo_regret,10,19.18000000000015,-0.8810000000000506,36.540000000000305,False
+connectome [reward-only] - qlearning,k4_spread_perm_mp20,cum_pseudo_regret,10,27.740000000000276,11.920000000000142,43.58000000000042,True
+connectome [reward-only] - qlearning,k4_spread_rev_mp5,cum_pseudo_regret,10,16.52000000000015,3.5200000000000373,30.441000000000248,True
+connectome [reward-only] - qlearning,k4_spread_rev_mp10,cum_pseudo_regret,10,13.300000000000116,0.0,27.920000000000222,False
+connectome [reward-only] - qlearning,k4_spread_rev_mp20,cum_pseudo_regret,10,18.78000000000022,5.840000000000082,31.700000000000358,True
+connectome [punish] - mlp,k4_close_perm_mp5,cum_pseudo_regret,10,28.780000000000513,4.734250000000225,52.78537500000116,True
+connectome [punish] - mlp,k4_close_perm_mp10,cum_pseudo_regret,10,31.46500000000009,6.409625000000478,55.25050000000089,True
+connectome [punish] - mlp,k4_close_perm_mp20,cum_pseudo_regret,10,23.395000000000294,-2.120874999999577,50.121625000001146,False
+connectome [punish] - mlp,k4_close_rev_mp5,cum_pseudo_regret,10,24.66999999999971,5.444874999999572,46.37500000000038,True
+connectome [punish] - mlp,k4_close_rev_mp10,cum_pseudo_regret,10,28.959999999999656,10.274874999999358,50.370125000000584,True
+connectome [punish] - mlp,k4_close_rev_mp20,cum_pseudo_regret,10,23.109999999999612,1.5848749999994425,46.146624999999744,True
+connectome [punish] - mlp,k4_spread_perm_mp5,cum_pseudo_regret,10,24.060000000000123,11.500000000000053,36.50000000000021,True
+connectome [punish] - mlp,k4_spread_perm_mp10,cum_pseudo_regret,10,25.32000000000017,6.300000000000033,40.60050000000026,True
+connectome [punish] - mlp,k4_spread_perm_mp20,cum_pseudo_regret,10,28.9200000000003,15.860000000000179,42.981000000000414,True
+connectome [punish] - mlp,k4_spread_rev_mp5,cum_pseudo_regret,10,14.240000000000062,2.9800000000000155,26.980000000000125,True
+connectome [punish] - mlp,k4_spread_rev_mp10,cum_pseudo_regret,10,19.820000000000142,7.819500000000053,32.46000000000022,True
+connectome [punish] - mlp,k4_spread_rev_mp20,cum_pseudo_regret,10,17.560000000000223,6.220000000000085,28.48000000000034,True

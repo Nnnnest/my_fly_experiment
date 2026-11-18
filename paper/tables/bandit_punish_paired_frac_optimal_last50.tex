@@ -1,0 +1,60 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome [punish] - connectome [reward-only] & k4\_close\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.006 & -0.282 & 0.264 & False \\
+connectome [punish] - connectome [reward-only] & k4\_close\_perm\_mp10 & frac\_optimal\_last50 & 10 & 0.092 & 0.0 & 0.276 & False \\
+connectome [punish] - connectome [reward-only] & k4\_close\_perm\_mp20 & frac\_optimal\_last50 & 10 & 0.086 & 0.0 & 0.258 & False \\
+connectome [punish] - connectome [reward-only] & k4\_close\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.186 & -0.46 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_close\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.192 & -0.476 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_close\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.086 & -0.258 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.264 & -0.528 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.116 & -0.4 & 0.168 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.098 & -0.286 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.182 & -0.45 & 0.0 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.202 & -0.454 & 0.002 & False \\
+connectome [punish] - connectome [reward-only] & k4\_spread\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.088 & -0.264 & 0.0 & False \\
+connectome [punish] - qlearning & k4\_close\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.538 & -0.818 & -0.254 & True \\
+connectome [punish] - qlearning & k4\_close\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.448 & -0.726 & -0.176 & True \\
+connectome [punish] - qlearning & k4\_close\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.61 & -0.884 & -0.282 & True \\
+connectome [punish] - qlearning & k4\_close\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.444 & -0.724 & -0.17 & True \\
+connectome [punish] - qlearning & k4\_close\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.542 & -0.816 & -0.268 & True \\
+connectome [punish] - qlearning & k4\_close\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.708 & -0.904 & -0.454 & True \\
+connectome [punish] - qlearning & k4\_spread\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.552 & -0.828 & -0.274 & True \\
+connectome [punish] - qlearning & k4\_spread\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.554 & -0.894 & -0.1919 & True \\
+connectome [punish] - qlearning & k4\_spread\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.636 & -0.89 & -0.366 & True \\
+connectome [punish] - qlearning & k4\_spread\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.536 & -0.804 & -0.266 & True \\
+connectome [punish] - qlearning & k4\_spread\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.464 & -0.718 & -0.204 & True \\
+connectome [punish] - qlearning & k4\_spread\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.536 & -0.804 & -0.264 & True \\
+connectome [reward-only] - qlearning & k4\_close\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.532 & -0.808 & -0.25 & True \\
+connectome [reward-only] - qlearning & k4\_close\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.54 & -0.81 & -0.266 & True \\
+connectome [reward-only] - qlearning & k4\_close\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.696 & -0.886 & -0.47 & True \\
+connectome [reward-only] - qlearning & k4\_close\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.258 & -0.6061 & 0.096 & False \\
+connectome [reward-only] - qlearning & k4\_close\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.35 & -0.706 & 0.014 & False \\
+connectome [reward-only] - qlearning & k4\_close\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.622 & -0.89 & -0.332 & True \\
+connectome [reward-only] - qlearning & k4\_spread\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.288 & -0.57 & -0.024 & True \\
+connectome [reward-only] - qlearning & k4\_spread\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.438 & -0.79 & -0.068 & True \\
+connectome [reward-only] - qlearning & k4\_spread\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.538 & -0.806 & -0.266 & True \\
+connectome [reward-only] - qlearning & k4\_spread\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.354 & -0.632 & -0.09 & True \\
+connectome [reward-only] - qlearning & k4\_spread\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.262 & -0.526 & 0.0 & False \\
+connectome [reward-only] - qlearning & k4\_spread\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.448 & -0.72 & -0.176 & True \\
+connectome [punish] - mlp & k4\_close\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.338 & -0.594 & -0.064 & True \\
+connectome [punish] - mlp & k4\_close\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.312 & -0.664 & 0.092 & False \\
+connectome [punish] - mlp & k4\_close\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.252 & -0.482 & -0.05 & True \\
+connectome [punish] - mlp & k4\_close\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.16 & -0.478 & 0.168 & False \\
+connectome [punish] - mlp & k4\_close\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.516 & -0.8 & -0.172 & True \\
+connectome [punish] - mlp & k4\_close\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.262 & -0.55 & 0.024 & False \\
+connectome [punish] - mlp & k4\_spread\_perm\_mp5 & frac\_optimal\_last50 & 10 & -0.544 & -0.816 & -0.268 & True \\
+connectome [punish] - mlp & k4\_spread\_perm\_mp10 & frac\_optimal\_last50 & 10 & -0.482 & -0.79 & -0.114 & True \\
+connectome [punish] - mlp & k4\_spread\_perm\_mp20 & frac\_optimal\_last50 & 10 & -0.602 & -0.828 & -0.348 & True \\
+connectome [punish] - mlp & k4\_spread\_rev\_mp5 & frac\_optimal\_last50 & 10 & -0.464 & -0.728 & -0.194 & True \\
+connectome [punish] - mlp & k4\_spread\_rev\_mp10 & frac\_optimal\_last50 & 10 & -0.44 & -0.706 & -0.166 & True \\
+connectome [punish] - mlp & k4\_spread\_rev\_mp20 & frac\_optimal\_last50 & 10 & -0.53 & -0.81 & -0.248 & True \\
+\bottomrule
+\end{tabular}
+\caption{4-armed bandit: paired differences in frac\_optimal\_last50 (matched on task, seed)}
+\label{tab:bandit_punish_paired_frac_optimal_last50}
+\end{table}

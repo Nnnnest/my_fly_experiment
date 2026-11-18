@@ -1,0 +1,49 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+connectome [punish] - connectome [reward-only],k4_close_perm_mp5,frac_optimal_last50,10,-0.005999999999999994,-0.282,0.264,False
+connectome [punish] - connectome [reward-only],k4_close_perm_mp10,frac_optimal_last50,10,0.092,0.0,0.27599999999999997,False
+connectome [punish] - connectome [reward-only],k4_close_perm_mp20,frac_optimal_last50,10,0.08600000000000001,0.0,0.258,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp5,frac_optimal_last50,10,-0.186,-0.45999999999999996,0.0,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp10,frac_optimal_last50,10,-0.192,-0.476,0.0,False
+connectome [punish] - connectome [reward-only],k4_close_rev_mp20,frac_optimal_last50,10,-0.086,-0.258,0.0,False
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp5,frac_optimal_last50,10,-0.26399999999999996,-0.528,0.0,False
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp10,frac_optimal_last50,10,-0.11600000000000002,-0.4,0.16799999999999998,False
+connectome [punish] - connectome [reward-only],k4_spread_perm_mp20,frac_optimal_last50,10,-0.098,-0.286,0.0,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp5,frac_optimal_last50,10,-0.182,-0.45,0.0,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp10,frac_optimal_last50,10,-0.20199999999999996,-0.4539999999999999,0.002,False
+connectome [punish] - connectome [reward-only],k4_spread_rev_mp20,frac_optimal_last50,10,-0.088,-0.264,0.0,False
+connectome [punish] - qlearning,k4_close_perm_mp5,frac_optimal_last50,10,-0.538,-0.818,-0.254,True
+connectome [punish] - qlearning,k4_close_perm_mp10,frac_optimal_last50,10,-0.44799999999999995,-0.7259999999999999,-0.176,True
+connectome [punish] - qlearning,k4_close_perm_mp20,frac_optimal_last50,10,-0.61,-0.884,-0.282,True
+connectome [punish] - qlearning,k4_close_rev_mp5,frac_optimal_last50,10,-0.44399999999999995,-0.724,-0.17,True
+connectome [punish] - qlearning,k4_close_rev_mp10,frac_optimal_last50,10,-0.542,-0.8160000000000001,-0.26799999999999996,True
+connectome [punish] - qlearning,k4_close_rev_mp20,frac_optimal_last50,10,-0.708,-0.9039999999999999,-0.45395000000000063,True
+connectome [punish] - qlearning,k4_spread_perm_mp5,frac_optimal_last50,10,-0.5519999999999999,-0.828,-0.27399999999999997,True
+connectome [punish] - qlearning,k4_spread_perm_mp10,frac_optimal_last50,10,-0.5539999999999999,-0.8939999999999999,-0.19190000000000146,True
+connectome [punish] - qlearning,k4_spread_perm_mp20,frac_optimal_last50,10,-0.6359999999999999,-0.89,-0.366,True
+connectome [punish] - qlearning,k4_spread_rev_mp5,frac_optimal_last50,10,-0.536,-0.804,-0.266,True
+connectome [punish] - qlearning,k4_spread_rev_mp10,frac_optimal_last50,10,-0.4640000000000001,-0.7180000000000001,-0.20400000000000001,True
+connectome [punish] - qlearning,k4_spread_rev_mp20,frac_optimal_last50,10,-0.5359999999999999,-0.8039999999999999,-0.264,True
+connectome [reward-only] - qlearning,k4_close_perm_mp5,frac_optimal_last50,10,-0.532,-0.808,-0.25000000000000006,True
+connectome [reward-only] - qlearning,k4_close_perm_mp10,frac_optimal_last50,10,-0.5399999999999999,-0.8099999999999999,-0.26599999999999996,True
+connectome [reward-only] - qlearning,k4_close_perm_mp20,frac_optimal_last50,10,-0.6960000000000001,-0.8859999999999998,-0.47000000000000003,True
+connectome [reward-only] - qlearning,k4_close_rev_mp5,frac_optimal_last50,10,-0.258,-0.6060500000000001,0.09599999999999999,False
+connectome [reward-only] - qlearning,k4_close_rev_mp10,frac_optimal_last50,10,-0.35,-0.7060000000000001,0.013999999999999957,False
+connectome [reward-only] - qlearning,k4_close_rev_mp20,frac_optimal_last50,10,-0.6219999999999999,-0.89,-0.33199999999999996,True
+connectome [reward-only] - qlearning,k4_spread_perm_mp5,frac_optimal_last50,10,-0.288,-0.57,-0.02400000000000002,True
+connectome [reward-only] - qlearning,k4_spread_perm_mp10,frac_optimal_last50,10,-0.438,-0.79,-0.068,True
+connectome [reward-only] - qlearning,k4_spread_perm_mp20,frac_optimal_last50,10,-0.5379999999999999,-0.8059999999999998,-0.26599999999999996,True
+connectome [reward-only] - qlearning,k4_spread_rev_mp5,frac_optimal_last50,10,-0.354,-0.6319999999999999,-0.09,True
+connectome [reward-only] - qlearning,k4_spread_rev_mp10,frac_optimal_last50,10,-0.262,-0.526,0.0,False
+connectome [reward-only] - qlearning,k4_spread_rev_mp20,frac_optimal_last50,10,-0.44799999999999995,-0.72,-0.176,True
+connectome [punish] - mlp,k4_close_perm_mp5,frac_optimal_last50,10,-0.33799999999999997,-0.5940000000000001,-0.06400000000000002,True
+connectome [punish] - mlp,k4_close_perm_mp10,frac_optimal_last50,10,-0.31199999999999994,-0.6639999999999999,0.092,False
+connectome [punish] - mlp,k4_close_perm_mp20,frac_optimal_last50,10,-0.252,-0.48200000000000004,-0.05,True
+connectome [punish] - mlp,k4_close_rev_mp5,frac_optimal_last50,10,-0.16000000000000006,-0.47800000000000004,0.168,False
+connectome [punish] - mlp,k4_close_rev_mp10,frac_optimal_last50,10,-0.516,-0.8,-0.1719500000000007,True
+connectome [punish] - mlp,k4_close_rev_mp20,frac_optimal_last50,10,-0.262,-0.5499999999999999,0.023999999999999994,False
+connectome [punish] - mlp,k4_spread_perm_mp5,frac_optimal_last50,10,-0.5439999999999999,-0.8160000000000001,-0.26799999999999996,True
+connectome [punish] - mlp,k4_spread_perm_mp10,frac_optimal_last50,10,-0.48199999999999993,-0.79,-0.11400000000000002,True
+connectome [punish] - mlp,k4_spread_perm_mp20,frac_optimal_last50,10,-0.6020000000000001,-0.828,-0.348,True
+connectome [punish] - mlp,k4_spread_rev_mp5,frac_optimal_last50,10,-0.4640000000000001,-0.7280000000000001,-0.19400000000000003,True
+connectome [punish] - mlp,k4_spread_rev_mp10,frac_optimal_last50,10,-0.44000000000000006,-0.706,-0.166,True
+connectome [punish] - mlp,k4_spread_rev_mp20,frac_optimal_last50,10,-0.5299999999999999,-0.8099999999999999,-0.248,True

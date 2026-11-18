@@ -1,0 +1,14 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lllrrrrr}
+\toprule
+comparison & task & metric & n & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+odor\_mask - native & single\_online & eval\_acc\_final & 10 & 0.009 & 0.004 & 0.0143 & True \\
+odor\_mask - native & two\_online & eval\_acc\_final & 10 & 0.0003 & -0.002 & 0.0023 & False \\
+\bottomrule
+\end{tabular}
+\caption{Addition: paired difference in held-out accuracy, odour-only mask minus native (matched on task, seed)}
+\label{tab:dan_kc_ablation_paired}
+\end{table}

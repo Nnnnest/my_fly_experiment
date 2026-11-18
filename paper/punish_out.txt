@@ -1,0 +1,192 @@
+status: {'ok': 240} | commits: {'9cba3cb31f170b62dd56b11b110ceaa496c15155': 240} | dirty: 0
+
+reproduction check vs runs/bandit_perm (120 matched runs): max |regret difference| = 0 (must be 0)
+
+--- bandit_punish_cum_pseudo_regret (12 rows) ---
+               task            qlearning                  mlp connectome [balanced] connectome [balanced_punish] connectome [balanced_reward]
+  k4_close_perm_mp5 15.83 [10.31, 24.97] 37.87 [28.60, 48.11]  58.76 [31.63, 89.74]         66.66 [37.92, 96.99]         58.76 [31.63, 89.74]
+ k4_close_perm_mp10 25.84 [15.27, 37.87] 41.64 [34.07, 48.77] 78.57 [55.86, 100.43]         73.11 [47.86, 97.30]        78.57 [55.86, 100.43]
+ k4_close_perm_mp20 25.90 [17.38, 35.89] 46.24 [37.89, 54.79] 89.01 [60.69, 116.68]         69.64 [43.82, 96.71]        89.01 [60.69, 116.68]
+   k4_close_rev_mp5 26.16 [14.90, 38.92] 33.35 [28.83, 38.12]  55.41 [33.60, 80.25]         58.02 [36.59, 82.44]         55.41 [33.60, 80.25]
+  k4_close_rev_mp10 24.39 [13.71, 36.52] 38.46 [30.35, 46.85]  64.87 [41.24, 90.02]         67.42 [47.66, 89.37]         64.87 [41.24, 90.02]
+  k4_close_rev_mp20 20.58 [13.85, 29.89] 40.72 [33.67, 48.00]  68.14 [41.92, 95.96]         63.83 [44.34, 86.17]         68.14 [41.92, 95.96]
+ k4_spread_perm_mp5 14.22 [12.76, 16.12] 14.74 [12.96, 17.24]  28.90 [14.54, 43.84]         38.80 [25.92, 51.30]         28.90 [14.54, 43.84]
+k4_spread_perm_mp10 24.68 [18.86, 34.50] 26.76 [19.86, 36.86]  43.86 [29.74, 57.58]         52.08 [39.22, 63.70]         43.86 [29.74, 57.58]
+k4_spread_perm_mp20 29.80 [28.86, 30.58] 31.52 [30.08, 32.94]  57.54 [41.70, 73.66]         60.44 [46.80, 75.00]         57.54 [41.70, 73.66]
+  k4_spread_rev_mp5 17.36 [13.26, 22.66] 20.62 [13.56, 31.32]  33.88 [18.74, 49.36]         34.86 [22.68, 47.32]         33.88 [18.74, 49.36]
+ k4_spread_rev_mp10 19.72 [18.14, 21.52] 21.60 [18.66, 26.24]  33.02 [18.90, 47.90]         41.42 [28.18, 55.06]         33.02 [18.90, 47.90]
+ k4_spread_rev_mp20 30.90 [29.18, 33.10] 32.98 [30.64, 35.70]  49.68 [36.96, 62.32]         50.54 [39.48, 61.26]         49.68 [36.96, 62.32]
+
+--- bandit_punish_frac_optimal_last50 (12 rows) ---
+               task         qlearning               mlp connectome [balanced] connectome [balanced_punish] connectome [balanced_reward]
+  k4_close_perm_mp5 0.83 [0.64, 0.93] 0.63 [0.44, 0.80]     0.30 [0.03, 0.57]            0.29 [0.03, 0.56]            0.30 [0.03, 0.57]
+ k4_close_perm_mp10 0.65 [0.38, 0.91] 0.52 [0.31, 0.72]     0.11 [0.01, 0.30]            0.20 [0.01, 0.48]            0.11 [0.01, 0.30]
+ k4_close_perm_mp20 0.81 [0.64, 0.93] 0.45 [0.21, 0.69]     0.11 [0.01, 0.30]            0.20 [0.01, 0.47]            0.11 [0.01, 0.30]
+   k4_close_rev_mp5 0.65 [0.39, 0.90] 0.37 [0.19, 0.58]     0.39 [0.12, 0.67]            0.21 [0.02, 0.48]            0.39 [0.12, 0.67]
+  k4_close_rev_mp10 0.66 [0.38, 0.92] 0.63 [0.41, 0.83]     0.31 [0.04, 0.60]            0.12 [0.01, 0.32]            0.31 [0.04, 0.60]
+  k4_close_rev_mp20 0.83 [0.63, 0.95] 0.38 [0.15, 0.63]     0.21 [0.02, 0.46]            0.12 [0.01, 0.31]            0.21 [0.02, 0.46]
+ k4_spread_perm_mp5 0.92 [0.89, 0.95] 0.92 [0.89, 0.94]     0.64 [0.37, 0.85]            0.37 [0.11, 0.64]            0.64 [0.37, 0.85]
+k4_spread_perm_mp10 0.84 [0.66, 0.94] 0.77 [0.57, 0.91]     0.40 [0.14, 0.67]            0.29 [0.04, 0.54]            0.40 [0.14, 0.67]
+k4_spread_perm_mp20 0.93 [0.91, 0.94] 0.89 [0.85, 0.93]     0.39 [0.12, 0.66]            0.29 [0.03, 0.56]            0.39 [0.12, 0.66]
+  k4_spread_rev_mp5 0.92 [0.90, 0.95] 0.85 [0.71, 0.93]     0.57 [0.30, 0.83]            0.39 [0.12, 0.65]            0.57 [0.30, 0.83]
+ k4_spread_rev_mp10 0.93 [0.91, 0.94] 0.90 [0.87, 0.93]     0.66 [0.39, 0.92]            0.46 [0.21, 0.73]            0.66 [0.39, 0.92]
+ k4_spread_rev_mp20 0.93 [0.92, 0.95] 0.93 [0.91, 0.95]     0.49 [0.21, 0.76]            0.40 [0.12, 0.67]            0.49 [0.21, 0.76]
+
+--- bandit_punish_pick_best (12 rows) ---
+               task         qlearning               mlp connectome [balanced] connectome [balanced_punish] connectome [balanced_reward]
+  k4_close_perm_mp5 0.90 [0.70, 1.00] 0.70 [0.40, 1.00]     0.30 [0.00, 0.60]            0.30 [0.00, 0.60]            0.30 [0.00, 0.60]
+ k4_close_perm_mp10 0.70 [0.40, 1.00] 0.80 [0.50, 1.00]     0.10 [0.00, 0.30]            0.20 [0.00, 0.50]            0.10 [0.00, 0.30]
+ k4_close_perm_mp20 0.80 [0.50, 1.00] 0.60 [0.30, 0.90]     0.10 [0.00, 0.30]            0.20 [0.00, 0.50]            0.10 [0.00, 0.30]
+   k4_close_rev_mp5 0.70 [0.40, 1.00] 0.50 [0.20, 0.80]     0.40 [0.10, 0.70]            0.20 [0.00, 0.50]            0.40 [0.10, 0.70]
+  k4_close_rev_mp10 0.70 [0.40, 1.00] 0.70 [0.40, 1.00]     0.30 [0.00, 0.60]            0.10 [0.00, 0.30]            0.30 [0.00, 0.60]
+  k4_close_rev_mp20 0.90 [0.70, 1.00] 0.40 [0.10, 0.70]     0.20 [0.00, 0.50]            0.10 [0.00, 0.30]            0.20 [0.00, 0.50]
+ k4_spread_perm_mp5 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.70 [0.40, 1.00]            0.50 [0.20, 0.80]            0.70 [0.40, 1.00]
+k4_spread_perm_mp10 0.90 [0.70, 1.00] 0.90 [0.70, 1.00]     0.50 [0.20, 0.80]            0.30 [0.00, 0.60]            0.50 [0.20, 0.80]
+k4_spread_perm_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.40 [0.10, 0.70]            0.30 [0.00, 0.60]            0.40 [0.10, 0.70]
+  k4_spread_rev_mp5 1.00 [1.00, 1.00] 0.90 [0.70, 1.00]     0.60 [0.30, 0.90]            0.50 [0.20, 0.80]            0.60 [0.30, 0.90]
+ k4_spread_rev_mp10 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.70 [0.40, 1.00]            0.50 [0.20, 0.80]            0.70 [0.40, 1.00]
+ k4_spread_rev_mp20 1.00 [1.00, 1.00] 1.00 [1.00, 1.00]     0.50 [0.20, 0.80]            0.40 [0.10, 0.70]            0.50 [0.20, 0.80]
+
+--- bandit_punish_frac_best_all (12 rows) ---
+               task qlearning mlp connectome [balanced] connectome [balanced_punish] connectome [balanced_reward]
+  k4_close_perm_mp5         -   -                     -            0.32 [0.10, 0.57]            0.40 [0.17, 0.64]
+ k4_close_perm_mp10         -   -                     -            0.20 [0.03, 0.44]            0.12 [0.03, 0.30]
+ k4_close_perm_mp20         -   -                     -            0.25 [0.05, 0.46]            0.16 [0.04, 0.35]
+   k4_close_rev_mp5         -   -                     -            0.28 [0.09, 0.50]            0.32 [0.12, 0.54]
+  k4_close_rev_mp10         -   -                     -            0.19 [0.05, 0.38]            0.29 [0.09, 0.51]
+  k4_close_rev_mp20         -   -                     -            0.20 [0.05, 0.43]            0.28 [0.05, 0.52]
+ k4_spread_perm_mp5         -   -                     -            0.48 [0.27, 0.70]            0.63 [0.37, 0.87]
+k4_spread_perm_mp10         -   -                     -            0.33 [0.16, 0.53]            0.44 [0.20, 0.67]
+k4_spread_perm_mp20         -   -                     -            0.30 [0.15, 0.49]            0.35 [0.15, 0.56]
+  k4_spread_rev_mp5         -   -                     -            0.54 [0.33, 0.74]            0.55 [0.29, 0.80]
+ k4_spread_rev_mp10         -   -                     -            0.49 [0.28, 0.69]            0.61 [0.37, 0.84]
+ k4_spread_rev_mp20         -   -                     -            0.41 [0.23, 0.59]            0.42 [0.22, 0.63]
+
+--- bandit_punish_choice_share (24 rows) ---
+               task                        label share_rank0_last200 share_rank1_last200 share_rank2_last200 share_rank3_last200
+ k4_close_perm_mp10 connectome [balanced_punish]   0.20 [0.01, 0.47]   0.30 [0.03, 0.57]   0.21 [0.02, 0.47]   0.30 [0.03, 0.58]
+ k4_close_perm_mp10 connectome [balanced_reward]   0.11 [0.01, 0.30]   0.30 [0.03, 0.57]   0.24 [0.03, 0.48]   0.36 [0.12, 0.63]
+ k4_close_perm_mp20 connectome [balanced_punish]   0.20 [0.01, 0.47]   0.34 [0.11, 0.60]   0.21 [0.02, 0.48]   0.26 [0.03, 0.50]
+ k4_close_perm_mp20 connectome [balanced_reward]   0.11 [0.01, 0.29]   0.24 [0.03, 0.48]   0.21 [0.02, 0.48]   0.44 [0.17, 0.72]
+  k4_close_perm_mp5 connectome [balanced_punish]   0.29 [0.02, 0.57]   0.20 [0.02, 0.47]   0.20 [0.02, 0.47]   0.30 [0.03, 0.58]
+  k4_close_perm_mp5 connectome [balanced_reward]   0.30 [0.03, 0.58]   0.29 [0.03, 0.57]   0.11 [0.02, 0.29]   0.30 [0.03, 0.57]
+  k4_close_rev_mp10 connectome [balanced_punish]   0.12 [0.02, 0.31]   0.47 [0.20, 0.74]   0.21 [0.02, 0.49]   0.20 [0.02, 0.48]
+  k4_close_rev_mp10 connectome [balanced_reward]   0.30 [0.03, 0.57]   0.29 [0.03, 0.56]   0.24 [0.03, 0.49]   0.17 [0.02, 0.39]
+  k4_close_rev_mp20 connectome [balanced_punish]   0.16 [0.02, 0.35]   0.47 [0.20, 0.74]   0.21 [0.02, 0.49]   0.16 [0.02, 0.38]
+  k4_close_rev_mp20 connectome [balanced_reward]   0.24 [0.03, 0.48]   0.29 [0.03, 0.56]   0.21 [0.02, 0.49]   0.26 [0.03, 0.49]
+   k4_close_rev_mp5 connectome [balanced_punish]   0.21 [0.02, 0.49]   0.47 [0.20, 0.74]   0.12 [0.02, 0.31]   0.21 [0.02, 0.48]
+   k4_close_rev_mp5 connectome [balanced_reward]   0.39 [0.11, 0.66]   0.38 [0.11, 0.65]   0.12 [0.02, 0.31]   0.12 [0.02, 0.30]
+k4_spread_perm_mp10 connectome [balanced_punish]   0.30 [0.07, 0.56]   0.59 [0.33, 0.84]   0.09 [0.02, 0.23]   0.02 [0.01, 0.02]
+k4_spread_perm_mp10 connectome [balanced_reward]   0.46 [0.19, 0.74]   0.47 [0.20, 0.75]   0.05 [0.02, 0.09]   0.02 [0.01, 0.02]
+k4_spread_perm_mp20 connectome [balanced_punish]   0.30 [0.07, 0.56]   0.57 [0.30, 0.82]   0.11 [0.02, 0.29]   0.02 [0.01, 0.03]
+k4_spread_perm_mp20 connectome [balanced_reward]   0.39 [0.12, 0.67]   0.48 [0.20, 0.76]   0.11 [0.02, 0.29]   0.02 [0.01, 0.03]
+ k4_spread_perm_mp5 connectome [balanced_punish]   0.45 [0.20, 0.71]   0.48 [0.21, 0.74]   0.06 [0.02, 0.12]   0.02 [0.01, 0.02]
+ k4_spread_perm_mp5 connectome [balanced_reward]   0.65 [0.38, 0.91]   0.30 [0.04, 0.58]   0.03 [0.02, 0.03]   0.02 [0.01, 0.02]
+ k4_spread_rev_mp10 connectome [balanced_punish]   0.47 [0.21, 0.74]   0.47 [0.21, 0.72]   0.03 [0.02, 0.04]   0.03 [0.02, 0.05]
+ k4_spread_rev_mp10 connectome [balanced_reward]   0.67 [0.39, 0.94]   0.29 [0.02, 0.57]   0.02 [0.01, 0.02]   0.02 [0.02, 0.03]
+ k4_spread_rev_mp20 connectome [balanced_punish]   0.45 [0.20, 0.70]   0.51 [0.26, 0.75]   0.02 [0.01, 0.03]   0.02 [0.02, 0.03]
+ k4_spread_rev_mp20 connectome [balanced_reward]   0.48 [0.20, 0.76]   0.47 [0.20, 0.75]   0.02 [0.01, 0.03]   0.02 [0.02, 0.03]
+  k4_spread_rev_mp5 connectome [balanced_punish]   0.52 [0.28, 0.75]   0.43 [0.20, 0.66]   0.03 [0.02, 0.04]   0.03 [0.02, 0.03]
+  k4_spread_rev_mp5 connectome [balanced_reward]   0.57 [0.30, 0.84]   0.38 [0.11, 0.65]   0.02 [0.02, 0.02]   0.03 [0.02, 0.03]
+
+--- bandit_punish_paired_cum_pseudo_regret (48 rows) ---
+                                    comparison                task            metric  n  mean_diff    ci_lo   ci_hi  excludes_zero
+connectome [punish] - connectome [reward-only]   k4_close_perm_mp5 cum_pseudo_regret 10      7.895  -7.8400 24.0305          False
+connectome [punish] - connectome [reward-only]  k4_close_perm_mp10 cum_pseudo_regret 10     -5.455 -26.2700 12.5601          False
+connectome [punish] - connectome [reward-only]  k4_close_perm_mp20 cum_pseudo_regret 10    -19.370 -49.3300  4.3751          False
+connectome [punish] - connectome [reward-only]    k4_close_rev_mp5 cum_pseudo_regret 10      2.605 -14.2759 20.6300          False
+connectome [punish] - connectome [reward-only]   k4_close_rev_mp10 cum_pseudo_regret 10      2.550 -12.1815 19.8201          False
+connectome [punish] - connectome [reward-only]   k4_close_rev_mp20 cum_pseudo_regret 10     -4.305 -25.1150 12.2601          False
+connectome [punish] - connectome [reward-only]  k4_spread_perm_mp5 cum_pseudo_regret 10      9.900   0.3000 20.6015           True
+connectome [punish] - connectome [reward-only] k4_spread_perm_mp10 cum_pseudo_regret 10      8.220  -7.1830 24.9000          False
+connectome [punish] - connectome [reward-only] k4_spread_perm_mp20 cum_pseudo_regret 10      2.900  -1.9000 10.2000          False
+connectome [punish] - connectome [reward-only]   k4_spread_rev_mp5 cum_pseudo_regret 10      0.980  -6.7000  9.6605          False
+connectome [punish] - connectome [reward-only]  k4_spread_rev_mp10 cum_pseudo_regret 10      8.400  -1.3405 19.7000          False
+connectome [punish] - connectome [reward-only]  k4_spread_rev_mp20 cum_pseudo_regret 10      0.860  -3.1800  6.1800          False
+               connectome [punish] - qlearning   k4_close_perm_mp5 cum_pseudo_regret 10     50.820  20.4097 82.7105           True
+               connectome [punish] - qlearning  k4_close_perm_mp10 cum_pseudo_regret 10     47.270  24.5099 68.7864           True
+               connectome [punish] - qlearning  k4_close_perm_mp20 cum_pseudo_regret 10     43.730  17.8047 71.2753           True
+               connectome [punish] - qlearning    k4_close_rev_mp5 cum_pseudo_regret 10     31.855   8.1786 60.4313           True
+               connectome [punish] - qlearning   k4_close_rev_mp10 cum_pseudo_regret 10     43.030  20.4742 68.9406           True
+               connectome [punish] - qlearning   k4_close_rev_mp20 cum_pseudo_regret 10     43.255  23.4900 66.7200           True
+               connectome [punish] - qlearning  k4_spread_perm_mp5 cum_pseudo_regret 10     24.580  11.9400 36.9805           True
+               connectome [punish] - qlearning k4_spread_perm_mp10 cum_pseudo_regret 10     27.400   7.8200 43.7400           True
+               connectome [punish] - qlearning k4_spread_perm_mp20 cum_pseudo_regret 10     30.640  17.2000 44.8805           True
+               connectome [punish] - qlearning   k4_spread_rev_mp5 cum_pseudo_regret 10     17.500   7.1590 29.0205           True
+               connectome [punish] - qlearning  k4_spread_rev_mp10 cum_pseudo_regret 10     21.700   8.9800 34.8605           True
+               connectome [punish] - qlearning  k4_spread_rev_mp20 cum_pseudo_regret 10     19.640   8.5800 30.4205           True
+          connectome [reward-only] - qlearning   k4_close_perm_mp5 cum_pseudo_regret 10     42.925  15.7894 74.5603           True
+          connectome [reward-only] - qlearning  k4_close_perm_mp10 cum_pseudo_regret 10     52.725  28.7780 75.2554           True
+          connectome [reward-only] - qlearning  k4_close_perm_mp20 cum_pseudo_regret 10     63.100  35.1496 90.4204           True
+          connectome [reward-only] - qlearning    k4_close_rev_mp5 cum_pseudo_regret 10     29.250   2.1947 59.7150           True
+          connectome [reward-only] - qlearning   k4_close_rev_mp10 cum_pseudo_regret 10     40.480  14.8429 69.9708           True
+          connectome [reward-only] - qlearning   k4_close_rev_mp20 cum_pseudo_regret 10     47.560  23.8199 73.7721           True
+          connectome [reward-only] - qlearning  k4_spread_perm_mp5 cum_pseudo_regret 10     14.680   0.2400 29.3600           True
+          connectome [reward-only] - qlearning k4_spread_perm_mp10 cum_pseudo_regret 10     19.180  -0.8810 36.5400          False
+          connectome [reward-only] - qlearning k4_spread_perm_mp20 cum_pseudo_regret 10     27.740  11.9200 43.5800           True
+          connectome [reward-only] - qlearning   k4_spread_rev_mp5 cum_pseudo_regret 10     16.520   3.5200 30.4410           True
+          connectome [reward-only] - qlearning  k4_spread_rev_mp10 cum_pseudo_regret 10     13.300   0.0000 27.9200          False
+          connectome [reward-only] - qlearning  k4_spread_rev_mp20 cum_pseudo_regret 10     18.780   5.8400 31.7000           True
+                     connectome [punish] - mlp   k4_close_perm_mp5 cum_pseudo_regret 10     28.780   4.7343 52.7854           True
+                     connectome [punish] - mlp  k4_close_perm_mp10 cum_pseudo_regret 10     31.465   6.4096 55.2505           True
+                     connectome [punish] - mlp  k4_close_perm_mp20 cum_pseudo_regret 10     23.395  -2.1209 50.1216          False
+                     connectome [punish] - mlp    k4_close_rev_mp5 cum_pseudo_regret 10     24.670   5.4449 46.3750           True
+                     connectome [punish] - mlp   k4_close_rev_mp10 cum_pseudo_regret 10     28.960  10.2749 50.3701           True
+                     connectome [punish] - mlp   k4_close_rev_mp20 cum_pseudo_regret 10     23.110   1.5849 46.1466           True
+                     connectome [punish] - mlp  k4_spread_perm_mp5 cum_pseudo_regret 10     24.060  11.5000 36.5000           True
+                     connectome [punish] - mlp k4_spread_perm_mp10 cum_pseudo_regret 10     25.320   6.3000 40.6005           True
+                     connectome [punish] - mlp k4_spread_perm_mp20 cum_pseudo_regret 10     28.920  15.8600 42.9810           True
+                     connectome [punish] - mlp   k4_spread_rev_mp5 cum_pseudo_regret 10     14.240   2.9800 26.9800           True
+                     connectome [punish] - mlp  k4_spread_rev_mp10 cum_pseudo_regret 10     19.820   7.8195 32.4600           True
+                     connectome [punish] - mlp  k4_spread_rev_mp20 cum_pseudo_regret 10     17.560   6.2200 28.4800           True
+
+--- bandit_punish_paired_frac_optimal_last50 (48 rows) ---
+                                    comparison                task              metric  n  mean_diff   ci_lo   ci_hi  excludes_zero
+connectome [punish] - connectome [reward-only]   k4_close_perm_mp5 frac_optimal_last50 10     -0.006 -0.2820  0.2640          False
+connectome [punish] - connectome [reward-only]  k4_close_perm_mp10 frac_optimal_last50 10      0.092  0.0000  0.2760          False
+connectome [punish] - connectome [reward-only]  k4_close_perm_mp20 frac_optimal_last50 10      0.086  0.0000  0.2580          False
+connectome [punish] - connectome [reward-only]    k4_close_rev_mp5 frac_optimal_last50 10     -0.186 -0.4600  0.0000          False
+connectome [punish] - connectome [reward-only]   k4_close_rev_mp10 frac_optimal_last50 10     -0.192 -0.4760  0.0000          False
+connectome [punish] - connectome [reward-only]   k4_close_rev_mp20 frac_optimal_last50 10     -0.086 -0.2580  0.0000          False
+connectome [punish] - connectome [reward-only]  k4_spread_perm_mp5 frac_optimal_last50 10     -0.264 -0.5280  0.0000          False
+connectome [punish] - connectome [reward-only] k4_spread_perm_mp10 frac_optimal_last50 10     -0.116 -0.4000  0.1680          False
+connectome [punish] - connectome [reward-only] k4_spread_perm_mp20 frac_optimal_last50 10     -0.098 -0.2860  0.0000          False
+connectome [punish] - connectome [reward-only]   k4_spread_rev_mp5 frac_optimal_last50 10     -0.182 -0.4500  0.0000          False
+connectome [punish] - connectome [reward-only]  k4_spread_rev_mp10 frac_optimal_last50 10     -0.202 -0.4540  0.0020          False
+connectome [punish] - connectome [reward-only]  k4_spread_rev_mp20 frac_optimal_last50 10     -0.088 -0.2640  0.0000          False
+               connectome [punish] - qlearning   k4_close_perm_mp5 frac_optimal_last50 10     -0.538 -0.8180 -0.2540           True
+               connectome [punish] - qlearning  k4_close_perm_mp10 frac_optimal_last50 10     -0.448 -0.7260 -0.1760           True
+               connectome [punish] - qlearning  k4_close_perm_mp20 frac_optimal_last50 10     -0.610 -0.8840 -0.2820           True
+               connectome [punish] - qlearning    k4_close_rev_mp5 frac_optimal_last50 10     -0.444 -0.7240 -0.1700           True
+               connectome [punish] - qlearning   k4_close_rev_mp10 frac_optimal_last50 10     -0.542 -0.8160 -0.2680           True
+               connectome [punish] - qlearning   k4_close_rev_mp20 frac_optimal_last50 10     -0.708 -0.9040 -0.4540           True
+               connectome [punish] - qlearning  k4_spread_perm_mp5 frac_optimal_last50 10     -0.552 -0.8280 -0.2740           True
+               connectome [punish] - qlearning k4_spread_perm_mp10 frac_optimal_last50 10     -0.554 -0.8940 -0.1919           True
+               connectome [punish] - qlearning k4_spread_perm_mp20 frac_optimal_last50 10     -0.636 -0.8900 -0.3660           True
+               connectome [punish] - qlearning   k4_spread_rev_mp5 frac_optimal_last50 10     -0.536 -0.8040 -0.2660           True
+               connectome [punish] - qlearning  k4_spread_rev_mp10 frac_optimal_last50 10     -0.464 -0.7180 -0.2040           True
+               connectome [punish] - qlearning  k4_spread_rev_mp20 frac_optimal_last50 10     -0.536 -0.8040 -0.2640           True
+          connectome [reward-only] - qlearning   k4_close_perm_mp5 frac_optimal_last50 10     -0.532 -0.8080 -0.2500           True
+          connectome [reward-only] - qlearning  k4_close_perm_mp10 frac_optimal_last50 10     -0.540 -0.8100 -0.2660           True
+          connectome [reward-only] - qlearning  k4_close_perm_mp20 frac_optimal_last50 10     -0.696 -0.8860 -0.4700           True
+          connectome [reward-only] - qlearning    k4_close_rev_mp5 frac_optimal_last50 10     -0.258 -0.6061  0.0960          False
+          connectome [reward-only] - qlearning   k4_close_rev_mp10 frac_optimal_last50 10     -0.350 -0.7060  0.0140          False
+          connectome [reward-only] - qlearning   k4_close_rev_mp20 frac_optimal_last50 10     -0.622 -0.8900 -0.3320           True
+          connectome [reward-only] - qlearning  k4_spread_perm_mp5 frac_optimal_last50 10     -0.288 -0.5700 -0.0240           True
+          connectome [reward-only] - qlearning k4_spread_perm_mp10 frac_optimal_last50 10     -0.438 -0.7900 -0.0680           True
+          connectome [reward-only] - qlearning k4_spread_perm_mp20 frac_optimal_last50 10     -0.538 -0.8060 -0.2660           True
+          connectome [reward-only] - qlearning   k4_spread_rev_mp5 frac_optimal_last50 10     -0.354 -0.6320 -0.0900           True
+          connectome [reward-only] - qlearning  k4_spread_rev_mp10 frac_optimal_last50 10     -0.262 -0.5260  0.0000          False
+          connectome [reward-only] - qlearning  k4_spread_rev_mp20 frac_optimal_last50 10     -0.448 -0.7200 -0.1760           True
+                     connectome [punish] - mlp   k4_close_perm_mp5 frac_optimal_last50 10     -0.338 -0.5940 -0.0640           True
+                     connectome [punish] - mlp  k4_close_perm_mp10 frac_optimal_last50 10     -0.312 -0.6640  0.0920          False
+                     connectome [punish] - mlp  k4_close_perm_mp20 frac_optimal_last50 10     -0.252 -0.4820 -0.0500           True
+                     connectome [punish] - mlp    k4_close_rev_mp5 frac_optimal_last50 10     -0.160 -0.4780  0.1680          False
+                     connectome [punish] - mlp   k4_close_rev_mp10 frac_optimal_last50 10     -0.516 -0.8000 -0.1720           True
+                     connectome [punish] - mlp   k4_close_rev_mp20 frac_optimal_last50 10     -0.262 -0.5500  0.0240          False
+                     connectome [punish] - mlp  k4_spread_perm_mp5 frac_optimal_last50 10     -0.544 -0.8160 -0.2680           True
+                     connectome [punish] - mlp k4_spread_perm_mp10 frac_optimal_last50 10     -0.482 -0.7900 -0.1140           True
+                     connectome [punish] - mlp k4_spread_perm_mp20 frac_optimal_last50 10     -0.602 -0.8280 -0.3480           True
+                     connectome [punish] - mlp   k4_spread_rev_mp5 frac_optimal_last50 10     -0.464 -0.7280 -0.1940           True
+                     connectome [punish] - mlp  k4_spread_rev_mp10 frac_optimal_last50 10     -0.440 -0.7060 -0.1660           True
+                     connectome [punish] - mlp  k4_spread_rev_mp20 frac_optimal_last50 10     -0.530 -0.8100 -0.2480           True

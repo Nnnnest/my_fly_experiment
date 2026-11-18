@@ -1,0 +1,3 @@
+comparison,task,metric,n,mean_diff,ci_lo,ci_hi,excludes_zero
+odor_mask - native,single_online,eval_acc_final,10,0.009000000000000008,0.0040000000000000365,0.014333333333333309,True
+odor_mask - native,two_online,eval_acc_final,10,0.0003333333333333355,-0.0019999999999999905,0.0023333333333333374,False

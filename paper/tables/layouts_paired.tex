@@ -1,0 +1,42 @@
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{llrrrrrr}
+\toprule
+comparison & size & metric & n\_layouts & mean\_diff & ci\_lo & ci\_hi & excludes\_zero \\
+\midrule
+connectome [gate\_error] - qlearning & maze113 & overall\_success & 10 & -0.131 & -0.1561 & -0.1037 & True \\
+connectome [gate\_error] - qlearning & maze72 & overall\_success & 10 & -0.0226 & -0.0264 & -0.0192 & True \\
+connectome [gate\_error] - qlearning & maze113 & final20 & 10 & -0.1883 & -0.2567 & -0.1183 & True \\
+connectome [gate\_error] - qlearning & maze72 & final20 & 10 & -0.0017 & -0.005 & 0.0 & False \\
+connectome [gate\_error] - qlearning & maze113 & final\_policy\_acc & 10 & -0.0672 & -0.0829 & -0.0551 & True \\
+connectome [gate\_error] - qlearning & maze72 & final\_policy\_acc & 10 & -0.0132 & -0.0202 & -0.0066 & True \\
+connectome [gate\_rank] - qlearning & maze113 & overall\_success & 10 & -0.2331 & -0.2933 & -0.1699 & True \\
+connectome [gate\_rank] - qlearning & maze72 & overall\_success & 10 & -0.0004 & -0.0011 & 0.0002 & False \\
+connectome [gate\_rank] - qlearning & maze113 & final20 & 10 & -0.2967 & -0.37 & -0.2083 & True \\
+connectome [gate\_rank] - qlearning & maze72 & final20 & 10 & 0.0 & 0.0 & 0.0 & False \\
+connectome [gate\_rank] - qlearning & maze113 & final\_policy\_acc & 10 & -0.1553 & -0.18 & -0.1311 & True \\
+connectome [gate\_rank] - qlearning & maze72 & final\_policy\_acc & 10 & -0.0081 & -0.0144 & -0.0028 & True \\
+mlp - qlearning & maze113 & overall\_success & 10 & -0.2718 & -0.453 & -0.1182 & True \\
+mlp - qlearning & maze72 & overall\_success & 10 & -0.0311 & -0.0511 & -0.0126 & True \\
+mlp - qlearning & maze113 & final20 & 10 & -0.27 & -0.4433 & -0.1183 & True \\
+mlp - qlearning & maze72 & final20 & 10 & -0.0017 & -0.005 & 0.0 & False \\
+mlp - qlearning & maze113 & final\_policy\_acc & 10 & -0.2759 & -0.4076 & -0.1522 & True \\
+mlp - qlearning & maze72 & final\_policy\_acc & 10 & -0.0308 & -0.0536 & -0.0132 & True \\
+connectome [gate\_rank] - connectome [gate\_error] & maze113 & overall\_success & 10 & -0.1021 & -0.1683 & -0.0345 & True \\
+connectome [gate\_rank] - connectome [gate\_error] & maze72 & overall\_success & 10 & 0.0221 & 0.0188 & 0.0261 & True \\
+connectome [gate\_rank] - connectome [gate\_error] & maze113 & final20 & 10 & -0.1083 & -0.2133 & 0.0 & False \\
+connectome [gate\_rank] - connectome [gate\_error] & maze72 & final20 & 10 & 0.0017 & 0.0 & 0.005 & False \\
+connectome [gate\_rank] - connectome [gate\_error] & maze113 & final\_policy\_acc & 10 & -0.0881 & -0.113 & -0.0648 & True \\
+connectome [gate\_rank] - connectome [gate\_error] & maze72 & final\_policy\_acc & 10 & 0.0051 & 0.001 & 0.0094 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze113 & overall\_success & 10 & -0.0885 & -0.1369 & -0.045 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze72 & overall\_success & 10 & -0.0118 & -0.0237 & -0.003 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze113 & final20 & 10 & -0.0717 & -0.1217 & -0.0267 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze72 & final20 & 10 & -0.005 & -0.0133 & 0.0 & False \\
+kc\_delta - rand\_delta (does the wiring help?) & maze113 & final\_policy\_acc & 10 & -0.0746 & -0.1135 & -0.0407 & True \\
+kc\_delta - rand\_delta (does the wiring help?) & maze72 & final\_policy\_acc & 10 & -0.0231 & -0.038 & -0.0122 & True \\
+\bottomrule
+\end{tabular}
+\caption{Paired differences across layouts (matched on layout)}
+\label{tab:layouts_paired}
+\end{table}
